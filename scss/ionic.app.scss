@@ -1,0 +1,161 @@
+/*
+To customize the look and feel of Ionic, you can override the variables
+in ionic's _variables.scss file.
+
+For example, you might change some of the default colors:
+
+$light:                           #fff !default;
+$stable:                          #f8f8f8 !default;
+$positive:                        #387ef5 !default;
+$calm:                            #11c1f3 !default;
+$balanced:                        #33cd5f !default;
+$energized:                       #ffc900 !default;
+$assertive:                       #ef473a !default;
+$royal:                           #886aea !default;
+$dark:                            #444 !default;
+*/
+
+// The path for our ionicons font files, relative to the built CSS in www/css
+$ionicons-font-path: "../lib/ionic/fonts" !default;
+
+// Include all of Ionic
+@import "www/lib/ionic/scss/ionic";
+@import "www/lib/slide-box/scss/slidingTabs.scss";
+
+.center{
+  text-align: center;
+}
+
+.notice-library-empty{
+    text-align: center;
+    font-size: 17px;
+    font-weight: bold;
+    line-height: 30px;
+}
+
+.button-facebook {
+    color: #fff;
+    background-color: #2a80b9;
+    border-color: #2a80b9;
+}
+
+
+.tab-login {
+text-align: center;
+margin-bottom: 30px;
+    div{
+      display: inline-block;
+      font-size: 18px;
+      padding: 11px;
+
+      &.active{
+        border-bottom: 3px solid $positive;
+      }
+
+    }
+}
+
+
+.library {
+
+
+    .book{
+        padding: 5px;
+        border: 1px solid #ddd;
+        box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.22);
+        position: relative;
+
+        .btn-more {
+            position: absolute;
+            font-size: 27px;
+            color: #AEAB9B;
+
+            padding: 0;
+            min-width: initial;
+            width: 30px;
+            min-height: initial;
+            height: 30px;
+            right: 0px;
+            bottom: 6px;
+            background-color: transparent;
+            border: none;
+        }
+
+        .cover{
+            height: 150px;
+            overflow: hidden;
+        }
+        img{
+            width: 100%;
+        }
+
+        h2{
+            font-size: 13px;
+            margin-top: 10px;
+            margin-bottom: 0px;
+            height: 33px;
+            overflow: hidden;
+        }
+
+        h3.author{
+            color: #999;
+            font-size: 12px;
+            margin: 0;
+            margin-top: 10px;
+            padding-right: 20px;
+        }
+
+    }
+}
+
+
+.item-book{
+  padding: 10px;
+  img{
+    display: inline-block;
+    width: 75px;
+  }
+
+  .info{
+
+    display: block;
+    height: 100%;
+    top: 10px;
+    position: absolute; 
+    padding-left: 85px;
+    width: 100%;
+    white-space: normal;
+    padding-right: 20px;
+  
+  }
+}
+
+/**
+    FORM ERROR
+*/
+
+
+
+label.item.has-error {
+  border-bottom: 2px solid red;
+}
+
+label.item.has-error-lr {
+  border-left: 2px solid red;
+  border-right: 2px solid red;
+}
+
+label.item.valid-lr {
+  border-left: 2px solid green;
+  border-right: 2px solid green;
+}
+
+.form-errors {
+  margin: 5px 0;
+  
+}
+
+.form-error {
+  padding: 2px 0 2px 16px;
+  color: red;
+}

@@ -1,0 +1,40 @@
+<ion-view>
+    <ion-nav-bar class="bar-positive">
+        <ion-nav-title>
+          {{friend.fullname}}
+        </ion-nav-title>
+        <ion-nav-buttons side="left">
+          
+            <button menu-toggle="right" class="button button-icon icon ion-android-arrow-back" ng-click="onBack()"></button>
+        </ion-nav-buttons>
+
+    </ion-nav-bar>
+  <ion-content>
+
+
+    <div class="list">
+
+        <div class="item item-book" ng-repeat="item in librarys" ng-click="onOpen(item)">
+          <img ng-src="{{item.thumb}}">
+          <div class="info">
+            <h2>{{item.title}}</h2>
+            <p>{{item.author}}</p>
+          </div>
+        </div>
+    </div>
+
+
+
+    <div class="notice-library-empty" ng-show="librarys.length==0">
+
+        Seu amigo {{friend.first_name}} ainda não possui livro cadastrado.
+
+    </div>
+   
+
+
+
+
+</ion-content>
+
+</ion-view>

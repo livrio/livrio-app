@@ -1,0 +1,24 @@
+<ion-view>
+  <ion-content>
+
+
+    <div class="list">
+
+    <div class="item item-avatar" ng-repeat="item in friends" ng-click="onLibrary(item)">
+      <img ng-src="{{item.photo}}" />
+      <h2>{{item.fullname}}</h2>
+      <p>Livros: {{item.amount_book}}</p>
+    </div>
+
+
+</div>
+
+ <div class="notice-library-empty" ng-show="friends.length==0">
+
+        Olá, {{user.name}} :)<br />
+        Você é uma pessoal solitaria, conecte-se aos seus amigos para ter vida social :D
+
+    </div>
+    
+  </ion-content>
+</ion-view>

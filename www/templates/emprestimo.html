@@ -1,0 +1,36 @@
+<ion-modal-view>
+    <ion-header-bar class="bar-positive">
+    <button class="button button-icon icon ion-android-arrow-back"></button>
+      <h1 class="title">Emprestimo</h1>
+
+     <div class="buttons">
+    
+  </div>
+    </ion-header-bar>
+
+
+
+    
+
+    <ion-content>
+      
+       <div class="list">
+
+    <div class="item item-avatar" ng-repeat="item in friends" ng-click="showPopup(item)">
+      <img ng-src="{{item.thumb}}" />
+      <h2>{{item.fullname}}</h2>
+    </div>
+
+
+</div>
+
+    <div class="notice-library-empty" ng-show="friends.length==0">
+
+        Olá, {{user.name}} :)<br />
+        Você é uma pessoal solitaria, conecte-se aos seus amigos para ter vida social :D
+
+    </div>
+
+
+    </ion-content>
+</ion-modal-view>

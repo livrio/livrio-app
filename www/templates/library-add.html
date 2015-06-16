@@ -1,0 +1,71 @@
+<ion-view>
+    <ion-nav-bar class="bar-positive">
+        <ion-nav-title>
+          Novo livro
+        </ion-nav-title>
+        <ion-nav-back-button>
+  </ion-nav-back-button>
+
+    </ion-nav-bar>
+  <ion-content>
+
+
+  <form ng-submit="doSave(formLibrary.$valid)" name="formLibrary" novalidate>
+
+
+          
+
+            <div class="list list-inset">
+
+
+
+            <div class="row item item-input">
+                    <div class="col col-80">
+                        <label class="item item-input" ng-class="{ 'has-error' : formLibrary.isbn.$invalid && submitted}">
+                          <input type="text" placeholder="ISBN" name="isbn" ng-model="form.isbn" required>
+                        </label>
+                         <div class="form-errors" ng-messages="formLibrary.isbn.$error" ng-show="submitted">
+                              <div class="form-error" ng-message="required">ISBN é obrigatório</div>
+                         </div>
+                    </div>
+                    <div class="col ">
+                      <button class="button icon ion-ios-barcode" ng-click="doScan()"></button>
+                    </div>
+                </div>
+      
+
+
+      <label class="item item-input" ng-class="{ 'has-error' : formLibrary.title.$invalid && submitted}">
+          <input type="text" placeholder="Título" name="title" ng-model="form.title" required>
+      </label>
+      <div class="form-errors" ng-messages="formLibrary.title.$error" ng-show="submitted">
+            <div class="form-error" ng-message="required">Título é obrigatória</div>
+        </div>
+
+         <label class="item item-input" ng-class="{ 'has-error' : formLibrary.author.$invalid && submitted}">
+          <input type="text" placeholder="Autor" name="author" ng-model="form.author" required>
+      </label>
+      <div class="form-errors" ng-messages="formLibrary.author.$error" ng-show="submitted">
+            <div class="form-error" ng-message="required">Autor é obrigatória</div>
+        </div>
+
+        <div class="item item-image">
+          <img ng-src="{{form.thumb}}" style="width: 100px; margin: 10px;" />
+        </div>
+
+        
+
+      <div class="item">
+          <button type="submit" ng-click="submitted=true" class="button button-block button-positive">
+  Salvar
+</button>
+
+      </div>
+    </div>
+
+    </form>
+
+
+  </ion-content>
+
+</ion-view>

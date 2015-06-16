@@ -1,0 +1,48 @@
+<ion-view>
+    <ion-nav-bar class="bar-positive">
+        <ion-nav-title>
+          Perfil
+        </ion-nav-title>
+        <ion-nav-buttons side="left">
+          
+            <button menu-toggle="right" class="button button-icon icon ion-android-arrow-back" ng-click="onBack()"></button>
+        </ion-nav-buttons>
+
+    </ion-nav-bar>
+  <ion-content>
+
+    <form ng-submit="doUpdate(formUpdate.$valid)" name="formUpdate" novalidate>
+            <div class="list list-inset">
+
+            <label class="item item-input" ng-class="{ 'has-error' : formUpdate.fullname.$invalid && submitted}">
+              <input type="text" placeholder="Nome Completo" name="fullname" ng-model="form.fullname" required>
+            </label>
+             <div class="form-errors" ng-messages="formUpdate.fullname.$error" ng-show="submitted">
+                  <div class="form-error" ng-message="required">Nome é obrigatório</div>
+              </div>
+
+
+            <label class="item item-input" ng-class="{ 'has-error' : formUpdate.email.$invalid && submitted}">
+              <input type="email" placeholder="Email" name="email" ng-model="form.email" required>
+            </label>
+             <div class="form-errors" ng-messages="formUpdate.email.$error" ng-show="submitted">
+                  <div class="form-error" ng-message="required">Email é obrigatório</div>
+              </div>
+
+              <div class="item">
+                  <img ng-click="onPicture()" ng-src="{{image}}" style="width: 100px; margin: 10px;" />
+              </div>
+
+            <div class="item">
+                <button type="submit" ng-click="submitted=true" class="button button-block button-positive">
+        Salvar
+      </button>
+
+            </div>
+          </div>
+
+    </form>
+
+</ion-content>
+
+</ion-view>
