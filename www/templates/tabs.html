@@ -4,35 +4,25 @@ Each tab's child <ion-nav-view> directive will have its own
 navigation history that also transitions its views in and out.
 -->
 
-<ion-nav-bar class="bar-positive" ng-controller="menuCtrl">
-
-<ion-nav-title>
-      Livrio
-    </ion-nav-title>
-
-    <ion-nav-buttons side="right">
-    <button menu-toggle="right" class="button button-icon icon ion-android-search"></button>
-    <a href="#/library-add" menu-toggle="right" class="button button-icon icon ion-android-add-circle"></a>
-    <button menu-toggle="right" class="button button-icon icon ion-android-more-vertical" ng-click="popover.show($event)"></button>
-  </ion-nav-buttons>
-</ion-nav-bar>
 
 
 
-<ion-tabs class="tabs-color-active-positive">
+
+
+<ion-tabs class="tabs-color-active-energized tabs-energized">
 
   <!-- Dashboard Tab -->
-  <ion-tab title="Biblioteca" href="#/tab/library">
+  <ion-tab title="Biblioteca" href="#/app/tab/library">
     <ion-nav-view name="tab-library"></ion-nav-view>
   </ion-tab>
 
   <!-- Chats Tab -->
-  <ion-tab title="Empréstimos" href="#/tab/loan">
+  <ion-tab title="Empréstimos" href="#/app/tab/loan">
     <ion-nav-view name="tab-loan"></ion-nav-view>
   </ion-tab>
 
   <!-- Account Tab -->
-  <ion-tab title="Amigos"  href="#/tab/friends">
+  <ion-tab title="Amigos"  href="#/app/tab/friends">
     <ion-nav-view name="tab-friends"></ion-nav-view>
   </ion-tab>
 

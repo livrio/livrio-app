@@ -1,0 +1,5 @@
+#!/bin/sh
+./build
+
+scp Livrio.apk web01.codeway.com.br:/var/www/livrio-site/app.apk
+

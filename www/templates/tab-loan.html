@@ -1,10 +1,28 @@
 <ion-view>
-  <ion-content>
+    <ion-content>
+
+    <div class="wait-message" ng-show="loading">
+        <ion-spinner class="spinner-energized"></ion-spinner>
+    </div>
+
+            <div class="library row " ng-repeat="row in librarys" ng-hide="loading">
+                <div class=" col col-50" ng-repeat="item in row">
+                    <div class="book"  ng-hide="item.removed" ng-click="onView(item)">
+                        <div class="cover">
+                            <img ng-src="{{item.thumb}}">
+                        </div>
+
+                        <h2>{{item.title}}</h2>
+                        
+                        <h3 class="author">{{item.author}}</h3>
+                        
+                    </div>
+
+                </div>
+            </div>
     
-        <div class="notice-library-empty" ng-show="librarys.length==0">
-
+        <div class="notice-library-empty" ng-show="librarys.length==0 && !loading">
             Você ainda não tem livros emprestados!
-
         </div>
-  </ion-content>
+    </ion-content>
 </ion-view>

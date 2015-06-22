@@ -8,12 +8,6 @@ angular.module('starter.controllers')
     $scope.form = $rootScope.user;
 
 
-    $scope.image = 'img/cover.png';
-
-    $scope.image = 'http://api.livr.io/photo/' + $rootScope.user.photo;
-    if ( !$rootScope.user.photo ) {
-        $scope.image  = 'img/cover.png';
-    }
     var id = $rootScope.user.id;
 
     $scope.onPicture = function() {

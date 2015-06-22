@@ -3,29 +3,19 @@ angular.module("starter.controllers")
 .controller("friendsCtrl", function($scope, $rootScope, $http, $ionicPopup, $ionicLoading, settings) {
     $scope.friends = [];
 
-
+    $scope.loading = true;
     $scope.onRefresh = function() {
-        $ionicLoading.show({
-            template: "Carregando..."
-        });
         $http.get(settings.URL.FRIEND)
         .success(function(response) {
-            $ionicLoading.hide();
             if (!response.errors) {
                 $scope.friends = [];
                 angular.forEach(response.data, function(item) {
-                    if (!item.photo) {
-                        item.photo = "img/avatar.png?";
-                    }
-                    else {
-                        item.photo =  "http://api.livr.io/photo/" + item.photo;
-                    }
                     $scope.friends.push(item);
                 });
+                $scope.loading = false;
             }
         })
         .error(function() {
-            $ionicLoading.hide();
             console.log("TRATAR ERROR");
         });
     };

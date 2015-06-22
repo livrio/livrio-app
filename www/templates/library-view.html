@@ -1,28 +1,75 @@
 <ion-view>
-    <ion-nav-bar class="bar-positive">
+    <ion-nav-bar class="bar-energized">
         <ion-nav-title>
-          {{bookView.title}}
+          
         </ion-nav-title>
         <ion-nav-buttons side="left">
           
             <button menu-toggle="right" class="button button-icon icon ion-android-arrow-back" ng-click="onBack()"></button>
       </ion-nav-buttons>
 
-       <ion-nav-buttons side="right">
-    <button menu-toggle="right" class="button button-icon icon ion-android-more-vertical" ng-click="popover.show($event)"></button>
-  </ion-nav-buttons>
+        <ion-nav-buttons side="right">
+          
+            <button menu-toggle="right" class="button button-icon ion-edit"  ng-click="onUpdate(bookView)"></button>
+            <button menu-toggle="right" class="button button-icon ion-android-more-vertical" ng-click="onMenu($event, bookView)"></button>
+      </ion-nav-buttons>
 
     </ion-nav-bar>
-  <ion-content>
+
+  <ion-content class="book-view" scroll="false">
+    <div class="header-book">
+        <h2>{{bookView.title}}</h2>
+        <h3>{{bookView.author}}</h3>
+    </div>
+    <ion-scroll  direction="y" style="width: 100%; height: 100%">
 
 
-    Detalhes do livro!!!! 
-
-
-    <div>
-
+    <div class="card">
+        <div class="item" href="#">
+          <img ng-src="{{bookView.thumb}}" class="cover">
+          <div class="info">
+              <span><strong>ISBN</strong><br />{{bookView.isbn}}</span>
+              <span ng-show="bookView.page_count>0"><strong>Páginas</strong><br />{{bookView.page_count}}</span>
+              <span ng-show="bookView.publisher"><strong>Editora</strong><br />{{bookView.publisher}}</span>
+              <span ng-show="bookView.published_date"><strong>Publicação</strong><br />{{bookView.published_date | date:'dd/MM/yyyy'}}</span>
+              
+          </div>
+        </div>
     </div>
 
+    <div class="card" ng-show="bookView.loaned">
+        <div class="item item-divider" href="#">
+          Empréstimo
+        </div>
+        <div class="item item-avatar">
+            <img ng-src="{{bookView.loaned.photo}}">
+            <h2>{{bookView.loaned.fullname}}</h2>
+            <p>
+                <strong>Data</strong> {{bookView.loaned.date | date:'dd/MM/yyyy'}}<br />
+                <span ng-show="bookView.loaned.expired>0"><strong>Previsão de entrega</strong> {{bookView.loaned.expired}} dias</span>
+                <span ng-show="bookView.loaned.expired<=0" ><strong>Previsão de entrega</strong> Atrasado</span>
+            </p>
+      </div>
+    </div>
+
+    <div class="card" ng-hide="bookView.loaned">
+        <div class="item">
+            <button class="button button-stable button-block" ng-click="onLoan(bookView)">Emprestar</button>
+        </div>
+    </div>
+
+
+
+    <div class="card" style="margin-bottom: 130px;" ng-show="bookView.description">
+        <div class="item item-divider" href="#">
+          Descrição
+        </div>
+        <div class="item item-text-wrap description" href="#">
+          {{bookView.description}}
+        </div>
+    </div>
+
+    </ion-scroll>
 
   </ion-content>
 

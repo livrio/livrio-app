@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('loginCtrl', function($scope, $ionicSlideBoxDelegate, $rootScope, $http, $ionicPopup, $ionicLoading, settings ) {
+.controller('loginCtrl', function($scope, $rootScope, $ionicSlideBoxDelegate, $rootScope, $http, $ionicPopup, $ionicLoading, settings ) {
 
     $scope.tab = 0;
 
@@ -11,9 +11,9 @@ angular.module('starter.controllers', [])
 
 
     $scope.form = {
-        fullname: 'Aurélio Saraiva',
-        email: 'aurelio@codeway.com.br',
-        password: '123456'
+        fullname: '',
+        email: window.localStorage.email || '',
+        password: window.localStorage.password || ''
     };
 
     $scope.doLogin = function(isValid) {
@@ -35,9 +35,10 @@ angular.module('starter.controllers', [])
                 if (!response.errors) {
                     window.localStorage.token = response.data.token;
                     $http.defaults.headers.common.Authorization = window.localStorage.token;
+                    window.localStorage.user = JSON.stringify(response.data.user);
                     $rootScope.user = response.data.user;
 
-                    window.location = '#/tab/library';
+                    window.location = '#/app/tab/library';
                 }
                 else {
                     $ionicPopup.alert({
@@ -49,6 +50,7 @@ angular.module('starter.controllers', [])
                 console.log(JSON.stringify(arguments));
                 $ionicLoading.hide();
                 console.error('TRATAR ERROR');
+                $rootScope.$emit("error.http");
             });
 
         }
@@ -104,20 +106,20 @@ angular.module('starter.controllers', [])
         var post = {
             token: token
         };
+        console.log(token);
         $http.post(settings.URL.LOGIN, post)
         .success(function(response) {
             $ionicLoading.hide();
-
+            console.log(JSON.stringify(response));
             if (!response.errors) {
                 window.localStorage.token = response.data.token;
                 $http.defaults.headers.common.Authorization = window.localStorage.token;
                 $rootScope.user = response.data.user;
-                window.location = '#/main';
+                window.location = '#/app/tab/library';
             }
             else if (create) {
                 $http.post(settings.URL.USER, post)
                 .success(function(response) {
-                    $ionicLoading.hide();
                     if (!response.errors) {
                         loginFacebook(token, false);
                     }
@@ -143,7 +145,7 @@ angular.module('starter.controllers', [])
             template: 'Entrando com Facebook...'
         });
 
-        facebookConnectPlugin.login(['email','public_profile'], function(res) {
+        facebookConnectPlugin.login(['email','public_profile','user_friends'], function(res) {
             if (res.status === 'connected') {
                 loginFacebook(res.authResponse.accessToken, true);
             } else {

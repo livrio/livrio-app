@@ -29,7 +29,17 @@ angular.module('starter', [
   ])
 
 .run(function($rootScope, $http) {
+    
     $http.defaults.headers.common['Content-Type'] = 'application/json';
     //sessionStorage.token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJhdXJlbGlvQGNvZGV3YXkuY29tLmJyIiwibmFtZSI6IkF1clx1MDBlOWxpbyBTYXJhaXZhIiwiYWRtaW4iOnRydWUsInRva2VuIjoiYTJkYmU0Njg1ZTAzZDYxOWQ3ZTU1YjkwODllMjgwM2MifQ.HG-_yyj7KEs-tqiXKOs7C827OAzVsvT3ftH_tSU4vzQ';
-    $http.defaults.headers.common['Authorization'] = window.localStorage.getItem('token');
+    
+    try {
+        $rootScope.user = JSON.parse(window.localStorage.user);
+        $http.defaults.headers.common['Authorization'] = window.localStorage.getItem('token');
+        window.location = '#/app/tab/library';
+    }
+    catch (e) {
+        window.location = '#/login';
+        console.log(e);
+    }
 });

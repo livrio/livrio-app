@@ -9,6 +9,13 @@
     <!-- compiled css output -->
     <link href="css/ionic.app.css" rel="stylesheet">
 
+    <script type="text/javascript" src="lib/jslog-me/dist/jslog.min.js"></script>
+    <script type="text/javascript">
+        
+        jslog = new JsLog({ key: "2a3362846dfe2f1caadcd2964abc6b5b73b0c18e" });
+        
+    </script>
+
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
     <script src="lib/angular-messages.min.js"></script>
@@ -34,11 +41,14 @@
     <script src="js/controllers/libraryView.js"></script>
     <script src="js/controllers/libraryFriend.js"></script>
     <script src="js/controllers/profile.js"></script>
+
+    <script src="js/services/book.js"></script>
+    <script src="js/services/loan.js"></script>
     
-    <script src="js/services.js"></script>
+    
   </head>
   <body ng-app="starter" ng-controller="mainCtrl"> 
-  
+ 
     <ion-nav-view></ion-nav-view>
   </body>
 </html>

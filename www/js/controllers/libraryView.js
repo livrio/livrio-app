@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-.controller('libraryViewCtrl', function($scope, $rootScope, $stateParams, $ionicHistory, $ionicPopover) {
+.controller('libraryViewCtrl', function($scope, $rootScope, $stateParams, $ionicHistory, $ionicPopover, BOOK) {
 
     var id = $stateParams.id;
 
@@ -14,9 +14,18 @@ angular.module('starter.controllers')
         $scope.popover = popover;
     });
 
-    $scope.onLoan = function() {
-        $rootScope.$emit('loan.add',id);
+    $scope.onLoan = function(book) {
+        $rootScope.$emit('loan.add',book);
     };
+
+
+    $scope.onMenu = function(event, book) {
+        BOOK.menuAction(event, book);
+    }
+
+    $scope.onUpdate = function(book) {
+        BOOK.update(book);
+    }
 
 
     $scope.onHide = function() {

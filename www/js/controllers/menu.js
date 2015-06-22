@@ -11,12 +11,5 @@ angular.module('starter.controllers')
     $scope.onHide = function() {
         $scope.popover.hide();
     };
-    $scope.onLogout = function() {
-        $scope.popover.hide();
-        delete window.localStorage.token;
-        window.location = '#/login';
-        window.location.reload();
-    };
-
 });
 

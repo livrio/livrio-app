@@ -7,41 +7,43 @@
   <ion-content>
 
 
-    <div class="library row " ng-repeat="row in librarys">
-    
-<div class=" col col-50" ng-repeat="item in row">
-<div class="book"  ng-click="onBook(item)">
+    <div class="wait-message" ng-show="loading">
+        <ion-spinner class="spinner-energized"></ion-spinner>
+    </div>
 
-            <div class="cover">
-                <img ng-src="{{item.thumb}}">
+    <div class="library row " ng-repeat="row in librarys" ng-hide="loading">
+        <div class=" col col-50" ng-repeat="item in row">
+            <div class="book"  ng-click="onBook(item)" ng-class="{'loaned':item.loaned}" ng-hide="item.removed">
+                <div class="cover">
+                    <img ng-src="{{item.thumb}}">
+                </div>
+                
+                    <h2>{{item.title}}</h2>
+                    
+                    <h3 class="author">{{item.author}}</h3>
+                    <button type="button" class="button icon ion-android-more-vertical btn-more" ng-click="onActionBook($event, item)"></button>
+                
             </div>
 
-        
-        
-        <h2>{{item.title}}</h2>
-        
-        <h3 class="author">{{item.author}}</h3>
-        <button type="button" class="button icon ion-android-more-vertical btn-more" ng-click="onActionBook($event, item)"></button>
-        
-
         </div>
-
-</div>
-
-        
-
-      </div>
+    </div>
 
 
-    <div class="notice-library-empty" ng-show="librarys.length==0">
+    <div class="notice-library-empty" ng-show="librarys.length==0 && !loading">
 
         Olá, {{user.name}} :)<br />
         Você ainda não tem livros cadastrados.<br />
         Comece já!
 
     </div>
+
+
+
    
 
 
   </ion-content>
+  <a class="button button-float" href="#/library-add">
+       <i class="icon ion-plus"></i>
+  </a>
 </ion-view>

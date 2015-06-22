@@ -5,7 +5,7 @@ in ionic's _variables.scss file.
 For example, you might change some of the default colors:
 
 $light:                           #fff !default;
-$stable:                          #f8f8f8 !default;
+
 $positive:                        #387ef5 !default;
 $calm:                            #11c1f3 !default;
 $balanced:                        #33cd5f !default;
@@ -17,13 +17,182 @@ $dark:                            #444 !default;
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
+$energized:                          #FF9800 !default;
+$stable: #c7b299 !default;
+$font-family-sans-serif:          "Roboto", "Segoe UI", sans-serif !default;
+$font-family-light-sans-serif:    "Roboto-Light", "Segoe UI-Light", sans-serif-light !default;
+
+
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
-@import "www/lib/slide-box/scss/slidingTabs.scss";
+@import url(http://fonts.googleapis.com/css?family=Roboto:500,300,700,400);
+
+
+.tabs-striped .tab-item.tab-item-active {
+    border-color: $energized;
+}
+
+
+.button.button-stable {
+    color: #fff;
+}
 
 .center{
   text-align: center;
+}
+
+.bar-transparent {
+    
+}
+
+
+.wait-message{
+    padding-top: 50px;
+    text-align: center;
+}
+
+
+.bar-header-button {
+
+    .button {
+        font-size: 15px !important;
+        text-transform: uppercase;
+        font-weight: 500 !important;
+    }
+
+}
+
+.tab-title{
+    text-transform: uppercase;
+}
+
+
+.profile{
+    
+    height: 120px;
+    position: relative;
+    display: block;
+    overflow: hidden;
+
+    .bg{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-filter: blur(5px);
+        background-size: cover;
+        background-position: 0px -23px;
+    }
+
+    .ct{
+        background-color: rgba(0, 0, 0, 0.16);
+        width: 100%;
+        height: 100%;
+        top: 0px;
+        position: absolute;
+        padding-top: 30px;
+    }
+
+    .photo{
+        width: 60px;
+        height: 60px;
+        position: absolute;
+        top: 50%;
+        left: 16px;
+        margin-top: -45px;
+        border-radius: 50%;
+        box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, 0.49);
+    }
+
+    .name{
+        position: absolute;
+        bottom: 10px;
+        width: 100%;
+        padding-left: 16px;
+        font-size: 15px;
+        text-transform: uppercase;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+        font-weight: bold;
+        color: #fff;
+    }
+
+
+
+
+    &.friends{
+        height: 150px;
+
+        .photo{
+            width: 75px;
+            height: 75px;
+            left: 50%;
+            margin-left: -30px;
+        }
+
+        .button-icon{
+            top: 0px;
+            left: 10px;
+            position: absolute;
+            &::before{
+                color: #fff;
+                text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+            }
+        }
+
+        .name{
+            text-align: left;
+            padding-left: 10px;
+        }
+
+        .book-count{
+
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: right;
+            font-size: 15px;
+            text-transform: uppercase;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+            font-weight: bold;
+            color: #fff;
+            padding-right: 10px;
+        }
+    }
+}
+
+.button-float{
+    background: $energized !important;
+    color:white !important;
+    z-index: 12 !important;
+    position: absolute !important; 
+    bottom: 10px !important;
+    right: 10px !important;
+    border-radius: 50% !important;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26) !important;
+    -webkit-transform: translate3d(0, 0, 0) !important;
+    transform: translate3d(0, 0, 0) !important;
+    -webkit-transition: 0.2s linear !important;
+    transition: 0.2s linear !important;
+    -webkit-transition-property: -webkit-transform, all !important;
+    transition-property: transform, all !important;
+
+    width: 56px;
+    height: 56px;
+    border: none;
+
+    i{
+        top: 6px;
+        position: absolute;
+        left: 19px;
+    }
+
+}
+
+.button-float:hover{
+    -webkit-transform: translate3d(0, -1px, 0)  !important;
+    transform: translate3d(0, -1px, 0) !important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4) !important;
+    background: darken($energized, 10%) !important;
 }
 
 .notice-library-empty{
@@ -40,6 +209,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 }
 
 
+
 .tab-login {
 text-align: center;
 margin-bottom: 30px;
@@ -49,21 +219,34 @@ margin-bottom: 30px;
       padding: 11px;
 
       &.active{
-        border-bottom: 3px solid $positive;
+        border-bottom: 3px solid $energized;
       }
 
     }
 }
 
+.platform-android .action-sheet .action-sheet-title {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.tab-nav.tabs{
+    /*box-shadow: 0px 0px 17px -1px rgba(0, 0, 0, 0.49);*/
+}
+
+
 
 .library {
 
 
-    .book{
-        padding: 5px;
+    .book {
+        
         border: 1px solid #ddd;
-        box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.22);
+        
         position: relative;
+        height: 244px;
+
+
 
         .btn-more {
             position: absolute;
@@ -90,14 +273,18 @@ margin-bottom: 30px;
         }
 
         h2{
-            font-size: 13px;
+            font-size: 12px;
             margin-top: 10px;
             margin-bottom: 0px;
-            height: 33px;
+            height: 29px;
             overflow: hidden;
+            padding-left: 5px;
+            text-transform: uppercase;
+            padding-right: 5px;
         }
 
         h3.author{
+            padding-left: 5px;
             color: #999;
             font-size: 12px;
             margin: 0;
@@ -105,6 +292,96 @@ margin-bottom: 30px;
             padding-right: 20px;
         }
 
+
+        &.loaned{
+            border-top: 2px solid rgb(210, 110, 110);
+            padding-top: 4px;
+        }
+
+    }
+}
+
+
+.book-view{
+    
+    .header-book {
+        padding-left: 10px;
+        padding-bottom: 10px;
+        background-color: $energized;
+        
+        padding-top: 10px;
+        h2{
+            color: #fff;
+            font-size: 18px;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        h3{
+            font-size: 12px;
+            color: #fff;
+            text-transform: uppercase;
+            margin: 0;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    }
+
+    .card {
+        margin:0;
+        box-shadow: none;
+
+        .item{
+            border: none;
+        }
+
+        .item-divider{
+            background: transparent;
+            color: #5F5F5F;
+            border-top: 1px solid #D0D0D0;
+            border-bottom: none;
+            box-shadow: none;
+        }
+
+        .item-avatar{
+            padding-left: 90px;
+            img{
+                max-width: 56px;
+                max-height: 56px;
+            }
+        }
+    }
+
+
+    .info {
+        padding-left: 20px;
+        float: left;
+        span{
+            display: block;
+            font-size: 12px;
+            strong{
+                font-size: 14px;
+            }
+        }
+    }
+
+    .loan{
+        span{
+            display: block;
+            font-size: 12px;
+            strong{
+                font-size: 14px;
+            }
+        }
+    }
+
+    .cover{
+        float: left;
+        width: 125px;
+    }
+
+    .description{
+        font-size: 12px;
     }
 }
 

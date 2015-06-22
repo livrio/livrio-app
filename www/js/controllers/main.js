@@ -1,6 +1,20 @@
 angular.module("starter.controllers")
-.controller("mainCtrl", function($scope, $rootScope, $http, $ionicModal, $ionicLoading, $ionicPopup, settings) {
+.controller("mainCtrl", function($scope, $ionicHistory, $rootScope, $http, $ionicModal, $ionicLoading, $ionicPopup, settings) {
 
+
+    $scope.onBack = function() {
+        $scope.modal.hide();
+    };
+
+    $scope.bookTitle = '';
+
+    $scope.onLogout = function() {
+        delete window.localStorage.token;
+        window.location = '#/login';
+        window.location.reload();
+    };
+
+    $scope.loading = true;
 
     var id = 0, book;
     $ionicModal.fromTemplateUrl("templates/emprestimo.html", {
@@ -14,30 +28,23 @@ angular.module("starter.controllers")
 
 
     var onRefresh = function() {
-        $ionicLoading.show({
-            template: "Carregando..."
-        });
         $http.get(settings.URL.FRIEND)
         .success(function(response) {
-            $ionicLoading.hide();
             if (!response.errors) {
                 $scope.friends = [];
                 angular.forEach(response.data, function(item) {
-                    if (!item.thumb) {
-                        item.thumb = "img/avatar.png?";
-                    }
                     $scope.friends.push(item);
                 });
+                $scope.loading = false;
             }
         })
         .error(function() {
-            $ionicLoading.hide();
             console.log("TRATAR ERROR");
         });
     };
 
 
-    function onLoan(user, day) {
+    function onLoan(user, day, del) {
         $ionicLoading.show({
             template: "Emprestando..."
         });
@@ -51,7 +58,7 @@ angular.module("starter.controllers")
             if (!response.errors) {
                 console.log("Emprestado");
                 $scope.modal.hide();
-                book.title = "EDITADO";
+                book.loaned = response.data.loaned;
             }
         })
         .error(function() {
@@ -123,10 +130,20 @@ angular.module("starter.controllers")
         myPopup.then(function(res) {});
     };
 
+
     $rootScope.$on("loan.add",function(e, item) {
         book = item;
         id = item.id;
         onRefresh();
+        $scope.bookTitle = item.title;
         $scope.modal.show();
     });
+
+    $rootScope.$on("error.http",function(e) {
+        $ionicPopup.alert({
+            template: "Error no servidor"
+        }).then(function() {});
+    });
+
+
 });

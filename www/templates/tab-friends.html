@@ -2,18 +2,24 @@
   <ion-content>
 
 
-    <div class="list">
+  <div class="wait-message" ng-show="loading">
+        <ion-spinner class="spinner-energized"></ion-spinner>
+    </div>
+    
+
+    <div class="list friend-list" ng-hide="loading">
 
     <div class="item item-avatar" ng-repeat="item in friends" ng-click="onLibrary(item)">
       <img ng-src="{{item.photo}}" />
-      <h2>{{item.fullname}}</h2>
-      <p>Livros: {{item.amount_book}}</p>
+      {{item.fullname}}
+      <br />
+       <i class="icon ion-ios-book"></i> {{item.amount_book}}
     </div>
 
 
 </div>
 
- <div class="notice-library-empty" ng-show="friends.length==0">
+ <div class="notice-library-empty" ng-show="friends.length==0 && !loading">
 
         Olá, {{user.name}} :)<br />
         Você é uma pessoal solitaria, conecte-se aos seus amigos para ter vida social :D

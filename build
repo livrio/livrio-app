@@ -1,0 +1,9 @@
+#!/bin/sh
+
+cordova prepare android
+cordova build --release android
+/home/aureliosaraiva/jdk/bin/jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore livrio-production.keystore -keypass Z4vMkyltu -storepass Z4vMkyltu platforms/android/ant-build/CordovaApp-release-unsigned.apk livrio
+rm -f Livrio.apk
+
+/home/aureliosaraiva/android-sdk-linux/build-tools/19.1.0/zipalign -v 4 platforms/android/ant-build/CordovaApp-release-unsigned.apk Livrio.apk
+

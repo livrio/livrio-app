@@ -11,12 +11,14 @@ angular.module("starter.config",[])
         LOGOUT: DOMAIN_API + "/auth/logout",
         ISBN: DOMAIN_API + "/isbn",
         BOOK: DOMAIN_API + "/book",
+        LOAN: DOMAIN_API + "/loan",
         FRIEND: DOMAIN_API + "/friend"
     },
     iOSApiKey: "961755098-c1f2cioji268glhuflmeil69trs5eudg.apps.googleusercontent.com"
 })
-.config(function($stateProvider, $httpProvider, $urlRouterProvider) {
+.config(function($stateProvider, $httpProvider, $urlRouterProvider, $ionicConfigProvider) {
 
+    //$ionicConfigProvider.views.maxCache(0);
 
     $httpProvider.interceptors.push(function($q, $location) {
         return {
@@ -38,6 +40,12 @@ angular.module("starter.config",[])
 
     .state("library-add", {
         url: "/library-add",
+        templateUrl: "templates/library-add.html",
+        controller: "libraryAddCtrl"
+    })
+
+    .state("library-form", {
+        url: "/library-form/:id",
         templateUrl: "templates/library-add.html",
         controller: "libraryAddCtrl"
     })
@@ -70,17 +78,22 @@ angular.module("starter.config",[])
         templateUrl: "templates/main.html"
     })
 
-
-    // setup an abstract state for the tabs directive
-    .state("tab", {
+    .state("app", {
+        url: "/app",
+        abstract: true,
+        templateUrl: "templates/side_menu.html"
+    })
+    .state("app.tab", {
         url: "/tab",
         abstract: true,
-        templateUrl: "templates/tabs.html"
+        views: {
+            "menuContent": {
+                templateUrl: "templates/tabs.html"
+            }
+        }
     })
 
-    // Each tab has its own nav history stack:
-
-    .state("tab.library", {
+    .state("app.tab.library", {
         url: "/library",
         views: {
             "tab-library": {
@@ -90,7 +103,8 @@ angular.module("starter.config",[])
         }
     })
 
-    .state("tab.loan", {
+
+    .state("app.tab.loan", {
         url: "/loan",
         views: {
             "tab-loan": {
@@ -99,7 +113,7 @@ angular.module("starter.config",[])
         }
         }
     })
-    .state("tab.friends", {
+    .state("app.tab.friends", {
         url: "/friends",
         views: {
             "tab-friends": {
@@ -108,12 +122,19 @@ angular.module("starter.config",[])
         }
         }
     });
+    
     if (!window.localStorage.token) {
         $urlRouterProvider.otherwise("/login");
     }
     else {
-        $httpProvider.defaults.headers.common.Authorization = window.localStorage.token;
-        $urlRouterProvider.otherwise("/tab/library");
+        try {
+            $rootScope.user = JSON.parse(window.localStorage.user);
+            $httpProvider.defaults.headers.common.Authorization = window.localStorage.token;
+            $urlRouterProvider.otherwise("/app/tab/library");
+        }
+        catch (e) {
+            $urlRouterProvider.otherwise("/login");
+        }
     }
     // if none of the above states are matched, use this as the fallback
 

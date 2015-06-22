@@ -14,7 +14,7 @@ var paths = {
   js: ['./www/js/**/*.js']
 };
 
-gulp.task('default', ['sass','lint']);
+gulp.task('default', ['sass']);
 
 gulp.task('sass', function(done) {
   gulp.src('./scss/ionic.app.scss')
@@ -37,15 +37,8 @@ gulp.task('jscs', function() {
     }));
 });
 
-gulp.task('lint', function() {
-  return gulp.src('./www/js/*.js')
-    .pipe(jshint()) 
-    .pipe(jshint.reporter('jshint-stylish'));
-});
-
 gulp.task('watch', function() {
   gulp.watch(paths.sass, ['sass']);
-  gulp.watch(paths.js, ['lint']);
 });
 
 

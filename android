@@ -1,8 +1,0 @@
-#!/bin/sh
-
-cordova prepare android
-cordova build --release android
-/home/aureliosaraiva/jdk/bin/jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore wiflip-production.keystore -keypass flipforall2014 -storepass flipforall2014 platforms/android/ant-build/CordovaApp-release-unsigned.apk production
-rm -f Wiflip.apk
-/home/aureliosaraiva/android-sdk-linux/build-tools/19.1.0/zipalign -v 4 platforms/android/ant-build/CordovaApp-release-unsigned.apk Wiflip.apk
-curl -T Wiflip.apk ftp://ftp.wiflip.com/downloads/ --user wiflipftp@wiflip.com:wqe123
