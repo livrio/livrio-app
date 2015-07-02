@@ -1,87 +1,90 @@
-<ion-side-menus>
-  <ion-side-menu-content>
-    <ion-nav-bar class="bar-energized">
-      <ion-nav-back-button>
-      </ion-nav-back-button>
-      <ion-nav-title>
-      Livr.io
-    </ion-nav-title>
-      <ion-nav-buttons side="left">
-        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
-        </button>
-      </ion-nav-buttons>
-    </ion-nav-bar>
-    <ion-nav-view name="menuContent"></ion-nav-view>
-  </ion-side-menu-content>
+<ion-side-menus ng-controller="menuCtrl" enable-menu-with-back-views="false">
 
-  <ion-side-menu side="left">
-    <ion-content>
+    <ion-side-menu-content >
 
-    <a class="profile" href="#/profile">
+        <ion-nav-bar class="bar-assertive">
 
-        
-        <div class="bg" ng-style="{'background-image': 'url({{user.photo}})'}">
+            <ion-nav-back-button></ion-nav-back-button>
 
-        </div>
+            <ion-nav-title>Livrio</ion-nav-title>
 
-        <div class="ct">
-            <img class="photo" ng-src="{{user.photo}}" />
-            <div class="name">{{user.fullname}}</div>    
-        </div>
-    </a>
+            <ion-nav-buttons side="left">
+                <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+            </ion-nav-buttons>
 
-        <ul class="list">
+        </ion-nav-bar>
 
-            <li class="item item-icon-left ">
-            
-              Favoritos
-            </li>
+        <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
 
-            <li class="item item-icon-left ">
-            
-              Lidos
-            </li>
+    </ion-side-menu-content>
 
-            <li class="item item-divider">
-            <i class="icon ion-ios-albums"></i>
-              Prateleiras
-            </li>
+    <ion-side-menu side="left"  expose-aside-when="large" >
+        <ion-content>
 
-            <li class="item item-icon-left ">
-              Tecnologia
-            </li>
+            <a class="profile" ui-sref="app.profile" menu-close>
+                <div class="bg"></div>
 
-            <li class="item item-icon-left ">
-              Designer
-            </li>
-
-
-
-            <li class="item item-icon-left ">
-              Gestão
-            </li>
-
-            <li class="item item-divider">
-            
-            <i class="icon ion-help"></i>
-                Livr.io
-            </li>
-
-            <a class="item item-icon-left " href="#/profile">
-            
-              Perfil
+                <div class="ct">
+                    <img class="photo" ng-src="{{user.photo}}" />
+                    <div class="name">{{user.fullname}} 
+<!-- <button class="button button-icon"><i class="icon ion-android-arrow-dropdown"></i></button> -->
+                    </div>    
+                </div>
             </a>
 
-            <a class="item item-icon-left " href="#/about">
-            
-              Sobre
-            </a>
+            <ul class="list sidemenu">
 
-            <a class="item item-icon-left " ng-click="onLogout()">
-            
-              Sair
-            </a>
-        </ul>
-    </ion-content>
-  </ion-side-menu>
+                <a class="item item-icon-left ac" ui-sref="app.library" ui-sref-active="active" menu-close>
+                    <i class="icon ion-ios-book"></i> Meus livros
+                </a>
+
+                <a class="item item-icon-left " ui-sref="app.friends" ui-sref-active="active" menu-close>
+                    <i class="icon ion-android-contacts"></i> Amigos
+                </a>
+
+                <a class="item item-icon-left " ui-sref="app.loan" ui-sref-active="active" menu-close>
+                    <i class="icon ion-arrow-swap"></i> Empréstimos
+                </a>
+
+                <a class="item item-icon-left " ui-sref="app.notification" ui-sref-active="active" menu-close>
+                    <i class="icon ion-android-notifications"></i> Notificações
+                    <span class="badge" ng-show="notifications.unread>0">{{notifications.unread}}</span>
+                </a>
+
+                
+
+                <li class="item item-divider item-line">            
+                    Estantes
+                </li>
+
+                <a ui-sref="app.shelf({id:item.id})" ui-sref-active="active" class="item item-icon-left " ng-repeat="item in shelfs | orderBy: 'name'" menu-close>
+                    <i class="icon ion-android-bookmark"></i>
+                    {{item.name}}
+                    <span class="badge"  ng-show="item.amount>0">{{item.amount}}</span>
+                </a>
+
+
+                <a class="item item-icon-left item-line" ui-sref="app.profile" ui-sref-active="active" menu-close>
+                    <i class="icon ion-person"></i> Meu perfil
+                </a>
+
+                <a class="item item-icon-left " href="#" menu-close>
+                    <i class="icon ion-android-settings"></i> Configurações
+                </a>
+
+                
+
+                <a class="item item-icon-left " ui-sref="app.about" ui-sref-active="active" menu-close>
+                    <i class="icon ion-help-circled"></i> Sobre o aplicativo
+                </a>
+
+                <div ng-click="doLogout()" class="item item-icon-left" menu-close>
+                    <i class="icon ion-android-exit"></i> Sair
+                </div>
+
+                
+
+            </ul>
+        </ion-content>
+    </ion-side-menu>
 </ion-side-menus>

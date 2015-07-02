@@ -11,11 +11,18 @@ angular.module("starter.controllers")
             isbn: "",
             title: "",
             author: "",
-            thumb: "img/cover.gif"
+            thumb: "img/cover.gif",
+            shelfs: []
         };
     }
     else {
-        $scope.form = $rootScope.bookUpdate;
+        var updateBook = angular.copy($rootScope.bookUpdate);
+        var ids = [];
+        angular.forEach(updateBook.shelfs, function(v) {
+            ids.push(v.id);
+        });
+        updateBook.shelfs = ids;
+        $scope.form = updateBook;
     }
 
 
@@ -96,7 +103,8 @@ angular.module("starter.controllers")
                 isbn: $scope.form.isbn,
                 title: $scope.form.title,
                 author: $scope.form.author,
-                cover_source: $scope.form.cover_source
+                cover_source: $scope.form.cover_source,
+                shelfs: $scope.form.shelfs
             };
 
             if (!id) {
@@ -107,6 +115,7 @@ angular.module("starter.controllers")
                         $cordovaToast.showLongBottom("Livro inserido!").then(function() {});
                         resetForm();
                         $rootScope.$emit("library.refresh");
+                        $rootScope.$emit("shelf.refresh");
                         window.location = "#/app/tab/library";
                     }
                     else {
@@ -128,6 +137,7 @@ angular.module("starter.controllers")
                         $cordovaToast.showLongBottom("Livro atualizado!").then(function() {});
                         //resetForm();
                         $rootScope.$emit("library.refresh");
+                        $rootScope.$emit("shelf.refresh");
                         window.location = "#/app/tab/library";
                     }
                     else {
@@ -201,13 +211,5 @@ angular.module("starter.controllers")
     };
 
 
-    // $scope.doImport = function(){
-    //     $cordovaOauth.google("966956371758-5q9774rtrl4t1dvt5bm8gb6in9kvbif3.apps.googleusercontent.com", ["https://www.googleapis.com/auth/userinfo.email"]).then(function(result) {
-    //            console.log('auth');
-    //     }, function(error) {
-    //         console.log(JSON.stringify(arguments));
-    //         console.log('auth error');
-    //     });
-    // }
 
 });

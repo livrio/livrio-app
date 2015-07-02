@@ -35,10 +35,15 @@ angular.module('starter.controllers', [])
                 if (!response.errors) {
                     window.localStorage.token = response.data.token;
                     $http.defaults.headers.common.Authorization = window.localStorage.token;
+                    console.log('auth1');
                     window.localStorage.user = JSON.stringify(response.data.user);
+                    console.log(response.data.user);
+                    console.log(JSON.stringify(response.data.user));
+                    console.log(window.localStorage.user);
+                    console.log(JSON.stringify(window.localStorage.user));
                     $rootScope.user = response.data.user;
 
-                    window.location = '#/app/tab/library';
+                    window.location = '#/app/library';
                 }
                 else {
                     $ionicPopup.alert({
@@ -114,8 +119,9 @@ angular.module('starter.controllers', [])
             if (!response.errors) {
                 window.localStorage.token = response.data.token;
                 $http.defaults.headers.common.Authorization = window.localStorage.token;
+                window.localStorage.user = JSON.stringify(response.data.user);
                 $rootScope.user = response.data.user;
-                window.location = '#/app/tab/library';
+                window.location = '#/app/library';
             }
             else if (create) {
                 $http.post(settings.URL.USER, post)

@@ -4,6 +4,13 @@ angular.module('starter.controllers')
 
     var id = $stateParams.id;
 
+    $scope.loading = true;
+    BOOK.view(id)
+    .then(function(book) {
+        $scope.loading = false;
+        $rootScope.bookView = book;
+    });
+
     $scope.onBack = function() {
         $ionicHistory.goBack();
     };
@@ -19,7 +26,8 @@ angular.module('starter.controllers')
     };
 
 
-    $scope.onMenu = function(event, book) {
+    $scope.onAction = function(event, book) {
+        console.log(book);
         BOOK.menuAction(event, book);
     }
 

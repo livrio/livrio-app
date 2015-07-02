@@ -1,45 +1,67 @@
-<ion-view>
-    <ion-nav-bar class="bar-energized">
-        <ion-nav-title>
-          Perfil
-        </ion-nav-title>
-        <ion-nav-buttons side="left">
-          
-            <button menu-toggle="right" class="button button-icon icon ion-android-arrow-back" ng-click="onBack()"></button>
-        </ion-nav-buttons>
+<ion-view title="Perfil de usuário">
 
-    </ion-nav-bar>
-  <ion-content>
+<ion-nav-buttons side="right">
+    <button class="button button-clean button-icon">Salvar</button>
+</ion-nav-buttons>
+
+  <ion-content class="profile-view">
 
     <form ng-submit="doUpdate(formUpdate.$valid)" name="formUpdate" novalidate>
-            <div class="list list-inset">
+        <div class="list">
 
-            <label class="item item-input" ng-class="{ 'has-error' : formUpdate.fullname.$invalid && submitted}">
-              <input type="text" placeholder="Nome Completo" name="fullname" ng-model="form.fullname" required>
-            </label>
-             <div class="form-errors" ng-messages="formUpdate.fullname.$error" ng-show="submitted">
-                  <div class="form-error" ng-message="required">Nome é obrigatório</div>
-              </div>
-
-
-            <label class="item item-input" ng-class="{ 'has-error' : formUpdate.email.$invalid && submitted}">
-              <input type="email" placeholder="Email" name="email" ng-model="form.email" required>
-            </label>
-             <div class="form-errors" ng-messages="formUpdate.email.$error" ng-show="submitted">
-                  <div class="form-error" ng-message="required">Email é obrigatório</div>
-              </div>
-
-              <div class="item">
-                  <img ng-click="onPicture()" ng-src="{{image}}" style="width: 100px; margin: 10px;" />
-              </div>
-
-            <div class="item">
-                <button type="submit" ng-click="submitted=true" class="button button-block button-energized">
-        Salvar
-      </button>
-
+            <div class="item" ng-click="onPicture()">
+                <img  ng-src="{{form.photo}}" style="width: 100%" class="photo" />
+                <button type="button" class="button button-icon button-photo">
+                <i class="icon ion-android-camera"></i>
+                </button>
             </div>
-          </div>
+
+
+            <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formUpdate.fullname.$invalid && formUpdate.$submitted}">
+                <span class="input-label">Nome</span>
+                <input type="text"  name="fullname" ng-model="form.fullname" required>
+            </label>
+            <div class="form-errors" ng-messages="formUpdate.fullname.$error" ng-show="formUpdate.$submitted">
+                <div class="form-error" ng-message="required">Nome é obrigatório</div>
+            </div>
+
+         
+
+            <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formUpdate.birth.$invalid && formUpdate.$submitted}">
+                <span class="input-label">Data de Nascimento</span>
+                <input type="date"  name="birth" ng-model="form.birth" required>
+            </label>
+            <div class="form-errors" ng-messages="formUpdate.birth.$error" ng-show="formUpdate.$submitted">
+                <div class="form-error" ng-message="required">Data de Nascimento é obrigatório</div>
+            </div>
+
+
+            <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formUpdate.gender.$invalid && formUpdate.$submitted}">
+                <span class="input-label">Sexo</span>
+                <select>
+                    <option>
+                    <option>Masculino
+                    <option>Feminino
+                </select>
+            </label>
+            <div class="form-errors" ng-messages="formUpdate.gender.$error" ng-show="formUpdate.$submitted">
+                <div class="form-error" ng-message="required">Sexo é obrigatório</div>
+            </div>
+
+           <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formUpdate.email.$invalid && formUpdate.$submitted}">
+                <span class="input-label">E-mail</span>
+                <input type="text"  name="email" ng-model="form.email" required>
+            </label>
+            <div class="form-errors" ng-messages="formUpdate.email.$error" ng-show="formUpdate.$submitted">
+                <div class="form-error" ng-message="required">E-mail é obrigatório</div>
+            </div>
+
+
+        </div>
+
+        <p class="padding">
+        Caro usuário, as informações de sexo e data de nascimento são utilizadas para sugerir livros que melhor se encaixa com seu perfil. Caso tenha dúvidas consulte nossa <a class="link" ui-sref="app.privacy">Política de Privacidade</a>.
+        </p>
 
     </form>
 

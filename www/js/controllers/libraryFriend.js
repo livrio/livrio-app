@@ -1,6 +1,6 @@
 angular.module("starter.controllers")
 
-.controller("libraryFriendCtrl", function($scope, $ionicHistory, $stateParams, $rootScope, $http, $ionicPopup, $ionicLoading, BOOK, settings) {
+.controller("libraryFriendCtrl", function($scope, $ionicNavBarDelegate, $ionicHistory, $stateParams, $rootScope, $http, $ionicPopup, $ionicLoading, FRIEND, BOOK, settings) {
 
     $scope.librarys = [];
 
@@ -8,36 +8,35 @@ angular.module("starter.controllers")
 
     $scope.loading = true;
 
+    FRIEND.view(id)
+    .then(function(friend) {
+        $scope.friend = friend;
+        console.log(friend);
+        $ionicNavBarDelegate.title(friend.fullname);
+        $scope.onRefresh();
+    });
+
     $scope.onRefresh = function() {
-        $http.get(settings.URL.BOOK + "?friend=" + id)
-        .success(function(response) {
-            if (!response.errors) {
-                var library = [];
-                angular.forEach(response.data, function(item) {
-
-                    item.author = item.author[0];//.author.join(", ");
-                    library.push(item);
-                });
-
-                $scope.librarys = columnize(library, 2);
-                $scope.loading = false;
-            }
+        BOOK.all({
+            friend: id
         })
-        .error(function() {
-            console.log("TRATAR ERROR");
+        .then(function(data) {
+            var library = [];
+            angular.forEach(data, function(item) {
+                item.author = item.author[0];//.author.join(", ");
+                item.friend = true;
+                library.push(item);
+            });
+
+            $scope.librarys = library;
+            $scope.loading = false;
+            $scope.$broadcast('scroll.refreshComplete');
         });
     };
 
 
-    $scope.onView = function(item) {
-        BOOK.view(item);
-    };
-
-    $scope.onRefresh();
-
-
-    $scope.onBack = function() {
-        $ionicHistory.goBack();
+    $scope.onActionBook = function(event, item) {
+        BOOK.menuAction(event, item);
     };
 
 });

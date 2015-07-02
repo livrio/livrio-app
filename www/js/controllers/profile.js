@@ -1,9 +1,11 @@
 "use strict";
 
 angular.module('starter.controllers')
-.controller('profileCtrl', function( $scope, $rootScope, $ionicActionSheet, $ionicHistory, $http, $ionicPopup, $ionicLoading, settings, $cordovaToast, $cordovaCamera) {
+.controller('profileCtrl', function( $scope, $ionicSideMenuDelegate, $ionicNavBarDelegate, $rootScope, $ionicActionSheet, $ionicHistory, $http, $ionicPopup, $ionicLoading, settings, $cordovaToast, $cordovaCamera) {
 
-
+    $scope.onBack = function() {
+        $ionicHistory.goBack();
+    };
 
     $scope.form = $rootScope.user;
 
@@ -13,9 +15,10 @@ angular.module('starter.controllers')
     $scope.onPicture = function() {
         var hideSheet = $ionicActionSheet.show({
             buttons: [
-                { text: 'Camera' },
-                { text: 'Galeria' }
+                { text: "<i class=\"icon ion-android-camera\"></i> Tirar foto" },
+                { text: "<i class=\"icon ion-image\"></i> Galeria"}
             ],
+            titleText: 'Foto de perfil',
             cancelText: 'Cancelar',
             cancel: function() {
                 hideSheet();
@@ -45,9 +48,8 @@ angular.module('starter.controllers')
             sourceType: sourceType,
             allowEdit: true,
             encodingType: Camera.EncodingType.JPEG,
-            targetWidth: 150,
-            targetHeight: 150,
-            correctOrientation: true,
+            targetWidth: 250,
+            targetHeight: 250,
             popoverOptions: CameraPopoverOptions,
             saveToPhotoAlbum: false
         };
@@ -101,6 +103,7 @@ angular.module('starter.controllers')
             .success(function(response) {
                 $ionicLoading.hide();
                 if ( !response.errors) {
+                    window.localStorage.user = JSON.stringify(response.data);
                     $cordovaToast.showLongBottom('Dados atualizados!').then(function() {});
                 }
                 else {

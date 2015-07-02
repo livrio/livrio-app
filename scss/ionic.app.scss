@@ -9,20 +9,28 @@ $light:                           #fff !default;
 $positive:                        #387ef5 !default;
 $calm:                            #11c1f3 !default;
 $balanced:                        #33cd5f !default;
-$energized:                       #ffc900 !default;
-$assertive:                       #ef473a !default;
+$assertive:                       #ffc900 !default;
+$energized:                       #ef473a !default;
 $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
-$energized:                          #FF9800 !default;
-$stable: #c7b299 !default;
+$assertive:                          #F44336 !default;
+/*$stable: #c7b299 !default;*/
+$action: #F44336 !default;
+$energized:                       #f9b000 !default;
+$divider: #EDEDED;
 $font-family-sans-serif:          "Roboto", "Segoe UI", sans-serif !default;
 $font-family-light-sans-serif:    "Roboto-Light", "Segoe UI-Light", sans-serif-light !default;
 
 
+
+.spinner svg {
+  stroke: $assertive;
+  fill: $assertive; 
+}
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
@@ -30,12 +38,16 @@ $font-family-light-sans-serif:    "Roboto-Light", "Segoe UI-Light", sans-serif-l
 
 
 .tabs-striped .tab-item.tab-item-active {
-    border-color: $energized;
+    border-color: $assertive;
 }
 
 
 .button.button-stable {
     color: #fff;
+}
+
+.bar.bar-assertive{
+    border: none;
 }
 
 .center{
@@ -50,6 +62,47 @@ $font-family-light-sans-serif:    "Roboto-Light", "Segoe UI-Light", sans-serif-l
 .wait-message{
     padding-top: 50px;
     text-align: center;
+    span{
+        display: block;
+        font-size: 14px;
+        margin-top: 5px;
+        font-weight: 500;
+        color: #696868;
+    }
+}
+
+
+.notifications {
+    
+    .item.unread{
+        background-color: #F0F0F0;
+    }
+}
+
+.bar.item-input-inset {
+    .item-input-wrapper {
+        background-color: transparent;
+    }
+
+    .placeholder-icon {
+        color: #fff;
+        font-size: 20px; 
+    }
+
+    input {
+        color: #fff;
+        border-bottom: 1px solid #fff;
+    }
+
+    ::-webkit-input-placeholder { /* WebKit browsers */
+        color:    #fff;
+    }
+
+    .button {
+        text-transform: uppercase;
+        font-size: 14px;
+        font-weight: bold;
+    }
 }
 
 
@@ -79,9 +132,8 @@ $font-family-light-sans-serif:    "Roboto-Light", "Segoe UI-Light", sans-serif-l
         position: absolute;
         width: 100%;
         height: 100%;
-        -webkit-filter: blur(5px);
         background-size: cover;
-        background-position: 0px -23px;
+        background-image: url(../img/bg.jpg);
     }
 
     .ct{
@@ -93,6 +145,16 @@ $font-family-light-sans-serif:    "Roboto-Light", "Segoe UI-Light", sans-serif-l
         padding-top: 30px;
     }
 
+    .button{
+        position: absolute;
+        right: 10px;
+        bottom: -11px;
+        font-size: 15px;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+        font-weight: bold;
+        color: #fff;
+    }
+
     .photo{
         width: 60px;
         height: 60px;
@@ -101,7 +163,6 @@ $font-family-light-sans-serif:    "Roboto-Light", "Segoe UI-Light", sans-serif-l
         left: 16px;
         margin-top: -45px;
         border-radius: 50%;
-        box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, 0.49);
     }
 
     .name{
@@ -160,9 +221,71 @@ $font-family-light-sans-serif:    "Roboto-Light", "Segoe UI-Light", sans-serif-l
     }
 }
 
+.friend-list{
+    
+    .item{
+        margin:0;
+        border: none;
+        border-bottom: 1px solid $divider;
+        img{
+            /*border-radius: 0; */
+        }
+    }
+}
+
+
+
+
+.sidemenu {
+    
+    .item{
+        border: none;
+        color: #333;
+        font-weight: 500;
+        font-size: 14px;
+        padding: 12px;
+
+        &.item-icon-left{
+            padding-left: 54px;
+        }
+
+        &.item-line{
+            margin-top: 16px;
+            border-top: 1px solid $divider;
+        }
+
+        &.item-divider{
+            background: none;
+            font-size: 16px;
+            color: #666;
+        }
+
+        &.active{
+            color: #ED756C;
+            background: none;
+        }
+
+        i{
+            &::before{
+                font-size: 22px;
+            }
+        }
+
+        .badge{
+            color: #444;
+            right: 10px;
+            top: 10px;
+        }
+
+        
+
+
+    }
+}
+
 .button-float{
-    background: $energized !important;
-    color:white !important;
+    background: $action !important;
+    color: #FFF !important;
     z-index: 12 !important;
     position: absolute !important; 
     bottom: 10px !important;
@@ -188,18 +311,35 @@ $font-family-light-sans-serif:    "Roboto-Light", "Segoe UI-Light", sans-serif-l
 
 }
 
+
+.friend-list {
+    
+    &.add {
+        h2{
+            line-height: 36px;
+            text-transform: uppercase;
+        }
+
+        .button{
+            top: 17px;
+        }
+    }
+}
 .button-float:hover{
     -webkit-transform: translate3d(0, -1px, 0)  !important;
     transform: translate3d(0, -1px, 0) !important;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4) !important;
-    background: darken($energized, 10%) !important;
+    background: darken($action, 10%) !important;
 }
 
 .notice-library-empty{
     text-align: center;
-    font-size: 17px;
-    font-weight: bold;
-    line-height: 30px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #808080;
+    text-transform: uppercase;
+    line-height: 200px;
+    height: 100%;
 }
 
 .button-facebook {
@@ -219,7 +359,7 @@ margin-bottom: 30px;
       padding: 11px;
 
       &.active{
-        border-bottom: 3px solid $energized;
+        border-bottom: 3px solid $assertive;
       }
 
     }
@@ -238,93 +378,128 @@ margin-bottom: 30px;
 
 .library {
 
-
+    
     .book {
         
-        border: 1px solid #ddd;
+        border: none;
+        border-bottom: 1px solid $divider;
+
         
         position: relative;
-        height: 244px;
+        padding: 0 16px 16px 16px;
+        
+        margin-bottom: 16px;
+
+        
+
+        
 
 
 
         .btn-more {
             position: absolute;
-            font-size: 27px;
-            color: #AEAB9B;
-
-            padding: 0;
-            min-width: initial;
-            width: 30px;
-            min-height: initial;
-            height: 30px;
-            right: 0px;
-            bottom: 6px;
-            background-color: transparent;
-            border: none;
-        }
-
-        .cover{
-            height: 150px;
-            overflow: hidden;
-        }
-        img{
-            width: 100%;
-        }
-
-        h2{
-            font-size: 12px;
-            margin-top: 10px;
-            margin-bottom: 0px;
-            height: 29px;
-            overflow: hidden;
-            padding-left: 5px;
-            text-transform: uppercase;
-            padding-right: 5px;
-        }
-
-        h3.author{
-            padding-left: 5px;
-            color: #999;
-            font-size: 12px;
+            top: -10px;
+            padding: 0px;
             margin: 0;
-            margin-top: 10px;
+            min-height: 0;
+            height: 35px;
+            right: 16px;
+
+           
+        }
+
+
+        .loan{
+            position: absolute;
+            left: 53px;
+            top: -5px;
+            font-size: 40px;
+            color: #3F51B5;
+
+            &.expired{
+                color: #F44336;
+            }
+        }
+
+        &:first-child{
+            padding-top: 16px;
+
+            .btn-more {
+                top: 8px;
+            }
+
+            .loan{
+                top: 11px;
+            }
+        }
+
+        img {
+            width: 60px;
+            overflow: hidden;
+            float: left;
+            
+        }
+
+        p{
+            font-size: 11px;
+            margin: 0;
+            line-height: 17px;
+            color: #2C2B2B;
+        }
+
+        div.ct{
+            padding-left: 80px;
             padding-right: 20px;
         }
 
 
-        &.loaned{
-            border-top: 2px solid rgb(210, 110, 110);
-            padding-top: 4px;
+        h2{
+            white-space: normal;
+            
+            font-size: 15px
         }
 
+        h3{
+            color: #737373;
+            font-size: 11px;
+            text-transform: uppercase;
+        }
+
+
+    }
+}
+
+.book-head {
+    padding-left: 10px;
+    padding-bottom: 16px;
+    background-color: $assertive;
+    
+    padding-top: 10px;
+    h2{
+        color: #fff;
+        font-size: 16px;
+        margin: 0;
+    }
+
+    h3{
+        font-size: 11px;
+        color: #fff;
+        text-transform: uppercase;
+        margin: 0;
+        font-weight: 500;
+        margin-top: 5px;
     }
 }
 
 
 .book-view{
     
-    .header-book {
-        padding-left: 10px;
-        padding-bottom: 10px;
-        background-color: $energized;
-        
-        padding-top: 10px;
-        h2{
-            color: #fff;
-            font-size: 18px;
-            margin: 0;
-            text-transform: uppercase;
-        }
+    
 
-        h3{
-            font-size: 12px;
-            color: #fff;
-            text-transform: uppercase;
-            margin: 0;
-            font-weight: bold;
-            margin-top: 10px;
-        }
+    .request-loan{
+        font-size: 15px;
+        font-weight: 500;
+        text-transform: uppercase;
     }
 
     .card {
@@ -335,12 +510,15 @@ margin-bottom: 30px;
             border: none;
         }
 
+        .item-line{
+            border-top: 1px solid $divider;
+        }
+
         .item-divider{
-            background: transparent;
-            color: #5F5F5F;
-            border-top: 1px solid #D0D0D0;
-            border-bottom: none;
-            box-shadow: none;
+            background: none;
+            font-size: 16px;
+            color: #666;
+            padding-bottom: 0px;
         }
 
         .item-avatar{
@@ -356,21 +534,26 @@ margin-bottom: 30px;
     .info {
         padding-left: 20px;
         float: left;
-        span{
-            display: block;
+
+        p {
+            color: #555;
             font-size: 12px;
-            strong{
-                font-size: 14px;
+            span{
+                display: block;
+                font-size: 13px;
+                font-weight: 500;
             }
         }
     }
 
     .loan{
-        span{
-            display: block;
+        p {
+            color: #555;
             font-size: 12px;
-            strong{
-                font-size: 14px;
+            span{
+                display: block;
+                font-size: 13px;
+                font-weight: 500;
             }
         }
     }
@@ -384,28 +567,151 @@ margin-bottom: 30px;
         font-size: 12px;
     }
 }
-
-
-.item-book{
-  padding: 10px;
-  img{
-    display: inline-block;
-    width: 75px;
-  }
-
-  .info{
-
-    display: block;
-    height: 100%;
-    top: 10px;
-    position: absolute; 
-    padding-left: 85px;
-    width: 100%;
-    white-space: normal;
-    padding-right: 20px;
-  
-  }
+.action-sheet-options.action-sheet-group{
+    background-color: #fff;
+    .button.action-sheet-destructive{
+        margin-top: 10px;
+        border-top: 1px solid $divider;
+    }
 }
+
+.about {
+    
+    .item{
+        padding: 10px; 
+        border-color: #fff;
+        padding-left: 32px;
+        font-size: 15px;
+        &.item-divider{
+            color: #A8A6A6;
+            font-size: 13px;
+            padding-left:16px;
+            border : none;
+            background: transparent;
+            text-transform: uppercase;
+        }
+    }
+}
+
+
+.profile-view {
+    .photo{
+        border-radius: 4px;
+    }
+    .button-photo{
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+        color: #fff;
+    }
+
+    a.link{
+        color: #333;
+        font-weight: 500;
+    }
+}
+
+.item-input select{
+    display: block;
+    padding-top: 2px;
+    padding-left: 0;
+    height: 34px;
+    color: #111;
+    vertical-align: middle;
+    font-size: 14px;
+    line-height: 16px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    padding: 4px 8px 3px 0px;
+    border: none;
+    background-color: #fff;
+    width: 90%;
+}
+.popup-container {
+    .popup {
+        background: #fff;
+        box-shadow: 0px 0px 23px 4px rgba(0, 0, 0, 0.16);
+        
+        .popup-head{
+            padding: 24px 24px 0 24px;
+            color: #1F1F1F;
+            border: none;
+        }
+
+        .popup-title{
+
+            text-align: left;
+        }
+
+        .popup-body{
+            color: #909090; 
+
+            padding: 24px;
+            font-size: 13px;
+        } 
+
+        .popup-buttons{
+            text-align: right;
+            flex: none;
+            display: block;
+            padding: 0px 24px 8px 24px;
+            min-height: 36px;
+        }
+
+        .button{
+            display: inline-block;
+            border: none ;
+            box-shadow:none;
+            text-transform: uppercase;
+            background-color: #fff;
+            color: #4485F3;
+            font-weight: 500;
+            padding:0;
+            width: auto;
+            text-align: right;
+            height: 36px;
+            min-height: 36px;
+            margin: 0;
+            
+            flex: none;
+
+            &.activated {
+                border: none;
+                box-shadow:none;
+                color: #6894E0;
+            }
+        }
+    }
+
+    &.popup-loan{
+    
+        .duration{
+            display: flex;
+        }
+        select{
+            background: none;
+            padding: 10px;
+            border-color: $divider;
+            flex: 1;
+            font-size: 14px;
+
+            &:first-child{
+                flex: 2;
+                margin-right: 10px;
+            }
+        }
+
+        .button{
+            margin-right:10px  !important;
+            &:last-child{
+                margin-right:0 !important;
+            }
+
+        }
+    }
+}
+
+
 
 /**
     FORM ERROR

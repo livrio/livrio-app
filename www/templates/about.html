@@ -1,26 +1,37 @@
-<ion-view>
-    <ion-nav-bar class="bar-energized">
-        <ion-nav-title>
-          Sobre o Livrio
-        </ion-nav-title>
-        <ion-nav-buttons side="left">
-          
-            <button menu-toggle="right" class="button button-icon icon ion-android-arrow-back" ng-click="onBack()"></button>
-        </ion-nav-buttons>
+<ion-view title="Sobre o Livrio">
 
-    </ion-nav-bar>
-  <ion-content>
+    <ion-content class="about">
+
+        <div class="padding" style="text-align: center;">
+            <img src="img/logo.png" style="width: 30%;"/>
+        </div>
 
 
-  Sobre o Livr.io<br />
+        <div class="list padding">
 
-  <h2>Autores</h2>
+            <div class="item item-divider">
+                Legal
+            </div>
+            
+            <a class="item" ui-sref="app.privacy">
+                Política de Privacidade
+            </a>
+            
+            <a class="item" ui-sref="app.terms">
+                Termos de Uso
+            </a>
 
-  Aurélio Saraiva<br/ >
-  Renata Miguez<br />
-  Daniel Ranzi<br />
-  Leonardo Corbisier
+            <div class="item item-divider">
+                Sobre este aplicativo
+            </div>
+            
+            <div class="item">
+                Versão Android 1.2.0
+            </div>
 
-</ion-content>
+
+        </div>
+
+    </ion-content>
 
 </ion-view>

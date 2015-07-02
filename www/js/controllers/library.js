@@ -9,28 +9,16 @@ angular.module("starter.controllers")
 
 
     $scope.onRefresh = function() {
-        $http.get(settings.URL.BOOK)
-        .success(function(response) {
-            if (!response.errors) {
-                var library = [];
-                angular.forEach(response.data, function(item) {
-
-                    item.author = item.author[0];//.author.join(", ");
-                    library.push(item);
-                });
-
-                $scope.librarys = columnize(library, 2);
-                $scope.loading = false;
-
-            }
-        })
-        .error(function() {
-            console.log("TRATAR ERROR");
+        BOOK.all().then(function(books) {
+            // $scope.librarys = columnize(books, 2);
+            $scope.librarys = books;
+            $scope.loading = false;
+            $scope.$broadcast('scroll.refreshComplete');
         });
     };
 
 
-    $scope.onBook = function(item) {
+    $scope.onView = function(item) {
         BOOK.view(item);
     };
 

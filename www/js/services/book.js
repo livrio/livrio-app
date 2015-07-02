@@ -1,14 +1,16 @@
 angular.module('starter.services',[])
-.factory('BOOK', ['$rootScope', '$http', '$q', '$ionicPopup', '$ionicLoading', '$cordovaToast', '$ionicActionSheet', 'settings', function($rootScope, $http, $q, $ionicPopup, $ionicLoading, $cordovaToast, $ionicActionSheet, settings) {
+.factory('BOOK', ['$rootScope', '$state', '$http', '$q', '$ionicPopup', '$ionicLoading', '$cordovaToast', '$ionicActionSheet', 'settings', function($rootScope, $state, $http, $q, $ionicPopup, $ionicLoading, $cordovaToast, $ionicActionSheet, settings) {
 
     var self = this;
 
 
 
     self.delete = function(book) {
-        var tpl = "Deseja excluir este livro?<br /><br /><strong>" + book.title + "</strong>";
         $ionicPopup.confirm({
-            template: tpl
+            title: 'Deseja excluir este livro?',
+            cancelText: 'Não',
+            okText: 'Sim',
+            template: book.title
         }).then(function(res) {
             if (res) {
                 $ionicLoading.show({
@@ -38,9 +40,26 @@ angular.module('starter.services',[])
     };
 
 
-    self.view = function(book) {
-        $rootScope.bookView = book;
-        window.location = "#/library-view/" + book.id;
+
+
+
+    self.view = function(id) {
+        var deferred = $q.defer();
+        $http.get(settings.URL.BOOK + "/" + id)
+        .success(function(response) {
+            if (!response.errors) {
+                response.data.author = response.data.author.join(", ");
+                deferred.resolve(response.data);
+            }
+            else {
+                deferred.reject();
+            }
+        })
+        .error(function() {
+            deferred.reject();
+            console.log("TRATAR ERROR");
+        });
+        return deferred.promise;
     };
 
     self.update = function(book) {
@@ -50,11 +69,12 @@ angular.module('starter.services',[])
 
 
     self.menuAction = function(event, book) {
+        console.log(arguments);
         event.stopPropagation();
-
         var hideSheet = $ionicActionSheet.show({
             buttons: [
-                { text: "<i class=\"icon ion-edit\"></i> Editar" }
+                { text: "<i class=\"icon ion-edit\"></i> Editar" },
+                { text: "<i class=\"icon ion-arrow-swap\"></i> Emprestar" }
             ],
             destructiveText: "<i class=\"icon ion-trash-a\"></i> Excluir",
             titleText: book.title,
@@ -64,10 +84,48 @@ angular.module('starter.services',[])
                 return true;
             },
             buttonClicked: function(index) {
-                self.update(book);
+                if (index === 0) {
+                    self.update(book);
+                }
+                else if (index === 1) {
+                    $state.go('app.loanAdd',{
+                        id: book.id
+                    });
+                }
                 return true;
             }
         });
+    };
+
+
+    self.all = function(params) {
+        params = params || {};
+
+        params.sort = 'id';
+        params.order = 'desc';
+        var deferred = $q.defer();
+        $http.get(settings.URL.BOOK, {
+            params: params
+        })
+        .success(function(response) {
+            if (!response.errors) {
+                var library = [];
+                angular.forEach(response.data, function(item) {
+
+                    item.author = item.author.join(", ");
+                    library.push(item);
+                });
+                deferred.resolve(response.data);
+            }
+            else {
+                deferred.resolve([]);
+            }
+        })
+        .error(function() {
+            deferred.resolve([]);
+            console.log("TRATAR ERROR");
+        });
+        return deferred.promise;
     };
 
 

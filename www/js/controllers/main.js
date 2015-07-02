@@ -8,11 +8,7 @@ angular.module("starter.controllers")
 
     $scope.bookTitle = '';
 
-    $scope.onLogout = function() {
-        delete window.localStorage.token;
-        window.location = '#/login';
-        window.location.reload();
-    };
+    
 
     $scope.loading = true;
 

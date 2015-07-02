@@ -52,7 +52,7 @@ window.plugins.toast = {
 cordova.plugins.barcodeScanner = {
     scan: function(success) {
         success({
-            text: "9788585701345"
+            text: "9788536502694"
         });
     }
 };

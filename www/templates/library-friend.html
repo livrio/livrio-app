@@ -1,41 +1,25 @@
-<ion-view>
+<ion-view title="{{friend.fullname}}">
    
   <ion-content>
-  <div class="profile friends" >
-
-        
-        <div class="bg" ng-style="{'background-image': 'url({{friend.photo}})'}">
-
-        </div>
-
-        <div class="ct">
-            <button  class="button button-icon icon ion-android-arrow-back" ng-click="onBack();"></button>
-            <img class="photo" ng-src="{{friend.photo}}" />
-            <div class="name">{{friend.fullname}}</div>    
-            <div class="book-count"><i class="icon ion-ios-book"></i> {{librarys.length}}</div>
-        </div>
-    </div>
+     <ion-refresher pulling-text="Atualizar" on-refresh="onRefresh()">
+    </ion-refresher>
 
     <div class="wait-message" ng-show="loading">
         <ion-spinner class="spinner-energized"></ion-spinner>
     </div>
 
 
-    <div class="library row " ng-repeat="row in librarys" ng-hide="loading">
-        <div class=" col col-50" ng-repeat="item in row">
-            <div class="book"  ng-click="onView(item)" ng-class="{'loaned':item.loaned}" ng-hide="item.removed">
-                <div class="cover">
-                    <img ng-src="{{item.thumb}}">
-                </div>
-                
-                    <h2>{{item.title}}</h2>
-                    
-                    <h3 class="author">{{item.author}}</h3>
-                    
-                
-            </div>
+    <div class="list library" ng-hide="loading">
 
+        <div class="item book"  ng-click="onView(item)" ng-hide="item.removed" ng-repeat="item in librarys" >
+
+            <img ng-src="{{item.thumb}}">
+                
+                <h2>{{item.title}}</h2>
+                
+                <h3 class="author">{{item.author}}</h3>
         </div>
+
     </div>
 
 

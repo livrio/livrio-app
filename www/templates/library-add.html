@@ -1,14 +1,8 @@
 <form ng-submit="doSave(formLibrary)" name="formLibrary" novalidate>
-<ion-view>
-<div class="bar bar-header bar-energized bar-header-button">
-<div class="button-bar">
-    <a class="button button-clear" ng-click="onCancel()">Cancelar</a>
-    <button type="submit" class="button button-clear">Salvar</button>
-</div>
-  
-  
-</div>
-  <ion-content style="padding-top: 44px;">
+<ion-view title="Novo livro">
+
+
+  <ion-content>
 
 
   
@@ -56,6 +50,8 @@
           <img ng-src="{{form.thumb}}" style="width: 100px; margin: 10px;" ng-click="onPicture()"/>
         </div>
 
+
+
 <!--        
 
          <div class="item" ng-hide="moreField">
@@ -76,7 +72,28 @@
              <span class="input-label">Páginas</span>
               <input type="number"  name="page_count" ng-model="form.page_count">
           </label> -->
+
+          <li class="item item-divider">
+            
+                Estantes
+            </li>
+
+          <li class="item item-checkbox"  ng-repeat="item in shelfs | orderBy: 'name'">
+             <label class="checkbox">
+               <input type="checkbox" checklist-model="form.shelfs" checklist-value="item.id">
+             </label>
+             {{item.name}}
+          </li>
+
+          <li class="item">
+                <button type="submit" class="button button-positive button-block">Salvar</button>
+          </li>
+
       </div>
+
+      
+
+
 
 
     

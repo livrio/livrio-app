@@ -12,19 +12,25 @@ angular.module("starter.config",[])
         ISBN: DOMAIN_API + "/isbn",
         BOOK: DOMAIN_API + "/book",
         LOAN: DOMAIN_API + "/loan",
-        FRIEND: DOMAIN_API + "/friend"
+        FRIEND: DOMAIN_API + "/friend",
+        SHELF: DOMAIN_API + "/shelf",
+        NOTIFICATION: DOMAIN_API + "/notification"
     },
     iOSApiKey: "961755098-c1f2cioji268glhuflmeil69trs5eudg.apps.googleusercontent.com"
 })
 .config(function($stateProvider, $httpProvider, $urlRouterProvider, $ionicConfigProvider) {
 
-    //$ionicConfigProvider.views.maxCache(0);
+    // $ionicConfigProvider.views.maxCache(10);
+    // $ionicConfigProvider.views.forwardCache(true);
+    $ionicConfigProvider.tabs.position('top');
 
     $httpProvider.interceptors.push(function($q, $location) {
         return {
             responseError: function(response) {
                 if (response.status === 401 || response.status === 403) {
                     $location.path("/login");
+                    window.localStorage.clear();
+                    window.location.reload();
                 }
                 return $q.reject(response);
             }
@@ -38,11 +44,6 @@ angular.module("starter.config",[])
         controller: "loginCtrl"
     })
 
-    .state("library-add", {
-        url: "/library-add",
-        templateUrl: "templates/library-add.html",
-        controller: "libraryAddCtrl"
-    })
 
     .state("library-form", {
         url: "/library-form/:id",
@@ -50,28 +51,6 @@ angular.module("starter.config",[])
         controller: "libraryAddCtrl"
     })
 
-    .state("about", {
-        url: "/about",
-        templateUrl: "templates/about.html",
-        controller: "aboutCtrl"
-    })
-    .state("library-view", {
-        url: "/library-view/:id",
-        templateUrl: "templates/library-view.html",
-        controller: "libraryViewCtrl"
-    })
-
-    .state("library-friend", {
-        url: "/library-friend/:id",
-        templateUrl: "templates/library-friend.html",
-        controller: "libraryFriendCtrl"
-    })
-
-    .state("profile", {
-        url: "/profile",
-        templateUrl: "templates/profile.html",
-        controller: "profileCtrl"
-    })
 
     .state("main", {
         url: "/main",
@@ -83,54 +62,180 @@ angular.module("starter.config",[])
         abstract: true,
         templateUrl: "templates/side_menu.html"
     })
+
+    .state("app.loanAdd", {
+        url: "/loan-add",
+        views: {
+            "menuContent": {
+                templateUrl: "templates/emprestimo.html",
+                controller: "loanAddCtrl"
+            }
+        }
+    })
+
+
+    .state("app.terms", {
+        url: "/terms",
+        views: {
+            "menuContent": {
+                templateUrl: "templates/terms.html"
+            }
+        }
+    })
+
+    .state("app.privacy", {
+        url: "/privacy",
+        views: {
+            "menuContent": {
+                templateUrl: "templates/privacy.html"
+            }
+        }
+    })
+
+    .state("app.feedback", {
+        url: "/feedback",
+        views: {
+            "menuContent": {
+                templateUrl: "templates/feedback.html"
+            }
+        }
+    })
+
+    .state("app.bookAdd", {
+        url: "/book-add",
+        views: {
+            "menuContent": {
+                templateUrl: "templates/library-add.html",
+                controller: "libraryAddCtrl"
+            }
+        }
+    })
+
+    .state("app.friendBook", {
+        url: "/friend/:id",
+        views: {
+            "menuContent": {
+                templateUrl: "templates/library-friend.html",
+                controller: "libraryFriendCtrl"
+            }
+        }
+    })
+
+    .state("app.friendAdd", {
+        url: "/friend-add",
+        views: {
+            "menuContent": {
+                templateUrl: "templates/friend-add.html",
+                controller: "friendAddCtrl"
+            }
+        }
+    })
+
+    .state("app.profile", {
+        url: "/profile",
+        views: {
+            "menuContent": {
+                templateUrl: "templates/profile.html",
+                controller: "profileCtrl"
+            }
+        }
+    })
+
+    .state("app.about", {
+        url: "/about",
+        views: {
+            "menuContent": {
+                templateUrl: "templates/about.html",
+                controller: "aboutCtrl"
+            }
+        }
+    })
+
+    .state("app.shelf", {
+        url: "/shelf/:id",
+        views: {
+            "menuContent": {
+                templateUrl: "templates/shelf.html",
+                controller: "shelfCtrl"
+            }
+        }
+    })
+
+    .state("app.notification", {
+        url: "/notification",
+        views: {
+            "menuContent": {
+                templateUrl: "templates/notification.html",
+                controller: "notificationCtrl"
+            }
+        }
+    })
+
+    .state("app.book", {
+        url: "/book/:id",
+        views: {
+            "menuContent": {
+                templateUrl: "templates/library-view.html",
+                controller: "libraryViewCtrl"
+            }
+        }
+    })
+
     .state("app.tab", {
         url: "/tab",
         abstract: true,
         views: {
             "menuContent": {
-                templateUrl: "templates/tabs.html"
+                templateUrl: "templates/tabs.html",
+                views: {
+                    "tab-loan": {
+                        templateUrl: "templates/tab-loan.html",
+                        controller: "loanCtrl"
+                    }
+                }
             }
         }
     })
 
-    .state("app.tab.library", {
+    .state("app.library", {
         url: "/library",
         views: {
-            "tab-library": {
-            templateUrl: "templates/tab-library.html",
-            controller: "libraryCtrl"
-        }
+            "menuContent": {
+                templateUrl: "templates/tab-library.html",
+                controller: "libraryCtrl"
+            }
         }
     })
 
 
-    .state("app.tab.loan", {
+    .state("app.loan", {
         url: "/loan",
         views: {
-            "tab-loan": {
+            "menuContent": {
             templateUrl: "templates/tab-loan.html",
             controller: "loanCtrl"
         }
         }
     })
-    .state("app.tab.friends", {
+    .state("app.friends", {
         url: "/friends",
         views: {
-            "tab-friends": {
+            "menuContent": {
             templateUrl: "templates/tab-friends.html",
             controller: "friendsCtrl"
         }
         }
     });
-    
+
     if (!window.localStorage.token) {
         $urlRouterProvider.otherwise("/login");
     }
     else {
         try {
+
             $rootScope.user = JSON.parse(window.localStorage.user);
             $httpProvider.defaults.headers.common.Authorization = window.localStorage.token;
-            $urlRouterProvider.otherwise("/app/tab/library");
+            $urlRouterProvider.otherwise("/app/library");
         }
         catch (e) {
             $urlRouterProvider.otherwise("/login");

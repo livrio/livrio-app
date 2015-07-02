@@ -26,6 +26,32 @@ angular.module('starter.services')
     };
 
 
+    self.add = function(book, user, day) {
+        var post = {
+            user: user,
+            day: day || 1
+        };
+
+        var deferred = $q.defer();
+        $http.put(settings.URL.BOOK + "/" + book + "/loan", post)
+        .success(function(response) {
+            if (!response.errors) {
+                deferred.resolve(response.data);
+                $cordovaToast.showLongBottom("Livro emprestado!").then(function() {});
+            }
+            else {
+                deferred.reject();
+            }
+        })
+        .error(function() {
+            deferred.reject();
+            console.log("TRATAR ERROR");
+        });
+
+        return deferred.promise;
+    };
+
+
     return self;
 
 }]);
