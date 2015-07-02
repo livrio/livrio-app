@@ -1,0 +1,46 @@
+<ion-view title="Encontrar amigo">
+
+    <ion-nav-buttons side="right">
+        <button class="button button-icon icon ion-android-search" on-touch="showSearch()" ng-hide="showInput"></button>
+    </ion-nav-buttons>
+
+    <form name="formFriend" novalidate>
+    <ion-header-bar class="bar-energized item-input-inset  bar-subheader" ng-show="showInput">
+
+
+
+
+    <label class="item-input-wrapper">
+    <i class="icon ion-android-search placeholder-icon"></i>
+    <input type="search" placeholder="Procurar pelo nome ou por e-mail" ng-keyup="onSearch(formFriend.word.$modelValue)" name="word" ng-model="word">
+    </label>
+    </ion-header-bar>
+    </form>
+
+    <ion-content class="has-header" ng-class="{'has-subheader':showInput}">
+
+
+        <div class="wait-message" ng-show="searching">
+        <ion-spinner class="spinner-energized"></ion-spinner>
+        </div>
+        <div class="list friend-list add" ng-hide="searching">
+        <div class="item item-avatar  item-button-right" ng-repeat="item in friendsResult">
+        <img ng-src="{{item.photo}}" />
+        <h2>{{item.fullname}}</h2>
+
+
+        <button class="button button-positive" ng-click="onAdd(item)" ng-hide="item.added">
+        <i class="icon ion-person-add"></i>
+        </button>
+        </div>
+        </div>
+
+
+        <div class="padding" ng-hide="searchStart">
+        <button ng-hide="user.isFacebook" ng-click="doFacebook()"class="button  button-block  button-login button-facebook icon-right ion-social-facebook" type="button">Procurar com <strong>Facebook</strong></button>
+
+        </div>
+
+    </ion-content>
+
+</ion-view>

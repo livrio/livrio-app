@@ -1,0 +1,27 @@
+<ion-view title="{{shelf.name}}">
+
+    <ion-content>
+        <div class="wait-message" ng-show="loading">
+            <ion-spinner class="spinner-energized"></ion-spinner>
+        </div>
+
+        <div class="list library" ng-hide="loading">
+            <div class="item book" ng-hide="item.removed" ng-repeat="item in librarys" ui-sref="app.book({id:item.id})">
+                <img ng-src="{{item.thumb}}">
+                <h2>{{item.title}}</h2>
+                <h3 class="author">{{item.author}}</h3>
+
+                <button type="button" class="button icon ion-android-more-vertical btn-more" ng-click="onActionBook($event, item)"></button>
+            </div>
+
+        </div>
+
+
+
+        <div class="notice-library-empty" ng-show="librarys.length==0 && !loading">
+            Estante vazia!
+        </div>
+
+    </ion-content>
+
+</ion-view>
