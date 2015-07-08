@@ -5,47 +5,63 @@
 
         <div class="wait-message" ng-show="loading">
             <ion-spinner class="spinner-energized"></ion-spinner>
+            <span>Carregando</span>
         </div>
 
 
 
         <div class="list library" ng-hide="loading">
-            <div class="item item-divider" href="#">
+            <div class="item item-divider" ng-show="bookLoans.length" style="margin-bottom: 16px;">
                 Livros de amigos
             </div>
-            <div class="item book" ng-hide="item.removed" ng-repeat="item in bookLoaneds" ui-sref="app.book({id:item.id})">
-
+            <div class="item book" ng-repeat="item in bookLoans" ui-sref="app.book({id:item.id})">
+                <i class="icon ion-bookmark loan" ng-class="{'expired':item.loaned.expired<=0}" ng-show="item.loaned"></i>
                 <img ng-src="{{item.thumb}}">
+                <div class="ct">
+                    <h2>{{item.title}}</h2>
+                    <h3>{{item.author}}</h3>
 
-                <h2>{{item.title}}</h2>
+                        <p ng-show="item.publisher">{{item.publisher}}<span ng-show="item.published_date"> ({{item.published_date | date:'yyyy'}})</span></p>
+                        
+                        <p ng-show="item.page_count>0">Páginas {{item.page_count}}</p>
+                    
+                        
+                </div>
 
-                <h3 class="author">{{item.author}}</h3>
-                <p>
-                <span ng-show="item.owner">Pertence a <strong>{{item.owner.fullname}}</strong></span>
-                </p>
-                <button type="button" class="button icon ion-android-more-vertical btn-more" ng-click="onActionBook($event, item)"></button>
+                
             </div>
 
-        </div>
-
-        <div class="list library" ng-hide="loading">
-            <div class="item item-divider" href="#">
+            <div class="item item-divider"  ng-show="bookLoaneds.length" style="margin-bottom: 16px;">
             Meus livros emprestado
             </div>
-            <div class="item book" ng-hide="item.removed" ng-repeat="item in bookLoans"  ui-sref="app.book({id:item.id})">
-
+            <div class="item book" ng-hide="item.removed" ng-repeat="item in bookLoaneds" ui-sref="app.book({id:item.id})">
+                <button type="button" class="button button-icon  btn-more" ng-click="onActionBook($event, item)">
+                    <i class="icon ion-android-more-vertical"></i>
+                </button>
+                <i class="icon ion-bookmark loan" ng-class="{'expired':item.loaned.expired<=0}" ng-show="item.loaned"></i>
                 <img ng-src="{{item.thumb}}">
+                <div class="ct">
+                    <h2>{{item.title}}</h2>
+                    <h3>{{item.author}}</h3>
 
-                <h2>{{item.title}}</h2>
+                        <p ng-show="item.publisher">{{item.publisher}}<span ng-show="item.published_date"> ({{item.published_date | date:'yyyy'}})</span></p>
+                        
+                        <p ng-show="item.page_count>0">Páginas {{item.page_count}}</p>
+                    
+                        
+                </div>
 
-                <h3 class="author">{{item.author}}</h3>
-                <p>
-                <span ng-show="item.loaned">Emprestado para <strong>{{item.loaned.fullname}}</strong></span>
-                </p>
-                <button type="button" class="button icon ion-android-more-vertical btn-more" ng-click="onActionBook($event, item)"></button>
+                
             </div>
 
         </div>  
+
+
+        <div class="notice-library-empty" ng-hide="(bookLoaneds.length && bookLoans.length) || loading">
+
+        Nenhum livro para mostrar
+
+    </div>
 
     </ion-content>
 </ion-view>

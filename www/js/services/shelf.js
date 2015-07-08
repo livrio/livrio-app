@@ -1,10 +1,9 @@
 angular.module("starter.services")
-.factory("SHELF", ["$rootScope", "$http", "$q", "$ionicPopup", "$ionicLoading", "$cordovaToast", "settings", "BOOK", function($rootScope, $http, $q, $ionicPopup, $ionicLoading, $cordovaToast, settings, BOOK) {
+.factory("SHELF", ["$rootScope", "$http", "$ionicHistory", "$state", "$q", "$ionicPopup", "$ionicLoading", "$cordovaToast", "settings", "BOOK", function($rootScope, $http, $ionicHistory, $state, $q, $ionicPopup, $ionicLoading, $cordovaToast, settings, BOOK) {
 
     var self = this;
 
     $rootScope.shelfs = [];
-
 
     function create(name) {
         var post = {
@@ -33,6 +32,41 @@ angular.module("starter.services")
             console.log(res);
             if (res) {
                 create(res);
+            }
+        });
+    };
+
+    self.delete = function(shelf) {
+        $ionicPopup.confirm({
+            title: 'Deseja excluir esta estante?',
+            cancelText: 'Não',
+            okText: 'Sim',
+            template: 'Os livros não serão excluídos!<br /><strong>' + shelf.name + '</strong>'
+        }).then(function(res) {
+            if (res) {
+                $ionicLoading.show({
+                    template: "Excluindo..."
+                });
+                $http.delete(settings.URL.SHELF + "/" + shelf.id)
+                .success(function(response) {
+                    $ionicLoading.hide();
+                    if (!response.errors) {
+                        self.all();
+                        $cordovaToast.showLongBottom("Estante excluída!").then(function() {});
+                        $ionicHistory.nextViewOptions({
+                            disableBack: true
+                        });
+                        $state.go('app.library');
+                    }
+                    else {
+                        console.log('EROOR DELETE');
+                    }
+                })
+                .error(function() {
+                    $ionicLoading.hide();
+                    console.log("TRATAR ERROR");
+                    $rootScope.$emit("error.http");
+                });
             }
         });
     };

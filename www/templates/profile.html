@@ -1,12 +1,14 @@
+
+<form ng-submit="doUpdate(formUpdate.$valid)" name="formUpdate" novalidate id="formUpdate">
 <ion-view title="Perfil de usuário">
 
 <ion-nav-buttons side="right">
-    <button class="button button-clean button-icon">Salvar</button>
+    <button class="button button-clean button-icon" type="submit">Salvar</button>
 </ion-nav-buttons>
 
   <ion-content class="profile-view">
 
-    <form ng-submit="doUpdate(formUpdate.$valid)" name="formUpdate" novalidate>
+    
         <div class="list">
 
             <div class="item" ng-click="onPicture()">
@@ -63,8 +65,9 @@
         Caro usuário, as informações de sexo e data de nascimento são utilizadas para sugerir livros que melhor se encaixa com seu perfil. Caso tenha dúvidas consulte nossa <a class="link" ui-sref="app.privacy">Política de Privacidade</a>.
         </p>
 
-    </form>
+    
 
 </ion-content>
 
 </ion-view>
+</form>

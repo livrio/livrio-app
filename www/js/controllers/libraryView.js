@@ -27,12 +27,19 @@ angular.module('starter.controllers')
 
 
     $scope.onAction = function(event, book) {
-        console.log(book);
         BOOK.menuAction(event, book);
     }
 
     $scope.onUpdate = function(book) {
         BOOK.update(book);
+    }
+
+    $scope.onRequestReturnBook = function(book) {
+        BOOK.requestReturn(book);
+    }
+
+    $scope.onRequestLoan = function(book) {
+        BOOK.requestLoan(book);
     }
 
 

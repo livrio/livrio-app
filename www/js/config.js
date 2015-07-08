@@ -1,6 +1,6 @@
 "use strict";
-// var DOMAIN_API = "http://livrio.codeway.in/v1";
-var DOMAIN_API = "http://api.livr.io/v1";
+var DOMAIN_API = "http://livrio.codeway.in/v1";
+// var DOMAIN_API = "http://api.livr.io/v1";
 angular.module("starter.config",[])
 .constant("settings", {
     API_BASE_URL: "http://api.wiflip.in/v1",
@@ -61,6 +61,15 @@ angular.module("starter.config",[])
         url: "/app",
         abstract: true,
         templateUrl: "templates/side_menu.html"
+    })
+
+    .state("app.config", {
+        url: "/config",
+        views: {
+            "menuContent": {
+                templateUrl: "templates/config.html"
+            }
+        }
     })
 
     .state("app.loanAdd", {

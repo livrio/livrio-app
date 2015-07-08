@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-.controller('shelfCtrl', function($scope, $stateParams, $ionicHistory, SHELF, BOOK) {
+.controller('shelfCtrl', function($scope, $stateParams, SHELF, BOOK) {
 
     var id = $stateParams.id;
 
@@ -28,6 +28,10 @@ angular.module('starter.controllers')
         BOOK.view(item);
     };
 
+    $scope.onDelete = function(item) {
+        SHELF.delete(item);
+    }
+
 
     $scope.onActionBook = function(event, item) {
         BOOK.menuAction(event, item);
@@ -36,8 +40,5 @@ angular.module('starter.controllers')
 
     $scope.onRefresh();
 
-    $scope.onBack = function() {
-        $ionicHistory.goBack();
-    };
 
 });

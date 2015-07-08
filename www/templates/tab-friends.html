@@ -1,7 +1,8 @@
 <ion-view title="Amigos">
 
     <ion-nav-buttons side="right">
-        <a class="button button-icon ion-android-person-add" ui-sref="app.friendAdd"></a>
+        <button class="button button-clean icon ion-android-share" type="button" ng-click="doInvite()"></button>
+        <a class="button button-clean icon ion-android-person-add" ui-sref="app.friendAdd"></a>
     </ion-nav-buttons>
 
     <ion-content>
@@ -11,6 +12,17 @@
 
         <div class="wait-message" ng-show="loading">
             <ion-spinner class="spinner-energized"></ion-spinner>
+            <span>Carregando</span>
+        </div>
+
+        <div class="card padding center" ng-hide="user.is_facebook  || loading">
+            <div class="item item-text-wrap">
+                <p>
+                    Você ainda não conectou o <strong>Livrio</strong> ao seu Facebook. Conecte-se para que seus amigos tenham acesso aos seus livros.
+                </p>
+                <br />
+                <button class="button button-small button-facebook icon-left ion-social-facebook" ng-click="doFacebook()">Conectar ao Facebook</button>
+            </div>
         </div>
 
 
@@ -19,15 +31,12 @@
             <div class="item item-avatar" ng-repeat="item in friends" ui-sref="app.friendBook({id:item.id})">
                 <img ng-src="{{item.photo}}" />
                 {{item.fullname}}
-                <br />
-                <i class="icon ion-ios-book"></i> {{item.amount_book}}
             </div>
         </div>
 
         <div class="notice-library-empty" ng-show="friends.length==0 && !loading">
 
-            Olá, {{user.name}} :)<br />
-            Você é uma pessoal solitaria, conecte-se aos seus amigos para ter vida social :D
+            Nenhum amigo
 
         </div>
 

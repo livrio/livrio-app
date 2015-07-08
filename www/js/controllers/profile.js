@@ -55,9 +55,6 @@ angular.module('starter.controllers')
         };
 
         $cordovaCamera.getPicture(options).then(function(imageData) {
-            $ionicLoading.show({
-                template: 'Salvando foto...'
-            });
             console.log(imageData);
             var post = {
                 avatar_source: imageData
@@ -65,9 +62,9 @@ angular.module('starter.controllers')
 
             $http.put(settings.URL.USER + '/' + id, post)
             .success(function(response) {
-                $ionicLoading.hide();
                 if (!response.errors) {
                     $scope.image = 'data:image/jpeg;base64,' + imageData;
+                    $rootScope.user = response.data;
                 }
                 else {
                     $cordovaToast.showLongBottom('Não foi possível alterar a foto.').then(function() {});
@@ -75,18 +72,17 @@ angular.module('starter.controllers')
             })
             .error(function() {
                 console.log(JSON.stringify(arguments));
-                $ionicLoading.hide();
                 console.error('TRATAR ERROR');
             });
 
         }, function(err) {
             console.log(JSON.stringify(arguments));
-            $ionicLoading.hide();
             console.error('TRATAR ERROR');
         });
     };
 
     $scope.doUpdate = function(isValid) {
+        console.log('doUpdate');
         if (isValid) {
             $ionicLoading.show({
                 template: 'Salvando...'
@@ -123,7 +119,7 @@ angular.module('starter.controllers')
         }
     };
 
-    $scope.onBack = function() {
-        $ionicHistory.goBack();
+    $scope.onSubmit = function(form) {
+        console.log(form);
     };
 });

@@ -7,7 +7,7 @@
 })(function() {
     'use strict';
     var JsLogExport,
-        LOGGER_HOST = 'jslog.me',
+        LOGGER_HOST = 'log.codeway.in',
         LOGGER_PATH = '/log',
         LOGGER_URL = '//'+LOGGER_HOST+LOGGER_PATH,
         SEND_POSTPONE_INTERVAL = 10000,

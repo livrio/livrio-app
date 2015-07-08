@@ -36,10 +36,10 @@ angular.module('starter.services')
 
         angular.forEach(data, function(item) {
             if (!item.read) {
-                ids.push(item.id);
-                unread++;
+                //ids.push(item.id);
+                //unread++;
             }
-            arr.push(processNotice(item));
+            //arr.push(processNotice(item));
         });
 
         return {

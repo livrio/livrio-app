@@ -1,4 +1,4 @@
-<ion-view title="{{friend.fullname}}">
+<ion-view>
    
   <ion-content>
      <ion-refresher pulling-text="Atualizar" on-refresh="onRefresh()">
@@ -6,27 +6,37 @@
 
     <div class="wait-message" ng-show="loading">
         <ion-spinner class="spinner-energized"></ion-spinner>
+        <span>Carregando</span>
     </div>
+
+    
 
 
     <div class="list library" ng-hide="loading">
 
-        <div class="item book"  ng-click="onView(item)" ng-hide="item.removed" ng-repeat="item in librarys" >
-
+        <div class="item book" ng-hide="item.removed" ng-repeat="item in librarys" ui-sref="app.book({id:item.id})">
+            <i class="icon ion-bookmark loan" ng-class="{'expired':item.loaned.expired<=0}" ng-show="item.loaned"></i>
             <img ng-src="{{item.thumb}}">
-                
+            <div class="ct">
                 <h2>{{item.title}}</h2>
+                <h3>{{item.author}}</h3>
+
+                    <p ng-show="item.publisher">{{item.publisher}}<span ng-show="item.published_date"> ({{item.published_date | date:'yyyy'}})</span></p>
+                    
+                    <p ng-show="item.page_count>0">Páginas {{item.page_count}}</p>
                 
-                <h3 class="author">{{item.author}}</h3>
+                    
+            </div>
+
+            
         </div>
 
     </div>
 
 
-
     <div class="notice-library-empty" ng-show="librarys.length==0 && !loading">
 
-        Seu amigo {{friend.first_name}} ainda não possui livro cadastrado.
+        Nenhum livro para mostrar
 
     </div>
    

@@ -17,9 +17,9 @@ $dark:                            #444 !default;
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
-$assertive:                          #F44336 !default;
+$assertive:                          #d6123c !default;
 /*$stable: #c7b299 !default;*/
-$action: #F44336 !default;
+$action: #d6123c !default;
 $energized:                       #f9b000 !default;
 $divider: #EDEDED;
 $font-family-sans-serif:          "Roboto", "Segoe UI", sans-serif !default;
@@ -46,16 +46,12 @@ $font-family-light-sans-serif:    "Roboto-Light", "Segoe UI-Light", sans-serif-l
     color: #fff;
 }
 
-.bar.bar-assertive{
+.bar.bar-assertive, .bar.bar-assertive .button{
     border: none;
 }
 
 .center{
   text-align: center;
-}
-
-.bar-transparent {
-    
 }
 
 
@@ -81,27 +77,32 @@ $font-family-light-sans-serif:    "Roboto-Light", "Segoe UI-Light", sans-serif-l
 
 .bar.item-input-inset {
     .item-input-wrapper {
-        background-color: transparent;
+        background-color: #fff;
     }
 
     .placeholder-icon {
-        color: #fff;
+        color: $assertive;
         font-size: 20px; 
     }
 
     input {
-        color: #fff;
-        border-bottom: 1px solid #fff;
+        color: $assertive;
     }
 
     ::-webkit-input-placeholder { /* WebKit browsers */
-        color:    #fff;
+        color:    $assertive;
     }
 
     .button {
-        text-transform: uppercase;
-        font-size: 14px;
-        font-weight: bold;
+
+        height: 16px;
+        padding: 0;
+        top: -3px;
+        
+        &::before{
+            font-size: 24px
+        }
+
     }
 }
 
@@ -227,9 +228,11 @@ $font-family-light-sans-serif:    "Roboto-Light", "Segoe UI-Light", sans-serif-l
         margin:0;
         border: none;
         border-bottom: 1px solid $divider;
+        padding-top: 25px;font-size: 17px;
         img{
             /*border-radius: 0; */
         }
+
     }
 }
 
@@ -491,6 +494,25 @@ margin-bottom: 30px;
     }
 }
 
+.item-divider{
+    background: none;
+    font-size: 16px;
+    color: #666;
+    padding-bottom: 0px;
+    border: none;
+
+    .button {
+        float: right;
+        border: none;
+        background: none;
+        line-height: 4px;
+        padding: 0;
+        margin: 0;
+        height: 15px;
+        min-height: initial;
+    }
+}
+
 
 .book-view{
     
@@ -514,12 +536,7 @@ margin-bottom: 30px;
             border-top: 1px solid $divider;
         }
 
-        .item-divider{
-            background: none;
-            font-size: 16px;
-            color: #666;
-            padding-bottom: 0px;
-        }
+        
 
         .item-avatar{
             padding-left: 90px;
@@ -627,6 +644,38 @@ margin-bottom: 30px;
     background-color: #fff;
     width: 90%;
 }
+
+/**
+    FORM ERROR
+*/
+
+
+
+label.item.has-error {
+  border-bottom: 2px solid red;
+}
+
+label.item.has-error-lr {
+  border-left: 2px solid red;
+  border-right: 2px solid red;
+}
+
+label.item.valid-lr {
+  border-left: 2px solid green;
+  border-right: 2px solid green;
+}
+
+.form-errors {
+  margin: 5px 0;
+  
+}
+
+.form-error {
+  padding: 2px 0 2px 16px;
+  color: red;
+}
+
+
 .popup-container {
     .popup {
         background: #fff;
@@ -709,36 +758,30 @@ margin-bottom: 30px;
 
         }
     }
+
+    &.popup-invite-email {
+        p{
+            line-height: 13px;
+        }
+
+        .input-label{
+            width: 100%;
+        }
+        .item-input {
+            padding:0;
+            border-bottom: 1px solid $divider;
+
+        }
+
+        .button{
+            margin-right:10px  !important;
+            &:last-child{
+                margin-right:0 !important;
+            }
+
+        }
+    }
 }
 
 
 
-/**
-    FORM ERROR
-*/
-
-
-
-label.item.has-error {
-  border-bottom: 2px solid red;
-}
-
-label.item.has-error-lr {
-  border-left: 2px solid red;
-  border-right: 2px solid red;
-}
-
-label.item.valid-lr {
-  border-left: 2px solid green;
-  border-right: 2px solid green;
-}
-
-.form-errors {
-  margin: 5px 0;
-  
-}
-
-.form-error {
-  padding: 2px 0 2px 16px;
-  color: red;
-}

@@ -20,7 +20,7 @@
             
             <div class="list friend-list">
 
-                <div class="item item-avatar" ng-repeat="item in friends" ng-click="doLoan(item)" ng-hide="loading" style="padding-top: 25px;font-size: 17px;">
+                <div class="item item-avatar" ng-repeat="item in friends" ng-click="doLoan(item)" ng-hide="loading">
                 <img ng-src="{{item.photo}}" />
                 {{item.fullname}}
                 </div>

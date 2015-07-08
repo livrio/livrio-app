@@ -57,6 +57,10 @@
                     Estantes
                 </li>
 
+                <div class="item item-icon-left" ng-hide="shelfs.length">
+                <p>Nenhum estante criada</p>
+                </div>
+
                 <a ui-sref="app.shelf({id:item.id})" ui-sref-active="active" class="item item-icon-left " ng-repeat="item in shelfs | orderBy: 'name'" menu-close>
                     <i class="icon ion-android-bookmark"></i>
                     {{item.name}}
@@ -68,7 +72,7 @@
                     <i class="icon ion-person"></i> Meu perfil
                 </a>
 
-                <a class="item item-icon-left " href="#" menu-close>
+                <a class="item item-icon-left " ui-sref="app.config" ui-sref-active="active" menu-close>
                     <i class="icon ion-android-settings"></i> Configurações
                 </a>
 

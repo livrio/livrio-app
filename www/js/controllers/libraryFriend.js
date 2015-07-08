@@ -8,10 +8,12 @@ angular.module("starter.controllers")
 
     $scope.loading = true;
 
+    $scope.friend = {};
+
     FRIEND.view(id)
     .then(function(friend) {
         $scope.friend = friend;
-        console.log(friend);
+        console.log(friend.fullname);
         $ionicNavBarDelegate.title(friend.fullname);
         $scope.onRefresh();
     });
@@ -21,14 +23,7 @@ angular.module("starter.controllers")
             friend: id
         })
         .then(function(data) {
-            var library = [];
-            angular.forEach(data, function(item) {
-                item.author = item.author[0];//.author.join(", ");
-                item.friend = true;
-                library.push(item);
-            });
-
-            $scope.librarys = library;
+            $scope.librarys = data;
             $scope.loading = false;
             $scope.$broadcast('scroll.refreshComplete');
         });

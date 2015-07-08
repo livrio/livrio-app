@@ -20,6 +20,7 @@ angular.module('starter.controllers')
     $scope.searchStart = false;
 
     $scope.onSearch = function(input) {
+        console.log('search');
         if (input.length < 3) {
             if (filterTextTimeout) {
                 $timeout.cancel(filterTextTimeout);
@@ -44,6 +45,18 @@ angular.module('starter.controllers')
         }, 250); // delay 250 ms
     };
 
+    $scope.onClean = function(form) {
+        console.log('clean');
+        if (form) {
+            form.$setPristine();
+            form.$setUntouched();
+            $scope.word = '';
+        }
+        $scope.searching = false;
+        $scope.friendsResult = [];
+        $scope.searchStart = false;
+    };
+
     $scope.onAdd = function(item) {
         console.log('change');
         console.log(arguments);
@@ -52,19 +65,5 @@ angular.module('starter.controllers')
         });
     };
 
-
-    $scope.doFacebook = function() {
-        $scope.searching = true;
-        $scope.searchStart = true;
-        FRIEND.addOnFacebook()
-        .then(function() {
-            $scope.searching = false;
-        },
-        function() {
-            $scope.searching = false;
-            $scope.searchStart = false;
-            console.log('ERROR FACEBOOK');
-        });
-    };
 
 });
