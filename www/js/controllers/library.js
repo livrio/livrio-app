@@ -1,6 +1,6 @@
 angular.module("starter.controllers")
 
-.controller("libraryCtrl", function($scope, $rootScope, $http, $ionicPopup, $ionicLoading, $ionicActionSheet, settings, BOOK, LOAN) {
+.controller("libraryCtrl", function($scope, $rootScope, $ionicActionSheet, BOOK) {
 
 
     $scope.librarys = [];
@@ -10,10 +10,13 @@ angular.module("starter.controllers")
 
     $scope.onRefresh = function() {
         BOOK.all().then(function(books) {
-            // $scope.librarys = columnize(books, 2);
             $scope.librarys = books;
             $scope.loading = false;
             $scope.$broadcast('scroll.refreshComplete');
+        },
+        function() {
+            $scope.$broadcast('scroll.refreshComplete');
+            $scope.loading = false;
         });
     };
 

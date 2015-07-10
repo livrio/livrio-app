@@ -59,7 +59,7 @@ angular.module('starter.controllers')
 
                         $scope.loadText = 'Emprestando';
                         $scope.loading = true;
-                        LOAN.add(book.id, user.id, days)
+                        LOAN.add(book.id, user.id, days,'sent')
                         .then(function(book) {
                             $scope.loading = false;
                             $scope.loadText = 'Carregando';

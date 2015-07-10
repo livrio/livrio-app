@@ -180,6 +180,16 @@ angular.module("starter.config",[])
         }
     })
 
+    .state("app.notificationLoan", {
+        url: "/notification/loan/:id",
+        views: {
+            "menuContent": {
+                templateUrl: "templates/notification_loan.html",
+                controller: "notificationLoanCtrl"
+            }
+        }
+    })
+
     .state("app.book", {
         url: "/book/:id",
         views: {

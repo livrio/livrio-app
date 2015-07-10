@@ -1,19 +1,16 @@
 angular.module('starter.controllers')
 
-.controller('libraryViewCtrl', function($scope, $rootScope, $stateParams, $ionicHistory, $ionicPopover, BOOK) {
+.controller('libraryViewCtrl', function($scope, $rootScope, $stateParams, $ionicHistory, $ionicPopover, BOOK, LOAN) {
 
     var id = $stateParams.id;
 
     $scope.loading = true;
+    var book;
     BOOK.view(id)
-    .then(function(book) {
+    .then(function(data) {
         $scope.loading = false;
-        $rootScope.bookView = book;
+        book = $rootScope.bookView = data;
     });
-
-    $scope.onBack = function() {
-        $ionicHistory.goBack();
-    };
 
     $ionicPopover.fromTemplateUrl('templates/menu_book.html', {
         scope: $scope
@@ -39,7 +36,14 @@ angular.module('starter.controllers')
     }
 
     $scope.onRequestLoan = function(book) {
-        BOOK.requestLoan(book);
+        LOAN.requestLoan(book);
+    }
+
+    $scope.onChangeStatus = function(status) {
+        LOAN.changeStatus(book.id, status)
+        .then(function(data) {
+            book.loaned = data.loaned;
+        });
     }
 
 

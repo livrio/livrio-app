@@ -6,33 +6,22 @@ angular.module('starter.controllers')
 
     $scope.loading = true;
     $scope.onRefresh = function() {
-        $http.get(settings.URL.LOAN)
-        .success(function(response) {
-            if (!response.errors) {
-                var bookLoans = [];
-                angular.forEach(response.data.loan, function(item) {
-                    item.author = item.author[0];//.author.join(", ");
-                    bookLoans.push(item);
-                });
 
-                $scope.bookLoans = bookLoans;
+        BOOK.all({
+            loan: 'my'
+        })
+        .then(function(data) {
+            $scope.bookLoaneds = data;
 
-                var bookLoaneds = [];
-                angular.forEach(response.data.loaned, function(item) {
-                    item.author = item.author[0];//.author.join(", ");
-                    bookLoaneds.push(item);
-                });
-
-                $scope.bookLoaneds = bookLoaneds;
+            BOOK.all({
+                loan: 'other'
+            })
+            .then(function(data) {
+                $scope.bookLoans = data;
 
                 $scope.loading = false;
                 $scope.$broadcast('scroll.refreshComplete');
-
-            }
-        })
-        .error(function() {
-            $scope.$broadcast('scroll.refreshComplete');
-            console.log("TRATAR ERROR");
+            });
         });
     };
 

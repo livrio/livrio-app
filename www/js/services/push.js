@@ -18,17 +18,26 @@ angular.module('starter.services')
 
         }
         else if (item.type === 'loan_confirm') {
-            text ='<strong>' + item.created_by.fullname + '</strong> disse que te emprestou o livro <strong>' + item.book.title + '</strong>';
-            href = "#/library-view/" + item.book.id;
+            text ='<strong>' + item.created_by.fullname + '</strong> solicitou empréstimo do livro <strong>' + item.book.title + '</strong>';
+            item.question = true;
+            href = "#/app/book/" + item.book.id;
+        }
+        else if (item.type === 'loan_confirm_yes') {
+            item.question = true;
+            text ='<strong>' + item.created_by.fullname + '</strong> já entregou o livro <strong>' + item.book.title + '</strong>';
+            href = "#/app/book/" + item.book.id;
+        }
+        else if (item.type === 'loan_confirm_no') {
+            text ='<strong>' + item.created_by.fullname + '</strong> não quis emprestar o livro <strong>' + item.book.title + '</strong>';
+            href = "#/app/book/" + item.book.id;
         }
 
-        return {
-                unread: !item.read,
-                text: text,
-                href: href,
-                date: $filter('date')(new Date(item.registration), "d 'de' MMMM 'de' yyyy 'às' H:mm"),
-                photo: item.created_by.photo
-            };
+        item.text = text;
+        item.date = $filter('date')(new Date(item.registration), "d 'de' MMMM 'de' yyyy 'às' H:mm");
+        item.photo = item.created_by.photo;
+        item.unread = !item.read;
+        item.href = href;
+        return item;
     }
 
     function processAllNotice(data) {
@@ -37,9 +46,9 @@ angular.module('starter.services')
         angular.forEach(data, function(item) {
             if (!item.read) {
                 //ids.push(item.id);
-                //unread++;
+                unread++;
             }
-            //arr.push(processNotice(item));
+            arr.push(processNotice(item));
         });
 
         return {
@@ -77,10 +86,22 @@ angular.module('starter.services')
     };
 
 
+    self.get = function(id) {
+        var list = $rootScope.notifications.list;
+        console.log(list);
+        for (var i=0;i < list.length;i++) {
+            if (id == list[i].id) {
+                return list[i];
+            }
+        }
+        return false;
+    };
+
+
     self.all = function(params) {
         params = params || {};
 
-        params.sort = 'id';
+        params.sort = 'registration';
         params.order = 'desc';
         var deferred = $q.defer();
         $http.get(settings.URL.NOTIFICATION, {
@@ -89,6 +110,7 @@ angular.module('starter.services')
         .success(function(response) {
             if (!response.errors) {
                 $rootScope.notifications = processAllNotice(response.data);
+                console.log($rootScope.notifications);
                 deferred.resolve(response.data);
             }
             else {

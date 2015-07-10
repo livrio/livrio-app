@@ -9,7 +9,7 @@ angular.module('starter.services')
         params.sort = 'name';
         params.order = 'asc';
         var deferred = $q.defer();
-        $http.get(settings.URL.FRIEND + "/search", {
+        $http.get(settings.URL.FRIEND, {
             params: params
         })
         .success(function(response) {

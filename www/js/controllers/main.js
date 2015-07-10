@@ -2,129 +2,56 @@ angular.module("starter.controllers")
 .controller("mainCtrl", function($scope, $ionicHistory, $rootScope, $http, $ionicModal, $ionicLoading, $ionicPopup, settings) {
 
 
-    $scope.onBack = function() {
-        $scope.modal.hide();
-    };
-
-    $scope.bookTitle = '';
-
-    
-
-    $scope.loading = true;
-
-    var id = 0, book;
-    $ionicModal.fromTemplateUrl("templates/emprestimo.html", {
-        scope: $scope,
-        animation: "slide-in-up"
-    }).then(function(modal) {
-        $scope.modal = modal;
-    });
-
-    $scope.friends = [];
-
-
-    var onRefresh = function() {
-        $http.get(settings.URL.FRIEND)
-        .success(function(response) {
-            if (!response.errors) {
-                $scope.friends = [];
-                angular.forEach(response.data, function(item) {
-                    $scope.friends.push(item);
-                });
-                $scope.loading = false;
-            }
-        })
-        .error(function() {
-            console.log("TRATAR ERROR");
-        });
-    };
-
-
-    function onLoan(user, day, del) {
-        $ionicLoading.show({
-            template: "Emprestando..."
-        });
-        var post = {
-            user: user,
-            day: day || 1
-        };
-        $http.put(settings.URL.BOOK + "/" + id + "/loan",post)
-        .success(function(response) {
-            $ionicLoading.hide();
-            if (!response.errors) {
-                console.log("Emprestado");
-                $scope.modal.hide();
-                book.loaned = response.data.loaned;
-            }
-        })
-        .error(function() {
-            $ionicLoading.hide();
-            console.log("TRATAR ERROR");
-        });
-    }
-
-
-    $scope.showPopup = function(user) {
-        var duration = [{
-            day: 1,
-            text:"1 dia"
-        },
-        {
-            day: 2,
-            text:"2 dias"
-        },
-        {
-            day: 3,
-            text:"3 dias"
-        },
-        {
-            day: 4,
-            text:"4 dias"
-        },
-        {
-            day: 5,
-            text:"5 dias"
-        },
-        {
-            day: 6,
-            text:"6 dias"
-        },
-        {
-            day: 7,
-            text:"1 semana"
-        },
-        {
-            day: 14,
-            text:"2 semanas"
-        }];
-
+    $rootScope.$on("loan.modal",function(e, book, success, failure) {
+        console.log($scope);
+        console.log('modal.loan');
         var values = [];
 
-        angular.forEach(duration, function(item) {
-            values.push("<option value=\"" + item.day + "\">" + item.text + "</option>");
-        });
+        for (var i = 1;i <= 10;i++) {
+            values.push("<option value=\"" + i + "\">" + i + "</option>");
+        }
 
-        $scope.day = 1;
+        $scope.loanDay = 1;
+        $scope.loanType = 1;
 
-        // An elaborate, custom popup
-        var myPopup = $ionicPopup.show({
-            template: "<label class=\"item item-input item-select\"><div class=\"input-label\">Duração</div><select ng-model=\"day\">" + values.join("") + "</select></label>",
-            title: "Duração do emprestimo",
-            subTitle: "Quantos dias seu amigo precisa?",
+        var tpl = [
+            "<p>Quanto tempo você precisa?</p>",
+            "<div class=\"duration\"><select ng-model=\"loanType\">",
+                "<option value=\"1\">Dia",
+                "<option value=\"7\">Semana",
+                "<option value=\"30\">Mês",
+            "</select>",
+
+            "<select ng-model=\"loanDay\">",
+                values.join(''),
+            "</select></div>"
+
+        ];
+
+
+        $ionicPopup.show({
+            title: "Solicitação de empréstimo",
+            template: tpl.join(''),
+            cssClass: 'popup-loan',
             scope: $scope,
             buttons: [
-                { text: "Cancelar" },
+                { text: "não" },
                 {
-                    text: "<b>Emprestar</b>",
-                    type: "button-positive",
+                    text: "Solicitar",
                     onTap: function(e) {
-                        onLoan(user.id, $scope.day);
+                        console.log(e);
+                        console.log('aqui');
+                        console.log($scope.loanDay, $scope.loanType);
+                        var duration = parseInt($scope.day,10) * parseInt($scope.type,10);
+                        success(duration);
+                        return true;
                     }
                 }
             ]
+        }).then(function(res) {
+            failure();
         });
-        myPopup.then(function(res) {});
-    };
+    });
 
 
     $rootScope.$on("loan.add",function(e, item) {

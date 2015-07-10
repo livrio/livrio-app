@@ -6,9 +6,7 @@ angular.module("starter.controllers")
     $scope.loading = true;
 
     $scope.onRefresh = function() {
-        FRIEND.search({
-            friend: true
-        })
+        FRIEND.search()
         .then(function(data) {
             $scope.friends = data;
             $scope.loading = false;

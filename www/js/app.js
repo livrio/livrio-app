@@ -38,7 +38,7 @@ angular.module('starter', [
     try {
         $rootScope.user = JSON.parse(window.localStorage.user);
         $http.defaults.headers.common['Authorization'] = window.localStorage.getItem('token');
-        window.location = '#/app/loan';
+        window.location = '#/app/book/13';
     }
     catch (e) {
         window.location = '#/login';

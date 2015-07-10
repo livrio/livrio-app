@@ -71,8 +71,8 @@ angular.module('starter.services',[])
     self.all = function(params) {
         params = params || {};
 
-        params.sort = 'id';
-        params.order = 'desc';
+        params.sort = 'title';
+        params.order = 'asc';
         var deferred = $q.defer();
         $http.get(settings.URL.BOOK, {
             params: params
@@ -121,56 +121,7 @@ angular.module('starter.services',[])
     };
 
 
-    self.requestLoan = function(book) {
-
-        var deferred = $q.defer();
-        var values = [];
-
-        for (var i = 1;i <= 10;i++) {
-            values.push("<option value=\"" + i + "\">" + i + "</option>");
-        }
-
-        $rootScope.day = 1;
-        $rootScope.type = 1;
-
-        var tpl = [
-            "<p>Quantos tempo você precisa?</p>",
-            "<div class=\"duration\"><select ng-model=\"type\">",
-                "<option value=\"1\">Dia",
-                "<option value=\"7\">Semana",
-                "<option value=\"30\">Mês",
-            "</select>",
-
-            "<select ng-model=\"day\">",
-                values.join(''),
-            "</select></div>"
-
-        ];
-
-        // An elaborate, custom popup
-        $ionicPopup.show({
-            title: "Solicitação de empréstimo",
-            template: tpl.join(''),
-            cssClass: 'popup-loan',
-            scope: $rootScope,
-            buttons: [
-                { text: "não" },
-                {
-                    text: "Solicitar",
-                    onTap: function(e) {
-                        var days = parseInt($rootScope.day,10) * parseInt($rootScope.type,10);
-                        $cordovaToast.showLongBottom("Solicitação enviada!").then(function() {});
-                        deferred.resolve();
-                    }
-                }
-            ]
-        }).then(function(res) {
-            console.log('TAP');
-            deferred.resolve();
-        });
-
-        return deferred.promise;
-    }
+    
 
     self.persistCover = function(book, cover) {
         var deferred = $q.defer();
