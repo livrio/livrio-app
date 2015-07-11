@@ -8173,3 +8173,15 @@ label.item.valid-lr {
   margin-right: 10px !important; }
   .popup-container.popup-invite-email .button:last-child {
     margin-right: 0 !important; }
+
+.button-scan {
+  width: 35px;
+  height: 35px;
+  background-color: #f9b000;
+  right: 15px;
+  min-width: 35px;
+  min-height: 35px;
+  border-radius: 50%; }
+  .button-scan.button-icon.icon:before {
+    font-size: 24px;
+    line-height: 35px; }

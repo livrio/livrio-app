@@ -32,6 +32,10 @@ angular.module('starter.controllers')
         SHELF.delete(item);
     }
 
+    $scope.onUpdate = function(item) {
+        SHELF.update(item);
+    }
+
 
     $scope.onActionBook = function(event, item) {
         BOOK.menuAction(event, item);

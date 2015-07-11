@@ -1,13 +1,14 @@
 "use strict";
 
 angular.module('starter.controllers')
-.controller('profileCtrl', function( $scope, $ionicSideMenuDelegate, $ionicNavBarDelegate, $rootScope, $ionicActionSheet, $ionicHistory, $http, $ionicPopup, $ionicLoading, settings, $cordovaToast, $cordovaCamera) {
+.controller('profileCtrl', function( $scope, $rootScope, $ionicActionSheet, $http, $cordovaToast, $cordovaCamera, settings) {
 
-    $scope.onBack = function() {
-        $ionicHistory.goBack();
-    };
+    var user = $rootScope.user;
 
-    $scope.form = $rootScope.user;
+    console.log(user.birthday);
+    user.birthday = new Date(user.birthday + " 23:59:59");
+    console.log(user.birthday);
+    $scope.form = user;
 
 
     var id = $rootScope.user.id;
@@ -59,18 +60,23 @@ angular.module('starter.controllers')
             var post = {
                 avatar_source: imageData
             };
+            var old = $scope.form.photo;
+            $scope.form.photo = 'data:image/jpeg;base64,' + imageData;
 
             $http.put(settings.URL.USER + '/' + id, post)
             .success(function(response) {
+                console.log(JSON.stringify(response));
                 if (!response.errors) {
-                    $scope.image = 'data:image/jpeg;base64,' + imageData;
+                    window.localStorage.user = JSON.stringify(response.data);
                     $rootScope.user = response.data;
                 }
                 else {
+                    $scope.form.photo = old;
                     $cordovaToast.showLongBottom('Não foi possível alterar a foto.').then(function() {});
                 }
             })
             .error(function() {
+                $scope.form.photo = old;
                 console.log(JSON.stringify(arguments));
                 console.error('TRATAR ERROR');
             });
@@ -81,45 +87,25 @@ angular.module('starter.controllers')
         });
     };
 
-    $scope.doUpdate = function(isValid) {
-        console.log('doUpdate');
-        if (isValid) {
-            $ionicLoading.show({
-                template: 'Salvando...'
-            });
-
-            var post = {
-                fullname: $scope.form.fullname,
-                email: $scope.form.email
-            };
-
+    $scope.onChangeField = function(field) {
+        if (field.$valid) {
+            var post = {};
+            if (field.$name == 'birthday') {
+                post[field.$name] = formatDate(field.$modelValue);
+            }
+            else {
+                post[field.$name] = field.$modelValue;
+            }
 
 
             $http.put(settings.URL.USER + '/' + id, post)
             .success(function(response) {
-                $ionicLoading.hide();
-                if ( !response.errors) {
-                    window.localStorage.user = JSON.stringify(response.data);
-                    $cordovaToast.showLongBottom('Dados atualizados!').then(function() {});
-                }
-                else {
-
-                    $ionicPopup.alert({
-                        template: 'O email <strong>' + ($scope.form.email) + '</strong> já está sendo utilizado por outro usuário!'
-                    }).then(function() {});
-                    console.error('TRATAR ERROR');
-                }
+                window.localStorage.user = JSON.stringify(response.data);
+                $rootScope.user = response.data;
             })
             .error(function() {
                 console.log(JSON.stringify(arguments));
-                $ionicLoading.hide();
-                console.error('TRATAR ERROR');
             });
-
         }
-    };
-
-    $scope.onSubmit = function(form) {
-        console.log(form);
     };
 });

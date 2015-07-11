@@ -36,6 +36,18 @@ angular.module("starter.services")
         });
     };
 
+    self.update = function(book) {
+        $ionicPopup.prompt({
+            title: "Editar estante",
+            template: "Qual o novo nome da estante?"
+        }).then(function(res) {
+            console.log(res);
+            if (res) {
+                create(res);
+            }
+        });
+    };
+
     self.delete = function(shelf) {
         $ionicPopup.confirm({
             title: 'Deseja excluir esta estante?',

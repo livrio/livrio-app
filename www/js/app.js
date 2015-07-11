@@ -16,14 +16,35 @@ function columnize(input, cols) {
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.services' is found in services.js
-// 'starter.controllers' is found in controllers.js
+
+function formatDate(date){
+
+    if(date){
+        var m = (date.getMonth()+1)+"";
+        var y = date.getFullYear();
+        var d = (date.getDate())+"";
+
+        if(m.length==1){
+            m = "0"+m;
+        }
+
+        if(d.length==1){
+            d = "0"+d;
+        }
+
+
+        return y+ "-"+m+"-"+d;
+    }
+
+    return;
+}
+
 angular.module('starter', [
   'ionic',
   'ngMessages',
   'checklist-model',
   'ngCordova',
+  'ionic.rating',
   'ionic.service.core',
   'ionic.service.push',
   'starter.controllers',
@@ -40,7 +61,7 @@ angular.module('starter', [
     try {
         $rootScope.user = JSON.parse(window.localStorage.user);
         $http.defaults.headers.common['Authorization'] = window.localStorage.getItem('token');
-        window.location = '#/app/library';
+        window.location = '#/app/profile';
     }
     catch (e) {
         window.location = '#/login';

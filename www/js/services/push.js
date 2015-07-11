@@ -179,6 +179,7 @@ angular.module('starter.services')
             doUpdateToken(data.platform,data.token);
         });
 
+/**
         $rootScope.$on('$cordovaPush:notificationReceived', function(event, notification) {
             console.log(JSON.stringify(notification));
       switch(notification.event) {
@@ -202,7 +203,7 @@ angular.module('starter.services')
           break;
       }
     });
-
+*/
 
         var user = $ionicUser.get();
         if (!user.user_id) {

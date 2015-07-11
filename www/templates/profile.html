@@ -1,14 +1,10 @@
 
-<form ng-submit="doUpdate(formUpdate.$valid)" name="formUpdate" novalidate id="formUpdate">
-<ion-view title="Perfil de usuário">
 
-<ion-nav-buttons side="right">
-    <button class="button button-clean button-icon" type="submit">Salvar</button>
-</ion-nav-buttons>
+<ion-view title="Perfil de usuário">
 
   <ion-content class="profile-view">
 
-    
+        <form ng-submit="doUpdate(formUpdate.$valid)" name="formUpdate" novalidate id="formUpdate">
         <div class="list">
 
             <div class="item" ng-click="onPicture()">
@@ -21,7 +17,7 @@
 
             <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formUpdate.fullname.$invalid && formUpdate.$submitted}">
                 <span class="input-label">Nome</span>
-                <input type="text"  name="fullname" ng-model="form.fullname" required>
+                <input type="text"  name="fullname" ng-model="form.fullname" ng-blur="onChangeField(formUpdate.fullname)" required>
             </label>
             <div class="form-errors" ng-messages="formUpdate.fullname.$error" ng-show="formUpdate.$submitted">
                 <div class="form-error" ng-message="required">Nome é obrigatório</div>
@@ -29,21 +25,20 @@
 
          
 
-            <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formUpdate.birth.$invalid && formUpdate.$submitted}">
+            <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formUpdate.birthday.$invalid && formUpdate.$submitted}">
                 <span class="input-label">Data de Nascimento</span>
-                <input type="date"  name="birth" ng-model="form.birth" required>
+                <input type="date"  name="birthday" ng-model="form.birthday" ng-blur="onChangeField(formUpdate.birthday)" required>
             </label>
-            <div class="form-errors" ng-messages="formUpdate.birth.$error" ng-show="formUpdate.$submitted">
+            <div class="form-errors" ng-messages="formUpdate.birthday.$error" ng-show="formUpdate.$submitted">
                 <div class="form-error" ng-message="required">Data de Nascimento é obrigatório</div>
             </div>
 
 
             <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formUpdate.gender.$invalid && formUpdate.$submitted}">
                 <span class="input-label">Sexo</span>
-                <select>
-                    <option>
-                    <option>Masculino
-                    <option>Feminino
+                <select ng-blur="onChangeField(formUpdate.gender)" name="gender" ng-model="form.gender">
+                    <option value="male" >Masculino
+                    <option value="female">Feminino
                 </select>
             </label>
             <div class="form-errors" ng-messages="formUpdate.gender.$error" ng-show="formUpdate.$submitted">
@@ -52,7 +47,7 @@
 
            <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formUpdate.email.$invalid && formUpdate.$submitted}">
                 <span class="input-label">E-mail</span>
-                <input type="text"  name="email" ng-model="form.email" required>
+                <input type="text"  name="email" ng-model="form.email" ng-blur="onChangeField(formUpdate.email)" required>
             </label>
             <div class="form-errors" ng-messages="formUpdate.email.$error" ng-show="formUpdate.$submitted">
                 <div class="form-error" ng-message="required">E-mail é obrigatório</div>
@@ -65,9 +60,8 @@
         Caro usuário, as informações de sexo e data de nascimento são utilizadas para sugerir livros que melhor se encaixa com seu perfil. Caso tenha dúvidas consulte nossa <a class="link" ui-sref="app.privacy">Política de Privacidade</a>.
         </p>
 
-    
+    </form>
 
 </ion-content>
 
 </ion-view>
-</form>

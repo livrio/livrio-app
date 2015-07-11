@@ -1,0 +1,129 @@
+<form ng-submit="doSave(formLibrary)" name="formLibrary" novalidate>
+<ion-view title="Novo livro">
+
+
+  <ion-content>
+
+            <div class="list">
+
+
+
+            
+
+                <div class="item item-input" ng-class="{ 'has-error' : formLibrary.isbn.$invalid && formLibrary.$submitted}">
+                
+                  <input type="text" placeholder="ISBN" name="isbn" ng-model="form.isbn" required>
+                  
+                  <button type="button" class="button button-icon icon ion-ios-barcode-outline button-scan" ng-click="doScan()"></button>
+                </div>
+                 <div class="form-errors" ng-messages="formLibrary.isbn.$error" ng-show="formLibrary.$submitted">
+                      <div class="form-error" ng-message="required">ISBN é obrigatório</div>
+                 </div>
+                  
+                
+      
+
+
+      <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formLibrary.title.$invalid && formLibrary.$submitted}">
+      <span class="input-label">Título</span>
+          <input type="text"  name="title" ng-model="form.title" required>
+      </label>
+      <div class="form-errors" ng-messages="formLibrary.title.$error" ng-show="formLibrary.$submitted">
+            <div class="form-error" ng-message="required">Título é obrigatório</div>
+        </div>
+
+         <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formLibrary.author.$invalid && formLibrary.$submitted}">
+         <span class="input-label">Autor</span>
+          <input type="text"  name="author" ng-model="form.author" required>
+      </label>
+      <div class="form-errors" ng-messages="formLibrary.author.$error" ng-show="formLibrary.$submitted">
+            <div class="form-error" ng-message="required">Autor é obrigatório</div>
+        </div>
+
+        <div class="item">
+        <rating ng-model="form.rate" max="rate_max"></rating>
+        </div>
+
+         <div class="item item-image">
+          <img ng-src="{{form.thumb}}" style="width: 100px; margin: 10px;" ng-click="onPicture()"/>
+        </div>
+
+
+
+       
+
+         <div class="item" ng-hide="moreField">
+            <button type="button" class="button button clean button-small" ng-click="moreField=true">Mais informações</button>
+         </div>
+
+          <label class="item item-input item-stacked-label" ng-show="moreField">
+             <span class="input-label">Editora</span>
+              <input type="text"  name="publisher" ng-model="form.publisher">
+          </label>
+
+          <label class="item item-input item-stacked-label" ng-show="moreField">
+             <span class="input-label">Ano de publicação</span>
+              <input type="number"  name="published_year" ng-model="form.published_year">
+          </label>
+
+          <label class="item item-input item-stacked-label" ng-show="moreField">
+             <span class="input-label">Páginas</span>
+              <input type="number"  name="page_count" ng-model="form.page_count">
+          </label> 
+
+           <li class="item item-toggle" ng-show="moreField">
+             Disponível para empréstimo
+             <label class="toggle toggle-positive">
+               <input type="checkbox" checked="checked" ng-model="form.config.loan" name="loan">
+               <div class="track">
+                 <div class="handle"></div>
+               </div>
+             </label>
+          </li>
+
+          <li class="item item-toggle" ng-show="moreField">
+             Já li
+             <label class="toggle toggle-positive">
+               <input type="checkbox" checked="checked" ng-model="form.config.read" name="read">
+               <div class="track">
+                 <div class="handle"></div>
+               </div>
+             </label>
+          </li>
+
+          <li class="item item-divider">
+            
+                Estantes
+            </li>
+
+          <li class="item item-checkbox"  ng-repeat="item in shelfs | orderBy: 'name'">
+             <label class="checkbox">
+               <input type="checkbox" checklist-model="form.shelfs" checklist-value="item.id">
+             </label>
+             {{item.name}}
+          </li>
+
+          <li class="item">
+                <button type="button" class="button button-small button-clean positive" ng-click="doCreateShelf()">Criar estante</button>
+          </li>
+
+          <li class="item">
+                <button type="submit" class="button button-energized button-block">Salvar</button>
+          </li>
+
+      </div>
+
+      
+
+
+
+
+    
+
+    
+
+
+  </ion-content>
+
+</ion-view>
+</form>

@@ -25,7 +25,7 @@
                     <h2>{{item.title}}</h2>
                     <h3>{{item.author}}</h3>
 
-                        <p ng-show="item.publisher">{{item.publisher}}<span ng-show="item.published_date"> ({{item.published_date | date:'yyyy'}})</span></p>
+                        <p ng-show="item.publisher">{{item.publisher}}<span ng-show="item.published_year"> ({{item.published_year}})</span></p>
                         
                         <p ng-show="item.page_count>0">Páginas {{item.page_count}}</p>
                     

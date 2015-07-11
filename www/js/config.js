@@ -24,8 +24,8 @@ angular.module("starter.config",[])
     $ionicAppProvider.identify({
         app_id: "857a12a1",
         api_key: "12ca9539c91f4361d908faf486ce3ff0109232db40100f89",
-        gcm_id: '966956371758'//,
-        //dev_push: true
+        gcm_id: '966956371758'
+        //,dev_push: true
     });
 
     // $ionicConfigProvider.views.maxCache(10);
@@ -53,10 +53,10 @@ angular.module("starter.config",[])
     })
 
 
-    .state("library-form", {
-        url: "/library-form/:id",
-        templateUrl: "templates/library-add.html",
-        controller: "libraryAddCtrl"
+    .state("book-form", {
+        url: "/book/form/:id",
+        templateUrl: "templates/book-add.html",
+        controller: "bookAddCtrl"
     })
 
 
@@ -119,11 +119,11 @@ angular.module("starter.config",[])
     })
 
     .state("app.bookAdd", {
-        url: "/book-add",
+        url: "/book/form",
         views: {
             "menuContent": {
-                templateUrl: "templates/library-add.html",
-                controller: "libraryAddCtrl"
+                templateUrl: "templates/book-add.html",
+                controller: "bookAddCtrl"
             }
         }
     })

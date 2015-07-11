@@ -784,4 +784,20 @@ label.item.valid-lr {
 }
 
 
+.button-scan {
+    width: 35px;
+    height: 35px;
+    background-color: $energized;
+    right: 15px;
+    min-width: 35px;
+    min-height: 35px;
+    border-radius: 50%;
+
+    &.button-icon.icon:before{
+        font-size: 24px;
+        line-height: 35px;
+    }
+}
+
+
 
