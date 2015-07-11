@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('loginCtrl', function($scope, $rootScope, $ionicSlideBoxDelegate, $rootScope, $http, $ionicPopup, $ionicLoading, settings ) {
+.controller('loginCtrl', function($scope, $rootScope, $ionicSlideBoxDelegate, $rootScope, $http, $ionicPopup, $ionicLoading, settings, PUSH ) {
 
     $scope.tab = 0;
 
@@ -22,6 +22,8 @@ angular.module('starter.controllers', [])
                 template: 'Entrando...'
             });
 
+
+
             var post = {
                 email: $scope.form.email,
                 password: $scope.form.password
@@ -37,10 +39,10 @@ angular.module('starter.controllers', [])
                     $http.defaults.headers.common.Authorization = window.localStorage.token;
                     console.log('auth1');
                     window.localStorage.user = JSON.stringify(response.data.user);
-                    console.log(response.data.user);
-                    console.log(JSON.stringify(response.data.user));
-                    console.log(window.localStorage.user);
-                    console.log(JSON.stringify(window.localStorage.user));
+                    var user = response.data.user;
+                    PUSH.register({
+                        name: user.fullname
+                    });
                     $rootScope.user = response.data.user;
 
                     window.location = '#/app/library';
@@ -121,6 +123,11 @@ angular.module('starter.controllers', [])
                 $http.defaults.headers.common.Authorization = window.localStorage.token;
                 window.localStorage.user = JSON.stringify(response.data.user);
                 $rootScope.user = response.data.user;
+
+                PUSH.register({
+                    name: response.data.user.fullname
+                });
+
                 window.location = '#/app/library';
             }
             else if (create) {

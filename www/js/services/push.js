@@ -1,5 +1,5 @@
 angular.module('starter.services')
-.factory('PUSH', ['$rootScope', '$http', '$q', '$ionicPopup', '$ionicLoading', '$filter', 'settings', function($rootScope, $http, $q, $ionicPopup, $ionicLoading, $filter, settings) {
+.factory('PUSH', ['$rootScope', '$http', '$q', '$ionicPopup', '$ionicLoading', '$filter', '$ionicUser', '$ionicPush', 'settings', function($rootScope, $http, $q, $ionicPopup, $ionicLoading, $filter, $ionicUser, $ionicPush, settings) {
 
     var self = this;
 
@@ -128,6 +128,116 @@ angular.module('starter.services')
         });
         return deferred.promise;
     };
+
+    self.test = function(token) {
+        var appId = '857a12a1';
+        var auth = btoa('e777cc0ffe2634e969007579aa430968f5418ac96a9e4c05:'); // Base64 encode your key
+        var req = {
+            method: 'POST',
+            url: 'https://push.ionic.io/api/v1/push',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Ionic-Application-Id': appId,
+                'Authorization': 'basic ' + auth
+            },
+            data: {
+                "tokens": [token],
+                "notification": {
+                "alert":"Hello World!"
+            }
+            }
+        };
+        $http(req).success(function(resp) {
+            console.log("Ionic Push: Push success!");
+        })
+        .error(function(error) {
+            console.log("Ionic Push: Push error...");
+        });
+    }
+
+
+    function doUpdateToken(platform, token) {
+
+        var post = {
+            deviceToken: {
+                platform: platform,
+                token: token
+            }
+        };
+        $http.put(settings.URL.USER + "/" + $rootScope.user.id, post)
+        .success(function() {});
+    };
+
+    /**
+    curl -u e777cc0ffe2634e969007579aa430968f5418ac96a9e4c05: -H "Content-Type: application/json" -H "X-Ionic-Application-Id: 857a12a1" https://push.ionic.io/api/v1/push -d '{"tokens":["APA91bEFLqNScXLqPMIA0QdF0MlWJmU4yQTU_Z-1bOeiLDyvyJZ9tFaksZUDYjfm4KZVbeqBJFFGXECBJjZVxCoViYhZxdH8A7BwVX22WdJ6UoatlBLkgtOzMxBiI4UFMQ377XVrxECL"],"notification":{"alert":"I come from planet Ion."}}'
+    */
+    self.register = function(userInfo) {
+
+        $rootScope.$on('$cordovaPush:tokenReceived', function(event, data) {
+            console.log("Successfully registered token " + data.token);
+            console.log('Ionic Push: Got token ', data.token, data.platform);
+            doUpdateToken(data.platform,data.token);
+        });
+
+        $rootScope.$on('$cordovaPush:notificationReceived', function(event, notification) {
+            console.log(JSON.stringify(notification));
+      switch(notification.event) {
+        case 'registered':
+          if (notification.regid.length > 0 ) {
+            alert('registration ID = ' + notification.regid);
+          }
+          break;
+
+        case 'message':
+          // this is the actual push notification. its format depends on the data model from the push server
+          alert('message = ' + notification.message + ' msgCount = ' + notification.msgcnt);
+          break;
+
+        case 'error':
+          alert('GCM error = ' + notification.msg);
+          break;
+
+        default:
+          alert('An unknown GCM event has occurred');
+          break;
+      }
+    });
+
+
+        var user = $ionicUser.get();
+        if (!user.user_id) {
+            user.user_id = $ionicUser.generateGUID();
+        };
+
+        // Add some metadata to your user object.
+        angular.extend(user, userInfo);
+
+        // Identify your user with the Ionic User Service
+        $ionicUser.identify(user).then(function() {
+            console.log('Identified user ' + user.name + ' ID ' + user.user_id);
+
+            $ionicPush.register({
+                canShowAlert: true, //Can pushes show an alert on your screen?
+                canSetBadge: true, //Can pushes update app icon badges?
+                canPlaySound: true, //Can notifications play a sound?
+                canRunActionsOnWake: true, //Can run actions outside the app,
+                onNotification: function(notification) {
+                    console.log(JSON.stringify(notification));
+                    return true;
+                }
+            }).then(function(deviceToken, t) {
+                console.log(deviceToken);
+                console.log(t);
+              
+            },
+            function(){
+                console.log('error token');
+            });
+
+        });
+    };
+
+    
 
 
     return self;

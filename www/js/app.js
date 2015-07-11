@@ -24,6 +24,8 @@ angular.module('starter', [
   'ngMessages',
   'checklist-model',
   'ngCordova',
+  'ionic.service.core',
+  'ionic.service.push',
   'starter.controllers',
   'starter.services',
   'starter.config'
@@ -38,7 +40,7 @@ angular.module('starter', [
     try {
         $rootScope.user = JSON.parse(window.localStorage.user);
         $http.defaults.headers.common['Authorization'] = window.localStorage.getItem('token');
-        window.location = '#/app/book/13';
+        window.location = '#/app/library';
     }
     catch (e) {
         window.location = '#/login';

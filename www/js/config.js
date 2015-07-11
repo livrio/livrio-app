@@ -1,6 +1,6 @@
 "use strict";
-var DOMAIN_API = "http://livrio.codeway.in/v1";
-// var DOMAIN_API = "http://api.livr.io/v1";
+// var DOMAIN_API = "http://livrio.codeway.in/v1";
+var DOMAIN_API = "http://api.livr.io/v1";
 angular.module("starter.config",[])
 .constant("settings", {
     API_BASE_URL: "http://api.wiflip.in/v1",
@@ -18,7 +18,15 @@ angular.module("starter.config",[])
     },
     iOSApiKey: "961755098-c1f2cioji268glhuflmeil69trs5eudg.apps.googleusercontent.com"
 })
-.config(function($stateProvider, $httpProvider, $urlRouterProvider, $ionicConfigProvider) {
+.config(function($stateProvider, $httpProvider, $urlRouterProvider, $ionicConfigProvider, $ionicAppProvider) {
+
+    // Identify app
+    $ionicAppProvider.identify({
+        app_id: "857a12a1",
+        api_key: "12ca9539c91f4361d908faf486ce3ff0109232db40100f89",
+        gcm_id: '966956371758'//,
+        //dev_push: true
+    });
 
     // $ionicConfigProvider.views.maxCache(10);
     // $ionicConfigProvider.views.forwardCache(true);
@@ -176,16 +184,6 @@ angular.module("starter.config",[])
             "menuContent": {
                 templateUrl: "templates/notification.html",
                 controller: "notificationCtrl"
-            }
-        }
-    })
-
-    .state("app.notificationLoan", {
-        url: "/notification/loan/:id",
-        views: {
-            "menuContent": {
-                templateUrl: "templates/notification_loan.html",
-                controller: "notificationLoanCtrl"
             }
         }
     })

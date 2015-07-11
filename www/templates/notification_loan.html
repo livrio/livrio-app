@@ -1,0 +1,48 @@
+<ion-view title="Confirmação de empréstimo">
+<ion-content class="book-view">
+
+
+
+    <div class="card">
+
+<!--
+            <div class="item item-avatar" ui-sref="app.friendBook({id:friend.id})">
+                <img ng-src="{{friend.photo}}" />
+                {{friend.fullname}}
+            </div>
+
+            <div class="item book"  ui-sref="app.book({id:book.id})">
+                <button type="button" class="button button-icon  btn-more" ng-click="onActionBook($event, book)">
+                    <i class="icon ion-android-more-vertical"></i>
+                </button>
+                <i class="icon ion-bookmark loan" ng-class="{'expired':book.loaned.expired<=0}" ng-show="book.loaned"></i>
+                <img ng-src="{{book.thumb}}">
+                <div class="ct">
+                    <h2>{{book.title}}</h2>
+                    <h3>{{book.author}}</h3>
+
+                        <p ng-show="book.publisher">{{book.publisher}}<span ng-show="book.published_date"> ({{book.published_date | date:'yyyy'}})</span></p>
+                        
+                        <p ng-show="book.page_count>0">Páginas {{book.page_count}}</p>
+                    
+                        
+                </div>
+
+                
+            </div>
+     
+-->
+        <div class="item item-wrap-text">
+        <p>
+        Emprestar este livro?
+        <br />
+        <button class="button button-small button-assertive" ng-click="doNotLoan()">Não</button>
+
+        <button class="button button-small button-energized" ng-click="doLoan()">Sim</button>
+        </p>
+        </div>
+    </div>
+  
+</ion-content>
+
+</ion-view>

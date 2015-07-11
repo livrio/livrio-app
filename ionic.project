@@ -1,6 +1,6 @@
 {
-  "name": "app",
-  "app_id": "",
+  "name": "Livrio",
+  "app_id": "857a12a1",
   "gulpStartupTasks": [
     "sass",
     "watch"
