@@ -1,8 +1,45 @@
+
 angular.module('starter.controllers', [])
 
+.directive('slidePosition', [ function() {
+    return {
+        restrict: 'A',
+        link: function ($scope, $element, $attrs, $parent) {
+            console.log($element);
+
+            var parent = $element.parent();
+
+            function onSlideMove() {
+                var targetTab = angular.element($element[0]);
+                var indicatorPos = parseInt(targetTab.prop("style").OTransform.replace(/[^0-9.\-]/g, ""),10);
+                var indicatorPosParent = parent.prop("style").backgroundPositionX.replace(/[^0-9.\-]/g, "");
+                console.log(indicatorPosParent, indicatorPos, indicatorPosParent+indicatorPos);
+
+                if(indicatorPos>100){
+                    indicatorPos=100;
+                }
+
+                parent.css({
+                    "background-position-x":(indicatorPosParent+indicatorPos) + "%"
+                });
+
+            }
+
+
+
+            
+
+            ionic.onGesture("dragleft", onSlideMove, $element[0]);
+            ionic.onGesture("dragright", onSlideMove, $element[0]);
+        }
+    }
+}])
 .controller('loginCtrl', function($scope, $rootScope, $ionicSlideBoxDelegate, $rootScope, $http, $ionicPopup, $ionicLoading, settings, PUSH ) {
 
     $scope.tab = 0;
+
+    $scope.slideClass = 'teste';
+
 
     $scope.onChangeTab = function(index) {
         $scope.tab = index;

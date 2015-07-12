@@ -1,5 +1,5 @@
 angular.module('starter.services')
-.factory('PUSH', ['$rootScope', '$http', '$q', '$ionicPopup', '$ionicLoading', '$filter', '$ionicUser', '$ionicPush', 'settings', function($rootScope, $http, $q, $ionicPopup, $ionicLoading, $filter, $ionicUser, $ionicPush, settings) {
+.factory('PUSH', ['$rootScope', '$http', '$q', '$ionicPopup', '$ionicLoading', '$filter', '$ionicUser', '$ionicPush', '$cordovaBadge','settings', function($rootScope, $http, $q, $ionicPopup, $ionicLoading, $filter, $ionicUser, $ionicPush, $cordovaBadge, settings) {
 
     var self = this;
 
@@ -11,32 +11,35 @@ angular.module('starter.services')
 
 
     function processNotice(item) {
-        var text = '', href='';
-        if (item.type === 'friend') {
-            text ='<strong>' + item.created_by.fullname + '</strong> entrou no <strong>Livrio.</strong>';
-            href = "#/library-friend/" + item.created_by.id;
+        try {
+            var text = '', href='';
+            if (item.type === 'friend') {
+                text ='<strong>' + item.created_by.fullname + '</strong> entrou no <strong>Livrio.</strong>';
+                href = "#/library-friend/" + item.created_by.id;
 
-        }
-        else if (item.type === 'loan_confirm') {
-            text ='<strong>' + item.created_by.fullname + '</strong> solicitou empréstimo do livro <strong>' + item.book.title + '</strong>';
-            item.question = true;
-            href = "#/app/book/" + item.book.id;
-        }
-        else if (item.type === 'loan_confirm_yes') {
-            item.question = true;
-            text ='<strong>' + item.created_by.fullname + '</strong> já entregou o livro <strong>' + item.book.title + '</strong>';
-            href = "#/app/book/" + item.book.id;
-        }
-        else if (item.type === 'loan_confirm_no') {
-            text ='<strong>' + item.created_by.fullname + '</strong> não quis emprestar o livro <strong>' + item.book.title + '</strong>';
-            href = "#/app/book/" + item.book.id;
-        }
+            }
+            else if (item.type === 'loan_confirm') {
+                text ='<strong>' + item.created_by.fullname + '</strong> solicitou empréstimo do livro <strong>' + item.book.title + '</strong>';
+                item.question = true;
+                href = "#/app/book/" + item.book.id;
+            }
+            else if (item.type === 'loan_confirm_yes') {
+                item.question = true;
+                text ='<strong>' + item.created_by.fullname + '</strong> já entregou o livro <strong>' + item.book.title + '</strong>';
+                href = "#/app/book/" + item.book.id;
+            }
+            else if (item.type === 'loan_confirm_no') {
+                text ='<strong>' + item.created_by.fullname + '</strong> não quis emprestar o livro <strong>' + item.book.title + '</strong>';
+                href = "#/app/book/" + item.book.id;
+            }
 
-        item.text = text;
-        item.date = $filter('date')(new Date(item.registration), "d 'de' MMMM 'de' yyyy 'às' H:mm");
-        item.photo = item.created_by.photo;
-        item.unread = !item.read;
-        item.href = href;
+            item.text = text;
+            item.date = $filter('date')(new Date(item.registration), "d 'de' MMMM 'de' yyyy 'às' H:mm");
+            item.photo = item.created_by.photo;
+            item.unread = !item.read;
+            item.href = href;
+        }
+        catch (e) {}
         return item;
     }
 
@@ -68,9 +71,11 @@ angular.module('starter.services')
         .success(function(response) {
             if (!response.errors) {
                 $rootScope.notifications.unread_ids=[];
+                $rootScope.notifications.unread = 0;
                 angular.forEach($rootScope.notifications.list, function(item) {
                     item.unread = false;
                 });
+                $cordovaBadge.clear();
 
                 deferred.resolve(true);
             }
@@ -109,8 +114,15 @@ angular.module('starter.services')
         })
         .success(function(response) {
             if (!response.errors) {
+                console.log($rootScope.notifications);
                 $rootScope.notifications = processAllNotice(response.data);
                 console.log($rootScope.notifications);
+
+                $cordovaBadge.configure({
+                    autoClear: true,
+                    title:$rootScope.notifications.unread > 1 ? "%d novas mensagens" : "%d nova mensagem"
+                });
+                $cordovaBadge.set($rootScope.notifications.unread);
                 deferred.resolve(response.data);
             }
             else {
@@ -179,31 +191,13 @@ angular.module('starter.services')
             doUpdateToken(data.platform,data.token);
         });
 
-/**
+
         $rootScope.$on('$cordovaPush:notificationReceived', function(event, notification) {
+            console.log('$cordovaPush:notificationReceived');
             console.log(JSON.stringify(notification));
-      switch(notification.event) {
-        case 'registered':
-          if (notification.regid.length > 0 ) {
-            alert('registration ID = ' + notification.regid);
-          }
-          break;
 
-        case 'message':
-          // this is the actual push notification. its format depends on the data model from the push server
-          alert('message = ' + notification.message + ' msgCount = ' + notification.msgcnt);
-          break;
-
-        case 'error':
-          alert('GCM error = ' + notification.msg);
-          break;
-
-        default:
-          alert('An unknown GCM event has occurred');
-          break;
-      }
     });
-*/
+
 
         var user = $ionicUser.get();
         if (!user.user_id) {
@@ -223,6 +217,7 @@ angular.module('starter.services')
                 canPlaySound: true, //Can notifications play a sound?
                 canRunActionsOnWake: true, //Can run actions outside the app,
                 onNotification: function(notification) {
+                    console.log('notification');
                     console.log(JSON.stringify(notification));
                     return true;
                 }

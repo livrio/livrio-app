@@ -9,7 +9,9 @@
             <ion-nav-title>Livrio</ion-nav-title>
 
             <ion-nav-buttons side="left">
-                <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+                <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+                    <span class="badge" ng-show="notifications.unread>0">{{notifications.unread}}</span>
+                </button>
             </ion-nav-buttons>
 
         </ion-nav-bar>

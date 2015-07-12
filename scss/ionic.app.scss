@@ -50,6 +50,20 @@ $font-family-light-sans-serif:    "Roboto-Light", "Segoe UI-Light", sans-serif-l
     border: none;
 }
 
+.button .badge{
+    position: absolute;
+    background-color: #000000;
+    font-size: 11px;
+    padding: 0;
+    margin: 0;
+    right: -12px;
+    color: #FFF;
+    height: 20px;
+    width: 20px;
+    line-height: 21px;
+    text-align: center;
+}
+
 .center{
   text-align: center;
 }
@@ -797,6 +811,28 @@ label.item.valid-lr {
         font-size: 24px;
         line-height: 35px;
     }
+}
+
+
+.login {
+    .slider-slides{
+        /*background-image: url(../img/bg_login.jpg);
+        background-size: cover;
+        background-position-x: 0px;
+        */
+    }
+    .slider {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  bottom: 0 !important;
+  right: 0 !important;
+}
+.slider-slide {
+  color: #000;
+
+}
+
 }
 
 

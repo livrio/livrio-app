@@ -7,4 +7,11 @@ angular.module('starter.controllers')
         PUSH.markRead();
     },1000);
 
+    $scope.onRefresh = function() {
+        PUSH.all()
+        .then(function() {
+            $scope.$broadcast('scroll.refreshComplete');
+        });
+    };
+
 });
