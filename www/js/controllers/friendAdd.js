@@ -35,8 +35,9 @@ angular.module('starter.controllers')
             console.log(input);
             $scope.searching = true;
             $scope.searchStart = true;
-            FRIEND.search({
-                word: input
+            FRIEND.all({
+                type: 'other',
+                word: "%" + input + "%"
             }).then(function(data) {
                 $scope.searching = false;
                 $scope.friendsResult = data;

@@ -19,13 +19,14 @@ $dark:                            #444 !default;
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 $assertive:                          #d6123c !default;
 /*$stable: #c7b299 !default;*/
-$action: #d6123c !default;
-$energized:                       #f9b000 !default;
+$action: #f9b000 !default;
+$energized:                       #ff6440 !default;
 $divider: #EDEDED;
 $font-family-sans-serif:          "Roboto", "Segoe UI", sans-serif !default;
 $font-family-light-sans-serif:    "Roboto-Light", "Segoe UI-Light", sans-serif-light !default;
 
 
+$calm: #63c9ce !default;
 
 .spinner svg {
   stroke: $assertive;
@@ -48,6 +49,14 @@ $font-family-light-sans-serif:    "Roboto-Light", "Segoe UI-Light", sans-serif-l
 
 .bar.bar-assertive, .bar.bar-assertive .button{
     border: none;
+}
+
+.button-bar{
+    
+    .button {
+        text-transform: uppercase;
+        font-size: 17px;
+    }
 }
 
 .button .badge{
@@ -266,10 +275,7 @@ $font-family-light-sans-serif:    "Roboto-Light", "Segoe UI-Light", sans-serif-l
             padding-left: 54px;
         }
 
-        &.item-line{
-            margin-top: 16px;
-            border-top: 1px solid $divider;
-        }
+        
 
         &.item-divider{
             background: none;
@@ -299,6 +305,7 @@ $font-family-light-sans-serif:    "Roboto-Light", "Segoe UI-Light", sans-serif-l
 
     }
 }
+
 
 .button-float{
     background: $action !important;
@@ -744,6 +751,12 @@ label.item.valid-lr {
                 color: #6894E0;
             }
         }
+
+        .item-input, input {
+            padding:0;
+            border-bottom: 1px solid $divider;
+
+        }
     }
 
     &.popup-loan{
@@ -781,11 +794,7 @@ label.item.valid-lr {
         .input-label{
             width: 100%;
         }
-        .item-input {
-            padding:0;
-            border-bottom: 1px solid $divider;
-
-        }
+        
 
         .button{
             margin-right:10px  !important;
@@ -795,23 +804,10 @@ label.item.valid-lr {
 
         }
     }
+
+
 }
 
-
-.button-scan {
-    width: 35px;
-    height: 35px;
-    background-color: $energized;
-    right: 15px;
-    min-width: 35px;
-    min-height: 35px;
-    border-radius: 50%;
-
-    &.button-icon.icon:before{
-        font-size: 24px;
-        line-height: 35px;
-    }
-}
 
 
 .login {
@@ -833,6 +829,88 @@ label.item.valid-lr {
 
 }
 
+}
+
+
+.book-form {
+    .item {
+        border: none;
+        padding-right: 16px;
+
+
+    }
+
+
+    input {
+        padding-right: 0px;
+        border-bottom: 1px solid $divider;
+
+        &[readonly]:not(.cloned-text-input) {
+            background-color: #fff;
+        }
+    }
+
+    .ion-ios-star{
+        color: #ffd203;
+    }
+
+    .item-divider{
+        padding-bottom: 16px;
+    }
+
+    .item-shelf {
+        font-size: 14px;
+        color: #111;
+        line-height: 16px;
+        font-weight: normal;
+    }
+
+    .isbn {
+        padding-top: 16px;
+        display: block;
+        .input-label{
+            display: block;
+            padding: 0px 0 0 0;
+            margin: 0px;
+        }
+
+        input {
+            padding-right: 20px;
+        }
+
+        .button-scan {
+            width: 40px;
+            height: 40px;
+            background: $action !important;
+            color: #000;
+            border: none;
+            min-width: 40px; 
+            min-height: 40px;
+            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26) !important;
+            -webkit-transform: translate3d(0, 0, 0) !important;
+            transform: translate3d(0, 0, 0) !important;
+            -webkit-transition: 0.2s linear !important;
+            transition: 0.2s linear !important;
+            -webkit-transition-property: -webkit-transform, all !important;
+            transition-property: transform, all !important;
+            position: absolute;
+            border-radius: 50% !important;
+            top: 16px;
+            right: 16px;
+
+            i{
+                top: 1px;
+                position: absolute;
+                left: 11px;
+            }
+            
+        }
+    }
+}
+
+.list .item.item-line, .card .item.item-line{
+    margin-top: 16px;
+    border-top: 1px solid $divider;
 }
 
 

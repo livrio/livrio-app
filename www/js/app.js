@@ -61,10 +61,36 @@ angular.module('starter', [
     try {
         $rootScope.user = JSON.parse(window.localStorage.user);
         $http.defaults.headers.common['Authorization'] = window.localStorage.getItem('token');
-        window.location = '#/app/profile';
+        window.location = '#/app/library';
     }
     catch (e) {
         window.location = '#/login';
         console.log(e);
     }
+
+
+    $rootScope.online = true;
+
+    $rootScope.isRun = true;
+
+
+    document.addEventListener("online", function(){
+        $rootScope.online = true;
+    }, false);
+
+    document.addEventListener("offline", function(){
+        $rootScope.online = false;
+    }, false);
+
+
+    document.addEventListener("pause", function(){
+
+        $rootScope.isRun = false;
+    }, false);
+
+
+    document.addEventListener("resume", function(){
+        console.log('resume');
+        $rootScope.isRun = true;
+    }, false);
 });

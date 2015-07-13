@@ -31,6 +31,12 @@
 
         </div>
 
+        <div class="notice-library-empty" ng-show="friendsResult.length==0 && searchStart">
+
+            nenhum amigo encontrado
+
+        </div>
+
 
         <div class="list friend-list add" ng-hide="searching">
         <div class="item item-avatar  item-button-right" ng-repeat="item in friendsResult">

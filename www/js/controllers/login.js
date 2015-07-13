@@ -138,7 +138,7 @@ angular.module('starter.controllers', [])
     };
 
     function errorFacebook(region) {
-        console.error('ERROR FACEBOOK');
+        console.error('ERROR FACEBOOK:' + region);
         $ionicLoading.hide();
         $ionicPopup.alert({
             template: 'O Facebook apresentou um erro e não permitiu o login.' + region

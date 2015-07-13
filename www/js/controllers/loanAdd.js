@@ -11,7 +11,7 @@ angular.module('starter.controllers')
     $scope.friends = [];
 
     $scope.onRefresh = function() {
-        FRIEND.search()
+        FRIEND.all()
         .then(function(data) {
             $scope.friends = data;
             $scope.loading = false;
@@ -64,7 +64,7 @@ angular.module('starter.controllers')
                             $scope.loading = false;
                             $scope.loadText = 'Carregando';
                             $rootScope.bookView.loaned = book.loaned;
-                            $ionicHistory.goBack();
+                            window.location = '#/app/book/' + book.id;
                         },
                         function() {
                             $scope.loading = false;

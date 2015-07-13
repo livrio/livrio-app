@@ -52,6 +52,8 @@ angular.module('starter.services')
         return deferred.promise;
     };
 
+    
+
     self.changeStatus = function(book, status) {
         var post = {
             book: book,

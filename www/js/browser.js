@@ -22,7 +22,7 @@ if (!window.cordova) {
             success({
                 status: "connected",
                 authResponse: {
-                    accessToken: "CAAKEya4xmrYBAEQZAMEcWqppD5FZCSAFkb0W7eJ0WIMX5XaZBpCtPuaAzVfKVShHFLOHk4QB9ZA1Vi8EfbQgzGt8UU7sE2mVcP9AvvnI2IOYHDETpZCY3DlbHxYcjGD7by3kNWLMhR66754KwuVQZCZAhutYl3ZBm1s79fTkOZAdJIwgsJoo8jNVyXF77skYP5xPcMZA8803faWDAjvKX6OkWqRKNtadfUozpoQKLKJQBBngZDZD"
+                    accessToken: "CAAKEya4xmrYBAEagzpi4tQalGD3XboZABOBfM3IcidJnIClUMZCS8M9DOZBXUlumHchfZC9oOUNXB47ZAke1ZCKSBwZBReRsHSTX7oHZCffYZA3pcA9HFgTtzZA0ki53ps07gUuZCqnV5rdxHyauhxwH4cXGU1ifH8nzNZCf1u9qyyc2Whf3blRMFFjIQzwcyEyIhH1H1BYFYbzi4iiw74ZBVLLsnSiZAzuU829OSRpEfko4UhbAZDZD"
                 }
             });
         },
@@ -51,8 +51,9 @@ if (!window.cordova) {
 
     cordova.plugins.barcodeScanner = {
         scan: function(success) {
+            var arrs = ["9788536502694","9788598078175","9788563560858"];
             success({
-                text: "9788536502694"
+                text: "9788563560858"
             });
         }
     };

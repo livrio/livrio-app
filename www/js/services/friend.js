@@ -3,7 +3,7 @@ angular.module('starter.services')
 
     var self = this;
 
-    self.search = function(params) {
+    self.all = function(params) {
         params = params || {};
 
         params.sort = 'name';
@@ -30,12 +30,34 @@ angular.module('starter.services')
 
     self.add = function(item) {
         var deferred = $q.defer();
-        $http.post(settings.URL.FRIEND + "/add", {
-            id: item.id
-        })
+        $http.post(settings.URL.FRIEND + "/" + item.id + "/request")
         .success(function(response) {
             if (!response.errors) {
                 $cordovaToast.showLongBottom("Solicitação enviada!");
+                deferred.resolve(true);
+            }
+            else {
+                deferred.reject();
+            }
+        })
+        .error(function() {
+            deferred.reject();
+        });
+
+        return deferred.promise;
+    };
+
+    self.confirm = function(item, response) {
+        var deferred = $q.defer();
+        $http.post(settings.URL.FRIEND + "/" +  item.created_by.id  + "/response",{
+            notification: item.id,
+            response: response
+        })
+        .success(function(response) {
+            if (!response.errors) {
+                if (response == 'yes'){
+                    $cordovaToast.showLongBottom("Vocês são amigos agora!");
+                }
                 deferred.resolve(true);
             }
             else {
@@ -132,26 +154,6 @@ angular.module('starter.services')
             ]
         }).then(function(res) {});
 
-
-        //
-        /*
-        var deferred = $q.defer();
-
-        $http.get(settings.URL.FRIEND + "/" + id)
-        .success(function(response) {
-            if (!response.errors) {
-                $cordovaToast.showLongBottom("Seu amigo receberá um e-mail!");
-                deferred.resolve();
-            }
-            else {
-                deferred.reject();
-            }
-        })
-        .error(function() {
-            deferred.reject();
-        });
-        return deferred.promise;
-        */
     };
 
 

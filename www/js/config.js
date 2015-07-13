@@ -53,10 +53,24 @@ angular.module("starter.config",[])
     })
 
 
-    .state("book-form", {
-        url: "/book/form/:id",
-        templateUrl: "templates/book-add.html",
-        controller: "bookAddCtrl"
+    .state("app.book-form", {
+        url: "/book-form/:id",
+        views: {
+            "menuContent": {
+                templateUrl: "templates/book-add.html",
+                controller: "bookAddCtrl"
+            }
+        }
+    })
+
+    .state("app.bookAdd", {
+        url: "/book-form",
+        views: {
+            "menuContent": {
+                templateUrl: "templates/book-add.html",
+                controller: "bookAddCtrl"
+            }
+        }
     })
 
 
@@ -75,7 +89,8 @@ angular.module("starter.config",[])
         url: "/config",
         views: {
             "menuContent": {
-                templateUrl: "templates/config.html"
+                templateUrl: "templates/config.html",
+                controller: "configCtrl"
             }
         }
     })
@@ -118,15 +133,7 @@ angular.module("starter.config",[])
         }
     })
 
-    .state("app.bookAdd", {
-        url: "/book/form",
-        views: {
-            "menuContent": {
-                templateUrl: "templates/book-add.html",
-                controller: "bookAddCtrl"
-            }
-        }
-    })
+    
 
     .state("app.friendBook", {
         url: "/friend/:id",
@@ -220,6 +227,16 @@ angular.module("starter.config",[])
             "menuContent": {
                 templateUrl: "templates/tab-library.html",
                 controller: "libraryCtrl"
+            }
+        }
+    })
+
+    .state("app.book-search", {
+        url: "/book-search",
+        views: {
+            "menuContent": {
+                templateUrl: "templates/book-search.html",
+                controller: "bookSearchCtrl"
             }
         }
     })

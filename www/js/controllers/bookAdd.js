@@ -1,6 +1,6 @@
 angular.module("starter.controllers")
 
-.controller("bookAddCtrl", function($scope, $stateParams, $ionicHistory, $timeout, $rootScope, $http, $ionicPopup, $ionicLoading, $cordovaBarcodeScanner, $cordovaOauth, $cordovaToast, $cordovaCamera, $ionicActionSheet, settings, SHELF) {
+.controller("bookAddCtrl", function($scope, $stateParams, $ionicModal, $timeout, $rootScope, $http, $ionicPopup, $ionicLoading, $cordovaBarcodeScanner, $cordovaOauth, $cordovaToast, $cordovaCamera, $ionicActionSheet, settings, SHELF) {
 
     var id = $stateParams.id;
 
@@ -8,6 +8,53 @@ angular.module("starter.controllers")
     $scope.rate_max = 5;
 
     console.log('form');
+
+    $scope.shelfText = 'Nenhuma estante';
+
+
+    function inChecked(shelfs, id) {
+        for (var i = 0; i < shelfs.length; i++) {
+            if (shelfs[i].id == id) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    function prepareShelfForm(shelfs) {
+        $scope.shelfsForm = [];
+        angular.forEach($rootScope.shelfs, function(v) {
+            $scope.shelfsForm.push({
+                text: v.name,
+                id: v.id,
+                checked: inChecked(shelfs, v.id)
+            });
+        });
+
+        console.log($scope.shelfsForm);
+    };
+
+    function valueShelfsForm(shefs) {
+        var arr = [], txt=[];
+        angular.forEach($scope.shelfsForm, function(v) {
+
+            if (v.checked) {
+                arr.push(v.id);
+                txt.push(v.text);
+            }
+
+        });
+        if (txt.length == 0) {
+            $scope.shelfText = 'Nenhuma estante';
+        }
+        else {
+            $scope.shelfText = txt.join(', ');
+        }
+
+
+        return arr;
+    };
 
     if (!id) {
         $scope.form = {
@@ -22,15 +69,16 @@ angular.module("starter.controllers")
                 read: false
             }
         };
+
+        $scope.title = 'Novo livro';
+        prepareShelfForm([]);
     }
     else {
         var updateBook = angular.copy($rootScope.bookUpdate);
-        var ids = [];
-        angular.forEach(updateBook.shelfs, function(v) {
-            ids.push(v.id);
-        });
-        updateBook.shelfs = ids;
+        console.log(updateBook);
+        prepareShelfForm(updateBook.shelfs);
         $scope.form = updateBook;
+        $scope.title = 'Edição de livro';
     }
 
 
@@ -46,13 +94,6 @@ angular.module("starter.controllers")
             formLibrary.$setUntouched();
         }
     }
-
-    $scope.onCancel = function() {
-        resetForm();
-        $ionicHistory.goBack();
-        // window.location = "#/app/tab/library";
-    };
-
 
 
     $scope.doScan = function() {
@@ -111,7 +152,7 @@ angular.module("starter.controllers")
                 title: $scope.form.title,
                 author: $scope.form.author,
                 cover_source: $scope.form.cover_source,
-                shelfs: $scope.form.shelfs,
+                shelfs: valueShelfsForm(),
                 rate: $scope.form.rate || 1,
 
                 publisher: $scope.form.publisher,
@@ -190,15 +231,6 @@ angular.module("starter.controllers")
     };
 
 
-    /*
-[{
-"name":"1434067203570.jpg",
-"localURL":"cdvfile://localhost/persistent/Pictures/1434067203570.jpg",
-"type":"image/jpeg",
-"lastModified":null,
-"lastModifiedDate":1434067203000,"size":6690954,"start":0,"end":0,
-"fullPath":"file:/storage/emulated/0/Pictures/1434067203570.jpg"}]
-    */
     var onPicture = function(index) {
         var sourceType = index === 0 ? Camera.PictureSourceType.CAMERA : Camera.PictureSourceType.PHOTOLIBRARY;
         var options = {
@@ -225,7 +257,41 @@ angular.module("starter.controllers")
 
 
     $scope.doCreateShelf  = function() {
-        SHELF.add();
+        SHELF.add()
+        .then(function(data) {
+            $scope.shelfsForm.push({
+                text: data.name,
+                id: data.id,
+                checked: true
+            });
+        });
+    };
+
+
+    $ionicModal.fromTemplateUrl('templates/modal_shelf.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function(modal) {
+        $scope.modalShelf = modal;
+    });
+
+
+    $scope.onShelf = function() {
+        $scope.modalShelf.show();
+    };
+
+    $scope.onSaveShelf = function() {
+        valueShelfsForm();
+        $scope.modalShelf.hide();
+    };
+
+    $scope.onCloseModal = function() {
+        if (id) {
+            prepareShelfForm(updateBook.shelfs);
+        } else if (!id) {
+            prepareShelfForm([]);
+        }
+        $scope.modalShelf.hide();
     };
 
 

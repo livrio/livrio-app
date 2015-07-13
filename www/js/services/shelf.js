@@ -5,35 +5,39 @@ angular.module("starter.services")
 
     $rootScope.shelfs = [];
 
-    function create(name) {
-        var post = {
-            name: name
-        };
-        $http.post(settings.URL.SHELF, post)
-        .success(function(response) {
-            if (!response.errors) {
-                $cordovaToast.showLongBottom("Estante criada!").then(function() {});
-                $rootScope.shelfs.push(response.data);
-            }
-            else {
-                console.log('ERROR SHELF CREATE');
-            }
-        })
-        .error(function() {
-            console.log("TRATAR ERROR");
-        });
-    }
 
-    self.add = function(book) {
+    self.add = function() {
+        var deferred = $q.defer();
         $ionicPopup.prompt({
             title: "Nova estante",
             template: "Qual o nome da estante?"
         }).then(function(res) {
             console.log(res);
             if (res) {
-                create(res);
+                $http.post(settings.URL.SHELF, {
+                    name: res
+                })
+                .success(function(response) {
+                    if (!response.errors) {
+                        $cordovaToast.showLongBottom("Estante criada!").then(function() {});
+                        $rootScope.shelfs.push(response.data);
+                        deferred.resolve(response.data);
+                    }
+                    else {
+                        console.log('ERROR SHELF CREATE');
+                        deferred.reject();
+                    }
+                })
+                .error(function() {
+                    console.log("TRATAR ERROR");
+                    deferred.reject();
+                });
+            }
+            else {
+                deferred.reject();
             }
         });
+        return deferred.promise;
     };
 
     self.update = function(book) {

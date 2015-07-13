@@ -64,7 +64,7 @@ angular.module('starter.services',[])
 
     self.update = function(book) {
         $rootScope.bookUpdate = book;
-        window.location = "#/library-form/" + book.id;
+        window.location = "#/app/book-form/" + book.id;
     };
 
 

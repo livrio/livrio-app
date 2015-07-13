@@ -9,13 +9,18 @@ angular.module('starter.services')
         list: []
     };
 
+    // document.addEventListener("resume", function(){
+    //     console.log('resume');
+    //     self.all();
+    // }, false);
+
 
     function processNotice(item) {
         try {
             var text = '', href='';
             if (item.type === 'friend') {
-                text ='<strong>' + item.created_by.fullname + '</strong> entrou no <strong>Livrio.</strong>';
-                href = "#/library-friend/" + item.created_by.id;
+                text ='<strong>' + item.created_by.fullname + '</strong> é seu amigo agora.';
+                href = "#/app/friend/" + item.created_by.id;
 
             }
             else if (item.type === 'loan_confirm') {
@@ -31,6 +36,10 @@ angular.module('starter.services')
             else if (item.type === 'loan_confirm_no') {
                 text ='<strong>' + item.created_by.fullname + '</strong> não quis emprestar o livro <strong>' + item.book.title + '</strong>';
                 href = "#/app/book/" + item.book.id;
+            }
+            else if (item.type === 'request_friend') {
+                text ='<strong>' + item.created_by.fullname + '</strong> solicitou amizade';
+                //href = "#/app/friend/" + item.book.id;
             }
 
             item.text = text;
@@ -48,7 +57,7 @@ angular.module('starter.services')
 
         angular.forEach(data, function(item) {
             if (!item.read) {
-                //ids.push(item.id);
+                ids.push(item.id);
                 unread++;
             }
             arr.push(processNotice(item));
@@ -117,12 +126,13 @@ angular.module('starter.services')
                 console.log($rootScope.notifications);
                 $rootScope.notifications = processAllNotice(response.data);
                 console.log($rootScope.notifications);
-
-                $cordovaBadge.configure({
-                    autoClear: true,
-                    title:$rootScope.notifications.unread > 1 ? "%d novas mensagens" : "%d nova mensagem"
-                });
-                $cordovaBadge.set($rootScope.notifications.unread);
+                if ($rootScope.notifications.unread > 0) {
+                    $cordovaBadge.configure({
+                        autoClear: true,
+                        title:$rootScope.notifications.unread > 1 ? "%d novas mensagens" : "%d nova mensagem"
+                    });
+                    $cordovaBadge.set($rootScope.notifications.unread);
+                }
                 deferred.resolve(response.data);
             }
             else {
@@ -194,9 +204,14 @@ angular.module('starter.services')
 
         $rootScope.$on('$cordovaPush:notificationReceived', function(event, notification) {
             console.log('$cordovaPush:notificationReceived');
-            console.log(JSON.stringify(notification));
-
-    });
+            console.log(notification);
+            switch (notification.event) {
+                case 'message':
+                    window.location = '#/app/notification';
+                    self.all();
+                break;
+            }
+        });
 
 
         var user = $ionicUser.get();
@@ -224,17 +239,13 @@ angular.module('starter.services')
             }).then(function(deviceToken, t) {
                 console.log(deviceToken);
                 console.log(t);
-              
             },
-            function(){
+            function() {
                 console.log('error token');
             });
 
         });
     };
-
-    
-
 
     return self;
 
