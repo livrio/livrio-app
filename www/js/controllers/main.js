@@ -1,5 +1,5 @@
 angular.module("starter.controllers")
-.controller("mainCtrl", function($scope, $ionicHistory, $rootScope, $http, $ionicModal, $ionicLoading, $ionicPopup, settings) {
+.controller("mainCtrl", function($scope, $ionicHistory, $rootScope, $http, $ionicModal, $ionicLoading, $ionicPopup, $cordovaToast, settings) {
 
 
     $rootScope.$on("loan.modal",function(e, book, success, failure) {
@@ -63,9 +63,7 @@ angular.module("starter.controllers")
     });
 
     $rootScope.$on("error.http",function(e) {
-        $ionicPopup.alert({
-            template: "Error no servidor"
-        }).then(function() {});
+        $cordovaToast.showLongBottom("Você está offline!").then(function() {});
     });
 
 

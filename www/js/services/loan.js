@@ -68,8 +68,11 @@ angular.module('starter.services')
                 if (status == 'requested_canceled' || status == 'wait_delivery_canceled') {
                     $cordovaToast.showLongBottom("Solicitação cancelada!").then(function() {});
                 }
+                else if (status == 'requested_returned') {
+                    $cordovaToast.showLongBottom("Solicitação enviada!").then(function() {});
+                }
                 else if (status == 'requested_denied') {
-                    $cordovaToast.showLongBottom("Empréstimo negado!").then(function() {});
+                    $cordovaToast.showLongBottom("Empréstimo cancelado!").then(function() {});
                 }
                 else if (status == 'wait_delivery') {
                     $ionicPopup.alert({

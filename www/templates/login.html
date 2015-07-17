@@ -1,62 +1,63 @@
 <ion-view>
-  <ion-content class="login" scroll="false">
+  <ion-content class="login" >
+
+<div class="center">
+                <img src="img/logo.png" style="width: 42%;" />
+            </div>
+
+  <div class="tab-login">
+        <div ng-class="{'active':tab==0}" ng-click="onChangeTab(0)">Login</div>
+        <div ng-class="{'active':tab==1}" ng-click="onChangeTab(1)">Cadastro</div>
+    </div>
 
 
     <ion-slide-box show-pager="false" on-slide-changed="onChangeTab($index)" >
       
-<!--       <ion-slide>
-        <div class="center">
-            <img src="img/logo.png" style="width: 42%;" />
-
-
-            <p class="padding">
-                Bem vindo ao Livrio, um aplicativo incrivel para gerenciamento e compartihamento de livros entre amigos.
-            </p>
-        </div>
-
-
-        
-
-      </ion-slide> -->
       <ion-slide>
-
-       <div class="center">
-            <img src="img/logo.png" style="width: 42%;" />
-
-        </div>
-        
         <form ng-submit="doLogin(formLogin.$valid)" name="formLogin" novalidate class="form-login">
-            <div class="padding">
-        <button ng-click="doFacebook()"class="button  button-block  button-login button-facebook icon-right ion-social-facebook" type="button">Entrar com <strong>Facebook</strong></button>
-</div>
+           
+        
+        
+
             <div class="list">
 
 
-            <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formLogin.email.$invalid && submitted}">
-            <span class="input-label">Email</span>
-            <input type="email" name="email" ng-model="form.email" required>
-            </label>
-            <div class="form-errors" ng-messages="formLogin.email.$error" ng-show="submitted">
-            <div class="form-error" ng-message="required">Email é obrigatório</div>
-            </div>
+                <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formLogin.email.$invalid && submitted}">
+                <span class="input-label">Email</span>
+                <input type="email" name="email" ng-model="form.email" required>
+                </label>
+                <div class="form-errors" ng-messages="formLogin.email.$error" ng-show="submitted" >
+                <div class="form-error" ng-message="required">Email é obrigatório</div>
+                </div>
 
 
-            <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formLogin.password.$invalid && submitted}">
-            <span class="input-label">Senha</span>
-            <input type="password" name="password" ng-model="form.password" required>
-            </label>
-            <div class="form-errors" ng-messages="formLogin.password.$error" ng-show="submitted">
-            <div class="form-error" ng-message="required">Senha é obrigatória</div>
-            </div>
+                <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formLogin.password.$invalid && submitted}">
+                <span class="input-label">Senha</span>
+                <input type="password" name="password" ng-model="form.password" required>
+                </label>
+                <div class="form-errors" ng-messages="formLogin.password.$error" ng-show="submitted">
+                <div class="form-error" ng-message="required">Senha é obrigatória</div>
+                </div>
 
+                <div class="item center">
+                    <button type="submit" ng-click="submitted=true" class="button button-balanced btn">
+                    Entrar
+                    </button>
 
-            </div>
+                    
+                </div>
 
-            <div class="padding">
-            <button type="submit" ng-click="submitted=true" class="button button-balanced button-block" style="ẅidth: 250px;">
-            Entrar
-            </button>
-            
+                <div class="item center">
+                    <button ng-click="doFacebook()"class="button  button-login button-facebook icon-left ion-social-facebook" type="button">Entrar com Facebook</button>
+                </div>
+
+                <div class="item item-text-wrap terms center">
+                <a  href="#/terms">
+    Ao tocar em "Entrar com Facebook" ou "Cadastrar", você concorda com os termos de Serviços e Politica de Privacidade do Livrio.
+    </a>
+              </div>
+  
+
             </div>
 
 
@@ -67,10 +68,7 @@
       </ion-slide>
 
       <ion-slide>
-         <div class="center">
-            <img src="img/logo.png" style="width: 42%;" />
-
-        </div>
+       
 
         <form ng-submit="doCreate(formCreate.$valid)" name="formCreate" novalidate>
             <div class="list">
@@ -101,21 +99,28 @@
                   <div class="form-error" ng-message="required">Senha é obrigatória</div>
               </div>
 
+              <div class="item center">
+                <button type="submit" ng-click="submittedCreate=true" class="button button-balanced btn">
+        Cadastrar
+      </button>
+              </div>
+
+              <div class="item item-text-wrap terms center">
+                <a  href="#/terms">
+    Ao tocar em "Entrar com Facebook" ou "Cadastrar", você concorda com os termos de Serviços e Politica de Privacidade do Livrio.
+    </a>
+              </div>
             
           </div>
 
-          <div class="padding">
-                <button type="submit" ng-click="submittedCreate=true" class="button button-block button-balanced">
-        Cadastrar
-      </button>
-
-            </div>
 
           </form>
 
       </ion-slide>
 
     </ion-slide-box>
+
+    
 
 
     

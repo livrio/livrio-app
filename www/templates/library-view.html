@@ -23,11 +23,11 @@
         
 
         <div class="card">
-            <div class="item" href="#">
+            <div class="item item-line-bottom" href="#">
               <img ng-src="{{bookView.thumb}}" class="cover">
               <div class="info">
                   <p><span>ISBN</span>{{bookView.isbn}}</p>
-                  <p ng-show="bookView.page_count>0"><span>Autor(res)</span>{{bookView.author}}</p>
+                  <p ng-show="bookView.page_count>0" style="width: 178px;"><span>Autor(res)</span>{{bookView.author}}</p>
                   <p ng-show="bookView.page_count>0"><span>Páginas</span>{{bookView.page_count}}</p>
                   <p ng-show="bookView.publisher"><span>Editora</span>{{bookView.publisher}}</p>
                   <p ng-show="bookView.published_date"><span>Publicação</span>{{bookView.published_date | date:'dd/MM/yyyy'}}</p>
@@ -37,78 +37,63 @@
         </div>
 
         <div class="card" ng-show="bookView.loaned && bookView.loaned.id==user.id">
-            <div class="item item-divider item-line" >
-              Empréstimo
-
-            </div>
             <div class="item item-avatar loan">
                 <img ng-src="{{bookView.loaned.photo}}">
                     {{bookView.loaned.fullname}}
                     <p><strong>Data</strong> {{bookView.loaned.date | date:'dd/MM/yyyy'}}</p>
-                    <p ng-show="bookView.loaned.expired>0"><strong>Tempo</strong> {{bookView.loaned.expired}} dias</p>
+                    <p ng-show="bookView.loaned.expired>0"><strong>Tempo</strong> {{bookView.loaned.expired}} dias restantes</p>
+                    <p ng-show="bookView.loaned.expired<=0" >Está atrasado!</p>
 
-                    <p ng-show="bookView.loaned.status=='requested'" >
-                        <strong>Status</strong> Aguardando 
-                        ( <a ng-click="onChangeStatus('requested_canceled')" href="#" class="energized">Cancelar</a> )
-                    </p>
+                    <button ng-show="bookView.loaned.status=='requested'" class="button button-small button-clean button-energized" ng-click="onChangeStatus('requested_canceled')">Cancelar solicitação</button> 
 
-                    <p ng-show="bookView.loaned.status=='wait_delivery' || bookView.loaned.status=='sent'" >
-                        Seu amigo entregou o livro?
-                         <a ng-click="onChangeStatus('delivered')" href="#" class="energized">Sim</a>
-                    </p>
+
+                    <button ng-show="bookView.loaned.status=='requested_returned' || bookView.loaned.status=='delivered'" class="button button-small button-clean button-energized" ng-click="onChangeStatus('wait_return')">Devolver</button>
+
+                    <button ng-show="bookView.loaned.status=='wait_delivery' || bookView.loaned.status=='sent'" class="button button-small button-clean button-energized" ng-click="onChangeStatus('delivered')">Confirmar empréstimo</button>
+
+
 
           </div>
         </div>
 
 
         <div class="card" ng-show="bookView.loaned && bookView.is_owner">
-            <div class="item item-divider item-line" >
-              Empréstimo
-            </div>
             <div class="item item-avatar loan">
                 <img ng-src="{{bookView.loaned.photo}}">
                     {{bookView.loaned.fullname}}
                     <p><strong>Data</strong> {{bookView.loaned.date | date:'dd/MM/yyyy'}}</p>
-                    <p ng-show="bookView.loaned.expired>0"><strong>Tempo</strong> {{bookView.loaned.expired}} dias</p>
-                    <p ng-show="bookView.loaned.expired<=0" >Atrasado</p>
+                    <p ng-show="bookView.loaned.expired>0"><strong>Prazo</strong> {{bookView.loaned.expired}} dias restantes</p>
+                    <p ng-show="bookView.loaned.expired<=0" >Está atrasado!</p>
 
-                    <p ng-show="bookView.loaned.status=='wait_delivery'" >
-                        <strong>Status</strong> Aguardando usuário confirmar
-                        ( <a ng-click="onChangeStatus('wait_delivery_canceled')" href="#" class="energized">Cancelar</a> )
+                    <button ng-show="bookView.loaned.status=='wait_delivery'" class="button button-small button-clean button-energized" ng-click="onChangeStatus('wait_delivery_canceled')">Cancelar empréstimo</button>
+
+                    <button ng-show="bookView.loaned.status=='sent'" class="button button-small button-clean button-energized" ng-click="onChangeStatus('sent_canceled')">Cancelar empréstimo</button>
+
+                    <button ng-show="bookView.loaned.status=='delivered' || bookView.loaned.status=='requested_returned'" class="button button-small button-clean button-energized" ng-click="onChangeStatus('requested_returned')">Solicitar devolução</button>
+
+                    <button ng-show="bookView.loaned.status=='wait_return'" class="button button-small button-clean button-energized" ng-click="onChangeStatus('returned')">Confirmar devolução</button>
+
+                    <p ng-show="bookView.loaned.status=='requested'">
+                    Deseja emprestar este livro?<br />
+                    <button class="button button-small button-clean button-energized" ng-click="onChangeStatus('requested_denied')">Não</button>
+                    <button class="button button-small button-clean button-energized" ng-click="onChangeStatus('wait_delivery')">Sim</button>
                     </p>
-
-                    <p ng-show="bookView.loaned.status=='sent'" >
-                        <strong>Status</strong> Aguardando usuário confirmar
-                        ( <a ng-click="onChangeStatus('sent_canceled')" href="#" class="energized">Cancelar</a> )
-                    </p>
-
+              
           </div>
 
-          <div class="item loan" ng-show="bookView.loaned.status=='requested'">
-                <p>Emprestar?</p>
-                <button class="button button-small" ng-click="onChangeStatus('requested_denied')">Não</button>
-                <button class="button button-small" ng-click="onChangeStatus('wait_delivery')">Sim</button>
-          </div>
-        </div>
 
-        <div class="card" ng-show="bookView.loaned && !bookView.is_owner && bookView.loaned.id!=user.id">
-            <div class="item item-divider item-line" >
-              Empréstimo
-            </div>
-            <div class="item loan">
-                Este livro já está emprestado para outra pessoa.
 
-          </div>
+
         </div>
 
         <div class="card" ng-hide="bookView.loaned || !bookView.is_owner">
-            <div class="item item-line">
+            <div class="item">
                 <a class="button button-energized button-block request-loan"  ui-sref="app.loanAdd({id:bookView.id})">Emprestar este livro</a>
             </div>
         </div>
 
         <div class="card" ng-hide="bookView.loaned || bookView.is_owner">
-            <div class="item item-line">
+            <div class="item">
                 <button class="button button-energized button-block request-loan"  ng-click="onRequestLoan(bookView)">
                     Solicitar emprestimo deste livro
                 </button>

@@ -23,7 +23,7 @@ angular.module('starter.services')
                 href = "#/app/friend/" + item.created_by.id;
 
             }
-            else if (item.type === 'loan_confirm') {
+            else if (item.type === 'loan_request') {
                 text ='<strong>' + item.created_by.fullname + '</strong> solicitou empréstimo do livro <strong>' + item.book.title + '</strong>';
                 item.question = true;
                 href = "#/app/book/" + item.book.id;
@@ -34,7 +34,19 @@ angular.module('starter.services')
                 href = "#/app/book/" + item.book.id;
             }
             else if (item.type === 'loan_confirm_no') {
-                text ='<strong>' + item.created_by.fullname + '</strong> não quis emprestar o livro <strong>' + item.book.title + '</strong>';
+                text ='<strong>' + item.created_by.fullname + '</strong> cancelou o empréstimo do livro <strong>' + item.book.title + '</strong>';
+                href = "#/app/book/" + item.book.id;
+            }
+            else if (item.type === 'loan_request_return') {
+                text ='<strong>' + item.created_by.fullname + '</strong> solicitou devolução do livro <strong>' + item.book.title + '</strong>';
+                href = "#/app/book/" + item.book.id;
+            }
+            else if (item.type === 'loan_return_confirm') {
+                text ='<strong>' + item.created_by.fullname + '</strong> devolveu o livro <strong>' + item.book.title + '</strong>';
+                href = "#/app/book/" + item.book.id;
+            }
+            else if (item.type === 'loan_confirm') {
+                text ='<strong>' + item.created_by.fullname + '</strong> te emprestou o livro <strong>' + item.book.title + '</strong>';
                 href = "#/app/book/" + item.book.id;
             }
             else if (item.type === 'request_friend') {
@@ -207,7 +219,7 @@ angular.module('starter.services')
             console.log(notification);
             switch (notification.event) {
                 case 'message':
-                    window.location = '#/app/notification';
+                    
                     self.all();
                 break;
             }

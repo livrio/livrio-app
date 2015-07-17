@@ -1,5 +1,6 @@
 @charset "UTF-8";
 @import url(http://fonts.googleapis.com/css?family=Roboto:500,300,700,400);
+@import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,300,700);
 /*
 To customize the look and feel of Ionic, you can override the variables
 in ionic's _variables.scss file.
@@ -7712,6 +7713,18 @@ a.button {
   text-transform: uppercase;
   font-size: 17px; }
 
+.platform-android .bar {
+  height: 50px;
+  padding-left: 16px; }
+  .platform-android .bar .title {
+    height: 54px;
+    line-height: 50px;
+    font-family: "Roboto Slab", "Roboto", "Segoe UI", sans-serif; }
+  .platform-android .bar .icon:before {
+    font-size: 24px; }
+  .platform-android .bar .title + .buttons {
+    top: 8px; }
+
 .button .badge {
   position: absolute;
   background-color: #000000;
@@ -7842,11 +7855,15 @@ a.button {
 .friend-list .item {
   margin: 0;
   border: none;
-  border-bottom: 1px solid #EDEDED;
+  border-bottom: 1px solid #C0C0C0;
   padding-top: 25px;
   font-size: 17px; }
   .friend-list .item img {
     /*border-radius: 0; */ }
+  .friend-list .item .amount {
+    display: block;
+    font-size: 12px;
+    color: #444; }
 
 .sidemenu .item {
   border: none;
@@ -7859,7 +7876,8 @@ a.button {
   .sidemenu .item.item-divider {
     background: none;
     font-size: 16px;
-    color: #666; }
+    color: #666;
+    font-family: "Roboto Slab", "Roboto", "Segoe UI", sans-serif; }
   .sidemenu .item.active {
     color: #d6123c;
     background: none; }
@@ -7916,18 +7934,12 @@ a.button {
 
 .button-facebook {
   color: #fff;
-  background-color: #2a80b9;
-  border-color: #2a80b9; }
-
-.tab-login {
-  text-align: center;
-  margin-bottom: 30px; }
-  .tab-login div {
-    display: inline-block;
-    font-size: 18px;
-    padding: 11px; }
-    .tab-login div.active {
-      border-bottom: 3px solid #d6123c; }
+  background-color: #3B5998;
+  border-color: #3B5998; }
+  .button-facebook.activated {
+    color: #fff;
+    background-color: #516691;
+    border-color: #3B5998; }
 
 .platform-android .action-sheet .action-sheet-title {
   font-weight: bold;
@@ -7938,7 +7950,7 @@ a.button {
 
 .library .book {
   border: none;
-  border-bottom: 1px solid #EDEDED;
+  border-bottom: 1px solid #C0C0C0;
   position: relative;
   padding: 0 16px 16px 16px;
   margin-bottom: 16px; }
@@ -7957,7 +7969,7 @@ a.button {
     font-size: 40px;
     color: #3F51B5; }
     .library .book .loan.expired {
-      color: #F44336; }
+      color: #d6123c; }
   .library .book:first-child {
     padding-top: 16px; }
     .library .book:first-child .btn-more {
@@ -8006,16 +8018,22 @@ a.button {
   font-size: 16px;
   color: #666;
   padding-bottom: 0px;
-  border: none; }
+  border: none;
+  font-family: "Roboto Slab", "Roboto", "Segoe UI", sans-serif;
+  color: #111; }
   .item-divider .button {
-    float: right;
+    position: absolute;
+    top: 2px;
+    right: 16px;
     border: none;
     background: none;
     line-height: 4px;
     padding: 0;
     margin: 0;
-    height: 15px;
-    min-height: initial; }
+    min-height: initial;
+    color: #d6123c; }
+    .item-divider .button:before {
+      font-size: 18px; }
 
 .book-view .request-loan {
   font-size: 15px;
@@ -8027,7 +8045,7 @@ a.button {
   .book-view .card .item {
     border: none; }
   .book-view .card .item-line {
-    border-top: 1px solid #EDEDED; }
+    border-top: 1px solid #C0C0C0; }
   .book-view .card .item-avatar {
     padding-left: 90px; }
     .book-view .card .item-avatar img {
@@ -8050,6 +8068,10 @@ a.button {
     display: block;
     font-size: 13px;
     font-weight: 500; }
+.book-view .loan .button-small {
+  font-size: 11px;
+  line-height: 12px;
+  min-height: 19px; }
 .book-view .cover {
   float: left;
   width: 125px; }
@@ -8060,7 +8082,7 @@ a.button {
   background-color: #fff; }
   .action-sheet-options.action-sheet-group .button.action-sheet-destructive {
     margin-top: 10px;
-    border-top: 1px solid #EDEDED; }
+    border-top: 1px solid #C0C0C0; }
 
 .about .item {
   padding: 10px;
@@ -8105,23 +8127,21 @@ a.button {
 /**
     FORM ERROR
 */
-label.item.has-error {
-  border-bottom: 2px solid red; }
+label.item.has-error input {
+  border-bottom: 1px solid #d6123c; }
 
 label.item.has-error-lr {
-  border-left: 2px solid red;
-  border-right: 2px solid red; }
+  border-left: 2px solid #d6123c;
+  border-right: 2px solid #d6123c; }
 
 label.item.valid-lr {
   border-left: 2px solid green;
   border-right: 2px solid green; }
 
-.form-errors {
-  margin: 5px 0; }
-
 .form-error {
-  padding: 2px 0 2px 16px;
-  color: red; }
+  padding: 0px 0 0px 16px;
+  color: #d6123c;
+  font-size: 11px; }
 
 .popup-container .popup {
   background: #fff;
@@ -8156,20 +8176,23 @@ label.item.valid-lr {
     height: 36px;
     min-height: 36px;
     margin: 0;
+    margin-left: 20px;
     flex: none; }
+    .popup-container .popup .button:first-child {
+      color: #949494; }
     .popup-container .popup .button.activated {
       border: none;
       box-shadow: none;
       color: #6894E0; }
   .popup-container .popup .item-input, .popup-container .popup input {
     padding: 0;
-    border-bottom: 1px solid #EDEDED; }
+    border-bottom: 1px solid #d6123c; }
 .popup-container.popup-loan .duration {
   display: flex; }
 .popup-container.popup-loan select {
   background: none;
   padding: 10px;
-  border-color: #EDEDED;
+  border-color: #C0C0C0;
   flex: 1;
   font-size: 14px; }
   .popup-container.popup-loan select:first-child {
@@ -8188,70 +8211,110 @@ label.item.valid-lr {
   .popup-container.popup-invite-email .button:last-child {
     margin-right: 0 !important; }
 
-.login .slider-slides {
-  /*background-image: url(../img/bg_login.jpg);
-        background-size: cover;
-        background-position-x: 0px;
-        */ }
-.login .slider {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  bottom: 0 !important;
-  right: 0 !important; }
-.login .slider-slide {
-  color: #000; }
-
-.book-form .item {
-  border: none;
-  padding-right: 16px; }
-.book-form input {
-  padding-right: 0px;
-  border-bottom: 1px solid #EDEDED; }
-  .book-form input[readonly]:not(.cloned-text-input) {
-    background-color: #fff; }
-.book-form .ion-ios-star {
-  color: #ffd203; }
-.book-form .item-divider {
-  padding-bottom: 16px; }
-.book-form .item-shelf {
-  font-size: 14px;
-  color: #111;
-  line-height: 16px;
-  font-weight: normal; }
-.book-form .isbn {
-  padding-top: 16px;
-  display: block; }
-  .book-form .isbn .input-label {
-    display: block;
-    padding: 0px 0 0 0;
-    margin: 0px; }
-  .book-form .isbn input {
-    padding-right: 20px; }
-  .book-form .isbn .button-scan {
-    width: 40px;
-    height: 40px;
-    background: #f9b000 !important;
-    color: #000;
+.login {
+  background-color: #fab001; }
+  .login .item {
     border: none;
-    min-width: 40px;
-    min-height: 40px;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26) !important;
-    -webkit-transform: translate3d(0, 0, 0) !important;
-    transform: translate3d(0, 0, 0) !important;
-    -webkit-transition: 0.2s linear !important;
-    transition: 0.2s linear !important;
-    -webkit-transition-property: -webkit-transform, all !important;
-    transition-property: transform, all !important;
-    position: absolute;
-    border-radius: 50% !important;
-    top: 16px;
-    right: 16px; }
-    .book-form .isbn .button-scan i {
-      top: 1px;
+    padding-right: 16px;
+    background-color: transparent; }
+  .login input {
+    background-color: transparent;
+    color: #fff;
+    border-bottom: 1px solid #fff;
+    border-radius: 0; }
+  .login .input-label {
+    color: #fff;
+    font-size: 17px; }
+  .login .button.btn {
+    border-color: #d6123c;
+    background-color: #d6123c; }
+  .login .button {
+    width: 210px;
+    text-transform: uppercase;
+    font-size: 14px; }
+  .login .terms {
+    line-height: 12px; }
+    .login .terms a {
+      color: #fff;
+      font-size: 11px;
+      text-decoration: none; }
+  .login .tab-login {
+    text-align: center;
+    margin-bottom: 30px; }
+    .login .tab-login div {
+      display: inline-block;
+      font-size: 17px;
+      padding: 11px;
+      color: #fff;
+      text-transform: uppercase; }
+      .login .tab-login div.active {
+        border-bottom: 3px solid #d6113c; }
+
+.book-form {
+  margin-bottom: 50px; }
+  .book-form .item {
+    border: none;
+    padding-right: 16px; }
+  .book-form input {
+    padding-right: 0px;
+    border-bottom: 1px solid #d6123c;
+    background-color: transparent;
+    border-radius: 0px; }
+    .book-form input[readonly]:not(.cloned-text-input) {
+      background-color: transparent; }
+  .book-form .ion-ios-star {
+    color: #ffd203; }
+  .book-form .item-divider {
+    padding-bottom: 16px;
+    font-family: "Roboto", "Segoe UI", sans-serif;
+    font-weight: normal;
+    font-size: 16px; }
+  .book-form .item-shelf {
+    font-size: 14px;
+    color: #111;
+    line-height: 16px;
+    font-weight: normal; }
+  .book-form .isbn {
+    padding-top: 16px;
+    display: block; }
+    .book-form .isbn .input-label {
+      display: block;
+      padding: 0px 0 0 0;
+      margin: 0px; }
+    .book-form .isbn input {
+      padding-right: 20px; }
+    .book-form .isbn .button-scan {
+      width: 40px;
+      height: 40px;
+      background: #f9b000 !important;
+      color: #000;
+      border: none;
+      min-width: 40px;
+      min-height: 40px;
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26) !important;
+      -webkit-transform: translate3d(0, 0, 0) !important;
+      transform: translate3d(0, 0, 0) !important;
+      -webkit-transition: 0.2s linear !important;
+      transition: 0.2s linear !important;
+      -webkit-transition-property: -webkit-transform, all !important;
+      transition-property: transform, all !important;
       position: absolute;
-      left: 11px; }
+      border-radius: 50% !important;
+      top: 16px;
+      right: 16px; }
+      .book-form .isbn .button-scan i {
+        top: 1px;
+        position: absolute;
+        left: 11px; }
+
+.input-label {
+  color: #111; }
 
 .list .item.item-line, .card .item.item-line {
   margin-top: 16px;
-  border-top: 1px solid #EDEDED; }
+  border-top: 1px solid #C0C0C0; }
+
+.list .item.item-line-bottom, .card .item.item-line-bottom {
+  margin-bottom: 16px;
+  border-bottom: 1px solid #C0C0C0;
+  border-radius: 0; }

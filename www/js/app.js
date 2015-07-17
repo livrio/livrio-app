@@ -52,7 +52,17 @@ angular.module('starter', [
   'starter.config'
   ])
 
-.run(function($rootScope, $http) {
+.run(function($rootScope, $http, $ionicPlatform) {
+
+    $ionicPlatform.ready(function() {
+
+        ionic.Platform.isFullScreen = true;
+
+        if (window.cordova && window.cordova.plugins.Keyboard) {
+            //cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        }
+
+    });
 
 
     $http.defaults.headers.common['Content-Type'] = 'application/json';
@@ -61,7 +71,7 @@ angular.module('starter', [
     try {
         $rootScope.user = JSON.parse(window.localStorage.user);
         $http.defaults.headers.common['Authorization'] = window.localStorage.getItem('token');
-        window.location = '#/app/library';
+        window.location = '#/app/book/20';
     }
     catch (e) {
         window.location = '#/login';
@@ -76,10 +86,12 @@ angular.module('starter', [
 
     document.addEventListener("online", function(){
         $rootScope.online = true;
+        console.log('offline');
     }, false);
 
     document.addEventListener("offline", function(){
         $rootScope.online = false;
+        console.log('offline');
     }, false);
 
 

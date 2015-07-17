@@ -1,6 +1,6 @@
 angular.module("starter.controllers")
 
-.controller("bookAddCtrl", function($scope, $stateParams, $ionicModal, $timeout, $rootScope, $http, $ionicPopup, $ionicLoading, $cordovaBarcodeScanner, $cordovaOauth, $cordovaToast, $cordovaCamera, $ionicActionSheet, settings, SHELF) {
+.controller("bookAddCtrl", function($scope, $stateParams, $ionicHistory, $ionicModal, $rootScope, $http, $ionicPopup, $ionicLoading, $cordovaBarcodeScanner, $cordovaOauth, $cordovaToast, $cordovaCamera, $ionicActionSheet, settings, SHELF) {
 
     var id = $stateParams.id;
 
@@ -8,6 +8,10 @@ angular.module("starter.controllers")
     $scope.rate_max = 5;
 
     console.log('form');
+
+    var shelfHistory;
+
+
 
     $scope.shelfText = 'Nenhuma estante';
 
@@ -18,7 +22,7 @@ angular.module("starter.controllers")
                 return true;
             }
         }
-
+        console.log('inChecked');
         return false;
     }
 
@@ -33,9 +37,11 @@ angular.module("starter.controllers")
         });
 
         console.log($scope.shelfsForm);
+        console.log('prepareShelfForm');
+        console.log(shelfs);
     };
 
-    function valueShelfsForm(shefs) {
+    function valueShelfsForm() {
         var arr = [], txt=[];
         angular.forEach($scope.shelfsForm, function(v) {
 
@@ -52,7 +58,7 @@ angular.module("starter.controllers")
             $scope.shelfText = txt.join(', ');
         }
 
-
+        console.log('valueShelfsForm');
         return arr;
     };
 
@@ -69,14 +75,23 @@ angular.module("starter.controllers")
                 read: false
             }
         };
+        console.log($rootScope.shelfTmp);
+        if ($rootScope.shelfTmp && $rootScope.shelfTmp.id) {
+            $scope.form.shelfs.push($scope.shelfTmp);
+            shelfHistory = $rootScope.shelfTmp.id;
+            delete $rootScope.shelfTmp;
+
+        }
 
         $scope.title = 'Novo livro';
-        prepareShelfForm([]);
+        prepareShelfForm($scope.form.shelfs);
+        valueShelfsForm();
     }
     else {
         var updateBook = angular.copy($rootScope.bookUpdate);
         console.log(updateBook);
         prepareShelfForm(updateBook.shelfs);
+        valueShelfsForm();
         $scope.form = updateBook;
         $scope.title = 'Edição de livro';
     }
@@ -170,7 +185,8 @@ angular.module("starter.controllers")
                         resetForm();
                         $rootScope.$emit("library.refresh");
                         $rootScope.$emit("shelf.refresh");
-                        window.location = "#/app/library";
+                        $rootScope.$emit("library.shelf.refresh");
+                        $ionicHistory.goBack();
                     }
                     else {
                         $ionicPopup.alert({
@@ -192,7 +208,8 @@ angular.module("starter.controllers")
                         //resetForm();
                         $rootScope.$emit("library.refresh");
                         $rootScope.$emit("shelf.refresh");
-                        window.location = "#/app/library";
+                        $rootScope.$emit("library.shelf.refresh");
+                        $ionicHistory.goBack();
                     }
                     else {
                         $ionicPopup.alert({

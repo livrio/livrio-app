@@ -2,6 +2,12 @@
 
 <ion-view title="Perfil de usuário">
 
+<ion-nav-buttons side="right">
+            <button type="button" class="button button-clear" style="font-weight: 500;" on-touch="onSave()">
+                SALVAR
+            </button>
+        </ion-nav-buttons>
+
   <ion-content class="profile-view">
 
         <form ng-submit="doUpdate(formUpdate.$valid)" name="formUpdate" novalidate id="formUpdate">

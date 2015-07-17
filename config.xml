@@ -2,40 +2,23 @@
 <widget id="br.com.codeway.livrio" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Livrio</name>
   <description>
-        Livr.io Cultura  Conhecimento
+        Livr.io Cultura e Conhecimento
     </description>
   <author email="aurelio@codeway.com.br" href="http://livr.io">
-      Ionic Framework Team
+      Codeway Mobile
     </author>
   <content src="index.html"/>
   <access origin="*"/>
-  <preference name="webviewbounce" value="false"/>
-  <preference name="UIWebViewBounce" value="false"/>
-  <preference name="DisallowOverscroll" value="true"/>
-  <preference name="BackupWebStorage" value="true"/>
+
+
   <preference name="SplashScreen" value="screen"/>
   <preference name="Orientation" value="portrait"/>
-  <preference name="StatusBarOverlaysWebView" value="false"/>
-  <preference name="fullscreen" value="false"/>
-  <preference name="prerendered-icon" value="true"/>
-  <preference name="stay-in-webview" value="false"/>
-  <preference name="ios-statusbarstyle" value="black-opaque"/>
-  <preference name="detect-data-types" value="true"/>
-  <preference name="exit-on-suspend" value="false"/>
-  <preference name="show-splash-screen-spinner" value="false"/>
-  <preference name="auto-hide-splash-screen" value="false"/>
-  <preference name="AutoHideSplashScreen" value="false"/>
-  <preference name="disable-cursor" value="false"/>
+  <preference name="fullscreen" value="true"/>
   <preference name="android-minSdkVersion" value="16"/>
   <preference name="android-installLocation" value="auto"/>
   <preference name="SplashScreenDelay" value="3000"/>
-  <preference name="DisallowOverscroll" value="true"/>
-  <preference name="BackupWebStorage" value="local"/>
-  <preference name="StatusBarBackgroundColor" value="#3C75F4"/>
-  <preference name="StatusBarStyle" value="lightcontent"/>
-  <feature name="StatusBar">
-    <param name="ios-package" value="CDVStatusBar" onload="true"/>
-  </feature>
+
+
   <platform name="android">
     <icon src="resources/android/icon/drawable-ldpi-icon.png" density="ldpi"/>
     <icon src="resources/android/icon/drawable-mdpi-icon.png" density="mdpi"/>

@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-.controller('shelfCtrl', function($scope, $stateParams, SHELF, BOOK) {
+.controller('shelfCtrl', function($scope, $rootScope, $stateParams, SHELF, BOOK) {
 
     var id = $stateParams.id;
 
@@ -21,6 +21,11 @@ angular.module('starter.controllers')
         SHELF.books(id).then(function(books) {
             $scope.librarys = books;
             $scope.loading = false;
+            $scope.$broadcast('scroll.refreshComplete');
+        },
+        function() {
+            $scope.$broadcast('scroll.refreshComplete');
+            $scope.$emit('error.http');
         });
     };
 
@@ -34,7 +39,11 @@ angular.module('starter.controllers')
 
     $scope.onUpdate = function(item) {
         SHELF.update(item);
-    }
+    };
+
+    $scope.onAddBook = function(item) {
+        $rootScope.shelfTmp = item;
+    };
 
 
     $scope.onActionBook = function(event, item) {
@@ -43,6 +52,12 @@ angular.module('starter.controllers')
 
 
     $scope.onRefresh();
+
+    $rootScope.$on("library.shelf.refresh",function() {
+        $scope.librarys = [];
+        $scope.loading = true;
+        $scope.onRefresh();
+    });
 
 
 });

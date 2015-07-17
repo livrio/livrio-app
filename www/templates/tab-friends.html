@@ -30,6 +30,7 @@
             <div class="item item-avatar" ng-repeat="item in friends" ui-sref="app.friendBook({id:item.id})">
                 <img ng-src="{{item.photo}}" />
                 {{item.fullname}}
+                <span class="amount">Livros {{item.amount_book}}</span>
             </div>
         </div>
 

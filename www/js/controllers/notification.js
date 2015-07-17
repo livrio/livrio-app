@@ -18,7 +18,9 @@ angular.module('starter.controllers')
     $scope.onAction = function(item) {
         if (item.type == 'request_friend') {
             $ionicPopup.confirm({
-                title: 'Confirmação de amizade',
+                title: 'Solicitação de amizade',
+                cancelText: 'Ignorar',
+                okText: 'Aceitar',
                 template: 'Deseja aceitar a soliciação de amizade de <strong>' + item.created_by.fullname + '</strong>'
             })
             .then(function(res) {

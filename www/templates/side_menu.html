@@ -36,6 +36,8 @@
 
             <ul class="list sidemenu">
 
+                
+
                 <a class="item item-icon-left ac" ui-sref="app.library" ui-sref-active="active" menu-close>
                     <i class="icon ion-ios-book"></i> Meus livros
                 </a>
@@ -53,10 +55,15 @@
                     <span class="badge" ng-show="notifications.unread>0">{{notifications.unread}}</span>
                 </a>
 
+                <a class="item item-icon-left ac" ui-sref="app.book-search" ui-sref-active="active" menu-close>
+                    <i class="icon ion-android-search"></i> Procurar livro
+                </a>
+
                 
 
                 <li class="item item-divider item-line">            
                     Estantes
+                    <button class="button button-icon icon ion-plus" ng-click="onShelfAdd()"></button>
                 </li>
 
                 <div class="item item-icon-left" ng-hide="shelfs.length">

@@ -53,7 +53,7 @@ if (!window.cordova) {
         scan: function(success) {
             var arrs = ["9788536502694","9788598078175","9788563560858"];
             success({
-                text: "9788563560858"
+                text: "9788598078175"
             });
         }
     };

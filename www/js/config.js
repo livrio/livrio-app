@@ -32,13 +32,22 @@ angular.module("starter.config",[])
     // $ionicConfigProvider.views.forwardCache(true);
     $ionicConfigProvider.tabs.position('top');
 
-    $httpProvider.interceptors.push(function($q, $location) {
+    $httpProvider.interceptors.push(function($q, $location, $rootScope) {
         return {
             responseError: function(response) {
+                console.log(response);
                 if (response.status === 401 || response.status === 403) {
                     $location.path("/login");
                     window.localStorage.clear();
                     window.location.reload();
+                }
+
+                if (response.status == 0) {
+                    console.log('offline');
+                    //$rootScope.online = false;
+                }
+                else{
+                    //$rootScope.online = true;
                 }
                 return $q.reject(response);
             }

@@ -13,14 +13,26 @@ angular.module('starter.controllers')
 
     var id = $rootScope.user.id;
 
+    $scope.onSave = function() {
+        $cordovaToast.showLongBottom('Salvo!').then(function() {});
+    };
+
     $scope.onPicture = function() {
         var hideSheet = $ionicActionSheet.show({
             buttons: [
                 { text: "<i class=\"icon ion-android-camera\"></i> Tirar foto" },
                 { text: "<i class=\"icon ion-image\"></i> Galeria"}
+                
             ],
+            destructiveText: "<i class=\"icon ion-trash-a\"></i> Remover foto",
             titleText: 'Foto de perfil',
             cancelText: 'Cancelar',
+            destructiveButtonClicked: function() {
+                save({
+                    photo_remove:  true
+                });
+                return true;
+            },
             cancel: function() {
                 hideSheet();
             },
@@ -31,16 +43,37 @@ angular.module('starter.controllers')
         });
     };
 
+    function save(post) {
 
-    /*
-[{
-"name":"1434067203570.jpg",
-"localURL":"cdvfile://localhost/persistent/Pictures/1434067203570.jpg",
-"type":"image/jpeg",
-"lastModified":null,
-"lastModifiedDate":1434067203000,"size":6690954,"start":0,"end":0,
-"fullPath":"file:/storage/emulated/0/Pictures/1434067203570.jpg"}]
-    */
+        var old = $scope.form.photo;
+        if (post.avatar_source) {
+            $scope.form.photo = 'data:image/jpeg;base64,' + post.avatar_source;
+        }
+        else {
+            $scope.form.photo = 'img/avatar.png';
+        }
+
+
+        $http.put(settings.URL.USER + '/' + id, post)
+        .success(function(response) {
+            console.log(JSON.stringify(response));
+            if (!response.errors) {
+                window.localStorage.user = JSON.stringify(response.data);
+                $rootScope.user = response.data;
+            }
+            else {
+                $scope.form.photo = old;
+                $cordovaToast.showLongBottom('Não foi possível alterar a foto.').then(function() {});
+            }
+        })
+        .error(function() {
+            $scope.form.photo = old;
+            console.log(JSON.stringify(arguments));
+            console.error('TRATAR ERROR');
+        });
+    }
+
+
     var onPicture = function(index) {
         var sourceType = index === 0 ? Camera.PictureSourceType.CAMERA : Camera.PictureSourceType.PHOTOLIBRARY;
         var options = {
@@ -60,26 +93,9 @@ angular.module('starter.controllers')
             var post = {
                 avatar_source: imageData
             };
-            var old = $scope.form.photo;
-            $scope.form.photo = 'data:image/jpeg;base64,' + imageData;
 
-            $http.put(settings.URL.USER + '/' + id, post)
-            .success(function(response) {
-                console.log(JSON.stringify(response));
-                if (!response.errors) {
-                    window.localStorage.user = JSON.stringify(response.data);
-                    $rootScope.user = response.data;
-                }
-                else {
-                    $scope.form.photo = old;
-                    $cordovaToast.showLongBottom('Não foi possível alterar a foto.').then(function() {});
-                }
-            })
-            .error(function() {
-                $scope.form.photo = old;
-                console.log(JSON.stringify(arguments));
-                console.error('TRATAR ERROR');
-            });
+            save(post);
+
 
         }, function(err) {
             console.log(JSON.stringify(arguments));

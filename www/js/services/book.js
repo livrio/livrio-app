@@ -8,8 +8,8 @@ angular.module('starter.services',[])
     self.delete = function(book) {
         $ionicPopup.confirm({
             title: 'Deseja excluir este livro?',
-            cancelText: 'Não',
-            okText: 'Sim',
+            cancelText: 'Cancelar',
+            okText: 'Excluir',
             template: book.title
         }).then(function(res) {
             if (res) {
@@ -23,9 +23,12 @@ angular.module('starter.services',[])
                     if (!response.errors) {
                         $cordovaToast.showLongBottom("Livro excluído!").then(function() {});
                         window.location = "#/app/library";
+                        $rootScope.$emit("library.refresh");
                     }
                     else {
-                        console.log('EROOR DELETE');
+                        $ionicPopup.alert({
+                            template: 'Você não pode excluir um livro que está emprestado.'
+                        }).then(function() {});
                     }
                 })
                 .error(function() {

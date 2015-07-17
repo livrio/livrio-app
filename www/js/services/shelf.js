@@ -10,7 +10,9 @@ angular.module("starter.services")
         var deferred = $q.defer();
         $ionicPopup.prompt({
             title: "Nova estante",
-            template: "Qual o nome da estante?"
+            template: "Qual o nome da estante?",
+            cancelText: 'Cancelar',
+            okText: 'Criar'
         }).then(function(res) {
             console.log(res);
             if (res) {
@@ -55,8 +57,8 @@ angular.module("starter.services")
     self.delete = function(shelf) {
         $ionicPopup.confirm({
             title: 'Deseja excluir esta estante?',
-            cancelText: 'Não',
-            okText: 'Sim',
+            cancelText: 'Cancelar',
+            okText: 'Excluir',
             template: 'Os livros não serão excluídos!<br /><strong>' + shelf.name + '</strong>'
         }).then(function(res) {
             if (res) {
