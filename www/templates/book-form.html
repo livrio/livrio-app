@@ -1,0 +1,113 @@
+<form ng-submit="doSave(formLibrary)" name="formLibrary" novalidate>
+<ion-view >
+
+    <ion-nav-bar class="bar-assertive">
+
+        <ion-nav-back-button></ion-nav-back-button>
+
+        <ion-nav-title>
+            {{title}}
+        </ion-nav-title>
+
+        <ion-nav-buttons side="right">
+            <button class="button button-clear" style="font-weight: 500;">
+                {{'book_form.btn_save' | translate}}
+            </button>
+        </ion-nav-buttons>
+
+    </ion-nav-bar>
+
+
+  <ion-content class="book-form">
+
+            <div class="list">
+
+
+
+            
+
+                <div class="item item-input isbn" ng-class="{ 'has-error' : formLibrary.isbn.$invalid && formLibrary.$submitted}">
+                    <span class="input-label">{{'book_form.field_isbn' | translate}}</span>
+                    <input type="text"  name="isbn" ng-model="form.isbn" ng-readonly="form.id" required>
+
+                    <button type="button" class="button button-scan" ng-click="doScan()" ng-hide="form.id">
+                        <i class="icon ion-ios-barcode-outline"></i>
+                    </button>
+                </div>
+                <div class="form-errors" ng-messages="formLibrary.isbn.$error" ng-show="formLibrary.$submitted">
+                  <div class="form-error" ng-message="required">{{'book_form.field_isbn' | translate}} {{'required_field' | translate}}</div>
+                </div>
+
+
+
+
+
+                <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formLibrary.title.$invalid && formLibrary.$submitted}">
+                    <span class="input-label">{{'book_form.field_title' | translate}}</span>
+                    <input type="text"  name="title" ng-model="form.title" required>
+                </label>
+                <div class="form-errors" ng-messages="formLibrary.title.$error" ng-show="formLibrary.$submitted">
+                    <div class="form-error" ng-message="required">{{'book_form.field_title' | translate}} {{'required_field' | translate}}</div>
+                </div>
+
+                <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formLibrary.author.$invalid && formLibrary.$submitted}">
+                    <span class="input-label">{{'book_form.field_author' | translate}}</span>
+                    <input type="text"  name="author" ng-model="form.author" required>
+                </label>
+                <div class="form-errors" ng-messages="formLibrary.author.$error" ng-show="formLibrary.$submitted">
+                    <div class="form-error" ng-message="required">{{'book_form.field_author' | translate}} {{'required_field' | translate}}</div>
+                </div>
+
+                <div class="item center">
+                    <rating ng-model="form.rate" max="rate_max"></rating>
+                </div>
+
+                <li class="item item-divider item-line">
+                {{'book_form.cover' | translate}}
+            </li>
+
+                <div class="item item-image">
+                <img ng-src="{{form.thumb}}" style="width: 100px; margin: 10px;" ng-click="onPicture()"/>
+                </div>
+
+            <label class="item item-input item-stacked-label" ng-click="onShelf()">
+             <span class="input-label">{{'book_form.shelf' | translate}}</span>
+              <input type="text"  ng-model="shelfText" readonly="on">
+          </label>
+
+
+
+
+          <label class="item item-input item-stacked-label">
+             <span class="input-label">{{'book_form.field_publisher' | translate}}</span>
+              <input type="text"  name="publisher" ng-model="form.publisher">
+          </label>
+
+          <label class="item item-input item-stacked-label">
+             <span class="input-label">{{'book_form.field_publisher_year' | translate}}</span>
+              <input type="number"  name="published_year" ng-model="form.published_year">
+          </label>
+
+          <label class="item item-input item-stacked-label">
+             <span class="input-label">{{'book_form.field_page' | translate}}</span>
+              <input type="number"  name="page_count" ng-model="form.page_count">
+          </label> 
+
+        
+
+      </div>
+
+      
+
+
+
+
+    
+
+    
+
+
+  </ion-content>
+
+</ion-view>
+</form>

@@ -1,0 +1,124 @@
+<ion-view>
+    <ion-nav-title>
+        {{bookView.title}}
+    </ion-nav-title>
+
+    <ion-nav-buttons side="right">
+        <button type="button" class="button icon button-clean ion-android-more-vertical ng-hide" ng-click="onAction($event, bookView)" ng-show="bookView.is_owner"></button>
+    </ion-nav-buttons>
+
+
+
+  <ion-content class="book-view">
+
+
+    <div class="wait-message" ng-show="loading">
+        <ion-spinner class="spinner-energized"></ion-spinner>
+        <span>{{'loading' | translate}}</span>
+    </div>
+
+    
+    <div ng-hide="loading">
+        
+        
+        
+
+        <div class="card">
+            <div class="item item-line-bottom" href="#">
+              <img ng-src="{{bookView.thumb}}" class="cover">
+              <div class="info">
+                  <p><span>{{'book.isbn' | translate }}</span>{{bookView.isbn}}</p>
+                  <p ng-show="bookView.page_count>0" style="width: 178px;"><span>{{'book.author' | translate }}</span>{{bookView.author}}</p>
+                  <p ng-show="bookView.page_count>0"><span>{{'book.page' | translate }}</span>{{bookView.page_count}}</p>
+                  <p ng-show="bookView.publisher"><span>{{'book.publisher' | translate }}</span>{{bookView.publisher}} 
+                  <span ng-show="bookView.published_year">({{bookView.published_year}})</span></p>
+                  
+                  
+              </div>
+            </div>
+        </div>
+
+        <div class="card" ng-show="bookView.loaned && bookView.loaned.id==user.id">
+            <div class="item item-avatar loan">
+                <img ng-src="{{bookView.loaned.photo}}">
+                    {{bookView.loaned.fullname}}
+                    <p><strong>{{'book.date' | translate }}</strong> {{bookView.loaned.date | date:'dd/MM/yyyy'}}</p>
+                    <p ng-show="bookView.loaned.expired>0">{{bookView.loaned.expired}} {{'book.days' | translate }}</p>
+                    <p ng-show="bookView.loaned.expired<=0" >{{'book.late' | translate }}</p>
+
+                    <button ng-show="bookView.loaned.status=='requested'" class="button button-small button-clean button-energized" ng-click="onChangeStatus('requested_canceled')">{{'book.btn_cancel_request' | translate }}</button> 
+
+
+                    <button ng-show="bookView.loaned.status=='requested_returned' || bookView.loaned.status=='delivered'" class="button button-small button-clean button-energized" ng-click="onChangeStatus('wait_return')">{{'book.btn_return' | translate }}</button>
+
+                    <button ng-show="bookView.loaned.status=='wait_delivery' || bookView.loaned.status=='sent'" class="button button-small button-clean button-energized" ng-click="onChangeStatus('delivered')">{{'book.btn_confirm_loan' | translate }}</button>
+
+
+
+          </div>
+        </div>
+
+
+        <div class="card" ng-show="bookView.loaned && bookView.is_owner">
+            <div class="item item-avatar loan">
+                <img ng-src="{{bookView.loaned.photo}}">
+                    {{bookView.loaned.fullname}}
+                    <p><strong>{{'book.date' | translate }}</strong> {{bookView.loaned.date | date:'dd/MM/yyyy'}}</p>
+                    <p ng-show="bookView.loaned.expired>0">{{bookView.loaned.expired}} {{'book.days' | translate }}</p>
+                    <p ng-show="bookView.loaned.expired<=0" >{{'book.late' | translate }}</p>
+
+                    <button ng-show="bookView.loaned.status=='wait_delivery'" class="button button-small button-clean button-energized" ng-click="onChangeStatus('wait_delivery_canceled')">{{'book.btn_cancel_loan' | translate }}</button>
+
+                    <button ng-show="bookView.loaned.status=='sent'" class="button button-small button-clean button-energized" ng-click="onChangeStatus('sent_canceled')">{{'book.btn_cancel_loan' | translate }}</button>
+
+                    <button ng-show="bookView.loaned.status=='delivered' || bookView.loaned.status=='requested_returned'" class="button button-small button-clean button-energized" ng-click="onChangeStatus('requested_returned')">{{'book.btn_request_return' | translate }}</button>
+
+                    <button ng-show="bookView.loaned.status=='wait_return'" class="button button-small button-clean button-energized" ng-click="onChangeStatus('returned')">{{'book.btn_request_return' | translate }}</button>
+
+                    <p ng-show="bookView.loaned.status=='requested'">
+                    {{'book.question_confirm_loan' | translate }}<br />
+                    <button class="button button-small button-clean button-energized" ng-click="onChangeStatus('requested_denied')">{{'book.question_yes' | translate }}</button>
+                    <button class="button button-small button-clean button-energized" ng-click="onChangeStatus('wait_delivery')">{{'book.question_no' | translate }}</button>
+                    </p>
+              
+          </div>
+
+
+
+
+        </div>
+
+        <div class="card" ng-hide="bookView.loaned || !bookView.is_owner">
+            <div class="item">
+                <a class="button button-energized button-block request-loan"  ui-sref="app.loanAdd({id:bookView.id})">
+                    {{'book.btn_start_loan' | translate }}
+                </a>
+            </div>
+        </div>
+
+        <div class="card" ng-hide="bookView.loaned || bookView.is_owner">
+            <div class="item">
+                <button class="button button-energized button-block request-loan"  ng-click="onRequestLoan(bookView)">
+                    
+                {{'book.btn_request_book' | translate }}
+                </button>
+            </div>
+        </div>
+
+
+
+        <div class="card" style="margin-bottom: 130px;" ng-show="bookView.description">
+            <div class="item item-divider item-line" >
+              {{'book.synopsis' | translate }}
+            </div>
+            <div class="item item-text-wrap description" ng-bind-html="bookView.description">
+
+            </div>
+        </div>
+
+      
+    </div>
+    
+  </ion-content>
+
+</ion-view>
