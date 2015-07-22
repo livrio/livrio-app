@@ -1,8 +1,10 @@
 angular.module("starter.controllers")
 
-.controller("bookAddCtrl", function($scope, $stateParams, $ionicHistory, $ionicModal, $rootScope, $http, $ionicPopup, $ionicLoading, $cordovaBarcodeScanner, $cordovaOauth, $cordovaToast, $cordovaCamera, $ionicActionSheet, settings, SHELF) {
+.controller("bookAddCtrl", function($scope, $stateParams, $ionicHistory, $ionicModal, $rootScope, $http, $ionicPopup, $ionicLoading, $cordovaBarcodeScanner, $cordovaToast, $cordovaCamera, $ionicActionSheet, $filter, settings, SHELF) {
 
     var id = $stateParams.id;
+
+    var trans = $filter('translate');
 
 
     $scope.rate_max = 5;
@@ -13,7 +15,7 @@ angular.module("starter.controllers")
 
 
 
-    $scope.shelfText = 'Nenhuma estante';
+    $scope.shelfText = trans('book_form.shelf_empty');
 
 
     function inChecked(shelfs, id) {
@@ -52,7 +54,7 @@ angular.module("starter.controllers")
 
         });
         if (txt.length == 0) {
-            $scope.shelfText = 'Nenhuma estante';
+            $scope.shelfText = trans('book_form.shelf_empty');
         }
         else {
             $scope.shelfText = txt.join(', ');
@@ -83,7 +85,7 @@ angular.module("starter.controllers")
 
         }
 
-        $scope.title = 'Novo livro';
+        $scope.title = trans('book_form.title_create');
         prepareShelfForm($scope.form.shelfs);
         valueShelfsForm();
     }
@@ -93,7 +95,7 @@ angular.module("starter.controllers")
         prepareShelfForm(updateBook.shelfs);
         valueShelfsForm();
         $scope.form = updateBook;
-        $scope.title = 'Edição de livro';
+        $scope.title = trans('book_form.title_update');
     }
 
 
@@ -120,14 +122,14 @@ angular.module("starter.controllers")
                 console.log(imageData.text);
             }
         }, function(error) {
-            $ionicPopup.alert({title: "Código de barra inválido!"});
+            $ionicLoading.hide();
         });
     };
 
 
     function searchISBN(isbn) {
         $ionicLoading.show({
-            template: "Pesquisando..."
+            template: trans('book_form.isbn_searching')
         });
         var url = settings.URL.ISBN + "/" + isbn;
         $http.get(url)
@@ -137,11 +139,13 @@ angular.module("starter.controllers")
 
                 if (response.data.is_book) {
                     $ionicPopup.alert({
-                        template: "O livro <strong>" + response.data.title + "</strong> já está cadastrado!"
+                        template: String.format(trans('book_form.isbn_duplicate'), response.data.title)
                     }).then(function() {});
                 }
+                else {
+                    angular.extend($scope.form, response.data);
+                }
 
-                angular.extend($scope.form, response.data);
 
             }
             else {
@@ -159,7 +163,7 @@ angular.module("starter.controllers")
         formLibrary = form;
         if (form.$valid) {
             $ionicLoading.show({
-                template: "Salvando..."
+                template: trans('book_form.saving')
             });
 
             var post = {
@@ -181,7 +185,7 @@ angular.module("starter.controllers")
                 .success(function(response) {
                     $ionicLoading.hide();
                     if (!response.errors) {
-                        $cordovaToast.showLongBottom("Livro inserido!").then(function() {});
+                        $cordovaToast.showLongBottom(trans('book_form.toast_create')).then(function() {});
                         resetForm();
                         $rootScope.$emit("library.refresh");
                         $rootScope.$emit("shelf.refresh");
@@ -190,7 +194,7 @@ angular.module("starter.controllers")
                     }
                     else {
                         $ionicPopup.alert({
-                            template: "Já existe um livro cadastro com o ISBN informado"
+                            template: trans('book_form.isbn_duplicate_notice')
                         }).then(function() {});
                     }
                 })
@@ -204,7 +208,7 @@ angular.module("starter.controllers")
                 .success(function(response) {
                     $ionicLoading.hide();
                     if (!response.errors) {
-                        $cordovaToast.showLongBottom("Livro atualizado!").then(function() {});
+                        $cordovaToast.showLongBottom(trans('book_form.toast_update')).then(function() {});
                         //resetForm();
                         $rootScope.$emit("library.refresh");
                         $rootScope.$emit("shelf.refresh");
@@ -213,7 +217,7 @@ angular.module("starter.controllers")
                     }
                     else {
                         $ionicPopup.alert({
-                            template: "Já existe um livro cadastro com o ISBN informado"
+                            template: trans('book_form.isbn_duplicate_notice')
                         }).then(function() {});
                     }
                 })
@@ -285,7 +289,7 @@ angular.module("starter.controllers")
     };
 
 
-    $ionicModal.fromTemplateUrl('templates/modal_shelf.html', {
+    $ionicModal.fromTemplateUrl('templates/book-form-shelf.html', {
         scope: $scope,
         animation: 'slide-in-up'
     }).then(function(modal) {

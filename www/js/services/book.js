@@ -1,33 +1,36 @@
 angular.module('starter.services',[])
-.factory('BOOK', ['$rootScope', '$state', '$http', '$q', '$ionicPopup',  '$ionicLoading', '$cordovaToast', '$cordovaCamera', '$ionicActionSheet', 'settings', function($rootScope, $state, $http, $q, $ionicPopup, $ionicLoading, $cordovaToast, $cordovaCamera, $ionicActionSheet, settings) {
+.factory('BOOK', ['$rootScope', '$http', '$q', '$ionicPopup',  '$ionicLoading', '$cordovaToast', '$cordovaCamera', '$ionicActionSheet', '$state', '$filter', 'settings', function($rootScope, $http, $q, $ionicPopup, $ionicLoading, $cordovaToast, $cordovaCamera, $ionicActionSheet, $state, $filter, settings) {
 
     var self = this;
 
+    var trans = $filter('translate');
+
+    
 
 
     self.delete = function(book) {
         $ionicPopup.confirm({
-            title: 'Deseja excluir este livro?',
-            cancelText: 'Cancelar',
-            okText: 'Excluir',
+            title: trans('book.question_delete'),
+            cancelText: trans('book.question_delete_no'),
+            okText: trans('book.question_delete_yes'),
             template: book.title
         }).then(function(res) {
             if (res) {
                 $ionicLoading.show({
-                    template: "Excluindo..."
+                    template: trans('book.wait_delete')
                 });
                 book.removed = true;
                 $http.delete(settings.URL.BOOK + "/" + book.id)
                 .success(function(response) {
                     $ionicLoading.hide();
                     if (!response.errors) {
-                        $cordovaToast.showLongBottom("Livro excluído!").then(function() {});
+                        $cordovaToast.showLongBottom(trans('book.toast_delete')).then(function() {});
                         window.location = "#/app/library";
                         $rootScope.$emit("library.refresh");
                     }
                     else {
                         $ionicPopup.alert({
-                            template: 'Você não pode excluir um livro que está emprestado.'
+                            template: trans('book.msg_delete_lock')
                         }).then(function() {});
                     }
                 })
@@ -107,11 +110,11 @@ angular.module('starter.services',[])
         $http.post(settings.URL.BOOK + "/" + book.id + "/request-return")
         .success(function(response) {
             if (!response.errors) {
-                $cordovaToast.showLongBottom("Seu amigo será avisado!").then(function() {});
+                $cordovaToast.showLongBottom(trans('book.toast_request_return')).then(function() {});
                 deferred.resolve();
             }
             else if (response.errors[0].code === 301) {
-                $cordovaToast.showLongBottom("Já existe uma solicitação pendente!").then(function() {});
+                $cordovaToast.showLongBottom(trans('book.toast_request_duplicate')).then(function() {});
             }
             else {
                 deferred.reject();
@@ -136,7 +139,7 @@ angular.module('starter.services',[])
         .success(function(response) {
 
             if (!response.errors) {
-                $cordovaToast.showLongBottom("Capa atualizada!").then(function() {});
+                $cordovaToast.showLongBottom(trans('book.toast_cover_update')).then(function() {});
                 $rootScope.$emit("library.refresh");
                 deferred.resolve(response.data.thumb);
             }
@@ -156,10 +159,10 @@ angular.module('starter.services',[])
         var deferred = $q.defer();
         $ionicActionSheet.show({
             buttons: [
-                { text: "<i class=\"icon ion-android-camera\"></i> Tirar foto" },
-                { text: "<i class=\"icon ion-image\"></i> Imagem"}
+                { text: "<i class=\"icon ion-android-camera\"></i> " + trans('book.sheet_photo') },
+                { text: "<i class=\"icon ion-image\"></i> " + trans('book.sheet_picture')}
             ],
-            titleText: 'Capa do livro: ' + book.title,
+            titleText: trans('book.sheet_title') + book.title,
             buttonClicked: function(index) {
 
                 var sourceType = index === 0 ? Camera.PictureSourceType.CAMERA : Camera.PictureSourceType.PHOTOLIBRARY;
@@ -204,22 +207,22 @@ angular.module('starter.services',[])
         event.stopPropagation();
 
         var options = [
-                { text: "<i class=\"icon ion-edit\"></i> Editar" },
-                { text: "<i class=\"icon ion-android-image\"></i> Alterar capa" }
+                { text: "<i class=\"icon ion-edit\"></i> " + trans('book.sheet_update') },
+                { text: "<i class=\"icon ion-android-image\"></i> " + trans('book.sheet_change_cover') }
             ];
 
         if (book.loaned) {
-            options.push({ text: "<i class=\"icon ion-arrow-swap\"></i> Solicitar devolução" });
+            options.push({ text: "<i class=\"icon ion-arrow-swap\"></i> " + trans('book.sheet_request_return') });
         }
         else {
-            options.push({ text: "<i class=\"icon ion-arrow-swap\"></i> Emprestar" });
+            options.push({ text: "<i class=\"icon ion-arrow-swap\"></i> " + trans('book.sheet_loan') });
         }
 
         $ionicActionSheet.show({
             buttons: options,
-            destructiveText: "<i class=\"icon ion-trash-a\"></i> Excluir",
+            destructiveText: "<i class=\"icon ion-trash-a\"></i> " + trans('book.sheet_delete'),
             titleText: book.title,
-            cancelText: "Cancelar",
+            cancelText: trans('book.sheet_cancel'),
             destructiveButtonClicked: function() {
                 self.delete(book);
                 return true;

@@ -1,9 +1,10 @@
 "use strict";
 
 angular.module('starter.controllers')
-.controller('profileCtrl', function( $scope, $rootScope, $ionicActionSheet, $http, $cordovaToast, $cordovaCamera, settings) {
+.controller('profileCtrl', function( $scope, $rootScope, $ionicActionSheet, $http, $cordovaToast, $cordovaCamera, $filter, settings) {
 
     var user = $rootScope.user;
+    var trans = $filter('translate');
 
     console.log(user.birthday);
     user.birthday = new Date(user.birthday + " 23:59:59");
@@ -14,19 +15,19 @@ angular.module('starter.controllers')
     var id = $rootScope.user.id;
 
     $scope.onSave = function() {
-        $cordovaToast.showLongBottom('Salvo!').then(function() {});
+        $cordovaToast.showLongBottom(trans('profile.toast_save')).then(function() {});
     };
 
     $scope.onPicture = function() {
         var hideSheet = $ionicActionSheet.show({
             buttons: [
-                { text: "<i class=\"icon ion-android-camera\"></i> Tirar foto" },
-                { text: "<i class=\"icon ion-image\"></i> Galeria"}
+                { text: "<i class=\"icon ion-android-camera\"></i> " + trans('profile.sheet_photo') },
+                { text: "<i class=\"icon ion-image\"></i> " + trans('profile.sheet_picture')}
                 
             ],
-            destructiveText: "<i class=\"icon ion-trash-a\"></i> Remover foto",
-            titleText: 'Foto de perfil',
-            cancelText: 'Cancelar',
+            destructiveText: "<i class=\"icon ion-trash-a\"></i> " + trans('profile.sheet_remove'),
+            titleText: trans('profile.sheet_title'),
+            cancelText: trans('profile.sheet_cancel'),
             destructiveButtonClicked: function() {
                 save({
                     photo_remove:  true
@@ -63,7 +64,7 @@ angular.module('starter.controllers')
             }
             else {
                 $scope.form.photo = old;
-                $cordovaToast.showLongBottom('Não foi possível alterar a foto.').then(function() {});
+                $cordovaToast.showLongBottom(trans('profile.toast_photo_error')).then(function() {});
             }
         })
         .error(function() {

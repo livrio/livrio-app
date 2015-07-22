@@ -1,7 +1,12 @@
 
 angular.module('starter.controllers', [])
-.controller('loginCtrl', function($scope, $rootScope, $ionicSlideBoxDelegate, $ionicPopup, $ionicLoading, settings, USER ) {
+.controller('loginCtrl', function($scope, $rootScope, $ionicSlideBoxDelegate, $ionicPopup, $ionicLoading, $filter,  settings, USER ) {
 
+    var trans = $filter('translate');
+
+    document.addEventListener("deviceready", function() {
+        window.analytics.trackView('login_start');
+    });
 
     $scope.tab = 0;
 
@@ -19,14 +24,14 @@ angular.module('starter.controllers', [])
     function firstLogin(name) {
 
         $ionicPopup.alert({
-            template: '<img src="img/livrio1.png" />Olá <strong>' + name + '</strong>, seja vem vindo ao <strong>Livrio</strong> um rede de compartilhamento de livros entre amigos. Comece já cadastrando seus livros e tornando-os disponíveis para seus amigos.'
+            template: '<img src="img/livrio1.png" />' + trans('welcome')
         }).then(function() {});
     }
 
     function testOffline() {
         if (!$rootScope.online) {
             $ionicPopup.alert({
-                template: 'Você precisa está conectado a internet. Por favor verifique sua conexão!'
+                template: trans('offline')
             }).then(function() {});
             return true;
         }
@@ -41,7 +46,7 @@ angular.module('starter.controllers', [])
         }
         if (isValid) {
             $ionicLoading.show({
-                template: 'Entrando...'
+                template: trans('login.loading_login')
             });
 
             var post = {
@@ -59,13 +64,13 @@ angular.module('starter.controllers', [])
                 $ionicLoading.hide();
                 if (error.status === 0) {
                     $ionicPopup.alert({
-                        template: 'Não foi possível se conectar. Por favor, verifique o acesso internet.'
+                        template: trans('offline')
                     }).then(function() {});
                 }
                 else {
 
                     $ionicPopup.alert({
-                        template: '<strong>Email</strong>/<strong>Senha</strong> estão incorretos.'
+                        template: trans('login.login_invalid')
                     }).then(function() {});
                 }
             });
@@ -78,7 +83,7 @@ angular.module('starter.controllers', [])
         }
         if (isValid) {
             $ionicLoading.show({
-                template: 'Cadastrando...'
+                template: trans('login.loading_create')
             });
 
             var post = {
@@ -92,7 +97,7 @@ angular.module('starter.controllers', [])
             .then(function(user) {
 
                 $ionicLoading.show({
-                    template: 'Entrando...'
+                    template: trans('login.loading_login')
                 });
 
                 USER.auth(post)
@@ -111,7 +116,7 @@ angular.module('starter.controllers', [])
 
                 if (p.email) {
                     $ionicPopup.alert({
-                        template: '<strong>Email</strong> já cadastrado!'
+                        template: trans('login.email_duplicate')
                     }).then(function() {});
                 }
 
@@ -125,7 +130,7 @@ angular.module('starter.controllers', [])
         }
 
         $ionicLoading.show({
-            template: 'Entrando com Facebook...'
+            template: trans('login.loading_facebook')
         });
 
         USER.authFacebook()
@@ -140,7 +145,7 @@ angular.module('starter.controllers', [])
         function() {
             $ionicLoading.hide();
             $ionicPopup.alert({
-                template: 'Não foi possível se conectar. Por favor, verifique o acesso internet.'
+                template: trans('offline')
             }).then(function() {});
         });
 

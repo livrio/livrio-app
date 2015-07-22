@@ -14,4 +14,5 @@ angular.module('starter.controllers')
             $scope.easterEggActive = 0;
         }
     }
+
 });

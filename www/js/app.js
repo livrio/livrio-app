@@ -1,18 +1,18 @@
 // Ionic Starter App
 
-function columnize(input, cols) {
-    var arr = [], colIdx=-1, i;
-    for (i = 0; i < input.length; i++) {
-
-        if ((i % cols) === 0) {
-            colIdx++;
-            arr[ colIdx ] = [];
-        }
-
-        arr[colIdx].push(input[i]);
-    }
-    return arr;
+if (!String.format) {
+    String.format = function(format) {
+        var args = Array.prototype.slice.call(arguments, 1);
+        return format.replace(/{(\d+)}/g, function(match, number) { 
+            
+            if(typeof args[number] != 'undefined'){
+                return args[number]; 
+            }
+            return match;
+        });
+    };
 }
+
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
@@ -42,17 +42,43 @@ function formatDate(date){
 angular.module('starter', [
   'ionic',
   'ngMessages',
-  'checklist-model',
   'ngCordova',
   'ionic.rating',
   'ionic.service.core',
   'ionic.service.push',
   'starter.controllers',
   'starter.services',
-  'starter.config'
+  'starter.config',
+  'pascalprecht.translate'
   ])
 
-.run(function($rootScope, $http, $ionicPlatform) {
+.run(function($rootScope, $http, $ionicPlatform, $translate) {
+
+    document.addEventListener("deviceready", function() {
+        if (typeof navigator.globalization !== "undefined") {
+            navigator.globalization.getPreferredLanguage(function(language) {
+                var lang = (language.value).toLowerCase().split("-")[0];
+                console.log(lang);
+                
+
+                $translate.use(lang).then(function(data) {
+                    console.log(data);
+                    window.localStorage.lang = data;
+                }, function(error) {
+                    
+                });
+            }, null);
+        }
+    });
+
+
+    document.addEventListener("deviceready", function() {
+        window.analytics.startTrackerWithId('UA-65249891-2');
+
+        cordova.getAppVersion.getVersionNumber().then(function (version) {
+            $rootScope.versionApp = version;
+        });
+    });
 
     $ionicPlatform.ready(function() {
 
@@ -71,7 +97,7 @@ angular.module('starter', [
     try {
         $rootScope.user = JSON.parse(window.localStorage.user);
         $http.defaults.headers.common['Authorization'] = window.localStorage.getItem('token');
-        window.location = '#/app/book/20';
+        window.location = '#/app/library';
     }
     catch (e) {
         window.location = '#/login';

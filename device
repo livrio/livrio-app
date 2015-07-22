@@ -7,6 +7,6 @@ rm -f Livrio.apk
 
 /home/aureliosaraiva/android-sdk-linux/build-tools/19.1.0/zipalign -v 4 platforms/android/ant-build/CordovaApp-release-unsigned.apk Livrio.apk
 
-adb uninstall br.com.codeway.livrio
+adb uninstall io.livr.app
 adb install Livrio.apk
-adb shell monkey -p br.com.codeway.livrio -c android.intent.category.LAUNCHER 1
+adb shell monkey -p io.livr.app -c android.intent.category.LAUNCHER 1

@@ -1,4 +1,4 @@
-<ion-view title="Sobre o Livrio">
+<ion-view title="{{'about.title' | translate}}">
 
     <ion-content class="about">
 
@@ -10,23 +10,22 @@
         <div class="list padding">
 
             <div class="item item-divider">
-                Legal
+                {{'about.terms' | translate}}
             </div>
             
             <a class="item" ui-sref="app.privacy">
-                Política de Privacidade
+                {{'about.policy' | translate}}
             </a>
             
-            <a class="item" ui-sref="app.terms">
-                Termos de Uso
-            </a>
+
 
             <div class="item item-divider">
-                Sobre este aplicativo
+                {{'about.about_app' | translate}}
             </div>
             
             <div class="item" ng-click="onEasterEgg()">
-                Versão Android 1.0.0
+            {{'about.version' | translate:'{value:versionApp}' }}
+                
             </div>
 
 

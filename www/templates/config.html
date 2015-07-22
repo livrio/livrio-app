@@ -1,19 +1,19 @@
-<ion-view title="Configurações">
+<ion-view title="{{'config.title' | translate}}">
 
     <ion-content>
 
             <ul class="list">
 
                 <ion-toggle ng-model="config.allowSearchEmail" toggle-class="toggle-calm" ng-change="onChangeField()">
-                    Permitir ser encontrado através do e-mail 
+                    {{'config.allow_search_by_email' | translate}}
                 </ion-toggle>
 
                 <ion-toggle ng-model="config.allowNotificationPush" toggle-class="toggle-calm" ng-change="onChangeField()">
-                    Receber notificações push 
+                    {{'config.allow_notification_push' | translate}}
                 </ion-toggle>
 
                 <ion-toggle ng-model="config.allowNotificationEmail" toggle-class="toggle-calm" ng-change="onChangeField()">
-                    Receber notificações por email
+                    {{'config.allow_notification_email' | translate}}
                 </ion-toggle>
 
             </ul>

@@ -6,11 +6,13 @@
 
             <ion-nav-back-button></ion-nav-back-button>
 
-            <ion-nav-title>Livrio</ion-nav-title>
+            <ion-nav-title>
+                {{'app_name' | translate}}
+            </ion-nav-title>
 
             <ion-nav-buttons side="left">
                 <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
-                    <span class="badge" ng-show="notifications.unread>0">{{notifications.unread}}</span>
+                    <span class="badge" ng-show="notifications.unview>0">{{notifications.unview}}</span>
                 </button>
             </ion-nav-buttons>
 
@@ -39,35 +41,35 @@
                 
 
                 <a class="item item-icon-left ac" ui-sref="app.library" ui-sref-active="active" menu-close>
-                    <i class="icon ion-ios-book"></i> Meus livros
+                    <i class="icon ion-ios-book"></i> {{'menu.my_books' | translate}}
                 </a>
 
                 <a class="item item-icon-left " ui-sref="app.friends" ui-sref-active="active" menu-close>
-                    <i class="icon ion-android-contacts"></i> Amigos
+                    <i class="icon ion-android-contacts"></i> {{'menu.my_friends' | translate}}
                 </a>
 
                 <a class="item item-icon-left " ui-sref="app.loan" ui-sref-active="active" menu-close>
-                    <i class="icon ion-arrow-swap"></i> Empréstimos
+                    <i class="icon ion-arrow-swap"></i> {{'menu.my_loans' | translate}}
                 </a>
 
                 <a class="item item-icon-left " ui-sref="app.notification" ui-sref-active="active" menu-close>
-                    <i class="icon ion-android-notifications"></i> Notificações
-                    <span class="badge" ng-show="notifications.unread>0">{{notifications.unread}}</span>
+                    <i class="icon ion-android-notifications"></i> {{'menu.notifications' | translate}}
+                    <span class="badge" ng-show="notifications.unview>0">{{notifications.unview}}</span>
                 </a>
 
                 <a class="item item-icon-left ac" ui-sref="app.book-search" ui-sref-active="active" menu-close>
-                    <i class="icon ion-android-search"></i> Procurar livro
+                    <i class="icon ion-android-search"></i> {{'menu.search' | translate}}
                 </a>
 
                 
 
                 <li class="item item-divider item-line">            
-                    Estantes
+                    {{'menu.shelfs' | translate}}
                     <button class="button button-icon icon ion-plus" ng-click="onShelfAdd()"></button>
                 </li>
 
                 <div class="item item-icon-left" ng-hide="shelfs.length">
-                <p>Nenhum estante criada</p>
+                <p>{{'menu.empty_shelfs' | translate}}</p>
                 </div>
 
                 <a ui-sref="app.shelf({id:item.id})" ui-sref-active="active" class="item item-icon-left " ng-repeat="item in shelfs | orderBy: 'name'" menu-close>
@@ -78,21 +80,21 @@
 
 
                 <a class="item item-icon-left item-line" ui-sref="app.profile" ui-sref-active="active" menu-close>
-                    <i class="icon ion-person"></i> Meu perfil
+                    <i class="icon ion-person"></i> {{'menu.profile' | translate}}
                 </a>
 
                 <a class="item item-icon-left " ui-sref="app.config" ui-sref-active="active" menu-close>
-                    <i class="icon ion-android-settings"></i> Configurações
+                    <i class="icon ion-android-settings"></i> {{'menu.config' | translate}}
                 </a>
 
                 
 
                 <a class="item item-icon-left " ui-sref="app.about" ui-sref-active="active" menu-close>
-                    <i class="icon ion-help-circled"></i> Sobre o aplicativo
+                    <i class="icon ion-help-circled"></i> {{'menu.about' | translate}}
                 </a>
 
                 <div ng-click="doLogout()" class="item item-icon-left" menu-close>
-                    <i class="icon ion-android-exit"></i> Sair
+                    <i class="icon ion-android-exit"></i> {{'menu.exit' | translate}}
                 </div>
 
                 

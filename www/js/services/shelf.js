@@ -1,7 +1,9 @@
 angular.module("starter.services")
-.factory("SHELF", ["$rootScope", "$http", "$ionicHistory", "$state", "$q", "$ionicPopup", "$ionicLoading", "$cordovaToast", "settings", "BOOK", function($rootScope, $http, $ionicHistory, $state, $q, $ionicPopup, $ionicLoading, $cordovaToast, settings, BOOK) {
+.factory("SHELF", ["$rootScope", "$http", "$ionicHistory", "$state", "$q", "$ionicPopup", "$ionicLoading", "$cordovaToast", "$filter", "settings", "BOOK", function($rootScope, $http, $ionicHistory, $state, $q, $ionicPopup, $ionicLoading, $cordovaToast, $filter, settings, BOOK) {
 
     var self = this;
+
+    var trans = $filter('translate');
 
     $rootScope.shelfs = [];
 
@@ -9,10 +11,10 @@ angular.module("starter.services")
     self.add = function() {
         var deferred = $q.defer();
         $ionicPopup.prompt({
-            title: "Nova estante",
-            template: "Qual o nome da estante?",
-            cancelText: 'Cancelar',
-            okText: 'Criar'
+            title: trans('shelf.popup_create_title'),
+            template: trans('shelf.popup_create_msg'),
+            cancelText: trans('shelf.popup_create_cancel'),
+            okText: trans('shelf.popup_create_ok')
         }).then(function(res) {
             console.log(res);
             if (res) {
@@ -21,7 +23,7 @@ angular.module("starter.services")
                 })
                 .success(function(response) {
                     if (!response.errors) {
-                        $cordovaToast.showLongBottom("Estante criada!").then(function() {});
+                        $cordovaToast.showLongBottom(trans('shelf.toast_create')).then(function() {});
                         $rootScope.shelfs.push(response.data);
                         deferred.resolve(response.data);
                     }
@@ -44,8 +46,10 @@ angular.module("starter.services")
 
     self.update = function(book) {
         $ionicPopup.prompt({
-            title: "Editar estante",
-            template: "Qual o novo nome da estante?"
+            title: trans('shelf.popup_update_title'),
+            template: trans('shelf.popup_update_msg'),
+            cancelText: trans('shelf.popup_update_cancel'),
+            okText: trans('shelf.popup_update_ok')
         }).then(function(res) {
             console.log(res);
             if (res) {
@@ -56,21 +60,17 @@ angular.module("starter.services")
 
     self.delete = function(shelf) {
         $ionicPopup.confirm({
-            title: 'Deseja excluir esta estante?',
-            cancelText: 'Cancelar',
-            okText: 'Excluir',
-            template: 'Os livros não serão excluídos!<br /><strong>' + shelf.name + '</strong>'
+            title: trans('shelf.popup_delete_title'),
+            cancelText: trans('shelf.popup_delete_cancel'),
+            okText: trans('shelf.popup_delete_ok'),
+            template: trans('shelf.popup_delete_msg') + '<br /><strong>' + shelf.name + '</strong>'
         }).then(function(res) {
             if (res) {
-                $ionicLoading.show({
-                    template: "Excluindo..."
-                });
                 $http.delete(settings.URL.SHELF + "/" + shelf.id)
                 .success(function(response) {
-                    $ionicLoading.hide();
                     if (!response.errors) {
                         self.all();
-                        $cordovaToast.showLongBottom("Estante excluída!").then(function() {});
+                        $cordovaToast.showLongBottom(trans('shelf.toast_delete')).then(function() {});
                         $ionicHistory.nextViewOptions({
                             disableBack: true
                         });
@@ -122,7 +122,7 @@ angular.module("starter.services")
                 }
                 else {
                     console.log('ERROR SHELF CREATE');
-                    deferred.reject('Greeting is not allowed.');
+                    deferred.reject();
                 }
             })
             .error(function() {
@@ -148,7 +148,6 @@ angular.module("starter.services")
             }
             else {
                 console.log('ERROR SHELF CREATE');
-                deferred.reject('Greeting is not allowed.');
             }
         })
         .error(function() {

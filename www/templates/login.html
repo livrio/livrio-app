@@ -6,8 +6,8 @@
             </div>
 
   <div class="tab-login">
-        <div ng-class="{'active':tab==0}" ng-click="onChangeTab(0)">Login</div>
-        <div ng-class="{'active':tab==1}" ng-click="onChangeTab(1)">Cadastro</div>
+        <div ng-class="{'active':tab==0}" ng-click="onChangeTab(0)">{{'login.tab_login' | translate}}</div>
+        <div ng-class="{'active':tab==1}" ng-click="onChangeTab(1)">{{'login.tab_create' | translate}}</div>
     </div>
 
 
@@ -23,37 +23,37 @@
 
 
                 <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formLogin.email.$invalid && submitted}">
-                <span class="input-label">Email</span>
+                <span class="input-label">{{'login.field_email' | translate}}</span>
                 <input type="email" name="email" ng-model="form.email" required>
                 </label>
                 <div class="form-errors" ng-messages="formLogin.email.$error" ng-show="submitted" >
-                <div class="form-error" ng-message="required">Email é obrigatório</div>
+                <div class="form-error" ng-message="required">{{'login.field_email' | translate}} {{'required_field' | translate}}</div>
                 </div>
 
 
                 <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formLogin.password.$invalid && submitted}">
-                <span class="input-label">Senha</span>
+                <span class="input-label">{{'login.field_password' | translate}}</span>
                 <input type="password" name="password" ng-model="form.password" required>
                 </label>
                 <div class="form-errors" ng-messages="formLogin.password.$error" ng-show="submitted">
-                <div class="form-error" ng-message="required">Senha é obrigatória</div>
+                <div class="form-error" ng-message="required">{{'login.field_password' | translate}} {{'required_field' | translate}}</div>
                 </div>
 
                 <div class="item center">
                     <button type="submit" ng-click="submitted=true" class="button button-balanced btn">
-                    Entrar
+                    {{'login.btn_login' | translate}}
                     </button>
 
                     
                 </div>
 
                 <div class="item center">
-                    <button ng-click="doFacebook()"class="button  button-login button-facebook icon-left ion-social-facebook" type="button">Entrar com Facebook</button>
+                    <button ng-click="doFacebook()"class="button  button-login button-facebook icon-left ion-social-facebook" type="button">{{'login.btn_facebook' | translate}}</button>
                 </div>
 
                 <div class="item item-text-wrap terms center">
                 <a  href="#/terms">
-    Ao tocar em "Entrar com Facebook" ou "Cadastrar", você concorda com os termos de Serviços e Politica de Privacidade do Livrio.
+    {{'login.terms' | translate}}
     </a>
               </div>
   
@@ -74,40 +74,40 @@
             <div class="list">
 
             <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formCreate.fullname.$invalid && submittedCreate}">
-            <span class="input-label">Nome completo</span>
+            <span class="input-label">{{'login.field_name' | translate}}</span>
               <input type="text"  name="fullname" ng-model="form.fullname" required>
             </label>
              <div class="form-errors" ng-messages="formCreate.fullname.$error" ng-show="submittedCreate">
-                  <div class="form-error" ng-message="required">Nome é obrigatório</div>
+                  <div class="form-error" ng-message="required">{{'login.field_name' | translate}} {{'required_field' | translate}}</div>
               </div>
 
 
             <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formCreate.email.$invalid && submittedCreate}">
-            <span class="input-label">Email</span>
+            <span class="input-label">{{'login.field_email' | translate}}</span>
               <input type="email"  name="email" ng-model="form.email" required>
             </label>
              <div class="form-errors" ng-messages="formCreate.email.$error" ng-show="submittedCreate">
-                  <div class="form-error" ng-message="required">Email é obrigatório</div>
+                  <div class="form-error" ng-message="required">{{'login.field_email' | translate}} {{'required_field' | translate}}</div>
               </div>
 
 
             <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formCreate.password.$invalid && submittedCreate}">
-            <span class="input-label">Senha</span>
+            <span class="input-label">{{'login.field_password' | translate}}</span>
                 <input type="password"  name="password" ng-model="form.password" required>
             </label>
             <div class="form-errors" ng-messages="formCreate.password.$error" ng-show="submittedCreate">
-                  <div class="form-error" ng-message="required">Senha é obrigatória</div>
+                  <div class="form-error" ng-message="required">{{'login.field_password' | translate}} {{'required_field' | translate}}</div>
               </div>
 
               <div class="item center">
                 <button type="submit" ng-click="submittedCreate=true" class="button button-balanced btn">
-        Cadastrar
+        {{'login.btn_create' | translate}}
       </button>
               </div>
 
               <div class="item item-text-wrap terms center">
                 <a  href="#/terms">
-    Ao tocar em "Entrar com Facebook" ou "Cadastrar", você concorda com os termos de Serviços e Politica de Privacidade do Livrio.
+    {{'login.terms' | translate}}
     </a>
               </div>
             

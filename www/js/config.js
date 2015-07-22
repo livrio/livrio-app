@@ -1,7 +1,9 @@
 "use strict";
 // var DOMAIN_API = "http://livrio.codeway.in/v1";
 var DOMAIN_API = "http://api.livr.io/v1";
-angular.module("starter.config",[])
+angular.module("starter.config",[
+    'pascalprecht.translate'
+    ])
 .constant("settings", {
     API_BASE_URL: "http://api.wiflip.in/v1",
     GA: "UA-54794657-1",
@@ -18,7 +20,12 @@ angular.module("starter.config",[])
     },
     iOSApiKey: "961755098-c1f2cioji268glhuflmeil69trs5eudg.apps.googleusercontent.com"
 })
-.config(function($stateProvider, $httpProvider, $urlRouterProvider, $ionicConfigProvider, $ionicAppProvider) {
+.config(function($stateProvider, $httpProvider, $urlRouterProvider, $ionicConfigProvider, $ionicAppProvider, $translateProvider) {
+
+    
+
+    $translateProvider.preferredLanguage("pt");
+    $translateProvider.fallbackLanguage("pt");
 
     // Identify app
     $ionicAppProvider.identify({
@@ -32,7 +39,7 @@ angular.module("starter.config",[])
     // $ionicConfigProvider.views.forwardCache(true);
     $ionicConfigProvider.tabs.position('top');
 
-    $httpProvider.interceptors.push(function($q, $location, $rootScope) {
+    $httpProvider.interceptors.push(function($q, $location, $cordovaToast) {
         return {
             responseError: function(response) {
                 console.log(response);
@@ -44,10 +51,7 @@ angular.module("starter.config",[])
 
                 if (response.status == 0) {
                     console.log('offline');
-                    //$rootScope.online = false;
-                }
-                else{
-                    //$rootScope.online = true;
+                    $cordovaToast.showLongBottom("Você está offline!").then(function() {});
                 }
                 return $q.reject(response);
             }
@@ -66,7 +70,7 @@ angular.module("starter.config",[])
         url: "/book-form/:id",
         views: {
             "menuContent": {
-                templateUrl: "templates/book-add.html",
+                templateUrl: "templates/book-form.html",
                 controller: "bookAddCtrl"
             }
         }
@@ -76,17 +80,12 @@ angular.module("starter.config",[])
         url: "/book-form",
         views: {
             "menuContent": {
-                templateUrl: "templates/book-add.html",
+                templateUrl: "templates/book-form.html",
                 controller: "bookAddCtrl"
             }
         }
     })
 
-
-    .state("main", {
-        url: "/main",
-        templateUrl: "templates/main.html"
-    })
 
     .state("app", {
         url: "/app",
@@ -108,21 +107,13 @@ angular.module("starter.config",[])
         url: "/loan-add",
         views: {
             "menuContent": {
-                templateUrl: "templates/emprestimo.html",
+                templateUrl: "templates/book-loan.html",
                 controller: "loanAddCtrl"
             }
         }
     })
 
 
-    .state("app.terms", {
-        url: "/terms",
-        views: {
-            "menuContent": {
-                templateUrl: "templates/terms.html"
-            }
-        }
-    })
 
     .state("app.privacy", {
         url: "/privacy",
@@ -133,22 +124,13 @@ angular.module("starter.config",[])
         }
     })
 
-    .state("app.feedback", {
-        url: "/feedback",
-        views: {
-            "menuContent": {
-                templateUrl: "templates/feedback.html"
-            }
-        }
-    })
 
-    
 
     .state("app.friendBook", {
         url: "/friend/:id",
         views: {
             "menuContent": {
-                templateUrl: "templates/library-friend.html",
+                templateUrl: "templates/book-friend.html",
                 controller: "libraryFriendCtrl"
             }
         }
@@ -208,27 +190,12 @@ angular.module("starter.config",[])
         url: "/book/:id",
         views: {
             "menuContent": {
-                templateUrl: "templates/library-view.html",
+                templateUrl: "templates/book-view.html",
                 controller: "libraryViewCtrl"
             }
         }
     })
 
-    .state("app.tab", {
-        url: "/tab",
-        abstract: true,
-        views: {
-            "menuContent": {
-                templateUrl: "templates/tabs.html",
-                views: {
-                    "tab-loan": {
-                        templateUrl: "templates/tab-loan.html",
-                        controller: "loanCtrl"
-                    }
-                }
-            }
-        }
-    })
 
     .state("app.library", {
         url: "/library",

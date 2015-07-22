@@ -4,8 +4,35 @@ if (!window.plugins) {
 
 if (!window.cordova) {
     window.cordova = {
-        plugins: {}
+        plugins: {},
+        getAppVersion: {
+            getVersionNumber: function(){
+                return {
+                    then: function(s){
+                        console.log('getVersionNumber: ','1.1.0');
+                        s('1.1.0');
+                    }
+                }
+            }
+        }
     };
+
+    if(!window.analytics){
+        window.analytics = {
+            debugMode: function(){
+                console.log('GA - debugMode');
+            },
+            startTrackerWithId: function(id){
+                console.log('GA - startTrackerWithId - ', id);
+            },
+            trackView: function(p){
+                console.log('GA - trackView - ', p);  
+            },
+            trackEvent: function(e){
+                console.log('GA - trackEvent - ', e);    
+            }
+        };
+    }
 
 
     function setPlatform(p) {

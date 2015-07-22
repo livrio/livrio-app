@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-.controller('menuCtrl', function($scope, $ionicPopover, SHELF, PUSH) {
+.controller('menuCtrl', function($scope, $rootScope, $ionicPopover, SHELF, PUSH) {
 
     SHELF.all();
 
@@ -11,11 +11,9 @@ angular.module('starter.controllers')
     };
 
     $scope.doLogout = function() {
-        var email = window.localStorage.email;
         window.localStorage.clear();
-        window.localStorage.email = email;
+        window.localStorage.email = $rootScope.user.email;
         window.location = '#/login';
-        window.location.reload();
     };
 });
 

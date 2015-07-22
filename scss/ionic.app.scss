@@ -40,6 +40,17 @@ $calm: #63c9ce !default;
 @import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,300,700);
 
 
+
+ul.rating li {
+  display: inline;
+  border: 0px;
+  background: none;
+  padding: 5px 10px;
+}
+ul.rating li i {
+  font-size: 30px;
+}
+
 .tabs-striped .tab-item.tab-item-active {
     border-color: $assertive;
 }
@@ -116,8 +127,24 @@ $calm: #63c9ce !default;
 
 .notifications {
     
-    .item.unread{
-        background-color: #F0F0F0;
+    .item {
+        p{
+            color: #333;
+        }
+        
+        span {
+             color: #111;
+             font-weight: 500;
+             font-size: 14px;
+        }
+
+        .time{
+            color: #666;
+            font-weight: normal;
+        }
+        &.unread {
+            background-color: #F0F0F0;
+        }
     }
 }
 

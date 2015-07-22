@@ -1,4 +1,4 @@
-<ion-view title="Meus livros">
+<ion-view title="{{'library.title' | translate}}">
 
     <ion-nav-buttons side="right">
         <a class="button button-clean icon ion-android-search" ui-sref="app.book-search"></a>
@@ -7,11 +7,12 @@
 
     <ion-content>
 
-        <ion-refresher pulling-text="Atualizar" on-refresh="onRefresh()"></ion-refresher>
+        <ion-refresher pulling-text="{{'refresh' | translate}}" on-refresh="onRefresh()"></ion-refresher>
 
 
         <div class="wait-message" ng-show="loading">
             <ion-spinner></ion-spinner>
+            <span>{{'loading' | translate}}</span>
         </div>
 
         <div class="list library" ng-hide="loading">
@@ -28,7 +29,7 @@
 
                         <p ng-show="item.publisher">{{item.publisher}}<span ng-show="item.published_year"> ({{item.published_year}})</span></p>
                         
-                        <p ng-show="item.page_count>0">Páginas {{item.page_count}}</p>
+                        <p ng-show="item.page_count>0">{{'library.page' | translate}} {{item.page_count}}</p>
                     
                         
                 </div>
@@ -42,7 +43,7 @@
 
         <div class="notice-library-empty" ng-show="librarys.length==0 && !loading">
 
-            nenhum livro cadastrado
+            {{'library.empty_list' | translate}}
 
         </div>
 

@@ -2,6 +2,14 @@ angular.module("starter.controllers")
 .controller("mainCtrl", function($scope, $ionicHistory, $rootScope, $http, $ionicModal, $ionicLoading, $ionicPopup, $cordovaToast, settings) {
 
 
+    // document.addEventListener("backbutton", function() {
+    //     console.log($state.current);
+    //     if ($state.current && $state.current.name != 'app.library') {
+
+    //     }
+    //     console.log('backbutton');
+    // }, false);
+
     $rootScope.$on("loan.modal",function(e, book, success, failure) {
         console.log($scope);
         console.log('modal.loan');

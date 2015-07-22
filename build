@@ -7,3 +7,5 @@ rm -f Livrio.apk
 
 /home/aureliosaraiva/android-sdk-linux/build-tools/19.1.0/zipalign -v 4 platforms/android/ant-build/CordovaApp-release-unsigned.apk Livrio.apk
 
+
+#keytool -exportcert -alias livrio -keystore livrio-production.keystore | openssl sha1 -binary | openssl base64

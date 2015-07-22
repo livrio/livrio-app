@@ -1,10 +1,10 @@
-<ion-view title="Procurar livros">
+<ion-view title="{{'search.title' | translate}}">
 
     <form name="formSearch" novalidate>
         <ion-header-bar class="bar-assertive item-input-inset  bar-subheader">
             <label class="item-input-wrapper">
             
-                <input type="search" placeholder="Título, autor, editora, ISBN..." ng-keyup="onSearch(formSearch.word.$modelValue)" name="word" ng-model="word">
+                <input type="search" placeholder="{{'search.placeholder' | translate}}" ng-keyup="onSearch(formSearch.word.$modelValue)" name="word" ng-model="word">
                 <button type="button" class="button button-icon icon button-small placeholder-icon" on-touch="onClean(formSearch)" ng-class="{'ion-android-close':searchStart, 'ion-android-search':!searchStart}">
                 </button>
             </label>
@@ -17,18 +17,18 @@
 
         <div class="wait-message" ng-show="searching">
             <ion-spinner></ion-spinner>
-            <span>Pesquisando</span>
+            <span>{{'search.loading' | translate}}</span>
         </div>
 
         <div class="notice-library-empty" ng-hide="searchStart">
 
-            utilize a pesquisa
+            {{'search.empty_list' | translate}}
 
         </div>
 
         <div class="notice-library-empty" ng-show="(librarys.length==0 && libraryFriends.length==0) && searchStart">
 
-            nenhum livro encontrado
+            {{'search.empty_search' | translate}}
 
         </div>
 
@@ -46,7 +46,7 @@
 
                         <p ng-show="item.publisher">{{item.publisher}}<span ng-show="item.published_year"> ({{item.published_year}})</span></p>
                         
-                        <p ng-show="item.page_count>0">Páginas {{item.page_count}}</p>
+                        <p ng-show="item.page_count>0">{{'search.page' | translate}} {{item.page_count}}</p>
                     
                         
                 </div>
@@ -55,7 +55,7 @@
             </div>
 
             <div class="item item-divider" ng-show="libraryFriends.length>0">
-                Livros de amigos
+                {{'search.book_friend' | translate}}
             </div>
 
             <div class="item book" ng-hide="item.removed" ng-repeat="item in libraryFriends" ui-sref="app.book({id:item.id})">
@@ -70,7 +70,7 @@
 
                         <p ng-show="item.publisher">{{item.publisher}}<span ng-show="item.published_year"> ({{item.published_year}})</span></p>
                         
-                        <p ng-show="item.page_count>0">Páginas {{item.page_count}}</p>
+                        <p ng-show="item.page_count>0">{{'search.page' | translate}} {{item.page_count}}</p>
                     
                         
                 </div>

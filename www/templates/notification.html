@@ -1,46 +1,23 @@
-<ion-view title="Notificações">
+<ion-view title="{{'notification.title' | translate}}">
 <ion-content>
 
-    <ion-refresher pulling-text="Atualizar" on-refresh="onRefresh()"></ion-refresher>
+    <ion-refresher pulling-text="{{'refresh' | translate}}" on-refresh="onRefresh()"></ion-refresher>
 
 <div class="list notifications">
 
 
     <a ng-click="onAction(item)" class="item item-avatar item-text-wrap" href="{{item.href}}" ng-repeat="item in notifications.list" ng-class="{'unread':item.unread}">
+      
       <img ng-src="{{item.photo}}">
       <p ng-bind-html="item.text"></p>
-      <p>{{item.date}}</p>
-    </a>
-<!--
-    <a class="item item-avatar item-text-wrap" href="#">
-      <img src="img/avatar.png">
-      <p><strong>Aurélio Saraiva</strong> entrou no Livr.io</p>
-      <p>20 de julho de 2015 às 12:30</p>
+      <span class="time">{{item.date}}</span>
+
     </a>
 
-    <a class="item item-avatar item-text-wrap" href="#">
-      <img src="img/avatar.png">
-      <p><strong>Renata</strong> Solicitou empréstimo do livro <strong>Startup</strong></p>
-      <p>20 de julho de 2015 às 12:30</p>
-    </a>
-
-    <a class="item item-avatar item-text-wrap" href="#">
-      <img src="img/avatar.png">
-      <p><strong>Leonardo</strong> disse que desolveu o livrio <strong>Email Marketing</strong></p>
-      <p>20 de julho de 2015 às 12:30</p>
-    </a>
-
-    <a class="item item-avatar item-text-wrap" href="#">
-      <img src="img/avatar.png">
-      <p><strong>Aurélio</strong> disse que te emprestou o livro <strong>Guia definitivo de banco de dados</strong></p>
-      <p>20 de julho de 2015 às 12:30</p>
-    </a>
-
--->
 </div>
 
 <div class="notice-library-empty" ng-show="notifications.list==0">
-    Nenhuma notificação
+    {{'notification.empty_list' | translate}}
 </div>
 
   

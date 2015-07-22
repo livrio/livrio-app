@@ -1,7 +1,9 @@
 angular.module('starter.services')
-.factory('FRIEND', ['$rootScope', '$http', '$q', '$ionicPopup', '$ionicLoading', '$cordovaToast', '$ionicActionSheet', 'settings', function($rootScope, $http, $q, $ionicPopup, $ionicLoading, $cordovaToast, $ionicActionSheet, settings) {
+.factory('FRIEND', ['$http', '$q',  '$cordovaToast', '$filter', 'settings', function($http, $q, $cordovaToast, $filter, settings) {
 
     var self = this;
+
+    var trans = $filter('translate');
 
     self.all = function(params) {
         params = params || {};
@@ -33,7 +35,7 @@ angular.module('starter.services')
         $http.post(settings.URL.FRIEND + "/" + item.id + "/request")
         .success(function(response) {
             if (!response.errors) {
-                $cordovaToast.showLongBottom("Solicitação enviada!");
+                $cordovaToast.showLongBottom(trans('friend.toast_request_friend'));
                 deferred.resolve(true);
             }
             else {
@@ -56,7 +58,7 @@ angular.module('starter.services')
         .success(function(response) {
             if (!response.errors) {
                 if (response == 'yes'){
-                    $cordovaToast.showLongBottom("Vocês são amigos agora!");
+                    $cordovaToast.showLongBottom(trans('friend.toast_friend'));
                 }
                 deferred.resolve(true);
             }
@@ -122,40 +124,6 @@ angular.module('starter.services')
 
         return deferred.promise;
     };
-
-
-    self.inviteEmail = function() {
-
-
-        var tpl = [
-            "<p>Infome o nome e e-mail do seu amigo e nós enviaremos um convite!</p>",
-            "<label class=\"item-input item-stacked-label\">",
-                "<span class=\"input-label\">Nome completo</span>",
-                "<input type=\"text\">",
-            "</label>",
-            "<label class=\"item-input item-stacked-label\">",
-                "<span class=\"input-label\">E-mail</span>",
-                "<input type=\"email\">",
-            "</label>"
-        ];
-
-        $ionicPopup.show({
-            title: "Enviar convite",
-            template: tpl.join(''),
-            cssClass: 'popup-invite-email',
-            buttons: [
-                { text: "Cancelar" },
-                {
-                    text: "Enviar",
-                    onTap: function(e) {
-                        $cordovaToast.showLongBottom("Seu amigo receberá um e-mail!");
-                    }
-                }
-            ]
-        }).then(function(res) {});
-
-    };
-
 
     return self;
 

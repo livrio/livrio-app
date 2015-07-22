@@ -1,62 +1,69 @@
 angular.module('starter.services')
-.factory('PUSH', ['$rootScope', '$http', '$q', '$ionicPopup', '$ionicLoading', '$filter', '$ionicUser', '$ionicPush', '$cordovaBadge','settings', function($rootScope, $http, $q, $ionicPopup, $ionicLoading, $filter, $ionicUser, $ionicPush, $cordovaBadge, settings) {
+.factory('PUSH', ['$rootScope', '$http', '$q', '$filter', '$ionicUser', '$ionicPush',  '$interval', 'settings', function($rootScope, $http, $q, $filter, $ionicUser, $ionicPush, $interval, settings) {
 
     var self = this;
 
+    var trans = $filter('translate');
+
     $rootScope.notifications = {
-        unread: 0,
-        unread_ids: [],
+        unview: 0,
+        unview_ids: [],
         list: []
     };
 
-    // document.addEventListener("resume", function(){
-    //     console.log('resume');
-    //     self.all();
-    // }, false);
+    $interval(function() {
+        angular.forEach($rootScope.notifications.list, function(item) {
+            item.date = $filter('dateparse')(new Date(item.registration));
+        });
+    }, 60000);
+
 
 
     function processNotice(item) {
         try {
             var text = '', href='';
             if (item.type === 'friend') {
-                text ='<strong>' + item.created_by.fullname + '</strong> é seu amigo agora.';
+                text = String.format(trans('notification.msg_friend'), item.created_by.fullname);
                 href = "#/app/friend/" + item.created_by.id;
 
             }
             else if (item.type === 'loan_request') {
-                text ='<strong>' + item.created_by.fullname + '</strong> solicitou empréstimo do livro <strong>' + item.book.title + '</strong>';
+                text = String.format(trans('notification.msg_loan_request'), item.created_by.fullname, item.book.title);
                 item.question = true;
                 href = "#/app/book/" + item.book.id;
             }
             else if (item.type === 'loan_confirm_yes') {
                 item.question = true;
-                text ='<strong>' + item.created_by.fullname + '</strong> já entregou o livro <strong>' + item.book.title + '</strong>';
+                text = String.format(trans('notification.msg_loan_confirm_yes'), item.created_by.fullname, item.book.title);
                 href = "#/app/book/" + item.book.id;
             }
             else if (item.type === 'loan_confirm_no') {
-                text ='<strong>' + item.created_by.fullname + '</strong> cancelou o empréstimo do livro <strong>' + item.book.title + '</strong>';
+                text = String.format(trans('notification.msg_loan_confirm_no'), item.created_by.fullname, item.book.title);
                 href = "#/app/book/" + item.book.id;
             }
             else if (item.type === 'loan_request_return') {
-                text ='<strong>' + item.created_by.fullname + '</strong> solicitou devolução do livro <strong>' + item.book.title + '</strong>';
+                text = String.format(trans('notification.msg_loan_request_return'), item.created_by.fullname, item.book.title);
                 href = "#/app/book/" + item.book.id;
             }
             else if (item.type === 'loan_return_confirm') {
-                text ='<strong>' + item.created_by.fullname + '</strong> devolveu o livro <strong>' + item.book.title + '</strong>';
+                text = String.format(trans('notification.msg_loan_return_confirm'), item.created_by.fullname, item.book.title);
                 href = "#/app/book/" + item.book.id;
             }
             else if (item.type === 'loan_confirm') {
-                text ='<strong>' + item.created_by.fullname + '</strong> te emprestou o livro <strong>' + item.book.title + '</strong>';
+                text = String.format(trans('notification.msg_loan_confirm'), item.created_by.fullname, item.book.title);
                 href = "#/app/book/" + item.book.id;
             }
             else if (item.type === 'request_friend') {
-                text ='<strong>' + item.created_by.fullname + '</strong> solicitou amizade';
+                text = String.format(trans('notification.msg_request_friend'), item.created_by.fullname);
+
                 //href = "#/app/friend/" + item.book.id;
             }
 
             item.text = text;
-            item.date = $filter('date')(new Date(item.registration), "d 'de' MMMM 'de' yyyy 'às' H:mm");
+            // item.registration = new Date();
+            item.date = $filter('dateparse')(new Date(item.registration));
             item.photo = item.created_by.photo;
+            item.unview = !item.view;
             item.unread = !item.read;
             item.href = href;
         }
@@ -65,39 +72,58 @@ angular.module('starter.services')
     }
 
     function processAllNotice(data) {
-        var arr = [], unread=0, ids=[];
+        var arr = [], unview=0, ids=[];
 
         angular.forEach(data, function(item) {
-            if (!item.read) {
+            if (!item.view) {
                 ids.push(item.id);
-                unread++;
+                unview++;
             }
             arr.push(processNotice(item));
         });
 
         return {
-            unread: unread,
-            unread_ids:ids,
+            unview: unview,
+            unview_ids:ids,
             list: arr
         };
     }
 
 
-    self.markRead = function() {
+    self.markView = function() {
 
         var deferred = $q.defer();
-        $http.put(settings.URL.NOTIFICATION + "/read", {
-            ids: $rootScope.notifications.unread_ids
+        $http.put(settings.URL.NOTIFICATION + "/view", {
+            ids: $rootScope.notifications.unview_ids
         })
         .success(function(response) {
             if (!response.errors) {
-                $rootScope.notifications.unread_ids=[];
-                $rootScope.notifications.unread = 0;
+                $rootScope.notifications.unview_ids=[];
+                $rootScope.notifications.unview = 0;
                 angular.forEach($rootScope.notifications.list, function(item) {
-                    item.unread = false;
+                    item.unview = false;
                 });
-                $cordovaBadge.clear();
 
+                deferred.resolve(true);
+            }
+            else {
+                deferred.resolve(false);
+            }
+        })
+        .error(function() {
+            deferred.resolve(false);
+            console.log("TRATAR ERROR");
+        });
+        return deferred.promise;
+    };
+
+    self.markRead = function(item) {
+
+        var deferred = $q.defer();
+        $http.put(settings.URL.NOTIFICATION + "/" + item.id + "/read")
+        .success(function(response) {
+            if (!response.errors) {
+                item.unread = false;
                 deferred.resolve(true);
             }
             else {
@@ -135,16 +161,9 @@ angular.module('starter.services')
         })
         .success(function(response) {
             if (!response.errors) {
-                console.log($rootScope.notifications);
+                console.log(JSON.stringify($rootScope.notifications));
                 $rootScope.notifications = processAllNotice(response.data);
-                console.log($rootScope.notifications);
-                if ($rootScope.notifications.unread > 0) {
-                    $cordovaBadge.configure({
-                        autoClear: true,
-                        title:$rootScope.notifications.unread > 1 ? "%d novas mensagens" : "%d nova mensagem"
-                    });
-                    $cordovaBadge.set($rootScope.notifications.unread);
-                }
+                console.log($rootScope.notifications.unview);
                 deferred.resolve(response.data);
             }
             else {
@@ -153,8 +172,8 @@ angular.module('starter.services')
         })
         .error(function() {
             $rootScope.notifications = {
-                unread: 0,
-                unread_ids:[],
+                unview: 0,
+                unview_ids:[],
                 list: []
             };
             deferred.resolve([]);
@@ -162,33 +181,6 @@ angular.module('starter.services')
         });
         return deferred.promise;
     };
-
-    self.test = function(token) {
-        var appId = '857a12a1';
-        var auth = btoa('e777cc0ffe2634e969007579aa430968f5418ac96a9e4c05:'); // Base64 encode your key
-        var req = {
-            method: 'POST',
-            url: 'https://push.ionic.io/api/v1/push',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Ionic-Application-Id': appId,
-                'Authorization': 'basic ' + auth
-            },
-            data: {
-                "tokens": [token],
-                "notification": {
-                "alert":"Hello World!"
-            }
-            }
-        };
-        $http(req).success(function(resp) {
-            console.log("Ionic Push: Push success!");
-        })
-        .error(function(error) {
-            console.log("Ionic Push: Push error...");
-        });
-    }
-
 
     function doUpdateToken(platform, token) {
 
@@ -219,7 +211,7 @@ angular.module('starter.services')
             console.log(notification);
             switch (notification.event) {
                 case 'message':
-                    
+                    console.log(JSON.stringify(notification));
                     self.all();
                 break;
             }
@@ -262,3 +254,4 @@ angular.module('starter.services')
     return self;
 
 }]);
+

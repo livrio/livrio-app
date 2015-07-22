@@ -12,11 +12,11 @@
 
     <ion-content>
 
-        <ion-refresher pulling-text="Atualizar" on-refresh="onRefresh()"></ion-refresher>
+        <ion-refresher pulling-text="{{'refresh' | translate}}" on-refresh="onRefresh()"></ion-refresher>
 
         <div class="wait-message" ng-show="loading">
             <ion-spinner class="spinner-energized"></ion-spinner>
-            <span>Carregando</span>
+            <span>{{'loading' | translate}}</span>
         </div>
 
         <div class="list library" ng-hide="loading">
@@ -34,7 +34,7 @@
                         {{item.publisher}}<span ng-show="item.published_date"> ({{item.published_date | date:'yyyy'}})</span>
                     </p>
                     
-                    <p ng-show="item.page_count>0">Páginas {{item.page_count}}</p>
+                    <p ng-show="item.page_count>0">{{'shelf.page' | translate}} {{item.page_count}}</p>
 
                 </div>
 
@@ -46,7 +46,7 @@
 
 
         <div class="notice-library-empty" ng-show="librarys.length==0 && !loading">
-            Nenhum livro nesta estante
+            {{'shelf.empty_list' | translate}}
         </div>
 
     </ion-content>

@@ -7700,6 +7700,15 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+ul.rating li {
+  display: inline;
+  border: 0px;
+  background: none;
+  padding: 5px 10px; }
+
+ul.rating li i {
+  font-size: 30px; }
+
 .tabs-striped .tab-item.tab-item-active {
   border-color: #d6123c; }
 
@@ -7751,6 +7760,15 @@ a.button {
     font-weight: 500;
     color: #696868; }
 
+.notifications .item p {
+  color: #333; }
+.notifications .item span {
+  color: #111;
+  font-weight: 500;
+  font-size: 14px; }
+.notifications .item .time {
+  color: #666;
+  font-weight: normal; }
 .notifications .item.unread {
   background-color: #F0F0F0; }
 

@@ -1,10 +1,10 @@
 
 
-<ion-view title="Perfil de usuário">
+<ion-view title="{{'profile.title' | translate}}">
 
 <ion-nav-buttons side="right">
             <button type="button" class="button button-clear" style="font-weight: 500;" on-touch="onSave()">
-                SALVAR
+                {{'profile.btn_save' | translate}}
             </button>
         </ion-nav-buttons>
 
@@ -22,48 +22,49 @@
 
 
             <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formUpdate.fullname.$invalid && formUpdate.$submitted}">
-                <span class="input-label">Nome</span>
+                <span class="input-label">{{'profile.field_name' | translate}}</span>
                 <input type="text"  name="fullname" ng-model="form.fullname" ng-blur="onChangeField(formUpdate.fullname)" required>
             </label>
             <div class="form-errors" ng-messages="formUpdate.fullname.$error" ng-show="formUpdate.$submitted">
-                <div class="form-error" ng-message="required">Nome é obrigatório</div>
+                <div class="form-error" ng-message="required">{{'profile.field_name' | translate}} {{'required_field' | translate}}</div>
             </div>
 
          
 
             <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formUpdate.birthday.$invalid && formUpdate.$submitted}">
-                <span class="input-label">Data de Nascimento</span>
+                <span class="input-label">{{'profile.field_birthday' | translate}}</span>
                 <input type="date"  name="birthday" ng-model="form.birthday" ng-blur="onChangeField(formUpdate.birthday)" required>
             </label>
             <div class="form-errors" ng-messages="formUpdate.birthday.$error" ng-show="formUpdate.$submitted">
-                <div class="form-error" ng-message="required">Data de Nascimento é obrigatório</div>
+                <div class="form-error" ng-message="required">{{'profile.field_birthday' | translate}} {{'required_field' | translate}}</div>
             </div>
 
 
             <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formUpdate.gender.$invalid && formUpdate.$submitted}">
-                <span class="input-label">Sexo</span>
+                <span class="input-label">{{'profile.field_gender' | translate}}</span>
                 <select ng-blur="onChangeField(formUpdate.gender)" name="gender" ng-model="form.gender">
-                    <option value="male" >Masculino
-                    <option value="female">Feminino
+                    <option value="male" >{{'profile.gender_male' | translate}}
+                    <option value="female">{{'profile.gender_female' | translate}}
                 </select>
             </label>
             <div class="form-errors" ng-messages="formUpdate.gender.$error" ng-show="formUpdate.$submitted">
-                <div class="form-error" ng-message="required">Sexo é obrigatório</div>
+                <div class="form-error" ng-message="required">{{'profile.field_gender' | translate}} {{'required_field' | translate}}</div>
             </div>
 
            <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formUpdate.email.$invalid && formUpdate.$submitted}">
-                <span class="input-label">E-mail</span>
+                <span class="input-label">{{'profile.field_email' | translate}}</span>
                 <input type="text"  name="email" ng-model="form.email" ng-blur="onChangeField(formUpdate.email)" required>
             </label>
             <div class="form-errors" ng-messages="formUpdate.email.$error" ng-show="formUpdate.$submitted">
-                <div class="form-error" ng-message="required">E-mail é obrigatório</div>
+                <div class="form-error" ng-message="required">{{'profile.field_email' | translate}} {{'required_field' | translate}}</div>
             </div>
 
 
         </div>
 
         <p class="padding">
-        Caro usuário, as informações de sexo e data de nascimento são utilizadas para sugerir livros que melhor se encaixa com seu perfil. Caso tenha dúvidas consulte nossa <a class="link" ui-sref="app.privacy">Política de Privacidade</a>.
+        {{'profile.info' | translate}}
+        
         </p>
 
     </form>

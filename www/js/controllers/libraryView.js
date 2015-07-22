@@ -12,12 +12,6 @@ angular.module('starter.controllers')
         book = $rootScope.bookView = data;
     });
 
-    $ionicPopover.fromTemplateUrl('templates/menu_book.html', {
-        scope: $scope
-    }).then(function(popover) {
-        $scope.popover = popover;
-    });
-
     $scope.onLoan = function(book) {
         $rootScope.$emit('loan.add',book);
     };
@@ -27,13 +21,7 @@ angular.module('starter.controllers')
         BOOK.menuAction(event, book);
     }
 
-    $scope.onUpdate = function(book) {
-        BOOK.update(book);
-    }
 
-    $scope.onRequestReturnBook = function(book) {
-        BOOK.requestReturn(book);
-    }
 
     $scope.onRequestLoan = function(book) {
         LOAN.requestLoan(book);
@@ -46,9 +34,5 @@ angular.module('starter.controllers')
         });
     }
 
-
-    $scope.onHide = function() {
-        $scope.popover.hide();
-    };
 
 });

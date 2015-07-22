@@ -1,4 +1,4 @@
-<ion-view title="Amigos">
+<ion-view title="{{'friends.title' | translate}}">
 
     <ion-nav-buttons side="right">
         <button class="button button-clean icon ion-android-share" type="button" ng-click="doInvite()"></button>
@@ -7,20 +7,20 @@
     <ion-content>
 
 
-        <ion-refresher pulling-text="Atualizar" on-refresh="onRefresh()"></ion-refresher>
+        <ion-refresher pulling-text="{{'refresh' | translate}}" on-refresh="onRefresh()"></ion-refresher>
 
         <div class="wait-message" ng-show="loading">
             <ion-spinner class="spinner-energized"></ion-spinner>
-            <span>Carregando</span>
+            <span>{{'loading' | translate}}</span>
         </div>
 
         <div class="card padding center" ng-hide="user.is_facebook  || loading">
             <div class="item item-text-wrap">
                 <p>
-                    Você ainda não conectou o <strong>Livrio</strong> ao seu Facebook. Conecte-se para que seus amigos tenham acesso aos seus livros.
+                    {{'friends.info_facebook' | translate}}
                 </p>
                 <br />
-                <button class="button button-small button-facebook icon-left ion-social-facebook" ng-click="doFacebook()">Conectar ao Facebook</button>
+                <button class="button button-small button-facebook icon-left ion-social-facebook" ng-click="doFacebook()">{{'friends.btn_facebook' | translate}}</button>
             </div>
         </div>
 
@@ -30,13 +30,13 @@
             <div class="item item-avatar" ng-repeat="item in friends" ui-sref="app.friendBook({id:item.id})">
                 <img ng-src="{{item.photo}}" />
                 {{item.fullname}}
-                <span class="amount">Livros {{item.amount_book}}</span>
+                <span class="amount">{{'friends.book' | translate}} {{item.amount_book}}</span>
             </div>
         </div>
 
         <div class="notice-library-empty" ng-show="friends.length==0 && !loading">
 
-            Nenhum amigo
+            {{'friends.empty_list' | translate}}
 
         </div>
 
