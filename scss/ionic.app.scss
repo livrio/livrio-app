@@ -34,9 +34,11 @@ $calm: #63c9ce !default;
   fill: $assertive; 
 }
 
+
+
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
-@import url(http://fonts.googleapis.com/css?family=Roboto:500,300,700,400);
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,300);
 @import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,300,700);
 
 
@@ -448,104 +450,83 @@ ul.rating li i {
     /*box-shadow: 0px 0px 17px -1px rgba(0, 0, 0, 0.49);*/
 }
 
+.book-card {
+    background: #FAFAFA;
+    padding: 0px;
+    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.12), 0px 2px 2px 0px rgba(0,0,0,0.24);
+    border-radius: 3px;
+    margin: 15px 10px;
+    min-height: 90px;
+    max-height: 110px;
 
-
-.library {
-
-    
-    .book {
-        
-        border: none;
-        border-bottom: 1px solid $divider;
-
-        
-        position: relative;
-        padding: 0 16px 16px 16px;
-        
-        margin-bottom: 16px;
-
-        
-
-        
-
-
-
-        .btn-more {
-            position: absolute;
-            top: -10px;
-            padding: 0px;
-            margin: 0;
-            min-height: 0;
-            height: 35px;
-            right: 16px;
-
-           
-        }
-
-
-        .loan{
-            position: absolute;
-            left: 53px;
-            top: -5px;
-            font-size: 40px;
-            color: #3F51B5;
-
-            &.expired{
-                color: $assertive;
-            }
-
-
-
-
-        }
-
-        &:first-child{
-            padding-top: 16px;
-
-            .btn-more {
-                top: 8px;
-            }
-
-            .loan{
-                top: 11px;
-            }
-        }
-
-        img {
-            width: 60px;
-            overflow: hidden;
+    .item {
+        background-color: transparent;
+        padding: 0px;
+        min-height: 90px;
+        max-height: 110px;
+        .cover{
             float: left;
-            
+            width: 80px;
         }
 
-        p{
-            font-size: 11px;
-            margin: 0;
-            line-height: 17px;
-            color: #2C2B2B;
+        .content {
+            padding-left: 90px;
+            padding-top: 10px;
+
+            h2{
+                font-size: 16px;
+                color: rgba(0,0,0,0.87);
+                line-height: 19px;
+                white-space: normal;
+                padding-right: 20px; 
+                max-height: 40px;
+                .btn-more{
+                    position: absolute;
+                    top: 1px;
+                    right: 5px;
+                    &:before{
+                        font-size: 22px; 
+                    }
+                }
+            } 
+
+            h3{ 
+                font-size: 14px;
+                color: rgba(0,0,0,0.54);
+                line-height: 16px;
+                padding-right: 20px;  
+            }
+
+
         }
 
-        div.ct{
-            padding-left: 80px;
-            padding-right: 20px;
+        .user-loan {
+            position: absolute;
+            bottom: 0px;
+            left: 90px;
+            vertical-align: middle;
+            img{
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+            }
+
+            > span {
+                vertical-align: top;
+                font-size: 12px;
+                color: rgba(0,0,0,0.87);
+                display: inline-block;
+                position: relative;
+                position: relative;
+                top: 5px;
+                left: 5px;
+                font-style: italic;
+
+            }
         }
-
-
-        h2{
-            white-space: normal;
-            
-            font-size: 15px
-        }
-
-        h3{
-            color: #737373;
-            font-size: 11px;
-            text-transform: uppercase;
-        }
-
-
     }
 }
+
 
 .book-head {
     padding-left: 10px;
@@ -559,7 +540,7 @@ ul.rating li i {
         margin: 0;
     }
 
-    h3{
+    h3{ 
         font-size: 11px;
         color: #fff;
         text-transform: uppercase;
@@ -599,80 +580,57 @@ ul.rating li i {
 
 .book-view{
     
-    
-
-    .request-loan{
-        font-size: 15px;
-        font-weight: 500;
-        text-transform: uppercase;
-    }
-
     .card {
-        margin:0;
-        box-shadow: none;
+        background: #FAFAFA;
+        padding: 0px;
+        box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.12), 0px 2px 2px 0px rgba(0,0,0,0.24);
+        border-radius: 3px;
 
         .item{
-            border: none;
+            
+            background-color: transparent;
         }
+    }
 
-        .item-line{
-            border-top: 1px solid $divider;
-        }
+    .item.item-divider {
+        font-size: 16px;
+        padding: 16px;
+    }
 
+    .card-details{
         
+        .item{
+            padding: 0px;
+        }
+        
+        .cover{
+            float: left;
+            width: 125px;
+        }
 
-        .item-avatar{
-            padding-left: 90px;
-            img{
-                max-width: 56px;
-                max-height: 56px;
+
+        .info {
+            padding-left: 20px;
+            float: left;
+
+            p {
+                color: #555;
+                font-size: 12px;
+                span{
+                    display: block;
+                    font-size: 13px;
+                    font-weight: 500;
+                }
             }
         }
     }
 
-
-    .info {
-        padding-left: 20px;
-        float: left;
-
-        p {
-            color: #555;
-            font-size: 12px;
-            span{
-                display: block;
-                font-size: 13px;
-                font-weight: 500;
-            }
-        }
-    }
-
-    .loan{
-        p {
-            color: #555;
-            font-size: 12px;
-            span{
-                display: block;
-                font-size: 13px;
-                font-weight: 500;
-            }
-        }
-
-        .button-small{
-            font-size: 11px;
-            line-height: 12px;
-            min-height: 19px;
-        }
-    }
-
-    .cover{
-        float: left;
-        width: 125px;
-    }
-
-    .description{
+    .item.description{
         font-size: 12px;
+        padding: 16px;
     }
 }
+
 .action-sheet-options.action-sheet-group{
     background-color: #fff;
     .button.action-sheet-destructive{
@@ -808,7 +766,7 @@ label.item.valid-lr {
             height: 36px;
             min-height: 36px;
             margin: 0;
-            margin-left: 20px;
+            margin-left: 14px;
             
             flex: none;
 
@@ -849,7 +807,6 @@ label.item.valid-lr {
         }
 
         .button{
-            margin-right:10px  !important;
             &:last-child{
                 margin-right:0 !important;
             }
@@ -883,6 +840,15 @@ label.item.valid-lr {
 
 .login {
     background-color: #fab001;
+
+    .spinner svg {
+        width: 80px;
+        height: 80px;
+    }
+
+    .wait-message span{
+        color: #fff;
+    }
 
 
     .item {
@@ -948,7 +914,7 @@ label.item.valid-lr {
 
 
 .book-form {
-    margin-bottom: 50px;
+    
     .item {
         border: none;
         padding-right: 16px;
@@ -986,7 +952,8 @@ label.item.valid-lr {
         font-weight: normal;
     }
 
-    .isbn {
+
+    .isbn { 
         padding-top: 16px;
         display: block;
         .input-label{
@@ -1045,3 +1012,11 @@ label.item.valid-lr {
 }
 
 
+.tabs-secondary {
+    a {
+        text-transform: uppercase;
+        color: #4485F3;
+        font-weight: 500;
+        max-width: initial;
+    }
+}

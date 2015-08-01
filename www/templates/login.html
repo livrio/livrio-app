@@ -3,15 +3,23 @@
 
 <div class="center">
                 <img src="img/logo.png" style="width: 42%;" />
+
             </div>
 
-  <div class="tab-login">
+            <div class="wait-message" ng-show="loading">
+<ion-spinner></ion-spinner>
+<span>{{loadingText}}</span>
+            </div>
+
+
+
+  <div class="tab-login" ng-hide="loading">
         <div ng-class="{'active':tab==0}" ng-click="onChangeTab(0)">{{'login.tab_login' | translate}}</div>
         <div ng-class="{'active':tab==1}" ng-click="onChangeTab(1)">{{'login.tab_create' | translate}}</div>
     </div>
 
 
-    <ion-slide-box show-pager="false" on-slide-changed="onChangeTab($index)" >
+    <ion-slide-box show-pager="false" on-slide-changed="onChangeTab($index)" ng-hide="loading">
       
       <ion-slide>
         <form ng-submit="doLogin(formLogin.$valid)" name="formLogin" novalidate class="form-login">

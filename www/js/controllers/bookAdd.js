@@ -117,8 +117,7 @@ angular.module("starter.controllers")
         console.log('---------');
         $cordovaBarcodeScanner.scan().then(function(imageData) {
             if (imageData.text) {
-                $scope.form.isbn = imageData.text;
-                searchISBN($scope.form.isbn);
+                searchISBN(imageData.text);
                 console.log(imageData.text);
             }
         }, function(error) {
@@ -143,6 +142,7 @@ angular.module("starter.controllers")
                     }).then(function() {});
                 }
                 else {
+                    delete response.data.id;
                     angular.extend($scope.form, response.data);
                 }
 

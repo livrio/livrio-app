@@ -140,7 +140,7 @@ angular.module('starter.services')
 
     self.get = function(id) {
         var list = $rootScope.notifications.list;
-        console.log(list);
+        
         for (var i=0;i < list.length;i++) {
             if (id == list[i].id) {
                 return list[i];
@@ -161,9 +161,7 @@ angular.module('starter.services')
         })
         .success(function(response) {
             if (!response.errors) {
-                console.log(JSON.stringify($rootScope.notifications));
-                $rootScope.notifications = processAllNotice(response.data);
-                console.log($rootScope.notifications.unview);
+                $rootScope.notifications = processAllNotice(response.data);                
                 deferred.resolve(response.data);
             }
             else {

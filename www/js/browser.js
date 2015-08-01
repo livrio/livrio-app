@@ -49,7 +49,7 @@ if (!window.cordova) {
             success({
                 status: "connected",
                 authResponse: {
-                    accessToken: "CAAKEya4xmrYBAEagzpi4tQalGD3XboZABOBfM3IcidJnIClUMZCS8M9DOZBXUlumHchfZC9oOUNXB47ZAke1ZCKSBwZBReRsHSTX7oHZCffYZA3pcA9HFgTtzZA0ki53ps07gUuZCqnV5rdxHyauhxwH4cXGU1ifH8nzNZCf1u9qyyc2Whf3blRMFFjIQzwcyEyIhH1H1BYFYbzi4iiw74ZBVLLsnSiZAzuU829OSRpEfko4UhbAZDZD"
+                    accessToken: "CAAKEya4xmrYBAAn9E7esZCCk6KbkKKGH3Wgvymm6Us12t1g7TwoT5SlvmRaIgofU2Rb3SEZAKJZA5wb6PmCN3wPLL2KdEKuAPZAq9fP72qie3F13eQDKii9RyLJ1uYsCnsWqLO8dKcWa3uI5kfaFYPx9M2dvPs7Bykqa8om7ndHTHUZBzITHTVoxqV9r6OrfGDIvQInm762WLTzZAdw0j7Ev2z021q6ZAvGAvAof7rZAOgZDZD"
                 }
             });
         },
@@ -72,15 +72,18 @@ if (!window.cordova) {
         },
         showLongBottom:function(text) {
             console.log("TOAST",text);
+        },
+        showShortCenter: function(text) {
+            console.log("TOAST",text);
         }
     };
 
 
     cordova.plugins.barcodeScanner = {
         scan: function(success) {
-            var arrs = ["9788536502694","9788598078175","9788563560858"];
+            var arrs = ["9788535248821","9788536502694","9788598078175","9788563560858"];
             success({
-                text: "9788598078175"
+                text: "9788535248821"
             });
         }
     };

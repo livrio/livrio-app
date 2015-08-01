@@ -67,7 +67,12 @@
             </li>
 
                 <div class="item item-image">
-                <img ng-src="{{form.thumb}}" style="width: 100px; margin: 10px;" ng-click="onPicture()"/>
+                    <div style="width: 100px;display: inline-block;position: relative;">
+                        <img ng-src="{{form.thumb}}" style="width: 100px;" ng-click="onPicture()"/>
+                        <button type="button" class="button button-icon button-photo" style="position: absolute;bottom: 0px;right: 0px;opacity: 0.6;">
+                        <i class="icon ion-android-camera"></i>
+                        </button>
+                    </div>
                 </div>
 
             <label class="item item-input item-stacked-label" ng-click="onShelf()">

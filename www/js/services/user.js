@@ -105,6 +105,7 @@ angular.module("starter.services")
 
         facebookConnectPlugin.login(['email','public_profile','user_friends'], function(res) {
             if (res.status === 'connected') {
+                console.log(res.authResponse.accessToken);
                 var params = {
                     token: res.authResponse.accessToken,
                     origin: 'facebook'

@@ -38,7 +38,6 @@ angular.module('starter.controllers')
     }
 
     return function(input) {
-        console.log(input);
         return prettyDate(input);
     };
 })

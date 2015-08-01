@@ -49,10 +49,11 @@ angular.module('starter', [
   'starter.controllers',
   'starter.services',
   'starter.config',
+  'starter.directives',
   'pascalprecht.translate'
   ])
 
-.run(function($rootScope, $http, $ionicPlatform, $translate) {
+.run(function($rootScope, $http, $ionicPlatform, $ionicHistory, $translate, $state) {
 
     document.addEventListener("deviceready", function() {
         if (typeof navigator.globalization !== "undefined") {
@@ -89,6 +90,37 @@ angular.module('starter', [
         }
 
     });
+
+    $ionicPlatform.registerBackButtonAction(function(e) {
+        if ($rootScope.backButtonPressedOnceToExit) {
+            ionic.Platform.exitApp();
+        }
+
+        else if ($ionicHistory.backView()) {
+            $ionicHistory.goBack();
+        }
+        else if ($state.current.name != 'app.library') {
+            $ionicHistory.nextViewOptions({
+                disableAnimate: true,
+                disableBack: true
+            });
+            $state.go('app.library');
+        }
+        else {
+            $rootScope.backButtonPressedOnceToExit = true;
+
+            console.log();
+
+            window.plugins.toast.showShortCenter(
+                trans('backbutton'),function(a) {},function(b) {}
+            );
+            setTimeout(function() {
+                $rootScope.backButtonPressedOnceToExit = false;
+            },2000);
+        }
+        e.preventDefault();
+        return false;
+    },101);
 
 
     $http.defaults.headers.common['Content-Type'] = 'application/json';

@@ -1,12 +1,12 @@
 angular.module('starter.controllers')
 
-.controller('loanAddCtrl', function($scope, $rootScope, $ionicHistory, $http, $ionicPopup, FRIEND, LOAN, settings) {
+.controller('loanAddCtrl', function($scope, $rootScope, $ionicHistory, $http, $ionicPopup, $filter,  FRIEND, LOAN, settings) {
 
-
+    var trans = $filter('translate');
     var book = $rootScope.bookView;
     $scope.loading = true;
 
-    $scope.loadText = 'Carregando';
+    $scope.loadText = trans('loading');
 
     $scope.friends = [];
 
@@ -27,17 +27,20 @@ angular.module('starter.controllers')
             values.push("<option value=\"" + i + "\">" + i + "</option>");
         }
 
-        $scope.day = 1;
-        $scope.type = 1;
+        $scope.data = {
+            day: 1,
+            type: 1
+        };
+
 
         var tpl = [
-            "<div class=\"duration\"><select ng-model=\"type\">",
-                "<option value=\"1\">Dia",
-                "<option value=\"7\">Semana",
-                "<option value=\"30\">Mês",
+            "<div class=\"duration\"><select ng-model=\"data.type\">",
+                "<option value=\"1\">",trans('loan.option_day'),
+                "<option value=\"7\">",trans('loan.option_week'),
+                "<option value=\"30\">",trans('loan.option_month'),
             "</select>",
 
-            "<select ng-model=\"day\">",
+            "<select ng-model=\"data.day\">",
                 values.join(''),
             "</select></div>"
 
@@ -45,31 +48,34 @@ angular.module('starter.controllers')
 
         // An elaborate, custom popup
         $ionicPopup.show({
-            title: "Duração do emprestimo",
+            title: trans('loan.popup_title'),
             template: tpl.join(''),
             cssClass: 'popup-loan',
             scope: $scope,
             buttons: [
-                { text: "não" },
                 {
-                    text: "Emprestar",
+                    text: trans('loan.popup_btn_cancel')
+                },
+                {
+                    text: trans('loan.popup_btn_ok'),
                     onTap: function(e) {
-                        var days = parseInt($scope.day,10) * parseInt($scope.type,10);
+                        var days = parseInt($scope.data.day,10) * parseInt($scope.data.type,10);
 
-
-                        $scope.loadText = 'Emprestando';
+                        $scope.loadText = trans('loan.loading_loan');
                         $scope.loading = true;
+
                         LOAN.add(book.id, user.id, days,'sent')
                         .then(function(book) {
                             $scope.loading = false;
-                            $scope.loadText = 'Carregando';
+                            $scope.loadText = trans('loading');
                             $rootScope.bookView.loaned = book.loaned;
                             window.location = '#/app/book/' + book.id;
                         },
                         function() {
                             $scope.loading = false;
-                            $scope.loadText = 'Carregando';
+                            $scope.loadText = trans('loading');
                         });
+
                     }
                 }
             ]

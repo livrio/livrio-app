@@ -9,6 +9,7 @@ angular.module("starter.config")
         loading: 'Carregando',
         welcome: 'Olá <strong>{0}</strong>, seja bem vindo ao <strong>Livrio</strong> uma rede de compartilhamento de livros entre amigos. Comece já cadastrando seus livros e disponibilizando-os para seus amigos.',
         offline: 'Você precisa estar conectado a internet. Por favor verifique sua conexão',
+        backbutton: 'Precione o botão voltar para sair',
 
         login: {
             loading_login: 'Entrando...',
@@ -110,8 +111,8 @@ angular.module("starter.config")
         },
         loan: {
             title: 'Empréstimos',
-            my_book: 'Meus livros',
-            friend_book: 'Livros de amigos',
+            my_books: 'Meus livros',
+            friend_books: 'Livros de amigos',
             page: 'Página',
             empty_list: 'Ainda não foram feitos empréstimos',
 
@@ -121,7 +122,20 @@ angular.module("starter.config")
             toast_request_loan: 'Solicitação enviada!',
             title_loan: 'Empréstimo',
 
-            msg_loan_info: 'Empréstimo realizado!<br />Agora entre em contato com seu amigo para efetuar a entrega do livro.'
+            msg_loan_info: 'Empréstimo realizado!<br />Agora entre em contato com seu amigo para efetuar a entrega do livro.',
+
+            option_day: 'Dia',
+            option_week: 'Semana',
+            option_month: 'Mês',
+
+            popup_title: 'Duração do emprestimo',
+            popup_title_2: 'Solicitação de empréstimo',
+            popup_btn_cancel: 'Cancelar',
+            popup_btn_ok: 'Emprestar',
+            popup_btn_request: 'Solicitar',
+
+            loading_loan: 'Emprestando'
+
 
         },
         notification: {
@@ -174,7 +188,7 @@ angular.module("starter.config")
             days: 'Dias restantes',
             btn_cancel_request: 'Cancelar solicitação',
             btn_return: 'Devolver',
-            btn_confirm_loan: 'Confirmar empréstimo',
+            btn_confirm_loan: 'Confirmar',
             btn_cancel_loan: 'Cancelar empréstimo',
             btn_request_return: 'Solicitar devolução',
             question_confirm_loan: 'Deseja emprestar este livro?',

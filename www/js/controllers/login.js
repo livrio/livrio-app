@@ -10,6 +10,22 @@ angular.module('starter.controllers', [])
 
     $scope.tab = 0;
 
+    $scope.loading = false;
+
+    $scope.loadingText = 'Entrando';
+
+    function showLoading(text) {
+        $scope.loading = true;
+        if (text) {
+            $scope.loadingText = text;
+        }
+    }
+
+    function hideLoading() {
+        $scope.loading = false;
+        $scope.loadingText = 'Entrando';
+    }
+
     $scope.onChangeTab = function(index) {
         $scope.tab = index;
         $ionicSlideBoxDelegate.slide(index);
@@ -45,9 +61,7 @@ angular.module('starter.controllers', [])
             return;
         }
         if (isValid) {
-            $ionicLoading.show({
-                template: trans('login.loading_login')
-            });
+            showLoading(trans('login.loading_login'));
 
             var post = {
                 email: $scope.form.email,
@@ -61,7 +75,7 @@ angular.module('starter.controllers', [])
             },
             function(error) {
                 console.log(error);
-                $ionicLoading.hide();
+                hideLoading();
                 if (error.status === 0) {
                     $ionicPopup.alert({
                         template: trans('offline')
@@ -82,9 +96,8 @@ angular.module('starter.controllers', [])
             return;
         }
         if (isValid) {
-            $ionicLoading.show({
-                template: trans('login.loading_create')
-            });
+            
+            showLoading(trans('login.loading_create'));
 
             var post = {
                 fullname: $scope.form.fullname,
@@ -95,19 +108,16 @@ angular.module('starter.controllers', [])
 
             USER.create(post)
             .then(function(user) {
-
-                $ionicLoading.show({
-                    template: trans('login.loading_login')
-                });
+                showLoading(trans('login.loading_login'));
 
                 USER.auth(post)
                 .then(function(data) {
-                    $ionicLoading.hide();
                     window.location = '#/app/library';
                     firstLogin(data.first_name);
+                    hideLoading();
                 },
                 function() {
-                    $ionicLoading.hide();
+                    hideLoading();
                 });
 
             },
@@ -129,21 +139,20 @@ angular.module('starter.controllers', [])
             return;
         }
 
-        $ionicLoading.show({
-            template: trans('login.loading_facebook')
-        });
+        
+        showLoading(trans('login.loading_facebook'));
 
         USER.authFacebook()
         .then(function(user) {
             console.log(user);
-            $ionicLoading.hide();
+            hideLoading();
             window.location = '#/app/library';
             if (user.create) {
                 firstLogin(user.first_name);
             }
         },
         function() {
-            $ionicLoading.hide();
+            hideLoading();
             $ionicPopup.alert({
                 template: trans('offline')
             }).then(function() {});
