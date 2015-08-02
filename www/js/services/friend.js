@@ -35,7 +35,7 @@ angular.module('starter.services')
         $http.post(settings.URL.FRIEND + "/" + item.id + "/request")
         .success(function(response) {
             if (!response.errors) {
-                $cordovaToast.showLongBottom(trans('friend.toast_request_friend'));
+                $cordovaToast.showLongBottom(trans('friends.toast_request_friend'));
                 deferred.resolve(true);
             }
             else {
@@ -58,7 +58,7 @@ angular.module('starter.services')
         .success(function(response) {
             if (!response.errors) {
                 if (response == 'yes'){
-                    $cordovaToast.showLongBottom(trans('friend.toast_friend'));
+                    $cordovaToast.showLongBottom(trans('friends.toast_friend'));
                 }
                 deferred.resolve(true);
             }

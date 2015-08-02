@@ -131,8 +131,8 @@ angular.module("starter.config")
             popup_title: 'Duração do emprestimo',
             popup_title_2: 'Solicitação de empréstimo',
             popup_btn_cancel: 'Cancelar',
-            popup_btn_ok: 'Emprestar',
-            popup_btn_request: 'Solicitar',
+            popup_btn_ok: 'Confirmar',
+            popup_btn_request: 'Confirmar',
 
             loading_loan: 'Emprestando'
 

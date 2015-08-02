@@ -5,8 +5,6 @@ angular.module('starter.services',[])
 
     var trans = $filter('translate');
 
-    
-
 
     self.delete = function(book) {
         $ionicPopup.confirm({
@@ -27,8 +25,11 @@ angular.module('starter.services',[])
                         $cordovaToast.showLongBottom(trans('book.toast_delete')).then(function() {});
                         window.location = "#/app/library";
                         $rootScope.$emit("library.refresh");
+                        $rootScope.$emit("shelf.refresh");
+                        $rootScope.$emit("library.shelf.refresh");
                     }
                     else {
+                        book.removed = false;
                         $ionicPopup.alert({
                             template: trans('book.msg_delete_lock')
                         }).then(function() {});
@@ -141,6 +142,8 @@ angular.module('starter.services',[])
             if (!response.errors) {
                 $cordovaToast.showLongBottom(trans('book.toast_cover_update')).then(function() {});
                 $rootScope.$emit("library.refresh");
+                $rootScope.$emit("shelf.refresh");
+                $rootScope.$emit("library.shelf.refresh");
                 deferred.resolve(response.data.thumb);
             }
             else {
@@ -207,8 +210,7 @@ angular.module('starter.services',[])
         event.stopPropagation();
 
         var options = [
-                { text: "<i class=\"icon ion-edit\"></i> " + trans('book.sheet_update') },
-                { text: "<i class=\"icon ion-android-image\"></i> " + trans('book.sheet_change_cover') }
+                { text: "<i class=\"icon ion-edit\"></i> " + trans('book.sheet_update') }
             ];
 
         if (book.loaned) {

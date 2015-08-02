@@ -8200,6 +8200,8 @@ label.item.valid-lr {
   .popup-container .popup .item-input, .popup-container .popup input {
     padding: 0;
     border-bottom: 1px solid #d6123c; }
+.popup-container.isbn-popup .popup {
+  width: 300px; }
 .popup-container.popup-loan .duration {
   display: flex; }
 .popup-container.popup-loan select {
@@ -8213,14 +8215,6 @@ label.item.valid-lr {
     margin-right: 10px; }
 .popup-container.popup-loan .button:last-child {
   margin-right: 0 !important; }
-.popup-container.popup-invite-email p {
-  line-height: 13px; }
-.popup-container.popup-invite-email .input-label {
-  width: 100%; }
-.popup-container.popup-invite-email .button {
-  margin-right: 10px !important; }
-  .popup-container.popup-invite-email .button:last-child {
-    margin-right: 0 !important; }
 
 .login {
   background-color: #fab001; }

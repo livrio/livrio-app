@@ -9,7 +9,17 @@ angular.module("starter.controllers")
 
     $scope.rate_max = 5;
 
-    console.log('form');
+
+    $ionicPopup.alert({
+        cssClass: 'isbn-popup',
+        okText: 'Ok, entendi',
+        title: 'Instrução',
+        template: String.format(['Olá {0}, você pode usar o cadastro simplicado de livros, usado o código ISBN.<br /><br />',
+                   'O <strong>ISBN</strong> é um código de identificação internacional do livro.  <br /><br />',
+                   '<div class="center"><img style="width:80%" src="img/isbn.jpg" /></div>'
+                   ].join(' '),$rootScope.user.first_name)
+    }).then(function() {});
+
 
     var shelfHistory;
 
@@ -66,7 +76,7 @@ angular.module("starter.controllers")
 
     if (!id) {
         $scope.form = {
-            rate: 2,
+            rate: 0,
             isbn: "",
             title: "",
             author: "",

@@ -725,6 +725,8 @@ label.item.valid-lr {
     .popup {
         background: #fff;
         box-shadow: 0px 0px 23px 4px rgba(0, 0, 0, 0.16);
+
+        
         
         .popup-head{
             padding: 24px 24px 0 24px;
@@ -788,6 +790,10 @@ label.item.valid-lr {
         }
     }
 
+    &.isbn-popup .popup{
+        width: 300px;
+    }
+
     &.popup-loan{
     
         .duration{
@@ -807,25 +813,6 @@ label.item.valid-lr {
         }
 
         .button{
-            &:last-child{
-                margin-right:0 !important;
-            }
-
-        }
-    }
-
-    &.popup-invite-email {
-        p{
-            line-height: 13px;
-        }
-
-        .input-label{
-            width: 100%;
-        }
-        
-
-        .button{
-            margin-right:10px  !important;
             &:last-child{
                 margin-right:0 !important;
             }
