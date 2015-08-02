@@ -9,16 +9,19 @@ angular.module("starter.controllers")
 
     $scope.rate_max = 5;
 
-
-    $ionicPopup.alert({
-        cssClass: 'isbn-popup',
-        okText: 'Ok, entendi',
-        title: 'Instrução',
-        template: String.format(['Olá {0}, você pode usar o cadastro simplicado de livros, usado o código ISBN.<br /><br />',
-                   'O <strong>ISBN</strong> é um código de identificação internacional do livro.  <br /><br />',
-                   '<div class="center"><img style="width:80%" src="img/isbn.jpg" /></div>'
-                   ].join(' '),$rootScope.user.first_name)
-    }).then(function() {});
+    if (!window.localStorage.popupISBN) {
+        $ionicPopup.alert({
+            cssClass: 'isbn-popup',
+            okText: 'Ok, entendi',
+            title: 'Instrução',
+            template: String.format(['Olá {0}, você pode usar o cadastro simplicado de livros, usado o código ISBN.<br /><br />',
+                       'O <strong>ISBN</strong> é um código de identificação internacional do livro.  <br /><br />',
+                       '<div class="center"><img style="width:80%" src="img/isbn.jpg" /></div>'
+                       ].join(' '),$rootScope.user.first_name)
+        }).then(function() {
+            window.localStorage.popupISBN = true;
+        });
+    }
 
 
     var shelfHistory;
