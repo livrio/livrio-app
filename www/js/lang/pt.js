@@ -180,7 +180,7 @@ angular.module("starter.config")
             author: 'Autor(res)',
             page: 'Páginas',
             publisher: 'Editora',
-            synopsis: 'Sinópse',
+            synopsis: 'Sinopse',
             late:'Devolução atrasada',
             btn_start_loan: 'Emprestar este livro',
             btn_request_book: 'Solicitar este livro emprestado',
@@ -202,7 +202,7 @@ angular.module("starter.config")
             question_delete: 'Deseja excluir este livro?',
             question_delete_yes: 'Excluir',
             question_delete_no: 'Cancelar',
-            wait_delete: 'Exluindo...',
+            wait_delete: 'Excluindo...',
             toast_delete: 'Livro excluido!',
             msg_delete_lock: 'Você não pode excluir um livro que está emprestado',
 

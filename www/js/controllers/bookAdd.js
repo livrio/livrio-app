@@ -7,8 +7,6 @@ angular.module("starter.controllers")
     var trans = $filter('translate');
 
 
-    $scope.rate_max = 5;
-
     if (!window.localStorage.popupISBN) {
         $ionicPopup.alert({
             cssClass: 'isbn-popup',
@@ -79,7 +77,6 @@ angular.module("starter.controllers")
 
     if (!id) {
         $scope.form = {
-            rate: 0,
             isbn: "",
             title: "",
             author: "",
@@ -185,7 +182,7 @@ angular.module("starter.controllers")
                 author: $scope.form.author,
                 cover_source: $scope.form.cover_source,
                 shelfs: valueShelfsForm(),
-                rate: $scope.form.rate || 1,
+                rate: 0,
 
                 publisher: $scope.form.publisher,
                 published_year: $scope.form.published_year,
