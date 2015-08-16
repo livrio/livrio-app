@@ -53,7 +53,9 @@ angular.module('starter', [
   'pascalprecht.translate'
   ])
 
-.run(function($rootScope, $http, $ionicPlatform, $ionicHistory, $translate, $state) {
+.run(function($rootScope, $http, $ionicPlatform, $ionicHistory, $translate, $state, $filter) {
+
+    var trans = $filter('translate');
 
     document.addEventListener("deviceready", function() {
         if (typeof navigator.globalization !== "undefined") {
@@ -84,10 +86,6 @@ angular.module('starter', [
     $ionicPlatform.ready(function() {
 
         ionic.Platform.isFullScreen = true;
-
-        if (window.cordova && window.cordova.plugins.Keyboard) {
-            //cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-        }
 
     });
 

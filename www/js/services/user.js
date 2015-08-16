@@ -24,8 +24,12 @@ angular.module("starter.services")
                 longitude: position.coords.longitude
             });
         });
-    }
+    };
 
+    self.updateAmountBook = function() {
+        $rootScope.user.amount_book++;
+        window.localStorage.user = JSON.stringify($rootScope.user);
+    };
 
     self.create = function(params) {
         var deferred = $q.defer();

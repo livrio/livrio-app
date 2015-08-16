@@ -42,6 +42,7 @@
 
                 <a class="item item-icon-left ac" ui-sref="app.library" ui-sref-active="active" menu-close>
                     <i class="icon ion-ios-book"></i> {{'menu.my_books' | translate}}
+                    <span class="badge"  ng-show="user.amount_book>0">{{user.amount_book}}</span>
                 </a>
 
                 <a class="item item-icon-left " ui-sref="app.friends" ui-sref-active="active" menu-close>

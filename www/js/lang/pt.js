@@ -32,7 +32,7 @@ angular.module("starter.config")
         },
 
         menu: {
-            my_books: 'Minha bibliotéca',
+            my_books: 'Meus livros',
             my_friends: 'Amigos',
             my_loans: 'Empréstimos',
             notifications: 'Notificações',

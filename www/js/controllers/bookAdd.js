@@ -1,6 +1,6 @@
 angular.module("starter.controllers")
 
-.controller("bookAddCtrl", function($scope, $stateParams, $ionicHistory, $ionicModal, $rootScope, $http, $ionicPopup, $ionicLoading, $cordovaBarcodeScanner, $cordovaToast, $cordovaCamera, $ionicActionSheet, $filter, settings, SHELF) {
+.controller("bookAddCtrl", function($scope, $stateParams, $ionicHistory, $ionicModal, $rootScope, $http, $ionicPopup, $ionicLoading, $cordovaBarcodeScanner, $cordovaToast, $cordovaCamera, $ionicActionSheet, $filter, settings, SHELF, USER) {
 
     var id = $stateParams.id;
 
@@ -201,6 +201,7 @@ angular.module("starter.controllers")
                         $rootScope.$emit("shelf.refresh");
                         $rootScope.$emit("library.shelf.refresh");
                         $ionicHistory.goBack();
+                        USER.updateAmountBook();
                     }
                     else {
                         $ionicPopup.alert({
