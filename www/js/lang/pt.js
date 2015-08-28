@@ -7,16 +7,16 @@ angular.module("starter.config")
         required_field: 'é obrigatório',
         refresh: 'Atualizar',
         loading: 'Carregando',
-        welcome: 'Olá <strong>{0}</strong>, seja bem vindo ao <strong>Livrio</strong> uma rede de compartilhamento de livros entre amigos. Comece já cadastrando seus livros e disponibilizando-os para seus amigos.',
-        offline: 'Você precisa estar conectado a internet. Por favor verifique sua conexão',
-        backbutton: 'Precione o botão voltar para sair',
+        welcome: 'Olá <strong>{0}</strong>! Seja bem vindo ao <strong>Livrio</strong>, uma rede de compartilhamento de livros entre amigos. Cadastre seus livros para que eles fiquem disponíveis para seus amigos.',
+        offline: 'Oops, parece que você não está conectado à Internet. Por favor verifique sua conexão de dados e tente novamente.',
+        backbutton: 'Pressione o botão voltar para sair',
 
         login: {
             loading_login: 'Entrando...',
             loading_create: 'Cadastrando...',
             loading_facebook: 'Conectando ao Facebook',
             email_duplicate: '<strong>Email</strong> já cadastrado!',
-            login_invalid: '<strong>Email</strong> e/ou <strong>Senha</strong> estão incorretos.',
+            login_invalid: 'O <strong>email</strong> ou <strong>senha</strong> digitados estão incorretos. Por favor, verifique os dados digitados.',
 
             tab_login: 'Login',
             tab_create: 'Cadastre-se',
@@ -32,7 +32,7 @@ angular.module("starter.config")
         },
 
         menu: {
-            my_books: 'Minha bibliotéca',
+            my_books: 'Minha biblioteca',
             my_friends: 'Amigos',
             my_loans: 'Empréstimos',
             notifications: 'Notificações',
@@ -60,7 +60,7 @@ angular.module("starter.config")
             field_email:'E-mail',
             gender_male: 'Masculino',
             gender_female: 'Feminino',
-            info: 'Caro usuário, as informações sobre sexo e data de nascimento são utilizadas para sugerirmos livros que melhor se adequam a você.',
+            info: 'Suas informações pessoais são utilizadas para sugerirmos livros que melhor se adequam a você.',
 
             sheet_title: 'Foto de perfil',
             sheet_cancel: 'Cancelar',
@@ -92,13 +92,13 @@ angular.module("starter.config")
             book: 'Livros',
 
             //listagem de livros de amigos
-            empty_list_book: 'Seu amigo ainda não cadastrou nenhum livro',
+            empty_list_book: 'Seu amigo ainda não cadastrou nenhum livro :(',
             page: 'Páginas',
 
             toast_request_friend: 'Solicitação enviada!',
             toast_friend: 'Vocês são amigos agora!',
 
-            invite_msg: 'Oi, agora todos os meus livros estão disponíveis no Livrio',
+            invite_msg: 'Todos os meus livros estão agora disponíveis no Livrio!',
             invite_subject: 'Conheça meus livros',
             invite_link: 'https://goo.gl/XQHPDi'
 
@@ -107,7 +107,7 @@ angular.module("starter.config")
             title: 'Encontrar amigos',
             empty_list: 'Utilize a pesquisa',
             empty_list_search: 'Não há usuários com este nome',
-            placeholder: 'Procurar pelo nome ou por e-mail'
+            placeholder: 'Procure pelo nome ou por e-mail'
         },
         loan: {
             title: 'Empréstimos',
@@ -171,7 +171,7 @@ angular.module("starter.config")
             title: 'Procurar livros',
             placeholder: 'Título, Autor, Editora, ISBN...',
             empty_list: 'Utilize o campo acima para pesquisar',
-            empty_search: 'não encontramos nenhum livro que corresponda a sua busca',
+            empty_search: 'não encontramos nenhum livro que corresponda à sua busca',
             page: 'Páginas',
             book_friend: 'Livros de amigos'
         },
@@ -180,7 +180,7 @@ angular.module("starter.config")
             author: 'Autor(res)',
             page: 'Páginas',
             publisher: 'Editora',
-            synopsis: 'Sinópse',
+            synopsis: 'Sinopse',
             late:'Devolução atrasada',
             btn_start_loan: 'Emprestar este livro',
             btn_request_book: 'Solicitar este livro emprestado',
@@ -202,7 +202,7 @@ angular.module("starter.config")
             question_delete: 'Deseja excluir este livro?',
             question_delete_yes: 'Excluir',
             question_delete_no: 'Cancelar',
-            wait_delete: 'Exluindo...',
+            wait_delete: 'Excluindo...',
             toast_delete: 'Livro excluido!',
             msg_delete_lock: 'Você não pode excluir um livro que está emprestado',
 
