@@ -7,13 +7,14 @@ angular.module("starter.config")
         required_field: 'é obrigatório',
         refresh: 'Atualizar',
         loading: 'Carregando',
-        welcome: 'Olá <strong>{0}</strong>, seja bem vindo ao <strong>Livrio</strong> uma rede de compartilhamento de livros entre amigos. Comece já cadastrando seus livros e disponibilizando-os para seus amigos.',
+        //
+        welcome: 'Olá, <strong>{0}</strong>, seja bem-vindo ao <strong>Livrio</strong>. uma rede para compartilhar os livros que você ama com quem ama livros. Cadastre seus livros e liberte-os para o mundo.',
         offline: 'Você precisa estar conectado a internet. Por favor verifique sua conexão',
         backbutton: 'Precione o botão voltar para sair',
 
         login: {
-            loading_login: 'Entrando...',
-            loading_create: 'Cadastrando...',
+            loading_login: 'Entrando',
+            loading_create: 'Cadastrando',
             loading_facebook: 'Conectando ao Facebook',
             email_duplicate: '<strong>Email</strong> já cadastrado!',
             login_invalid: '<strong>Email</strong> e/ou <strong>Senha</strong> estão incorretos.',
@@ -65,7 +66,7 @@ angular.module("starter.config")
             sheet_title: 'Foto de perfil',
             sheet_cancel: 'Cancelar',
             sheet_photo: 'Tirar foto',
-            sheet_picture: 'Imagem',
+            sheet_picture: 'Galeria',
             sheet_remove: 'Remover foto',
 
             toast_save: 'Salvo!',
@@ -75,7 +76,7 @@ angular.module("starter.config")
         },
         config: {
             title: 'Configurações',
-            allow_search_by_email: 'Permitir que me econtrem pelo e-mail',
+            allow_search_by_email: 'Permitir que me encontrem pelo e-mail',
             allow_notification_push: 'Permitir notificações push',
             allow_notification_email: 'Permitir notificações por e-mail'
         },
@@ -98,7 +99,7 @@ angular.module("starter.config")
             toast_request_friend: 'Solicitação enviada!',
             toast_friend: 'Vocês são amigos agora!',
 
-            invite_msg: 'Oi, agora todos os meus livros estão disponíveis no Livrio',
+            invite_msg: 'Oi, agora você pode pegar meus livros emprestados com o Livrio, Baixe o app no link e conheça a minha biblioteca.',
             invite_subject: 'Conheça meus livros',
             invite_link: 'https://goo.gl/XQHPDi'
 
@@ -137,6 +138,9 @@ angular.module("starter.config")
             loading_loan: 'Emprestando'
 
 
+            
+
+
         },
         notification: {
             title: 'Notificações',
@@ -150,6 +154,9 @@ angular.module("starter.config")
             msg_loan_confirm: '<span>{0}</span> deseja te emprestar o livro <span>{1}</span>',
             msg_request_friend: '<span>{0}</span> quer ser seu amigo no Livrio.',
             msg_friend: '<span>{0}</span> é seu amigo agora.',
+
+            msg_loan_sent_canceled: '<span>{0}</span> cancelou o empréstimo do livro <span>{1}</span>',
+            msg_loan_sent_refused: '<span>{0}</span> recusou o empréstimo do livro <span>{1}</span>',
 
             time_now: 'agora',
             time_minute: 'há 1 minuto',
@@ -194,6 +201,10 @@ angular.module("starter.config")
             question_confirm_loan: 'Deseja emprestar este livro?',
             question_yes: 'Sim',
             question_no: 'Não',
+
+            popup_isbn_title: 'Instrução',
+            popup_isbn_btn: 'Ok, entendi!',
+            popup_isbn_info: 'Olá {0}, você pode usar o cadastro simplicado de livros, usado o código ISBN.<br /><br /> O <strong>ISBN</strong> é um código de identificação internacional do livro.',
 
             //tela de emprestimo
             title_loan:'Emprestar livro',

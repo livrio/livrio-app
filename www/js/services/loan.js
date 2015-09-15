@@ -33,9 +33,10 @@ angular.module('starter.services')
 
     
 
-    self.changeStatus = function(book, status) {
+    self.changeStatus = function(book, status, text) {
         var post = {
             book: book,
+            text: text || '',
             status: status || 'requested'
         };
 

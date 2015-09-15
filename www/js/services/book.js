@@ -1,5 +1,5 @@
 angular.module('starter.services',[])
-.factory('BOOK', ['$rootScope', '$http', '$q', '$ionicPopup',  '$ionicLoading', '$cordovaToast', '$cordovaCamera', '$ionicActionSheet', '$state', '$filter', 'settings', function($rootScope, $http, $q, $ionicPopup, $ionicLoading, $cordovaToast, $cordovaCamera, $ionicActionSheet, $state, $filter, settings) {
+.factory('BOOK', ['$rootScope', '$http', '$q', '$ionicPopup',  '$ionicLoading', '$cordovaToast', '$cordovaCamera', '$ionicActionSheet', '$state', '$filter', 'settings','USER', function($rootScope, $http, $q, $ionicPopup, $ionicLoading, $cordovaToast, $cordovaCamera, $ionicActionSheet, $state, $filter, settings, USER) {
 
     var self = this;
 
@@ -27,6 +27,7 @@ angular.module('starter.services',[])
                         $rootScope.$emit("library.refresh");
                         $rootScope.$emit("shelf.refresh");
                         $rootScope.$emit("library.shelf.refresh");
+                        USER.updateAmountBook(true);
                     }
                     else {
                         book.removed = false;

@@ -26,8 +26,14 @@ angular.module("starter.services")
         });
     };
 
-    self.updateAmountBook = function() {
-        $rootScope.user.amount_book++;
+    self.updateAmountBook = function(sub) {
+        if (sub) {
+            $rootScope.user.amount_book--;
+        }
+        else {
+            $rootScope.user.amount_book++;
+        }
+
         window.localStorage.user = JSON.stringify($rootScope.user);
     };
 

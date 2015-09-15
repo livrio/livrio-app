@@ -1,13 +1,19 @@
 angular.module('starter.controllers')
 
-.controller('menuCtrl', function($scope, $rootScope, $ionicPopover, SHELF, PUSH) {
+.controller('menuCtrl', function($scope, $state, $rootScope, $ionicPopover, $ionicSideMenuDelegate, SHELF, PUSH) {
 
     SHELF.all();
 
     PUSH.all();
 
     $scope.onShelfAdd = function() {
-        SHELF.add();
+        SHELF.add()
+        .then(function(item) {
+            $ionicSideMenuDelegate.toggleLeft();
+            $state.go('app.shelf',{
+                id: item.id
+            });
+        });
     };
 
     $scope.doLogout = function() {

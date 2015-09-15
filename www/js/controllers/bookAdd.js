@@ -10,12 +10,11 @@ angular.module("starter.controllers")
     if (!window.localStorage.popupISBN) {
         $ionicPopup.alert({
             cssClass: 'isbn-popup',
-            okText: 'Ok, entendi',
-            title: 'Instrução',
-            template: String.format(['Olá {0}, você pode usar o cadastro simplicado de livros, usado o código ISBN.<br /><br />',
-                       'O <strong>ISBN</strong> é um código de identificação internacional do livro.  <br /><br />',
-                       '<div class="center"><img style="width:80%" src="img/isbn.jpg" /></div>'
-                       ].join(' '),$rootScope.user.first_name)
+            okText: trans('book.popup_isbn_btn'),
+            title: trans('book.popup_isbn_title'),
+            template: String.format(
+                trans('book.popup_isbn_info') + '<br /><br /><div class="center"><img style="width:80%" src="img/isbn.jpg" /></div>', $rootScope.user.first_name
+            )
         }).then(function() {
             window.localStorage.popupISBN = true;
         });
@@ -247,11 +246,11 @@ angular.module("starter.controllers")
     $scope.onPicture = function() {
         var hideSheet = $ionicActionSheet.show({
             buttons: [
-                { text: "<i class=\"icon ion-android-camera\"></i> Tirar foto" },
-                { text: "<i class=\"icon ion-image\"></i> Imagem"}
+                { text: "<i class=\"icon ion-android-camera\"></i> " + trans('book.sheet_photo') },
+                { text: "<i class=\"icon ion-image\"></i> " + trans('book.sheet_picture')}
             ],
-            cancelText: 'Cancelar',
-            titleText: 'Capa do livro ' + $scope.form.title,
+            cancelText: trans('book.sheet_cancel'),
+            titleText: trans('book.sheet_title') + ' ' + $scope.form.title,
             cancel: function() {
                 hideSheet();
             },

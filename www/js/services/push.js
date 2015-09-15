@@ -40,6 +40,9 @@ angular.module('starter.services')
             else if (item.type === 'loan_confirm_no') {
                 text = String.format(trans('notification.msg_loan_confirm_no'), item.created_by.fullname, item.book.title);
                 href = "#/app/book/" + item.book.id;
+                if (item.content.reason) {
+                    text = text + ' &horbar; ' + item.content.reason ;
+                }
             }
             else if (item.type === 'loan_request_return') {
                 text = String.format(trans('notification.msg_loan_request_return'), item.created_by.fullname, item.book.title);
@@ -53,10 +56,25 @@ angular.module('starter.services')
                 text = String.format(trans('notification.msg_loan_confirm'), item.created_by.fullname, item.book.title);
                 href = "#/app/book/" + item.book.id;
             }
-            else if (item.type === 'request_friend') {
-                text = String.format(trans('notification.msg_request_friend'), item.created_by.fullname);
+            else if (item.type === 'loan_confirm') {
+                text = String.format(trans('notification.msg_loan_confirm'), item.created_by.fullname, item.book.title);
+                href = "#/app/book/" + item.book.id;
+            }
+            else if (item.type === 'loan_sent_canceled') {
+                text = String.format(trans('notification.msg_loan_sent_canceled'), item.created_by.fullname, item.book.title);
+                if (item.content.reason) {
+                    text = text + ' &horbar; ' + item.content.reason ;
+                }
 
-                //href = "#/app/friend/" + item.book.id;
+                href = "#/app/book/" + item.book.id;
+            }
+            else if (item.type === 'loan_sent_refused') {
+                text = String.format(trans('notification.msg_loan_sent_refused'), item.created_by.fullname, item.book.title);
+                if (item.content.reason) {
+                    text = text + ' &horbar; ' + item.content.reason ;
+                }
+
+                href = "#/app/book/" + item.book.id;
             }
 
             item.text = text;

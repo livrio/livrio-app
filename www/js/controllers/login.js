@@ -12,7 +12,7 @@ angular.module('starter.controllers', [])
 
     $scope.loading = false;
 
-    $scope.loadingText = 'Entrando';
+    $scope.loadingText = trans('login.loading_login');
 
     function showLoading(text) {
         $scope.loading = true;
@@ -40,7 +40,7 @@ angular.module('starter.controllers', [])
     function firstLogin(name) {
 
         $ionicPopup.alert({
-            template: '<img src="img/livrio1.png" />' + trans('welcome')
+            template: '<img src="img/livrio1.png" />' + String.format(trans('welcome'),name)
         }).then(function() {});
     }
 
