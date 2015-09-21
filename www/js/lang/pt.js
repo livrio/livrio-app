@@ -50,7 +50,7 @@ angular.module("starter.config")
             terms: 'Termos Legais',
             policy: 'Termos de uso e Política de Privacidade',
             about_app: 'Sobre este aplicativo',
-            version: 'Versão Android {{value}}'
+            version: 'Versão Android: '
         },
         profile: {
             title: 'Perfil de usuário',
@@ -101,7 +101,7 @@ angular.module("starter.config")
 
             invite_msg: 'Oi, agora você pode pegar meus livros emprestados com o Livrio, Baixe o app no link e conheça a minha biblioteca.',
             invite_subject: 'Conheça meus livros',
-            invite_link: 'https://goo.gl/XQHPDi'
+            invite_link: 'http://onelink.to/dqgt6e'
 
         },
         add_friend: {

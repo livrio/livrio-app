@@ -7,6 +7,8 @@ angular.module("starter.controllers")
 
     var trans = $filter('translate');
 
+    $scope.info_facebook = trans('friends.info_facebook');
+
     $scope.onRefresh = function() {
         FRIEND.all()
         .then(function(data) {

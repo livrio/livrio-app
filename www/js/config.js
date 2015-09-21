@@ -1,6 +1,6 @@
 "use strict";
-var DOMAIN_API = "http://livrio.codeway.in/v1";
-// var DOMAIN_API = "http://api.livr.io/v1";
+// var DOMAIN_API = "http://livrio.codeway.in/v1";
+var DOMAIN_API = "http://api.livr.io/v1";
 angular.module("starter.config",[
     'pascalprecht.translate'
     ])
@@ -32,7 +32,7 @@ angular.module("starter.config",[
         app_id: "857a12a1",
         api_key: "12ca9539c91f4361d908faf486ce3ff0109232db40100f89",
         gcm_id: '966956371758'
-        ,dev_push: true
+        // ,dev_push: true
     });
 
     // $ionicConfigProvider.views.maxCache(10);

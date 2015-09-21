@@ -79,6 +79,7 @@ angular.module('starter', [
         window.analytics.startTrackerWithId('UA-65249891-2');
 
         cordova.getAppVersion.getVersionNumber().then(function (version) {
+            console.log(version);
             $rootScope.versionApp = version;
         });
     });
