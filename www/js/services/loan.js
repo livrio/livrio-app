@@ -54,14 +54,6 @@ angular.module('starter.services')
                 else if (status == 'requested_denied') {
                     $cordovaToast.showLongBottom(trans('loan.toast_loan_cancel')).then(function() {});
                 }
-                else if (status == 'wait_delivery') {
-                    $ionicPopup.alert({
-                        title: trans('loan.title_loan'),
-                        template: trans('loan.msg_loan_info')
-                    }).then(function(res) {
-                        deferred.resolve();
-                    });
-                }
 
                 deferred.resolve(response.data);
             }

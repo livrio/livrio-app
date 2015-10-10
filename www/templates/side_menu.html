@@ -26,7 +26,7 @@
         <ion-content>
 
             <a class="profile" ui-sref="app.profile" menu-close>
-                <div class="bg"></div>
+                <div class="bg" style="background-image: url({{user.cover}})"></div>
 
                 <div class="ct">
                     <img class="photo" ng-src="{{user.photo}}" />
@@ -69,7 +69,7 @@
                     <button class="button button-icon icon ion-plus" ng-click="onShelfAdd()"></button>
                 </li>
 
-                <div class="item item-icon-left" ng-hide="shelfs.length">
+                <div class="item item-icon-left item-text-wrap" ng-hide="shelfs.length">
                 <p>{{'menu.empty_shelfs' | translate}}</p>
                 </div>
 

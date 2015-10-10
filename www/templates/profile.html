@@ -10,15 +10,22 @@
 
   <ion-content class="profile-view">
 
+        <div class="hero slide-up" ng-style="cover">
+            <div class="content">
+                <button type="button" class="button button-icon button-photo" ng-click="onCover()">
+                    <i class="icon ion-android-camera"></i>
+                </button>
+                <div class="avatar" ng-style="photo" ng-click="onPicture()">
+                    
+                </div>
+                <h3><a  class="light">{{form.fullname}}</a></h3>
+            </div>
+
+            
+        </div>
+
         <form ng-submit="doUpdate(formUpdate.$valid)" name="formUpdate" novalidate id="formUpdate">
         <div class="list">
-
-            <div class="item" ng-click="onPicture()">
-                <img  ng-src="{{form.photo}}" style="width: 100%" class="photo" />
-                <button type="button" class="button button-icon button-photo">
-                <i class="icon ion-android-camera"></i>
-                </button>
-            </div>
 
 
             <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formUpdate.fullname.$invalid && formUpdate.$submitted}">
@@ -55,6 +62,16 @@
                 <span class="input-label">{{'profile.field_email' | translate}}</span>
                 <input type="text"  name="email" ng-model="form.email" ng-blur="onChangeField(formUpdate.email)" required>
             </label>
+
+            <label class="item item-input item-stacked-label item-text-wrap" ng-class="{ 'has-error' : formUpdate.phone.$invalid && formUpdate.$submitted}">
+                <span class="input-label">{{'profile.field_phone' | translate}}</span>
+                <input type="text"  name="phone" ng-model="form.phone" ng-blur="onChangeField(formUpdate.phone)" placeholder="(Opcional)">
+                <small>
+            Nós informe seu número de celular, no futuro disponibilizaremos troca de mensagem para empréstimo de livro através do Whatsapp.
+            </small>
+            </label>
+            
+
             <div class="form-errors" ng-messages="formUpdate.email.$error" ng-show="formUpdate.$submitted">
                 <div class="form-error" ng-message="required">{{'profile.field_email' | translate}} {{'required_field' | translate}}</div>
             </div>

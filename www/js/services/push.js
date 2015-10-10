@@ -1,5 +1,5 @@
 angular.module('starter.services')
-.factory('PUSH', ['$rootScope', '$http', '$q', '$filter', '$ionicUser', '$ionicPush',  '$interval', 'settings', function($rootScope, $http, $q, $filter, $ionicUser, $ionicPush, $interval, settings) {
+.factory('PUSH', ['$rootScope', '$http', '$q', '$filter', '$interval', 'settings', function($rootScope, $http, $q, $filter, $interval, settings) {
 
     var self = this;
 
@@ -22,7 +22,20 @@ angular.module('starter.services')
     function processNotice(item) {
         try {
             var text = '', href='';
-            if (item.type === 'friend') {
+
+            if (item.type === 'system_first_book') {
+                text = String.format(trans('notification.msg_system_first_book'), item.user.fullname);
+                href = "#/app/friends";
+            }
+            else if (item.type === 'system_welcome') {
+                text = String.format(trans('notification.msg_system_welcome'), item.user.fullname);
+                href = "#/app/book-form";
+            }
+            else if (item.type === 'system_library_empty') {
+                text = String.format(trans('notification.msg_system_library_empty'), item.user.fullname);
+                href = "#/app/book-form";
+            }
+            else if (item.type === 'friend') {
                 text = String.format(trans('notification.msg_friend'), item.created_by.fullname);
                 href = "#/app/friend/" + item.created_by.id;
 
@@ -32,9 +45,22 @@ angular.module('starter.services')
                 item.question = true;
                 href = "#/app/book/" + item.book.id;
             }
+            else if (item.type === 'friend_like_book') {
+                text = String.format(trans('notification.msg_friend_like_book'), item.created_by.fullname, item.book.title);
+                href = "#/app/book/" + item.book.id;
+            }
+             else if (item.type === 'friend_recommend_book') {
+                text = String.format(trans('notification.msg_friend_recommend_book'), item.created_by.fullname, item.book.title);
+                href = "#/app/book/" + item.book.id;
+            }
             else if (item.type === 'loan_confirm_yes') {
                 item.question = true;
                 text = String.format(trans('notification.msg_loan_confirm_yes'), item.created_by.fullname, item.book.title);
+
+                if (item.content.msg) {
+                    text = text + ' &horbar; ' + item.content.msg ;
+                }
+
                 href = "#/app/book/" + item.book.id;
             }
             else if (item.type === 'loan_confirm_no') {
@@ -75,6 +101,11 @@ angular.module('starter.services')
                 }
 
                 href = "#/app/book/" + item.book.id;
+            }
+            else if (item.type === 'request_friend') {
+                text = String.format(trans('notification.msg_request_friend'), item.created_by.fullname);
+
+                //href = "#/app/friend/" + item.book.id;
             }
 
             item.text = text;
@@ -179,7 +210,7 @@ angular.module('starter.services')
         })
         .success(function(response) {
             if (!response.errors) {
-                $rootScope.notifications = processAllNotice(response.data);                
+                $rootScope.notifications = processAllNotice(response.data);
                 deferred.resolve(response.data);
             }
             else {
@@ -215,6 +246,25 @@ angular.module('starter.services')
     */
     self.register = function(userInfo) {
 
+        var push = PushNotification.init({ "android": {"senderID": "966956371758","iconColor":"#f9b000","icon":"notify"}} );
+
+        push.on('registration', function(data) {
+            console.log(JSON.stringify(data));
+            console.log(data.registrationId);
+            doUpdateToken('android',data.registrationId);
+        });
+
+        push.on('notification', function(data) {
+            console.log(JSON.stringify(data));
+            if (!data.additionalData.foreground) {
+                window.location = '#/app/notification';
+            }
+
+            self.all();
+            self.markView();
+
+        });
+        /*
         $rootScope.$on('$cordovaPush:tokenReceived', function(event, data) {
             console.log("Successfully registered token " + data.token);
             console.log('Ionic Push: Got token ', data.token, data.platform);
@@ -265,6 +315,7 @@ angular.module('starter.services')
             });
 
         });
+*/
     };
 
     return self;

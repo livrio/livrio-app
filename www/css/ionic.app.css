@@ -7700,6 +7700,178 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+/* Hero
+==================================*/
+.hero {
+  background-size: cover;
+  color: #fff;
+  height: 150px;
+  position: relative;
+  text-align: center;
+  -webkit-transition: all 1s cubic-bezier(0.55, 0, 0.1, 1);
+  transition: all 1s cubic-bezier(0.55, 0, 0.1, 1);
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  width: 100%; }
+
+.hero > .content {
+  bottom: 10px;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  z-index: 1; }
+
+.hero > .content > .avatar {
+  background-position: center;
+  background-size: cover;
+  border: solid 1px rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  display: inline-block;
+  height: 88px;
+  left: auto;
+  margin-bottom: 10px;
+  position: relative;
+  width: 88px; }
+
+.hero h1 .hero h2, .hero h3, .hero h4, .hero h5, .hero h6 {
+  color: #fff;
+  margin: 0; }
+
+.hero h4 {
+  color: rgba(255, 255, 255, 0.7);
+  margin: 3px 0 16px; }
+
+.hero h1 > a, .hero h2 > a, .hero h3 > a, .hero h4 > a, .hero h5 > a, .hero h6 > a {
+  text-decoration: none; }
+
+.hero + .button-bar {
+  border-radius: 0;
+  margin-top: 0; }
+
+.hero + .tabs {
+  position: inherit;
+  border-bottom: 1px solid #ccc; }
+
+.tabs-secondary a {
+  color: #080C15;
+  text-transform: uppercase;
+  font-weight: 500;
+  max-width: initial; }
+  .tabs-secondary a.success {
+    color: #1B5E20; }
+  .tabs-secondary a.danger {
+    color: #B71C1C; }
+
+.tab-item.active {
+  opacity: 1;
+  color: #4485F3; }
+
+.has-header {
+  top: 50px; }
+
+.bg {
+  background-color: #c7b299; }
+
+.book-view .btn-more {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 20px;
+  opacity: 0.5; }
+.book-view .card.loaned-action {
+  margin: 10px; }
+.book-view .bar-option {
+  padding: 16px 0;
+  height: 80px; }
+.book-view .list {
+  background: #fff;
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.24); }
+  .book-view .list .item {
+    background-color: transparent; }
+  .book-view .list .item-divider {
+    font-size: 16px;
+    padding: 16px; }
+.book-view .request-loan {
+  font-size: 14px !important; }
+.book-view .ly {
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) -25%, #ffffff 100%);
+  position: absolute;
+  top: 100px;
+  z-index: 10; }
+.book-view .collpase {
+  height: 150px;
+  overflow: hidden; }
+.book-view .book-info .cover {
+  float: left;
+  width: 125px; }
+.book-view .book-info .info {
+  padding-left: 20px;
+  float: left; }
+  .book-view .book-info .info p {
+    color: #080C15;
+    font-size: 12px; }
+    .book-view .book-info .info p strong {
+      display: block;
+      font-size: 13px;
+      font-weight: 500; }
+.book-view .item.description {
+  font-size: 12px;
+  padding: 16px; }
+
+.book-card {
+  background-color: #fff;
+  padding: 0px;
+  margin: 10px;
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.24);
+  height: initial;
+  border-radius: 3px;
+  border: none; }
+  .book-card .row, .book-card .col {
+    padding: 0px; }
+  .book-card .cover {
+    width: 80px;
+    height: 128px;
+    background-size: cover; }
+  .book-card .content {
+    padding-left: 10px;
+    padding-top: 10px; }
+    .book-card .content h2 {
+      font-size: 16px;
+      color: rgba(0, 0, 0, 0.87);
+      line-height: 19px;
+      white-space: normal;
+      padding-right: 20px;
+      max-height: 40px; }
+      .book-card .content h2 .btn-more {
+        position: absolute;
+        top: 1px;
+        right: 5px; }
+        .book-card .content h2 .btn-more:before {
+          font-size: 22px; }
+    .book-card .content h3 {
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.54);
+      line-height: 16px;
+      padding-right: 20px; }
+  .book-card .user-loan {
+    position: absolute;
+    bottom: 0px; }
+    .book-card .user-loan img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%; }
+    .book-card .user-loan > span {
+      vertical-align: top;
+      font-size: 12px;
+      color: #444;
+      display: inline-block;
+      position: relative;
+      top: 5px;
+      left: 5px;
+      font-style: italic; }
+
 ul.rating li {
   display: inline;
   border: 0px;
@@ -7797,6 +7969,11 @@ ul.rating li i {
 .tab-title {
   text-transform: uppercase; }
 
+/*
+.has-header {
+    top: 50px;
+}
+*/
 .profile {
   height: 120px;
   position: relative;
@@ -7873,7 +8050,7 @@ ul.rating li i {
 .friend-list .item {
   margin: 0;
   border: none;
-  border-bottom: 1px solid #C0C0C0;
+  border-bottom: 1px solid #dcdcdc;
   padding-top: 25px;
   font-size: 17px; }
   .friend-list .item img {
@@ -7943,12 +8120,24 @@ ul.rating li i {
 
 .notice-library-empty {
   text-align: center;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
-  color: #808080;
+  color: #585858;
   text-transform: uppercase;
-  line-height: 200px;
-  height: 100%; }
+  line-height: 30px;
+  height: 200px;
+  position: absolute;
+  top: 100px;
+  width: 100%; }
+  .notice-library-empty p {
+    font-size: 12px;
+    color: #808080;
+    line-height: 20px;
+    padding: 0 20px; }
+  .notice-library-empty img {
+    width: 130px; }
+  .notice-library-empty i {
+    font-size: 22px; }
 
 .button-facebook {
   color: #fff;
@@ -7962,66 +8151,6 @@ ul.rating li i {
 .platform-android .action-sheet .action-sheet-title {
   font-weight: bold;
   text-transform: uppercase; }
-
-.tab-nav.tabs {
-  /*box-shadow: 0px 0px 17px -1px rgba(0, 0, 0, 0.49);*/ }
-
-.book-card {
-  background: #FAFAFA;
-  padding: 0px;
-  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.24);
-  border-radius: 3px;
-  margin: 15px 10px;
-  min-height: 90px;
-  max-height: 110px; }
-  .book-card .item {
-    background-color: transparent;
-    padding: 0px;
-    min-height: 90px;
-    max-height: 110px; }
-    .book-card .item .cover {
-      float: left;
-      width: 80px; }
-    .book-card .item .content {
-      padding-left: 90px;
-      padding-top: 10px; }
-      .book-card .item .content h2 {
-        font-size: 16px;
-        color: rgba(0, 0, 0, 0.87);
-        line-height: 19px;
-        white-space: normal;
-        padding-right: 20px;
-        max-height: 40px; }
-        .book-card .item .content h2 .btn-more {
-          position: absolute;
-          top: 1px;
-          right: 5px; }
-          .book-card .item .content h2 .btn-more:before {
-            font-size: 22px; }
-      .book-card .item .content h3 {
-        font-size: 14px;
-        color: rgba(0, 0, 0, 0.54);
-        line-height: 16px;
-        padding-right: 20px; }
-    .book-card .item .user-loan {
-      position: absolute;
-      bottom: 0px;
-      left: 90px;
-      vertical-align: middle; }
-      .book-card .item .user-loan img {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%; }
-      .book-card .item .user-loan > span {
-        vertical-align: top;
-        font-size: 12px;
-        color: rgba(0, 0, 0, 0.87);
-        display: inline-block;
-        position: relative;
-        position: relative;
-        top: 5px;
-        left: 5px;
-        font-style: italic; }
 
 .book-head {
   padding-left: 10px;
@@ -8062,40 +8191,11 @@ ul.rating li i {
     .item-divider .button:before {
       font-size: 18px; }
 
-.book-view .card {
-  background: #FAFAFA;
-  padding: 0px;
-  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.24);
-  border-radius: 3px; }
-  .book-view .card .item {
-    background-color: transparent; }
-.book-view .item.item-divider {
-  font-size: 16px;
-  padding: 16px; }
-.book-view .card-details .item {
-  padding: 0px; }
-.book-view .card-details .cover {
-  float: left;
-  width: 125px; }
-.book-view .card-details .info {
-  padding-left: 20px;
-  float: left; }
-  .book-view .card-details .info p {
-    color: #555;
-    font-size: 12px; }
-    .book-view .card-details .info p span {
-      display: block;
-      font-size: 13px;
-      font-weight: 500; }
-.book-view .item.description {
-  font-size: 12px;
-  padding: 16px; }
-
 .action-sheet-options.action-sheet-group {
   background-color: #fff; }
   .action-sheet-options.action-sheet-group .button.action-sheet-destructive {
     margin-top: 10px;
-    border-top: 1px solid #C0C0C0; }
+    border-top: 1px solid #dcdcdc; }
 
 .about .item {
   padding: 10px;
@@ -8114,12 +8214,16 @@ ul.rating li i {
   border-radius: 4px; }
 .profile-view .button-photo {
   position: absolute;
+  top: -10px;
   right: 20px;
-  bottom: 20px;
   color: #fff; }
 .profile-view a.link {
   color: #333;
   font-weight: 500; }
+.profile-view .hero h3 {
+  margin-bottom: 10px; }
+  .profile-view .hero h3 .light {
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.58); }
 
 .item-input select {
   display: block;
@@ -8207,7 +8311,7 @@ label.item.valid-lr {
 .popup-container.popup-loan select {
   background: none;
   padding: 10px;
-  border-color: #C0C0C0;
+  border-color: #dcdcdc;
   flex: 1;
   font-size: 14px; }
   .popup-container.popup-loan select:first-child {
@@ -8294,8 +8398,8 @@ label.item.valid-lr {
   .book-form .isbn .button-scan {
     width: 40px;
     height: 40px;
-    background: #f9b000 !important;
-    color: #000;
+    background: #63c9ce !important;
+    color: #fff;
     border: none;
     min-width: 40px;
     min-height: 40px;
@@ -8318,17 +8422,27 @@ label.item.valid-lr {
 .input-label {
   color: #111; }
 
+.list .item {
+  border-left: none;
+  border-right: none; }
+
 .list .item.item-line, .card .item.item-line {
   margin-top: 16px;
-  border-top: 1px solid #C0C0C0; }
+  border-top: 1px solid #dcdcdc !important; }
+  .list .item.item-line.no-margin, .card .item.item-line.no-margin {
+    margin-top: 0px; }
 
 .list .item.item-line-bottom, .card .item.item-line-bottom {
   margin-bottom: 16px;
-  border-bottom: 1px solid #C0C0C0;
+  border-bottom: 1px solid #dcdcdc;
   border-radius: 0; }
+  .list .item.item-line-bottom.no-margin, .card .item.item-line-bottom.no-margin {
+    margin-bottom: 0px; }
 
-.tabs-secondary a {
-  text-transform: uppercase;
-  color: #4485F3;
-  font-weight: 500;
-  max-width: initial; }
+.view-config .item-toggle {
+  padding-right: 80px; }
+  .view-config .item-toggle p {
+    margin-top: 5px;
+    color: #656565;
+    font-size: 12px;
+    line-height: 14px; }

@@ -83,6 +83,8 @@ if (!window.cordova) {
         scan: function(success) {
             var arrs = ["9788535248821","9788536502694","9788598078175","9788563560858"];
             success({
+                format: 'EAN_13',
+                cancelled: false,
                 text: "9788598078175"
             });
         }
@@ -99,6 +101,24 @@ if (!window.cordova) {
         },
         EncodingType: {
             JPEG:1
+        }
+    }
+
+    window.PushNotification = {
+        init: function(){
+            console.log('PUSH init');
+            return {
+                on: function(n,f){
+                    console.log('PUSH: ', n);
+                    f({
+                        
+                        additionalData: {
+                            foreground: false
+                        },
+                        registrationId: 'APA91bFKGM8BLVB0UWS_jk1emaj3h7r_ukPt6NXjsMyTO_gu2CVQGTWfYRcMVB-iyN-llWCg36AoKo3vVcz9qpHMeEYAnQ_l2uVgzKnVwlO7syvhVCnwwE0'
+                    })
+                }
+            }
         }
     }
 

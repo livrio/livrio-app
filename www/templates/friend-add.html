@@ -25,15 +25,14 @@
         <span>{{'loading' | translate}}</span>
         </div>
 
-        <div class="notice-library-empty" ng-hide="searchStart">
+        <div class="notice-library-empty" ng-hide="searchStart" ng-bind-html="empty_list">
 
-            {{'add_friend.empty_list' | translate}}
 
         </div>
 
-        <div class="notice-library-empty" ng-show="friendsResult.length==0 && searchStart">
+        <div class="notice-library-empty" ng-show="friendsResult.length==0 && searchStart"  ng-bind-html="empty_list_search">
 
-            {{'add_friend.empty_list_search' | translate}}
+            
 
         </div>
 

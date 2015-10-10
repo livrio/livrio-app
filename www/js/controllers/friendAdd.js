@@ -1,6 +1,11 @@
 angular.module('starter.controllers')
 
-.controller('friendAddCtrl', function($scope, $ionicHistory, $timeout, FRIEND) {
+.controller('friendAddCtrl', function($scope, $ionicHistory, $timeout, $filter,  FRIEND) {
+
+    var trans = $filter('translate');
+
+    $scope.empty_list = trans('add_friend.empty_list');
+    $scope.empty_list_search = trans('add_friend.empty_list_search');
 
     $scope.showInput = false;
 

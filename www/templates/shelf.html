@@ -21,8 +21,7 @@
 
         <book ng-repeat="item in librarys" book="item"></book>
 
-        <div class="notice-library-empty" ng-show="librarys.length==0 && !loading">
-            {{'shelf.empty_list' | translate}}
+        <div class="notice-library-empty" ng-show="librarys.length==0 && !loading"  ng-bind-html="empty_list">
         </div>
 
     </ion-content>

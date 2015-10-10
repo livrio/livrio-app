@@ -1,6 +1,12 @@
 angular.module('starter.controllers')
 
-.controller('loanCtrl', function($scope, $rootScope, $http, $ionicLoading, $ionicActionSheet, BOOK, settings) {
+.controller('loanCtrl', function($scope, $rootScope, $http, $ionicLoading, $ionicActionSheet, $filter, BOOK, settings) {
+
+
+    var trans = $filter('translate');
+
+    $scope.empty_list = trans('loan.empty_list');
+    
 
     $scope.librarys = [];
 

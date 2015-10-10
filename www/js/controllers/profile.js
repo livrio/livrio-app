@@ -12,10 +12,29 @@ angular.module('starter.controllers')
     $scope.form = user;
 
 
+    $scope.$watch('form.photo',function(n) {
+        $scope.photo = {
+            'background-image': 'url(' + n + ')'
+        };
+    });
+
+    $scope.$watch('form.cover',function(n) {
+        $scope.cover = {
+            'background-image': 'url(' + n + ')'
+        };
+    });
+
+
+
+
     var id = $rootScope.user.id;
 
     $scope.onSave = function() {
         $cordovaToast.showLongBottom(trans('profile.toast_save')).then(function() {});
+    };
+
+    $scope.onCover = function() {
+        onPicture(1, true);
     };
 
     $scope.onPicture = function() {
@@ -44,14 +63,21 @@ angular.module('starter.controllers')
         });
     };
 
-    function save(post) {
+    function save(post, cover) {
 
         var old = $scope.form.photo;
-        if (post.avatar_source) {
+        var old2 = $scope.form.cover;
+        if (post.avatar_source && !cover) {
             $scope.form.photo = 'data:image/jpeg;base64,' + post.avatar_source;
         }
-        else {
+        else if(!cover){
             $scope.form.photo = 'img/avatar.png';
+        }
+        else if (post.cover_source && cover) {
+            $scope.form.cover = 'data:image/jpeg;base64,' + post.cover_source;
+        }
+        else if(cover){
+            $scope.form.cover = 'img/cover.png';
         }
 
 
@@ -64,6 +90,7 @@ angular.module('starter.controllers')
             }
             else {
                 $scope.form.photo = old;
+                $scope.form.cover = old2;
                 $cordovaToast.showLongBottom(trans('profile.toast_photo_error')).then(function() {});
             }
         })
@@ -75,7 +102,7 @@ angular.module('starter.controllers')
     }
 
 
-    var onPicture = function(index) {
+    var onPicture = function(index, cover) {
         var sourceType = index === 0 ? Camera.PictureSourceType.CAMERA : Camera.PictureSourceType.PHOTOLIBRARY;
         var options = {
             quality: 75,
@@ -89,13 +116,23 @@ angular.module('starter.controllers')
             saveToPhotoAlbum: false
         };
 
+        if (cover) {
+            delete options.targetWidth;
+            delete options.targetHeight;
+            delete options.popoverOptions;
+        }
+
         $cordovaCamera.getPicture(options).then(function(imageData) {
             console.log(imageData);
-            var post = {
-                avatar_source: imageData
-            };
+            var post = {};
+            if (cover) {
+                post.cover_source = imageData;
+            }
+            else {
+                post.avatar_source = imageData;
+            }
 
-            save(post);
+            save(post, cover);
 
 
         }, function(err) {

@@ -44,8 +44,6 @@ angular.module('starter', [
   'ngMessages',
   'ngCordova',
   'ionic.rating',
-  'ionic.service.core',
-  'ionic.service.push',
   'starter.controllers',
   'starter.services',
   'starter.config',
@@ -53,7 +51,7 @@ angular.module('starter', [
   'pascalprecht.translate'
   ])
 
-.run(function($rootScope, $http, $ionicPlatform, $ionicHistory, $translate, $state, $filter) {
+.run(function($rootScope, $http, $ionicPlatform, $ionicHistory, $translate, $state, $filter, USER) {
 
     var trans = $filter('translate');
 
@@ -84,11 +82,6 @@ angular.module('starter', [
         });
     });
 
-    $ionicPlatform.ready(function() {
-
-        ionic.Platform.isFullScreen = true;
-
-    });
 
     $ionicPlatform.registerBackButtonAction(function(e) {
         if ($rootScope.backButtonPressedOnceToExit) {
@@ -129,6 +122,7 @@ angular.module('starter', [
         $rootScope.user = JSON.parse(window.localStorage.user);
         $http.defaults.headers.common['Authorization'] = window.localStorage.getItem('token');
         window.location = '#/app/library';
+        USER.updateLocation();
     }
     catch (e) {
         window.location = '#/login';

@@ -1,6 +1,6 @@
 angular.module("starter.controllers")
 
-.controller("bookSearchCtrl", function($scope, $rootScope, $ionicActionSheet, $timeout, BOOK) {
+.controller("bookSearchCtrl", function($scope, $rootScope, $ionicActionSheet, $filter, $timeout, BOOK) {
 
     var filterTextTimeout;
 
@@ -8,6 +8,11 @@ angular.module("starter.controllers")
     $scope.librarys = [];
     $scope.libraryFriends = [];
     $scope.searchStart = false;
+
+    var trans = $filter('translate');
+
+    $scope.empty_list = trans('search.empty_list');
+    $scope.empty_search = trans('search.empty_search');
 
     $scope.onSearch = function(input) {
         console.log('search');
@@ -26,6 +31,7 @@ angular.module("starter.controllers")
             $scope.searching = true;
             $scope.searchStart = true;
             BOOK.all({
+                history: true,
                 word: "%" + input + "%"
             }).then(function(data) {
                 $scope.librarys = data;

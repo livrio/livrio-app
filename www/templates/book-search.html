@@ -12,7 +12,7 @@
     </form>
 
 
-    <ion-content>
+    <ion-content ng-class="{'bg':!searching && searchStart}">
 
 
         <div class="wait-message" ng-show="searching">
@@ -20,15 +20,14 @@
             <span>{{'search.loading' | translate}}</span>
         </div>
 
-        <div class="notice-library-empty" ng-hide="searchStart">
+        <div class="notice-library-empty" ng-hide="searchStart" ng-bind-html="empty_list">
 
-            {{'search.empty_list' | translate}}
 
         </div>
 
-        <div class="notice-library-empty" ng-show="(librarys.length==0 && libraryFriends.length==0) && searchStart">
+        <div class="notice-library-empty" ng-show="(librarys.length==0 && libraryFriends.length==0) && searchStart"  ng-bind-html="empty_search">
 
-            {{'search.empty_search' | translate}}
+            
 
         </div>
 

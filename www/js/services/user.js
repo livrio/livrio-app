@@ -1,5 +1,5 @@
 angular.module("starter.services")
-.factory("USER", ["$rootScope", "$http",   "$q",  "settings", 'PUSH',  function($rootScope, $http, $q, settings, PUSH) {
+.factory("USER", ["$rootScope", "$http",   "$q",  "settings", 'PUSH',  function($rootScope, $http, $q,  settings, PUSH) {
 
     var self = this;
 
@@ -19,6 +19,7 @@ angular.module("starter.services")
         var user = $rootScope.user;
 
         navigator.geolocation.getCurrentPosition(function(position) {
+            console.log(position);
             $http.put(settings.URL.USER + "/" + user.id, {
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude

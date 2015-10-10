@@ -1,8 +1,12 @@
 angular.module('starter.controllers')
 
-.controller('shelfCtrl', function($scope, $rootScope, $stateParams, SHELF, BOOK) {
+.controller('shelfCtrl', function($scope, $rootScope, $stateParams, $filter, SHELF, BOOK) {
 
     var id = $stateParams.id;
+
+    var trans = $filter('translate');
+
+    $scope.empty_list = trans('shelf.empty_list');
 
     $scope.shelf = {};
 

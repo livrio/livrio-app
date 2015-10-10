@@ -1,23 +1,13 @@
-<div class="card book-card" ng-hide="book.removed" ui-sref="app.book({id:book.id})">
+<div class="item book-card" ng-hide="book.removed" ui-sref="app.book({id:book.id})">
 
-    <div class="item">
-        <img class="cover" ng-src="{{book.thumb}}">
-        <div class="content">
-            <h2>{{book.title}}
+<div class="row">
+    <div class="cover" style="background-image: url({{book.thumb}})">
+        
+    </div>
+    <div class="col content">
+        <h2>{{book.title}}</h2>
+        <h3>{{book.author}}</h3>
 
-            <button 
-                type="button" 
-                class="button button-icon btn-more icon ion-android-more-vertical" 
-                ng-click="onActionBook($event, book)"
-                ng-show="book.is_owner"
-            >
-            </button>
-
-            </h2>
-            <h3>{{book.author}}</h3>
-
-            
-        </div>
         <div class="user-loan" ng-show="book.loaned && book.is_owner && book.owner.id==user.id">
             <img ng-src="{{book.loaned.photo}}" /> 
             <span class="name">
@@ -35,5 +25,10 @@
         </div>
 
     </div>
+</div>
+
+
+
+   
 
 </div>

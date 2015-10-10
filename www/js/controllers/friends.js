@@ -9,6 +9,8 @@ angular.module("starter.controllers")
 
     $scope.info_facebook = trans('friends.info_facebook');
 
+    $scope.empty_list = trans('friends.empty_list');
+
     $scope.onRefresh = function() {
         FRIEND.all()
         .then(function(data) {

@@ -1,5 +1,5 @@
     <ion-view title="{{'loan.title' | translate}}">
-    <ion-content>
+    <ion-content ng-class="{'bg':!loading}">
 
         <ion-refresher pulling-text="{{'refresh' | translate}}" on-refresh="onRefresh()"></ion-refresher>
 
@@ -8,14 +8,14 @@
             <span>{{'loading' | translate}}</span>
         </div>
 
-        <book ng-repeat="item in bookLoans" book="item"></book>
+        <div class="list">
+            <book ng-repeat="item in bookLoans" book="item"></book>
 
-        <book ng-repeat="item in bookLoaneds" book="item"></book>
+            <book ng-repeat="item in bookLoaneds" book="item"></book>
+        </div>
 
+        <div class="notice-library-empty" ng-hide="bookLoaneds.length || bookLoans.length || loading" ng-bind-html="empty_list">
 
-        <div class="notice-library-empty" ng-hide="bookLoaneds.length || bookLoans.length || loading">
-
-        {{'loan.empty_list' | translate}}
 
     </div>
 

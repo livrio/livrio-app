@@ -122,16 +122,22 @@ angular.module("starter.controllers")
     }
 
 
-    $scope.doScan = function() {
-        console.log('---------');
-        $cordovaBarcodeScanner.scan().then(function(imageData) {
-            if (imageData.text) {
-                searchISBN(imageData.text);
-                console.log(imageData.text);
-            }
-        }, function(error) {
-            $ionicLoading.hide();
-        });
+    $scope.doScan = function(input) {
+        if(!input){
+            console.log('---------');
+            $cordovaBarcodeScanner.scan().then(function(code) {
+                console.log(JSON.stringify(code));
+                if (!code.cancelled && code.text && (code.format == 'EAN_13' || code.format == 'EAN_8')) {
+                    searchISBN(code.text);
+                    console.log(code.text);
+                }
+            }, function(error) {
+                $ionicLoading.hide();
+            });
+        }
+        else if (input.$modelValue.length === 13) {
+            searchISBN(input.$modelValue);
+        }
     };
 
 

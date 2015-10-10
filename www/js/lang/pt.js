@@ -8,7 +8,8 @@ angular.module("starter.config")
         refresh: 'Atualizar',
         loading: 'Carregando',
         //
-        welcome: 'Olá, <strong>{0}</strong>, seja bem-vindo ao <strong>Livrio</strong>. uma rede para compartilhar os livros que você ama com quem ama livros. Cadastre seus livros e liberte-os para o mundo.',
+
+        welcome: 'Olá <strong>{0}</strong>, seja bem vindo ao <strong>Livrio.</strong> Por aqui, a gente compartilha livros com quem também ama livros. Eu vou te ajudar a cadastrar os seus e libertá-los para o mundo.',
         offline: 'Você precisa estar conectado a internet. Por favor verifique sua conexão',
         backbutton: 'Precione o botão voltar para sair',
 
@@ -17,15 +18,15 @@ angular.module("starter.config")
             loading_create: 'Cadastrando',
             loading_facebook: 'Conectando ao Facebook',
             email_duplicate: '<strong>Email</strong> já cadastrado!',
-            login_invalid: '<strong>Email</strong> e/ou <strong>Senha</strong> estão incorretos.',
+            login_invalid: 'Ops! E-mail ou senha incorretos. Que tal tentar de novo?',
 
-            tab_login: 'Login',
-            tab_create: 'Cadastre-se',
+            tab_login: 'Entrar',
+            tab_create: 'Criar conta',
             field_email: 'E-mail',
             field_password: 'Senha',
             btn_login: 'Entrar',
             btn_facebook: 'Entrar com o Facebook',
-            terms: 'Ao clicar em "Entrar com o Facebook" ou "Cadastrar", você concorda com os Termos de Serviços e Política de Privacidade do Livrio.',
+            terms: 'Ao entrar no Livrio, você concorda com nossos Termos de Serviços e Política de Privacidade.',
 
             btn_create: 'Cadastrar',
             field_name: 'Nome completo'
@@ -39,7 +40,7 @@ angular.module("starter.config")
             notifications: 'Notificações',
             search: 'Procurar livro',
             shelfs: 'Estantes',
-            empty_shelfs: 'Nenhuma estante criada',
+            empty_shelfs: 'Você ainda não tem estantes. Organize seus livros por temas.',
             profile: 'Meu perfil',
             config: 'Configurações',
             about: 'Sobre o aplicativo',
@@ -53,15 +54,16 @@ angular.module("starter.config")
             version: 'Versão Android: '
         },
         profile: {
-            title: 'Perfil de usuário',
+            title: 'Meu perfil',
             btn_save: 'Salvar',
             field_name: 'Nome',
             field_birthday: 'Data de Nascimento',
             field_gender: 'Sexo',
             field_email:'E-mail',
+            field_phone:'Celular',
             gender_male: 'Masculino',
             gender_female: 'Feminino',
-            info: 'Caro usuário, as informações sobre sexo e data de nascimento são utilizadas para sugerirmos livros que melhor se adequam a você.',
+            info: 'Fique tranquilo. Suas informações só serão utilizadas para sugerir livros que tenham mais a ver com você!',
 
             sheet_title: 'Foto de perfil',
             sheet_cancel: 'Cancelar',
@@ -76,38 +78,40 @@ angular.module("starter.config")
         },
         config: {
             title: 'Configurações',
-            allow_search_by_email: 'Permitir que me encontrem pelo e-mail',
+            allow_search_by_email: 'Permitir que me encontrem pelo email.',
             allow_notification_push: 'Permitir notificações push',
-            allow_notification_email: 'Permitir notificações por e-mail'
+            allow_notification_email: 'Permitir notificações por email',
+            allow_accept_friend_facebook: 'Vincular amizades do Facebook',
+            allow_connect_facebook: 'Conectado ao Facebook'
         },
         library: {
-            title: 'Minha biblioteca',
+            title: 'Meus livros',
             page: 'Páginas',
-            empty_list: 'Clique no "+" para cadastrar seus livros'
+            empty_list: 'Nenhum livro cadastrado. <p>Clique no <i class="ion ion-plus"></i> para começar.</p><img src="img/bored.svg" />'
         },
         friends: {
             title: 'Meus amigos',
-            empty_list: 'Você ainda não possui amigos',
-            info_facebook: 'Você ainda não conectou o <strong>Livrio</strong> ao seu Facebook. Conecte-se para que seus amigos tenham acesso aos seus livros.',
+            empty_list: 'Você não tem amigos cadastrados<p>Clique no <i class="ion ion-android-share"></i> para convidar seus amigos.</p><img src="img/bored.svg" />',
+            info_facebook: 'Para ter acesso aos livros incríveis que estão parados nas estantes deles, encontre-os por aqui.',
             btn_facebook: 'Conectar ao Facebook',
             book: 'Livros',
 
             //listagem de livros de amigos
-            empty_list_book: 'Seu amigo ainda não cadastrou nenhum livro',
+            empty_list_book: '{0} não disponibilizou nenhum livro ainda. Envie um lembrete para ter acesso à sua estante.',
             page: 'Páginas',
 
             toast_request_friend: 'Solicitação enviada!',
             toast_friend: 'Vocês são amigos agora!',
 
-            invite_msg: 'Oi, agora você pode pegar meus livros emprestados com o Livrio, Baixe o app no link e conheça a minha biblioteca.',
-            invite_subject: 'Conheça meus livros',
+            invite_msg: 'Oi, agora todos os meus livros estão disponíveis no Livrio e você pode pedir emprestado a hora que quiser.',
+            invite_subject: 'Vem ver',
             invite_link: 'http://onelink.to/dqgt6e'
 
         },
         add_friend: {
             title: 'Encontrar amigos',
-            empty_list: 'Utilize a pesquisa',
-            empty_list_search: 'Não há usuários com este nome',
+            empty_list: '<p>Utilize o campo acima para encontrar seu amigo</p><img src="img/official.svg" />',
+            empty_list_search: 'Nenhum amigo encontrado<p>Ops! Não encontramos ninguém com este nome. Que tal tentar de novo?</p><img src="img/bored.svg" />',
             placeholder: 'Procurar pelo nome ou por e-mail'
         },
         loan: {
@@ -115,7 +119,7 @@ angular.module("starter.config")
             my_books: 'Meus livros',
             friend_books: 'Livros de amigos',
             page: 'Página',
-            empty_list: 'Ainda não foram feitos empréstimos',
+            empty_list: 'Nenhum empréstimo<p>Nenhum livro seu está emprestado. Que tal indicar um livro incrível para um amigo?</p><img src="img/official.svg" />',
 
             toast_request_cancel: 'Solicitação cancelada!',
             toast_request: 'Solicitação enviada!',
@@ -123,7 +127,7 @@ angular.module("starter.config")
             toast_request_loan: 'Solicitação enviada!',
             title_loan: 'Empréstimo',
 
-            msg_loan_info: 'Empréstimo realizado!<br />Agora entre em contato com seu amigo para efetuar a entrega do livro.',
+            msg_loan_info: 'Empréstimo realizado!<br />Entre em contato com seu amigo para combinar a entrega do livro.',
 
             option_day: 'Dia',
             option_week: 'Semana',
@@ -137,26 +141,38 @@ angular.module("starter.config")
 
             loading_loan: 'Emprestando'
 
+        },
+        recommend: {
+            title: 'Recomendação',
+            empty_list: 'Não encontrou seu amigo? Talvez ele ainda não conheça o <strong>Livrio</strong>! Utilize a opção abaixo para enviar a recomendação através de outras redes.</p><img src="img/bored.svg" />',
 
-            
 
+            toast_request: 'Recomendação enviada!'
 
         },
         notification: {
             title: 'Notificações',
             empty_list: 'Você não tem nenhuma notificação',
 
-            msg_loan_request: '<span>{0}</span> solicitou empréstimo do livro <span>{1}</span>',
+            msg_loan_request: '<span>{0}</span> pediu emprestado <span>{1}</span>',
             msg_loan_confirm_yes: '<span>{0}</span> já entregou o livro <span>{1}</span>',
             msg_loan_confirm_no: '<span>{0}</span> cancelou o empréstimo do livro <span>{1}</span>',
-            msg_loan_request_return: '<span>{0}</span> solicitou devolução do livro <span>{1}</span>',
+            msg_loan_request_return: '<span>{0}</span> quer seu livro de volta. Entre em contato para combinar a devolução. <span>{1}</span>',
             msg_loan_return_confirm: '<span>{0}</span> devolveu o livro <span>{1}</span>',
             msg_loan_confirm: '<span>{0}</span> deseja te emprestar o livro <span>{1}</span>',
             msg_request_friend: '<span>{0}</span> quer ser seu amigo no Livrio.',
             msg_friend: '<span>{0}</span> é seu amigo agora.',
+            msg_friend_like_book: '<span>{0}</span> curtiu seu livro <span>{1}</span>',
+            msg_friend_recommend_book: '<span>{0}</span> te recomendou o livro <span>{1}</span>',
 
             msg_loan_sent_canceled: '<span>{0}</span> cancelou o empréstimo do livro <span>{1}</span>',
             msg_loan_sent_refused: '<span>{0}</span> recusou o empréstimo do livro <span>{1}</span>',
+
+            msg_system_library_empty: '<span>{0}</span> você ainda não cadastrou nenhum livro. Cadastre e compartilhe com seus amigos!',
+
+            msg_system_first_book: 'Parabéns <span>{0}</span>! Você cadastrou seu primeiro livro. Que tal agora convidar seus amigos?',
+
+            msg_system_welcome: 'Olá <span>{0}</span>, seja bem vindo ao <strong>Livrio.</strong> Por aqui, a gente compartilha livros com quem também ama livros. Eu vou te ajudar a cadastrar os seus e libertá-los para o mundo.',
 
             time_now: 'agora',
             time_minute: 'há 1 minuto',
@@ -170,27 +186,27 @@ angular.module("starter.config")
             question_friend_title: 'Solicitação de amizade',
             question_friend_yes: 'Aceitar',
             question_friend_no: 'Recusar',
-            question_friend_msg: 'Você deseja aceitar a soliciação de amizade de <strong>{0}</strong>'
+            question_friend_msg: 'Você deseja se conectar com <strong>{0}</strong>'
 
         },
         search: {
             loading: 'Pesquisando',
             title: 'Procurar livros',
             placeholder: 'Título, Autor, Editora, ISBN...',
-            empty_list: 'Utilize o campo acima para pesquisar',
-            empty_search: 'não encontramos nenhum livro que corresponda a sua busca',
+            empty_list: '<p>Utilize o campo acima para encontrar seu livro</p><img src="img/official.svg" />',
+            empty_search: 'Nenhum livro encontrado<p>Ops! Parece que ninguém tem o livro que você está procurando. Faça uma nova busca, conferindo os dados do livro.</p><img src="img/bored.svg" />',
             page: 'Páginas',
             book_friend: 'Livros de amigos'
         },
         book: {
             isbn: 'ISBN',
-            author: 'Autor(res)',
+            author: 'Autor(a)',
             page: 'Páginas',
             publisher: 'Editora',
             synopsis: 'Sinopse',
             late:'Devolução atrasada',
             btn_start_loan: 'Emprestar este livro',
-            btn_request_book: 'Solicitar este livro emprestado',
+            btn_request_book: 'pedir emprestado',
             date: 'Data',
             days: 'Dias restantes',
             btn_cancel_request: 'Cancelar solicitação',
@@ -234,7 +250,7 @@ angular.module("starter.config")
         },
         shelf: {
             page: 'Página',
-            empty_list: 'Nenhum livro nesta estante',
+            empty_list: 'Estante vazia. <p>Clique no <i class="ion ion-plus"></i> para começar ou organize os já cadastrados.</p><img src="img/official.svg" />',
             popup_create_title: 'Nova estante',
             popup_create_msg: 'Qual o nome da estante?',
             popup_create_cancel: 'Cancelar',

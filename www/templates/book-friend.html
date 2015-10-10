@@ -4,7 +4,22 @@
     {{friend.fullname}}
     </ion-nav-title>
     
-  <ion-content>
+  <ion-content ng-class="{'bg':!loading}">
+    <div class="hero slide-up" ng-style="cover">
+        <div class="content">
+            
+            <div class="avatar" ng-style="photo">
+                
+            </div>
+            <h3><a  class="light">{{friend.fullname}}</a></h3>
+        </div>
+
+
+        
+    </div>
+
+
+
      <ion-refresher pulling-text="{{'refresh' | translate}}" on-refresh="onRefresh()">
     </ion-refresher>
 
@@ -14,9 +29,29 @@
     </div>
 
     
+    <div class="list">
+        <div class="item tabs tabs-secondary tabs-icon-top bar-option">
 
-    <book ng-repeat="item in librarys" book="item"></book>
+            <a class="tab-item" >
+            <i class="icon ion-thumbsup"></i>
+            curtir
+            </a>
 
+
+
+            <a class="tab-item" >
+            <i class="icon ion-share"></i>
+            Recomendar
+            </a>
+
+            <a class="tab-item" >
+            <i class="icon ion-chatboxes"></i>
+            Comentários
+            </a>
+        </div>
+
+        <book ng-repeat="item in librarys" book="item"></book>
+    </div>
 
     <div class="notice-library-empty" ng-show="librarys.length==0 && !loading">
 

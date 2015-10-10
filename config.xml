@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="io.livr.app" version="1.1.6" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="io.livr.app" version="1.2.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Livrio</name>
   <description>
         Livr.io Cultura e Conhecimento
@@ -9,29 +9,29 @@
     </author>
   <content src="index.html"/>
   <access origin="*"/>
-
-
   <preference name="SplashScreen" value="screen"/>
   <preference name="Orientation" value="portrait"/>
-  <preference name="fullscreen" value="true"/>
+  <preference name="fullscreen" value="false"/>
   <preference name="android-minSdkVersion" value="16"/>
   <preference name="android-installLocation" value="auto"/>
   <preference name="SplashScreenDelay" value="3000"/>
-
-
   <platform name="android">
+    <splash density="port-ldpi" src="resources/android/splash/drawable-port-ldpi-screen.png"/>
+    <splash density="port-mdpi" src="resources/android/splash/drawable-port-mdpi-screen.png"/>
+    <splash density="port-hdpi" src="resources/android/splash/drawable-port-hdpi-screen.png"/>
+    <splash density="port-xhdpi" src="resources/android/splash/drawable-port-xhdpi-screen.png"/>
+    <splash density="port-xxhdpi" src="resources/android/splash/drawable-port-xxhdpi-screen.png"/>
+    <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png"/>
     <icon src="resources/android/icon/drawable-ldpi-icon.png" density="ldpi"/>
     <icon src="resources/android/icon/drawable-mdpi-icon.png" density="mdpi"/>
     <icon src="resources/android/icon/drawable-hdpi-icon.png" density="hdpi"/>
     <icon src="resources/android/icon/drawable-xhdpi-icon.png" density="xhdpi"/>
     <icon src="resources/android/icon/drawable-xxhdpi-icon.png" density="xxhdpi"/>
     <icon src="resources/android/icon/drawable-xxxhdpi-icon.png" density="xxxhdpi"/>
-    <splash src="resources/android/splash/drawable-port-ldpi-screen.png" density="port-ldpi"/>
-    <splash src="resources/android/splash/drawable-port-mdpi-screen.png" density="port-mdpi"/>
-    <splash src="resources/android/splash/drawable-port-hdpi-screen.png" density="port-hdpi"/>
-    <splash src="resources/android/splash/drawable-port-xhdpi-screen.png" density="port-xhdpi"/>
-    <splash src="resources/android/splash/drawable-port-xxhdpi-screen.png" density="port-xxhdpi"/>
-    <splash src="resources/android/splash/drawable-port-xxxhdpi-screen.png" density="port-xxxhdpi"/>
   </platform>
   <icon src="resources/android/icon/drawable-xhdpi-icon.png"/>
+  <plugin name="cordova-plugin-facebook4" spec="./cordova-plugin-facebook4">
+    <variable name="APP_ID" value="708951699200694"/>
+    <variable name="APP_NAME" value="Livrio"/>
+  </plugin>
 </widget>

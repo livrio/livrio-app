@@ -1,11 +1,15 @@
 angular.module("starter.controllers")
 
-.controller("libraryCtrl", function($scope, $rootScope, $ionicActionSheet, BOOK) {
+.controller("libraryCtrl", function($scope, $rootScope, $ionicActionSheet, $filter, BOOK) {
 
 
     $scope.librarys = [];
 
     $scope.loading = true;
+
+    var trans = $filter('translate');
+
+    $scope.empty_list = trans('library.empty_list');
 
 
     $scope.onRefresh = function() {

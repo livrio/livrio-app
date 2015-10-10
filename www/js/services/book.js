@@ -6,6 +6,42 @@ angular.module('starter.services',[])
     var trans = $filter('translate');
 
 
+    self.like = function(book) {
+        var type = book.is_like ? 'delete' : 'post';
+        var deferred = $q.defer();
+        $http[type](settings.URL.BOOK + "/" + book.id + '/like')
+        .success(function(response) {
+            if (!response.errors) {
+                response.data.author = response.data.author.join(", ");
+                deferred.resolve(response.data);
+            }
+            else {
+                deferred.resolve(book);
+            }
+        });
+        return deferred.promise;
+    }
+
+    self.recommend = function(book, friend) {
+
+        var deferred = $q.defer();
+        var post = {
+            friend: friend
+        }
+        $http.post(settings.URL.BOOK + "/" + book.id + '/recommend',post)
+        .success(function(response) {
+            if (!response.errors) {
+                deferred.resolve(true);
+                $cordovaToast.showLongBottom(trans('recommend.toast_request')).then(function() {});
+            }
+            else {
+                deferred.resolve(false);
+            }
+        });
+        return deferred.promise;
+    }
+
+
     self.delete = function(book) {
         $ionicPopup.confirm({
             title: trans('book.question_delete'),
@@ -215,10 +251,10 @@ angular.module('starter.services',[])
             ];
 
         if (book.loaned) {
-            options.push({ text: "<i class=\"icon ion-arrow-swap\"></i> " + trans('book.sheet_request_return') });
+            //options.push({ text: "<i class=\"icon ion-arrow-swap\"></i> " + trans('book.sheet_request_return') });
         }
         else {
-            options.push({ text: "<i class=\"icon ion-arrow-swap\"></i> " + trans('book.sheet_loan') });
+            //options.push({ text: "<i class=\"icon ion-arrow-swap\"></i> " + trans('book.sheet_loan') });
         }
 
         $ionicActionSheet.show({
@@ -235,12 +271,6 @@ angular.module('starter.services',[])
                     self.update(book);
                 }
                 else if (index === 1) {
-                    self.changeCover(book, true)
-                    .then(function(url) {
-                        book.thumb = url;
-                    });
-                }
-                else if (index === 2) {
                     if (book.loaned) {
                         self.requestReturn(book);
                     }

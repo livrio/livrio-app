@@ -1,6 +1,7 @@
 "use strict";
-// var DOMAIN_API = "http://livrio.codeway.in/v1";
 var DOMAIN_API = "http://api.livr.io/v1";
+DOMAIN_API = "http://livrio.codeway.in/v1";
+
 angular.module("starter.config",[
     'pascalprecht.translate'
     ])
@@ -20,20 +21,13 @@ angular.module("starter.config",[
     },
     iOSApiKey: "961755098-c1f2cioji268glhuflmeil69trs5eudg.apps.googleusercontent.com"
 })
-.config(function($stateProvider, $httpProvider, $urlRouterProvider, $ionicConfigProvider, $ionicAppProvider, $translateProvider) {
+.config(function($stateProvider, $httpProvider, $urlRouterProvider, $translateProvider, $ionicConfigProvider) {
 
     
 
     $translateProvider.preferredLanguage("pt");
     $translateProvider.fallbackLanguage("pt");
 
-    // Identify app
-    $ionicAppProvider.identify({
-        app_id: "857a12a1",
-        api_key: "12ca9539c91f4361d908faf486ce3ff0109232db40100f89",
-        gcm_id: '966956371758'
-        // ,dev_push: true
-    });
 
     // $ionicConfigProvider.views.maxCache(10);
     // $ionicConfigProvider.views.forwardCache(true);
@@ -109,6 +103,16 @@ angular.module("starter.config",[
             "menuContent": {
                 templateUrl: "templates/book-loan.html",
                 controller: "loanAddCtrl"
+            }
+        }
+    })
+
+    .state("app.recommend", {
+        url: "/recommend",
+        views: {
+            "menuContent": {
+                templateUrl: "templates/book-recommend.html",
+                controller: "recommendCtrl"
             }
         }
     })

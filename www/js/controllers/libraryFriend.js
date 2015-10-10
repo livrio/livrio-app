@@ -13,6 +13,13 @@ angular.module("starter.controllers")
     FRIEND.view(id)
     .then(function(friend) {
         $scope.friend = friend;
+
+        $scope.cover = {
+            'background-image': 'url(' + friend.cover + ')'
+        };
+        $scope.photo = {
+            'background-image': 'url(' + friend.photo + ')'
+        };
         console.log(friend.fullname);
         $ionicNavBarDelegate.title(friend.fullname);
         $scope.onRefresh();

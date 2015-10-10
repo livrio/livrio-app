@@ -1,0 +1,32 @@
+.tabs-secondary a {
+    color: #080C15;
+
+    text-transform: uppercase;
+    font-weight: 500;
+    max-width: initial;
+
+    &.success{
+        color: #1B5E20;
+    }
+
+    &.danger{
+        color: #B71C1C;
+    }
+}
+
+.tab-item.active {
+    opacity: 1;
+    color: #4485F3;
+}
+
+
+.has-header{
+    top: 50px;
+}
+
+
+.bg {
+    background-color: #c7b299;
+}
+
+

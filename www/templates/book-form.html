@@ -1,4 +1,4 @@
-<form ng-submit="doSave(formLibrary)" name="formLibrary" novalidate>
+
 <ion-view >
 
     <ion-nav-bar class="bar-assertive">
@@ -10,14 +10,13 @@
         </ion-nav-title>
 
         <ion-nav-buttons side="right">
-            <button class="button button-clear" style="font-weight: 500;">
-                {{'book_form.btn_save' | translate}}
-            </button>
+            <button type="button" class="button button-clean icon ion-ios-barcode-outline" ng-click="doScan()"></button>
         </ion-nav-buttons>
+
 
     </ion-nav-bar>
 
-
+<form ng-submit="doSave(formLibrary)" name="formLibrary" novalidate>
   <ion-content class="book-form">
 
             <div class="list">
@@ -26,13 +25,9 @@
 
             
 
-                <div class="item item-input isbn" ng-class="{ 'has-error' : formLibrary.isbn.$invalid && formLibrary.$submitted}">
+                <div class="item item-input item-stacked-label" ng-class="{ 'has-error' : formLibrary.isbn.$invalid && formLibrary.$submitted}">
                     <span class="input-label">{{'book_form.field_isbn' | translate}}</span>
-                    <input type="text"  name="isbn" ng-model="form.isbn" ng-readonly="form.id" required>
-
-                    <button type="button" class="button button-scan" ng-click="doScan()" ng-hide="form.id">
-                        <i class="icon ion-ios-barcode-outline"></i>
-                    </button>
+                    <input ng-blur="doScan(formLibrary.isbn)"  type="text"  name="isbn" ng-model="form.isbn" ng-readonly="form.id" required>
                 </div>
                 <div class="form-errors" ng-messages="formLibrary.isbn.$error" ng-show="formLibrary.$submitted">
                   <div class="form-error" ng-message="required">{{'book_form.field_isbn' | translate}} {{'required_field' | translate}}</div>
@@ -111,5 +106,8 @@
 
   </ion-content>
 
-</ion-view>
+  <button type="submit" class="button button-float">
+        <i class="icon ion-checkmark"></i>
+    </button>
 </form>
+</ion-view>

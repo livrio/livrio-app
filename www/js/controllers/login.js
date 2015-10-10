@@ -40,7 +40,7 @@ angular.module('starter.controllers', [])
     function firstLogin(name) {
 
         $ionicPopup.alert({
-            template: '<img src="img/livrio1.png" />' + String.format(trans('welcome'),name)
+            template: String.format(trans('welcome'),name) + '<div style="text-align: center;margin-top: 20px;"><img src="img/official.svg" style="width:130px"/></div>'
         }).then(function() {});
     }
 
