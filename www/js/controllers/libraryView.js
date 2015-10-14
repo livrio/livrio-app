@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-.controller('libraryViewCtrl', function($scope, $rootScope, $stateParams, $ionicHistory, $ionicPopover, $ionicPopup, $filter, BOOK, LOAN) {
+.controller('libraryViewCtrl', function($scope, $rootScope, $stateParams, $ionicHistory, $ionicPopover, $ionicPopup, $filter, BOOK, LOAN, FRIEND) {
 
     var id = $stateParams.id;
 
@@ -21,6 +21,7 @@ angular.module('starter.controllers')
             $rootScope.bookView = data;
         });
     }
+
 
 
 

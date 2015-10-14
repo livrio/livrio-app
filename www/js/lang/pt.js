@@ -7,28 +7,17 @@ angular.module("starter.config")
         required_field: 'é obrigatório',
         refresh: 'Atualizar',
         loading: 'Carregando',
-<<<<<<< HEAD
-        //
-
         welcome: 'Olá <strong>{0}</strong>, seja bem vindo ao <strong>Livrio.</strong> Por aqui, a gente compartilha livros com quem também ama livros. Eu vou te ajudar a cadastrar os seus e libertá-los para o mundo.',
         offline: 'Você precisa estar conectado a internet. Por favor verifique sua conexão',
         backbutton: 'Precione o botão voltar para sair',
-=======
-        welcome: 'Olá <strong>{0}</strong>! Seja bem vindo ao <strong>Livrio</strong>, uma rede de compartilhamento de livros entre amigos. Cadastre seus livros para que eles fiquem disponíveis para seus amigos.',
-        offline: 'Oops, parece que você não está conectado à Internet. Por favor verifique sua conexão de dados e tente novamente.',
-        backbutton: 'Pressione o botão voltar para sair',
->>>>>>> aaa0dc581464dc6314430c1c38c9b88861d2e537
+
 
         login: {
             loading_login: 'Entrando',
             loading_create: 'Cadastrando',
             loading_facebook: 'Conectando ao Facebook',
             email_duplicate: '<strong>Email</strong> já cadastrado!',
-<<<<<<< HEAD
             login_invalid: 'Ops! E-mail ou senha incorretos. Que tal tentar de novo?',
-=======
-            login_invalid: 'O <strong>email</strong> ou <strong>senha</strong> digitados estão incorretos. Por favor, verifique os dados digitados.',
->>>>>>> aaa0dc581464dc6314430c1c38c9b88861d2e537
 
             tab_login: 'Entrar',
             tab_create: 'Criar conta',
@@ -44,11 +33,7 @@ angular.module("starter.config")
         },
 
         menu: {
-<<<<<<< HEAD
             my_books: 'Meus livros',
-=======
-            my_books: 'Minha biblioteca',
->>>>>>> aaa0dc581464dc6314430c1c38c9b88861d2e537
             my_friends: 'Amigos',
             my_loans: 'Empréstimos',
             notifications: 'Notificações',
@@ -77,11 +62,7 @@ angular.module("starter.config")
             field_phone:'Celular',
             gender_male: 'Masculino',
             gender_female: 'Feminino',
-<<<<<<< HEAD
             info: 'Fique tranquilo. Suas informações só serão utilizadas para sugerir livros que tenham mais a ver com você!',
-=======
-            info: 'Suas informações pessoais são utilizadas para sugerirmos livros que melhor se adequam a você.',
->>>>>>> aaa0dc581464dc6314430c1c38c9b88861d2e537
 
             sheet_title: 'Foto de perfil',
             sheet_cancel: 'Cancelar',
@@ -115,38 +96,22 @@ angular.module("starter.config")
             book: 'Livros',
 
             //listagem de livros de amigos
-<<<<<<< HEAD
-            empty_list_book: '{0} não disponibilizou nenhum livro ainda. Envie um lembrete para ter acesso à sua estante.',
-=======
-            empty_list_book: 'Seu amigo ainda não cadastrou nenhum livro :(',
->>>>>>> aaa0dc581464dc6314430c1c38c9b88861d2e537
+            empty_list_book: 'Nenhum livro encontrado<p>Seu amigo ainda não cadastrou nenhum livro.</p><img src="img/bored.svg" />',
             page: 'Páginas',
 
             toast_request_friend: 'Solicitação enviada!',
             toast_friend: 'Vocês são amigos agora!',
 
-<<<<<<< HEAD
             invite_msg: 'Oi, agora todos os meus livros estão disponíveis no Livrio e você pode pedir emprestado a hora que quiser.',
             invite_subject: 'Vem ver',
             invite_link: 'http://onelink.to/dqgt6e'
-=======
-            invite_msg: 'Todos os meus livros estão agora disponíveis no Livrio!',
-            invite_subject: 'Conheça meus livros',
-            invite_link: 'https://goo.gl/XQHPDi'
->>>>>>> aaa0dc581464dc6314430c1c38c9b88861d2e537
 
         },
         add_friend: {
             title: 'Encontrar amigos',
-<<<<<<< HEAD
             empty_list: '<p>Utilize o campo acima para encontrar seu amigo</p><img src="img/official.svg" />',
             empty_list_search: 'Nenhum amigo encontrado<p>Ops! Não encontramos ninguém com este nome. Que tal tentar de novo?</p><img src="img/bored.svg" />',
             placeholder: 'Procurar pelo nome ou por e-mail'
-=======
-            empty_list: 'Utilize a pesquisa',
-            empty_list_search: 'Não há usuários com este nome',
-            placeholder: 'Procure pelo nome ou por e-mail'
->>>>>>> aaa0dc581464dc6314430c1c38c9b88861d2e537
         },
         loan: {
             title: 'Empréstimos',
@@ -177,11 +142,19 @@ angular.module("starter.config")
 
         },
         recommend: {
-            title: 'Recomendação',
-            empty_list: 'Não encontrou seu amigo? Talvez ele ainda não conheça o <strong>Livrio</strong>! Utilize a opção abaixo para enviar a recomendação através de outras redes.</p><img src="img/bored.svg" />',
+            title: 'Recomendar livro',
+            empty_search: 'Não encontrou seu amigo? <p>Talvez ele ainda não conheça o <strong>Livrio</strong>! Utilize a botão <i class="ion ion-android-share-alt"></i> acima para enviar a recomendação através de outras redes.</p><img src="img/bored.svg" />',
 
 
-            toast_request: 'Recomendação enviada!'
+            toast_request: 'Recomendação enviada!',
+
+            loading: 'Pesquisando',
+            placeholder: 'Procurar amigo...',
+            empty_list: '<p>Utilize o campo acima para encontrar seu amigo.</p><img src="img/official.svg" />',
+
+            invite_msg: 'Seu amigo {0} recomendou o livro {1} para você ler. Solicite empréstimo através do Livrio!',
+            invite_subject: '{0} te recomendou um livro',
+            invite_link: 'http://onelink.to/dqgt6e'
 
         },
         notification: {
@@ -227,13 +200,8 @@ angular.module("starter.config")
             loading: 'Pesquisando',
             title: 'Procurar livros',
             placeholder: 'Título, Autor, Editora, ISBN...',
-<<<<<<< HEAD
             empty_list: '<p>Utilize o campo acima para encontrar seu livro</p><img src="img/official.svg" />',
             empty_search: 'Nenhum livro encontrado<p>Ops! Parece que ninguém tem o livro que você está procurando. Faça uma nova busca, conferindo os dados do livro.</p><img src="img/bored.svg" />',
-=======
-            empty_list: 'Utilize o campo acima para pesquisar',
-            empty_search: 'não encontramos nenhum livro que corresponda à sua busca',
->>>>>>> aaa0dc581464dc6314430c1c38c9b88861d2e537
             page: 'Páginas',
             book_friend: 'Livros de amigos'
         },

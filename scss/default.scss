@@ -30,3 +30,23 @@
 }
 
 
+
+.no-header {
+    .nav-bar-block{
+        display: none;
+    }
+
+    .has-header{
+        top: 0px;
+    }
+
+    .back-button{
+        position: absolute;
+        color: #fff;
+        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.67);
+    }
+
+    .notice-library-empty {
+        position: inherit;
+    }
+}

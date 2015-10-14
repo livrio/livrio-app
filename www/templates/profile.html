@@ -10,15 +10,19 @@
 
   <ion-content class="profile-view">
 
-        <div class="hero slide-up" ng-style="cover">
-            <div class="content">
-                <button type="button" class="button button-icon button-photo" ng-click="onCover()">
+        <div class="hero">
+        <button type="button" class="button button-icon button-photo" ng-click="onCover()">
                     <i class="icon ion-android-camera"></i>
                 </button>
+            <div class="cover" ng-style="cover">
+
+            </div>
+            <div class="content">
+                
                 <div class="avatar" ng-style="photo" ng-click="onPicture()">
                     
                 </div>
-                <h3><a  class="light">{{form.fullname}}</a></h3>
+                <h3>{{form.fullname}}</h3>
             </div>
 
             

@@ -1,6 +1,6 @@
 angular.module("starter.controllers")
 
-.controller("libraryFriendCtrl", function($scope, $ionicNavBarDelegate, $ionicHistory, $stateParams, $rootScope, $http, $ionicPopup, $ionicLoading, FRIEND, BOOK, settings) {
+.controller("libraryFriendCtrl", function($scope, $ionicNavBarDelegate, $ionicHistory, $stateParams, $rootScope, $http, $ionicPopup, $filter, $ionicLoading, FRIEND, BOOK, settings) {
 
     $scope.librarys = [];
 
@@ -9,6 +9,10 @@ angular.module("starter.controllers")
     $scope.loading = true;
 
     $scope.friend = {};
+
+    var trans = $filter('translate');
+
+    $scope.empty_list = trans('friends.empty_list_book');
 
     FRIEND.view(id)
     .then(function(friend) {

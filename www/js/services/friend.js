@@ -1,5 +1,5 @@
 angular.module('starter.services')
-.factory('FRIEND', ['$http', '$q',  '$cordovaToast', '$filter', 'settings', function($http, $q, $cordovaToast, $filter, settings) {
+.factory('FRIEND', ['$http', '$q',  '$cordovaToast', '$filter', '$ionicModal','settings', function($http, $q, $cordovaToast, $filter, $ionicModal, settings) {
 
     var self = this;
 
@@ -123,6 +123,16 @@ angular.module('starter.services')
         });
 
         return deferred.promise;
+    };
+
+
+    self.showModal = function(scope, book) {
+        $ionicModal.fromTemplateUrl('templates/modal-friend.html', {
+            scope: scope,
+            animation: 'slide-in-up'
+        }).then(function(modal) {
+            modal.show();
+        });
     };
 
     return self;
