@@ -256,12 +256,13 @@ angular.module('starter.services')
 
         push.on('notification', function(data) {
             console.log(JSON.stringify(data));
+            
+            self.all();
+            self.markView();
             if (!data.additionalData.foreground) {
                 window.location = '#/app/notification';
             }
 
-            self.all();
-            self.markView();
 
         });
         /*

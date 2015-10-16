@@ -4,9 +4,9 @@ angular.module('starter.controllers', [])
 
     var trans = $filter('translate');
 
-    document.addEventListener("deviceready", function() {
-        window.analytics.trackView('login_start');
-    });
+    // document.addEventListener("deviceready", function() {
+    //     window.analytics.trackView('login_start');
+    // });
 
     $scope.tab = 0;
 
@@ -122,7 +122,7 @@ angular.module('starter.controllers', [])
 
             },
             function(p) {
-                $ionicLoading.hide();
+                hideLoading();
 
                 if (p.email) {
                     $ionicPopup.alert({

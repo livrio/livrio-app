@@ -1,16 +1,17 @@
 
 
-<ion-view title="{{'profile.title' | translate}}">
+<ion-view class="no-header">
+   <ion-nav-bar>
 
-<ion-nav-buttons side="right">
-            <button type="button" class="button button-clear" style="font-weight: 500;" on-touch="onSave()">
-                {{'profile.btn_save' | translate}}
-            </button>
-        </ion-nav-buttons>
+   </ion-nav-bar>
+
 
   <ion-content class="profile-view">
 
         <div class="hero">
+         <button ng-click="onMenu()" class="button back-button buttons   button-clear header-item">
+            <i class="icon ion-navicon"></i>
+        </button>
         <button type="button" class="button button-icon button-photo" ng-click="onCover()">
                     <i class="icon ion-android-camera"></i>
                 </button>
@@ -23,6 +24,7 @@
                     
                 </div>
                 <h3>{{form.fullname}}</h3>
+                <h4>livros {{user.amount_book}}</h4>
             </div>
 
             

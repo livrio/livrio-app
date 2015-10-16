@@ -81,7 +81,8 @@ angular.module("starter.config")
             allow_notification_push: 'Permitir notificações push',
             allow_notification_email: 'Permitir notificações por email',
             allow_accept_friend_facebook: 'Vincular amizades do Facebook',
-            allow_connect_facebook: 'Conectado ao Facebook'
+            allow_connect_facebook: 'Conectado ao Facebook',
+            enable_isbn_default: 'Habilitar leitor de ISBN como padrão'
         },
         library: {
             title: 'Meus livros',
@@ -104,7 +105,7 @@ angular.module("starter.config")
 
             invite_msg: 'Oi, agora todos os meus livros estão disponíveis no Livrio e você pode pedir emprestado a hora que quiser.',
             invite_subject: 'Vem ver',
-            invite_link: 'http://onelink.to/dqgt6e'
+            invite_link: 'http://livr.io/get'
 
         },
         add_friend: {
@@ -128,6 +129,8 @@ angular.module("starter.config")
 
             msg_loan_info: 'Empréstimo realizado!<br />Entre em contato com seu amigo para combinar a entrega do livro.',
 
+
+
             option_day: 'Dia',
             option_week: 'Semana',
             option_month: 'Mês',
@@ -141,6 +144,20 @@ angular.module("starter.config")
             loading_loan: 'Emprestando'
 
         },
+
+        loaned: {
+            title: 'Emprestar livro',
+            empty_search: 'Não encontrou seu amigo? <p>Talvez ele ainda não conheça o <strong>Livrio</strong>! Utilize a botão <i class="ion ion-android-share-alt"></i> acima para enviar um convite.</p><img src="img/bored.svg" />',
+
+
+            loading: 'Pesquisando',
+            placeholder: 'Procurar amigo...',
+            empty_list: '<p>Utilize o campo acima para encontrar seu amigo.</p><img src="img/official.svg" />',
+
+            invite_msg: 'Seu amigo {0} quer te emprestar o livro {1} para você ler. Peça emprestado através do Livrio!',
+            invite_subject: '{0} quer te emprestar um livro',
+            invite_link: 'http://livr.io/get'
+        },
         recommend: {
             title: 'Recomendar livro',
             empty_search: 'Não encontrou seu amigo? <p>Talvez ele ainda não conheça o <strong>Livrio</strong>! Utilize a botão <i class="ion ion-android-share-alt"></i> acima para enviar a recomendação através de outras redes.</p><img src="img/bored.svg" />',
@@ -152,9 +169,16 @@ angular.module("starter.config")
             placeholder: 'Procurar amigo...',
             empty_list: '<p>Utilize o campo acima para encontrar seu amigo.</p><img src="img/official.svg" />',
 
-            invite_msg: 'Seu amigo {0} recomendou o livro {1} para você ler. Solicite empréstimo através do Livrio!',
+            invite_msg: 'Seu amigo {0} recomendou o livro {1} para você ler. Peça emprestado através do Livrio!',
             invite_subject: '{0} te recomendou um livro',
-            invite_link: 'http://onelink.to/dqgt6e'
+            invite_link: 'http://livr.io/get'
+
+        },
+        comment: {
+            title: 'Comentários',
+            placeholder: 'Escreva aqui',
+            empty_list: 'Nenhum comentário? <p>Seja o primeiro a comentar este livro.</p><img src="img/official.svg" />'
+
 
         },
         notification: {
@@ -162,7 +186,7 @@ angular.module("starter.config")
             empty_list: 'Você não tem nenhuma notificação',
 
             msg_loan_request: '<span>{0}</span> pediu emprestado <span>{1}</span>',
-            msg_loan_confirm_yes: '<span>{0}</span> já entregou o livro <span>{1}</span>',
+            msg_loan_confirm_yes: '<span>{0}</span> já entregou o livro? <span>{1}</span>',
             msg_loan_confirm_no: '<span>{0}</span> cancelou o empréstimo do livro <span>{1}</span>',
             msg_loan_request_return: '<span>{0}</span> quer seu livro de volta. Entre em contato para combinar a devolução. <span>{1}</span>',
             msg_loan_return_confirm: '<span>{0}</span> devolveu o livro <span>{1}</span>',

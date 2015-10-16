@@ -10,5 +10,6 @@ rm -f Livrio.apk
 
 
 #keytool -exportcert -alias livrio -keystore livrio-production.keystore | openssl sha1 -binary | openssl base64
+#keytool -genkey -v -keystore my-release-key.keystore -alias alias_name -keyalg RSA -keysize 2048 -validity 10000
 
 #./device

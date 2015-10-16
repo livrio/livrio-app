@@ -97,6 +97,8 @@ angular.module("starter.controllers")
         $scope.title = trans('book_form.title_create');
         prepareShelfForm($scope.form.shelfs);
         valueShelfsForm();
+
+
     }
     else {
         var updateBook = angular.copy($rootScope.bookUpdate);
@@ -330,6 +332,14 @@ angular.module("starter.controllers")
         }
         $scope.modalShelf.hide();
     };
+
+    if (!id) {
+        var config = $rootScope.user.config;
+        console.log(config);
+        if (config.enableIsbnDefault) {
+            $scope.doScan();
+        }
+    }
 
 
 

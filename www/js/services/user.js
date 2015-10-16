@@ -92,10 +92,10 @@ angular.module("starter.services")
                 deferred.resolve(response.data.user);
                 self.updateLocation();
 
-                document.addEventListener("deviceready", function() {
-                    window.analytics.trackView('login_end');
-                    window.analytics.setUserId(response.data.user.id);
-                });
+                // document.addEventListener("deviceready", function() {
+                //     window.analytics.trackView('login_end');
+                //     window.analytics.setUserId(response.data.user.id);
+                // });
             }
             else {
                 deferred.reject(response);

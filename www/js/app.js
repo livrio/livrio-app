@@ -74,7 +74,7 @@ angular.module('starter', [
 
 
     document.addEventListener("deviceready", function() {
-        window.analytics.startTrackerWithId('UA-65249891-2');
+        // window.analytics.startTrackerWithId('UA-65249891-2');
 
         cordova.getAppVersion.getVersionNumber().then(function (version) {
             console.log(version);

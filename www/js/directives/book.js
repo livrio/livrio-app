@@ -197,7 +197,7 @@ angular.module("starter.directives",[])
         else if (status == 'sent_canceled') {
             $ionicPopup.prompt({
                 title: 'Cancelar empréstimo',
-                template: String.format('Você está cancelando o empréstimo do livro <strong>{0}</strong>. Informe o motivo do cancelamento para seu amigo.',book.title) + '<input ng-model="data.response" type="text" placeholder="Opcional">',
+                template: String.format('Você está cancelando o empréstimo do livro <strong>{0}</strong>. Informe o motivo do cancelamento para seu amigo.',book.title) + '<input ng-model="data.response" type="text" placeholder="Qual motivo?">',
                 cancelText: 'Cancelar',
                 okText: 'OK'
             }).then(function(res) {
@@ -212,7 +212,7 @@ angular.module("starter.directives",[])
         else if (status == 'sent_refused') {
             $ionicPopup.prompt({
                 title: 'Cancelar empréstimo',
-                template: String.format('Você está recusando o empréstimo do livro <strong>{0}</strong>. Informe o motivo da recusa para seu amigo.',book.title) + '<input ng-model="data.response" type="text" placeholder="Opcional">',
+                template: String.format('Você está recusando o empréstimo do livro <strong>{0}</strong>. Informe o motivo da recusa para seu amigo.',book.title) + '<input ng-model="data.response" type="text" placeholder="Qual motivo?">',
                 cancelText: 'Cancelar',
                 okText: 'OK'
             }).then(function(res) {
@@ -227,7 +227,7 @@ angular.module("starter.directives",[])
         else if (status == 'requested_denied') {
             $ionicPopup.prompt({
                 title: 'Recusar empréstimo',
-                template: String.format('Você está recusando o empréstimo do livro <strong>{0}</strong>. Informe o motivo da recusa para seu amigo.',book.title) + '<input ng-model="data.response" type="text" placeholder="Opcional">',
+                template: String.format('Você está recusando o empréstimo do livro <strong>{0}</strong>. Informe o motivo da recusa para seu amigo.',book.title) + '<input ng-model="data.response" type="text" placeholder="Qual motivo?">',
                 cancelText: 'Cancelar',
                 okText: 'OK'
             }).then(function(res) {
@@ -242,7 +242,7 @@ angular.module("starter.directives",[])
         else if (status == 'wait_delivery') {
             $ionicPopup.prompt({
                 title: trans('loan.title_loan'),
-                template: trans('loan.msg_loan_info') + '<input ng-model="data.response" type="text" placeholder="Opcional">',
+                template: trans('loan.msg_loan_info') + '<input ng-model="data.response" type="text" placeholder="Escreva aqui uma mensagem">',
                 cancelText: 'Cancelar',
                 okText: 'OK'
             }).then(function(res) {

@@ -28,6 +28,13 @@
                     </p>
                 </ion-toggle>
 
+                <ion-toggle class="item-text-wrap" ng-model="config.enableIsbnDefault" toggle-class="toggle-calm" ng-change="onChangeField()">
+                    {{'config.enable_isbn_default' | translate}}
+                    <p>
+                        Se habilitado o leitor de código de barras (ISBN) será a opção padrão de cadastro de novos livros.
+                    </p>
+                </ion-toggle>
+
                 <ion-toggle class="item-text-wrap" ng-model="user.is_facebook" toggle-class="toggle-calm" ng-change="onChangeFieldFacebook()">
                     {{'config.allow_connect_facebook' | translate}}
                     <p>

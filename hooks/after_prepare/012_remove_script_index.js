@@ -17,11 +17,13 @@ function removeScriptIndex(indexPath, platform) {
   try {
 
     var html = fs.readFileSync(indexPath, 'utf8');
-
+    ///microsoft/i
     html = html.replace('<script src="js/browser.js"></script>', '');
+    html = html.replace(/<script src\=\"js\/browser\.js\?ionicCachebuster\=[0-9]+\"\>\<\/script\>/, '');
 
     fs.writeFileSync(indexPath, html, 'utf8');
 
+    
     process.stdout.write('Remove Script index \n');
   } catch (e) {
     process.stdout.write(e);

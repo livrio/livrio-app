@@ -3,7 +3,7 @@
         {{bookView.title}}
     </ion-nav-title>
 
-  <ion-content class="book-view" >
+  <ion-content class="book-view bg-color" >
 
 
 
@@ -20,7 +20,7 @@
     
 
     <div class="list book-info">
-        <i class="btn-more icon ion-information-circled"></i>
+        <!-- <i class="btn-more icon ion-information-circled"></i> -->
         <div class="item">
             <img ng-src="{{bookView.thumb}}" class="cover">
 
@@ -50,7 +50,7 @@
             Recomendar
             </a>
 
-            <a class="tab-item" >
+            <a class="tab-item"  ui-sref="app.comment({id:bookView.id})">
             <i class="icon ion-chatboxes"></i>
             Comentários
             </a>

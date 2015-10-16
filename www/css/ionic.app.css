@@ -7757,8 +7757,11 @@ a.button {
 .has-header {
   top: 50px; }
 
-.bg {
-  background-color: #c7b299; }
+.has-subheader {
+  top: 88px; }
+
+.bg-color {
+  background-color: #efefef; }
 
 .no-header .nav-bar-block {
   display: none; }
@@ -7782,6 +7785,8 @@ a.button {
 .book-view .bar-option {
   padding: 16px 0;
   height: 80px; }
+  .book-view .bar-option small {
+    display: block; }
 .book-view .list {
   background: #fff;
   box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.24); }
@@ -8218,8 +8223,8 @@ ul.rating li i {
   border-radius: 4px; }
 .profile-view .button-photo {
   position: absolute;
-  top: -10px;
-  right: 20px;
+  top: 0px;
+  right: 10px;
   color: #fff; }
 .profile-view a.link {
   color: #333;
@@ -8450,3 +8455,16 @@ label.item.valid-lr {
     color: #656565;
     font-size: 12px;
     line-height: 14px; }
+
+.input-comment {
+  border-top: 1px solid #dcdcdc; }
+  .input-comment input {
+    padding-left: 25px !important; }
+  .input-comment .photo {
+    width: 32px;
+    height: 32px;
+    background-size: cover;
+    border-radius: 50%;
+    position: absolute;
+    left: 5px;
+    top: 9px; }

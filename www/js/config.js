@@ -117,6 +117,16 @@ angular.module("starter.config",[
         }
     })
 
+    .state("app.comment", {
+        url: "/comment",
+        views: {
+            "menuContent": {
+                templateUrl: "templates/book-comment.html",
+                controller: "commentCtrl"
+            }
+        }
+    })
+
 
 
     .state("app.privacy", {

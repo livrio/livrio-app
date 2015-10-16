@@ -41,6 +41,38 @@ angular.module('starter.services',[])
         return deferred.promise;
     }
 
+    self.comment = function(book, message) {
+
+        var deferred = $q.defer();
+        $http.post(settings.URL.BOOK + "/" + book.id + '/comment',{
+            message: message
+        })
+        .success(function(response) {
+            if (!response.errors) {
+                deferred.resolve(response.data);
+            }
+            else {
+                deferred.resolve([]);
+            }
+        });
+        return deferred.promise;
+    }
+
+    self.comments = function(book) {
+
+        var deferred = $q.defer();
+        $http.get(settings.URL.BOOK + "/" + book.id + '/comment')
+        .success(function(response) {
+            if (!response.errors) {
+                deferred.resolve(response.data);
+            }
+            else {
+                deferred.resolve([]);
+            }
+        });
+        return deferred.promise;
+    }
+
 
     self.delete = function(book) {
         $ionicPopup.confirm({

@@ -569,8 +569,8 @@ ul.rating li i {
     }
     .button-photo{
         position: absolute;
-        top: -10px;
-        right: 20px;
+        top: 0px;
+        right: 10px;
         color: #fff;
     }
 
@@ -935,5 +935,25 @@ label.item.valid-lr {
             font-size: 12px;
             line-height: 14px;
         }
+    }
+}
+
+
+.input-comment {
+    border-top: 1px solid $divider;
+
+    input{
+        padding-left: 25px !important;
+
+    }
+
+    .photo{
+        width: 32px;
+        height: 32px;
+        background-size: cover;
+        border-radius: 50%;
+        position: absolute;
+        left: 5px;
+        top: 9px;
     }
 }

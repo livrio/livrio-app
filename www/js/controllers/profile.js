@@ -1,7 +1,7 @@
 "use strict";
 
 angular.module('starter.controllers')
-.controller('profileCtrl', function( $scope, $rootScope, $ionicActionSheet, $http, $cordovaToast, $cordovaCamera, $filter, settings) {
+.controller('profileCtrl', function( $scope, $rootScope, $ionicSideMenuDelegate, $ionicActionSheet, $http, $cordovaToast, $cordovaCamera, $filter, settings) {
 
     var user = $rootScope.user;
     var trans = $filter('translate');
@@ -10,6 +10,10 @@ angular.module('starter.controllers')
     user.birthday = new Date(user.birthday + " 23:59:59");
     console.log(user.birthday);
     $scope.form = user;
+
+    $scope.onMenu = function(){
+        $ionicSideMenuDelegate.toggleLeft();
+    };
 
 
     $scope.$watch('form.photo',function(n) {
@@ -33,9 +37,6 @@ angular.module('starter.controllers')
         $cordovaToast.showLongBottom(trans('profile.toast_save')).then(function() {});
     };
 
-    $scope.onCover = function() {
-        onPicture(1, true);
-    };
 
     $scope.onPicture = function() {
         var hideSheet = $ionicActionSheet.show({
@@ -58,6 +59,32 @@ angular.module('starter.controllers')
             },
             buttonClicked: function(index) {
                 onPicture(index);
+                return true;
+            }
+        });
+    };
+
+    $scope.onCover = function() {
+        var hideSheet = $ionicActionSheet.show({
+            buttons: [
+                { text: "<i class=\"icon ion-android-camera\"></i> " + trans('profile.sheet_photo') },
+                { text: "<i class=\"icon ion-image\"></i> " + trans('profile.sheet_picture')}
+                
+            ],
+            destructiveText: "<i class=\"icon ion-trash-a\"></i> " + trans('profile.sheet_remove'),
+            titleText: trans('profile.sheet_title'),
+            cancelText: trans('profile.sheet_cancel'),
+            destructiveButtonClicked: function() {
+                save({
+                    cover_remove:  true
+                });
+                return true;
+            },
+            cancel: function() {
+                hideSheet();
+            },
+            buttonClicked: function(index) {
+                onPicture(index, true);
                 return true;
             }
         });
@@ -87,6 +114,7 @@ angular.module('starter.controllers')
             if (!response.errors) {
                 window.localStorage.user = JSON.stringify(response.data);
                 $rootScope.user = response.data;
+                $scope.form = $rootScope.user;
             }
             else {
                 $scope.form.photo = old;

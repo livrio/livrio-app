@@ -1,39 +1,37 @@
-<ion-view title="{{'book.title_loan' | translate}}">
+<ion-view title="{{'loaned.title' | translate}}">
+    
+    <form name="formSearch" novalidate>
+        <ion-header-bar class="bar-assertive item-input-inset  bar-subheader">
+            <label class="item-input-wrapper">
+            
+                <input type="search" placeholder="{{'loaned.placeholder' | translate}}" ng-keyup="onSearch(formSearch.word.$modelValue)" name="word" ng-model="word">
+                <button type="button" class="button button-icon icon button-small placeholder-icon" on-touch="onClean(formSearch)" ng-class="{'ion-android-close':searchStart, 'ion-android-search':!searchStart}">
+                </button>
+            </label>
+        </ion-header-bar>
+    </form>
+
     <ion-content>
 
-        <div class="wait-message" ng-show="loading">
-            <ion-spinner class="spinner-energized"></ion-spinner>
-            <span>{{loadText}}</span>
-        </div>
+    <div class="wait-message" ng-show="loading">
+        <ion-spinner class="spinner-energized"></ion-spinner>
+        <span>{{'loading' | translate}}</span>
+    </div>
 
 
+        <div class="list friend-list">
 
-        <div class="book-head" ng-hide="loading">
-            <h2>{{bookView.title}}</h2>
-            <h3>{{bookView.author}}</h3>
-        </div>
-
-
-
-        <ion-scroll direction="y" style="width: 100%; height: 100%">
-            <ion-refresher pulling-text="Atualizar" on-refresh="onRefresh()"></ion-refresher>
-            
-            <div class="list friend-list">
-
-                <div class="item item-avatar" ng-repeat="item in friends" ng-click="doLoan(item)" ng-hide="loading">
-                <img ng-src="{{item.photo}}" />
-                {{item.fullname}}
-                </div>
-
+            <div class="item item-avatar" ng-repeat="item in friends" ng-click="doLoan(item)" ng-hide="loading">
+            <img ng-src="{{item.photo}}" />
+            {{item.fullname}}
             </div>
 
-            <div class="notice-library-empty" ng-show="friends.length==0 && !loading">
+        </div>
 
-            Nenhum amigo
+        <div class="notice-library-empty" ng-hide="searchStart" ng-bind-html="empty_list"></div>
+        <div class="notice-library-empty" ng-show="friends.length==0 && searchStart"  ng-bind-html="empty_search"></div>
+    <div class="center" ng-show="friends.length==0 && searchStart"><button type="button" ng-click="doInvite()" class="button icon ion-android-share-alt button-recommend"></button></div>
 
-            </div>
-
-        </ion-scroll>
 
     </ion-content>
 </ion-view>

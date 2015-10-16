@@ -18,7 +18,28 @@
     "gulp-jshint": "~1.11.0"
   },
   "cordovaPlugins": [
-    "com.ionic.keyboard"
+    "com.ionic.keyboard",
+    "cordova-plugin-camera",
+    "cordova-plugin-geolocation",
+    "cordova-plugin-globalization",
+    "cordova-plugin-inappbrowser",
+    "cordova-plugin-whitelist",
+    
+    "nl.x-services.plugins.socialsharing",
+    "nl.x-services.plugins.toast",
+    "org.apache.cordova.splashscreen",
+    "cordova-plugin-app-version",
+    "phonegap-plugin-push",
+    "phonegap-plugin-barcodescanner",
+    {
+      "locator": "https://github.com/jeduan/cordova-plugin-facebook4",
+      "variables": {
+        "APP_ID": "708951699200694",
+        "APP_NAME": "Livrio"
+      }
+    }
+
+
   ],
   "cordovaPlatforms": [
     "android"
