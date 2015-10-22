@@ -9,7 +9,7 @@ angular.module("starter.config")
         loading: 'Carregando',
         welcome: 'Olá <strong>{0}</strong>, seja bem vindo ao <strong>Livrio.</strong> Por aqui, a gente compartilha livros com quem também ama livros. Eu vou te ajudar a cadastrar os seus e libertá-los para o mundo.',
         offline: 'Você precisa estar conectado a internet. Por favor verifique sua conexão',
-        backbutton: 'Precione o botão voltar para sair',
+        backbutton: 'Pressione o botão voltar para sair',
 
 
         login: {

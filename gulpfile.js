@@ -8,6 +8,7 @@ var rename = require('gulp-rename');
 var sh = require('shelljs');
 var jshint = require('gulp-jshint');
 var jscs = require('gulp-jscs');
+var angularTranslate = require('gulp-angular-translate');
 
 var paths = {
   sass: ['./scss/**/*.scss'],
@@ -43,6 +44,12 @@ gulp.task('watch', function() {
   gulp.watch(paths.sass, ['sass']);
 });
 
+
+gulp.task('trans', function() {
+  return gulp.src('www/templates/**/*.html')
+    .pipe(angularTranslate())
+    .pipe(gulp.dest('www/trans'));
+});
 
 
 gulp.task('install', ['git-check'], function() {
