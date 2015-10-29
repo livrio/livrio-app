@@ -15,7 +15,8 @@
     "gulp-util": "^2.2.14",
     "shelljs": "^0.3.0",
     "jshint-stylish": "~2.0.0",
-    "gulp-jshint": "~1.11.0"
+    "gulp-jshint": "~1.11.0",
+    "grunt-po2json-angular-translate": "0.0.3"
   },
   "cordovaPlugins": [
     "com.ionic.keyboard",
@@ -24,7 +25,6 @@
     "cordova-plugin-globalization",
     "cordova-plugin-inappbrowser",
     "cordova-plugin-whitelist",
-    
     "nl.x-services.plugins.socialsharing",
     "nl.x-services.plugins.toast",
     "org.apache.cordova.splashscreen",
@@ -38,8 +38,6 @@
         "APP_NAME": "Livrio"
       }
     }
-
-
   ],
   "cordovaPlatforms": [
     "android"

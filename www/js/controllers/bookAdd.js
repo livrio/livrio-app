@@ -160,6 +160,10 @@ angular.module("starter.controllers")
                 }
                 else {
                     delete response.data.id;
+                    response.data.isbn = parseInt(response.data.isbn,10);
+                    response.data.page_count = parseInt(response.data.page_count,10);
+                    response.data.published_year = parseInt(response.data.published_year,10);
+
                     angular.extend($scope.form, response.data);
                 }
 

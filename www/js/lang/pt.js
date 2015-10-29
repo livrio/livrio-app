@@ -11,6 +11,10 @@ angular.module("starter.config")
         offline: 'Você precisa estar conectado a internet. Por favor verifique sua conexão',
         backbutton: 'Pressione o botão voltar para sair',
 
+        app: {
+            loading: 'Carregando'
+        },
+
 
         login: {
             loading_login: 'Entrando',
@@ -18,6 +22,7 @@ angular.module("starter.config")
             loading_facebook: 'Conectando ao Facebook',
             email_duplicate: '<strong>Email</strong> já cadastrado!',
             login_invalid: 'Ops! E-mail ou senha incorretos. Que tal tentar de novo?',
+            login_facebook: 'Ops! Ocorreu algum erro ao tentar acessar o Facebook! Por favor, tente mais tarde.',
 
             tab_login: 'Entrar',
             tab_create: 'Criar conta',

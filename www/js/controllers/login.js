@@ -81,6 +81,9 @@ angular.module('starter.controllers', [])
                         template: trans('offline')
                     }).then(function() {});
                 }
+                else if (error.status == 96) {
+                    console.log('97');
+                }
                 else {
 
                     $ionicPopup.alert({
@@ -139,7 +142,7 @@ angular.module('starter.controllers', [])
             return;
         }
 
-        
+
         showLoading(trans('login.loading_facebook'));
 
         USER.authFacebook()
@@ -151,11 +154,18 @@ angular.module('starter.controllers', [])
                 firstLogin(user.first_name);
             }
         },
-        function() {
+        function(error) {
             hideLoading();
-            $ionicPopup.alert({
-                template: trans('offline')
-            }).then(function() {});
+            if (error && error.status == 96) {
+                $ionicPopup.alert({
+                    template: trans('login.login_facebook')
+                }).then(function() {});
+            }
+            else {
+                $ionicPopup.alert({
+                    template: trans('offline')
+                }).then(function() {});
+            }
         });
 
     };

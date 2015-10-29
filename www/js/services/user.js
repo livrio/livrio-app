@@ -126,27 +126,37 @@ angular.module("starter.services")
                 self.auth(params)
                 .then(function(data) {
                     deferred.resolve(data);
-                }, function() {
-                    //cria um usuário se ainda não existe
-                    self.create(params)
-                    .then(function() {
+                }, function(res) {
 
-                        //tenta efetuar login navamente
-                        self.auth(params)
-                        .then(function(data) {
-                            console.log('facebook create');
-                            data.create = true
-                            deferred.resolve(data);
+                    if (res.errors && res.errors.code == 96) {
+                        facebookConnectPlugin.logout(function() {
+                            deferred.reject({status:96});
                         },
                         function() {
+                            deferred.reject({status:96});
+                        });
+                    }
+                    else {
+                        //cria um usuário se ainda não existe
+                        self.create(params)
+                        .then(function() {
+
+                            //tenta efetuar login navamente
+                            self.auth(params)
+                            .then(function(data) {
+                                console.log('facebook create');
+                                data.create = true
+                                deferred.resolve(data);
+                            },
+                            function() {
+                                deferred.reject();
+                            });
+
+                        },function() {
                             deferred.reject();
                         });
-
-                    },function() {
-                        deferred.reject();
-                    });
-
-                })
+                    }
+                });
 
             } else {
                 deferred.reject();

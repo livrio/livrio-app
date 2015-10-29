@@ -1,8 +1,9 @@
 angular.module('starter.controllers')
 
-.controller('aboutCtrl', function($scope, $ionicPopup) {
+.controller('aboutCtrl', function($scope, $ionicPopup, $filter) {
 
-
+    var trans = $filter('translate');
+    var t = trans('translate')('AURELIO');
     $scope.easterEggActive = 0;
     $scope.onEasterEgg = function() {
         $scope.easterEggActive++;

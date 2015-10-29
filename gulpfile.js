@@ -46,9 +46,9 @@ gulp.task('watch', function() {
 
 
 gulp.task('trans', function() {
-  return gulp.src('www/templates/**/*.html')
+  return gulp.src('www/lang/**/*.js')
     .pipe(angularTranslate())
-    .pipe(gulp.dest('www/trans'));
+    .pipe(gulp.dest('www/lang'));
 });
 
 

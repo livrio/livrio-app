@@ -50,9 +50,12 @@ if (!window.cordova) {
             success({
                 status: "connected",
                 authResponse: {
-                    accessToken: "CAAKEya4xmrYBAAn9E7esZCCk6KbkKKGH3Wgvymm6Us12t1g7TwoT5SlvmRaIgofU2Rb3SEZAKJZA5wb6PmCN3wPLL2KdEKuAPZAq9fP72qie3F13eQDKii9RyLJ1uYsCnsWqLO8dKcWa3uI5kfaFYPx9M2dvPs7Bykqa8om7ndHTHUZBzITHTVoxqV9r6OrfGDIvQInm762WLTzZAdw0j7Ev2z021q6ZAvGAvAof7rZAOgZDZD"
+                    accessToken: "CAAKEya4xmrYBAMsl8wBmZAVQZBnv4eIAxTjWUwoXVZB2pc8iFBeeomYeECqqcc3Xggp3WrjNOZBl9HLGCVAKfYu6Ez1AimV5LuMFcZBLjQMnc1Dg2diWSKePjhutBZBUDQHhDVOHWvIEptkgQINvZAluUzYTboaIBPfYdB8h4vRCQQUZArInfVYbjRTCgIsBGgUs0DMqs4YjQh5RzyM2ZACHBhUpSll9SMxJ5gZBJezYzgjgZDZD"
                 }
             });
+        },
+        logout: function(s, f){
+            s();
         },
         api: function(p, e, success, failure) {
             success({
@@ -86,7 +89,7 @@ if (!window.cordova) {
             success({
                 format: 'EAN_13',
                 cancelled: false,
-                text: "9788598078175"
+                text: "9788575222669"
             });
         }
     };
