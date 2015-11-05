@@ -7750,6 +7750,17 @@ a.button {
   .tabs-secondary a.danger {
     color: #B71C1C; }
 
+.button.button-success {
+  border: none;
+  background-color: #c7b299;
+  color: #fff;
+  font-weight: 500; }
+  .button.button-success.button-small.icon-left:before {
+    font-size: 12px;
+    line-height: 8px;
+    margin-top: 0px;
+    margin-right: 5px; }
+
 .tab-item.active {
   opacity: 1;
   color: #4485F3; }
@@ -7762,6 +7773,11 @@ a.button {
 
 .bg-color {
   background-color: #efefef; }
+
+.item-search input {
+  width: 100%; }
+.item-search .button-icon.icon:before {
+  font-size: 22px; }
 
 .no-header .nav-bar-block {
   display: none; }
@@ -7886,8 +7902,56 @@ ul.rating li i {
 .tabs-striped .tab-item.tab-item-active {
   border-color: #d6123c; }
 
+.view-friend-add .notice-tab {
+  background-color: #efefef;
+  padding: 16px;
+  text-align: left;
+  margin-bottom: 3px;
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.24); }
+.view-friend-add .button-invite-friend {
+  text-transform: uppercase;
+  font-size: 10px;
+  padding: 0px 10px;
+  height: 20px;
+  line-height: 22px;
+  min-height: 0;
+  top: 50%;
+  margin-top: -10px; }
+
+.invite-tab {
+  position: relative; }
+  .invite-tab.tabs-background-assertive {
+    background-color: #d6123c;
+    border: none; }
+  .invite-tab a {
+    color: rgba(249, 249, 249, 0.6);
+    text-transform: uppercase;
+    font-weight: 500;
+    max-width: inherit; }
+    .invite-tab a.active {
+      color: #fff; }
+  .invite-tab.tabs-top {
+    top: 0px; }
+
 .button.button-stable {
   color: #fff; }
+
+.buttons-invites {
+  margin-top: 20px; }
+  .buttons-invites .button {
+    width: 300px;
+    margin: 10px 20px;
+    text-transform: uppercase;
+    font-size: 14px;
+    color: #FFF;
+    border: none; }
+  .buttons-invites .button.button-invite {
+    background-color: #f9b000;
+    margin-top: 20px; }
+  .buttons-invites .button.button-whatsapp {
+    background-color: #065e52; }
+  .buttons-invites .button.button-shered {
+    background-color: #63c9ce; }
 
 .bar.bar-assertive, .bar.bar-assertive .button {
   border: none; }
@@ -8091,6 +8155,9 @@ ul.rating li i {
     color: #444;
     right: 10px;
     top: 10px; }
+  .sidemenu .item.background {
+    background-color: #d6123c;
+    color: #fff; }
 
 .button-float {
   background: #f9b000 !important;
@@ -8116,10 +8183,13 @@ ul.rating li i {
     left: 19px; }
 
 .friend-list.add h2 {
-  line-height: 36px;
-  text-transform: uppercase; }
-.friend-list.add .button {
-  top: 17px; }
+  line-height: 18px;
+  text-transform: capitalize; }
+.friend-list small {
+  font-size: 11px;
+  font-weight: 500;
+  color: #FF6440;
+  position: absolute; }
 
 .button-float:hover {
   -webkit-transform: translate3d(0, -1px, 0) !important;
@@ -8468,3 +8538,7 @@ label.item.valid-lr {
     position: absolute;
     left: 5px;
     top: 9px; }
+
+.view-invite .spinner svg {
+  width: 80px;
+  height: 80px; }

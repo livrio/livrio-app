@@ -14,6 +14,20 @@
     }
 }
 
+.button.button-success {
+    border: none;
+    background-color: #c7b299;
+    color: #fff;
+    font-weight: 500;
+
+    &.button-small.icon-left:before {
+        font-size: 12px;
+        line-height: 8px;
+        margin-top: 0px;
+        margin-right: 5px;
+    }
+}
+
 .tab-item.active {
     opacity: 1;
     color: #4485F3;
@@ -30,6 +44,16 @@
 
 .bg-color{
     background-color: #efefef;
+}
+
+.item-search {
+    input {
+        width: 100%;
+    }
+
+    .button-icon.icon:before {
+        font-size: 22px;
+    }
 }
 
 

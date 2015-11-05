@@ -49,6 +49,25 @@ angular.module('starter.services')
         return deferred.promise;
     };
 
+    self.invite = function(item) {
+        var deferred = $q.defer();
+        $http.post(settings.URL.FRIEND + "/" + item.id + "/invite")
+        .success(function(response) {
+            if (!response.errors) {
+                $cordovaToast.showLongBottom(trans('friends.toast_request_friend'));
+                deferred.resolve(true);
+            }
+            else {
+                deferred.reject();
+            }
+        })
+        .error(function() {
+            deferred.reject();
+        });
+
+        return deferred.promise;
+    };
+
     self.confirm = function(item, response) {
         var deferred = $q.defer();
         $http.post(settings.URL.FRIEND + "/" +  item.created_by.id  + "/response",{

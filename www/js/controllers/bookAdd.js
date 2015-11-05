@@ -125,6 +125,7 @@ angular.module("starter.controllers")
 
 
     $scope.doScan = function(input) {
+        console.log('SEARCH ISBN');
         if(!input){
             console.log('---------');
             $cordovaBarcodeScanner.scan().then(function(code) {
@@ -137,13 +138,15 @@ angular.module("starter.controllers")
                 $ionicLoading.hide();
             });
         }
-        else if (input.$modelValue.length === 13) {
+        else if (input.$modelValue.length === 13 || input.$modelValue.length === 10) {
             searchISBN(input.$modelValue);
         }
     };
 
 
     function searchISBN(isbn) {
+        console.log('ISBN');
+        console.log(isbn);
         $ionicLoading.show({
             template: trans('book_form.isbn_searching')
         });

@@ -1,6 +1,6 @@
 "use strict";
 var DOMAIN_API = "http://api.livr.io/v1";
-DOMAIN_API = "http://livrio.codeway.in/v1";
+// DOMAIN_API = "http://livrio.codeway.in/v1";
 
 angular.module("starter.config",[
     'pascalprecht.translate'
@@ -16,6 +16,7 @@ angular.module("starter.config",[
         BOOK: DOMAIN_API + "/book",
         LOAN: DOMAIN_API + "/loan",
         FRIEND: DOMAIN_API + "/friend",
+        CONTACT: DOMAIN_API + "/contact",
         SHELF: DOMAIN_API + "/shelf",
         NOTIFICATION: DOMAIN_API + "/notification"
     },
@@ -227,6 +228,26 @@ angular.module("starter.config",[
             "menuContent": {
                 templateUrl: "templates/book-search.html",
                 controller: "bookSearchCtrl"
+            }
+        }
+    })
+
+    .state("app.invite", {
+        url: "/invite",
+        views: {
+            "menuContent": {
+                templateUrl: "templates/invite.html",
+                controller: "inviteCtrl"
+            }
+        }
+    })
+
+    .state("app.contact", {
+        url: "/contact",
+        views: {
+            "menuContent": {
+                templateUrl: "templates/contacts.html",
+                controller: "contactCtrl"
             }
         }
     })

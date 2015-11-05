@@ -36,6 +36,8 @@ $calm: #63c9ce !default;
 
 
 
+
+
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,300);
@@ -57,14 +59,91 @@ ul.rating li i {
   font-size: 30px;
 }
 
+
+
 .tabs-striped .tab-item.tab-item-active {
     border-color: $assertive;
+}
+
+.view-friend-add{
+    .notice-tab{
+        background-color: #efefef;
+        padding: 16px;
+        text-align: left;
+        margin-bottom: 3px;
+        box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.12), 0px 2px 2px 0px rgba(0,0,0,0.24);
+    }
+
+
+    .button-invite-friend{
+        text-transform: uppercase;
+        font-size: 10px;
+        padding: 0px 10px;
+        height: 20px;
+        line-height: 22px;
+        min-height: 0;
+        top: 50%;
+        margin-top: -10px;
+    }
+}
+
+.invite-tab{
+    position: relative;
+    &.tabs-background-assertive{
+        background-color: $assertive;
+        border: none;
+    }
+
+    a{
+        color: rgba(249, 249, 249, 0.6);
+        text-transform: uppercase;
+        font-weight: 500;
+        max-width: inherit;
+
+
+        &.active{
+            color: #fff;
+        }
+    }
+
+    &.tabs-top {
+
+        top: 0px;
+    }
 }
 
 
 .button.button-stable {
     color: #fff;
 }
+.buttons-invites{
+    margin-top: 20px;
+
+    .button{
+        width: 300px;
+        margin: 10px 20px;
+        text-transform: uppercase;
+        font-size: 14px;
+        color: #FFF;
+        border: none;
+    }
+
+    .button.button-invite{
+        background-color: $action;
+        margin-top: 20px;
+    }
+
+    .button.button-whatsapp{
+        background-color: #065e52;
+    }
+
+    .button.button-shered{
+        background-color: #63c9ce;
+    }
+    
+
+}
+
 
 .bar.bar-assertive, .bar.bar-assertive .button{
     border: none;
@@ -314,7 +393,7 @@ ul.rating li i {
 }
 
 .friend-list{
-    
+
     .item{
         margin:0;
         border: none;
@@ -375,6 +454,11 @@ ul.rating li i {
             top: 10px;
         }
 
+        &.background{
+            background-color: $assertive;
+            color: #fff;
+        }
+
         
 
 
@@ -415,13 +499,16 @@ ul.rating li i {
     
     &.add {
         h2{
-            line-height: 36px;
-            text-transform: uppercase;
+            line-height: 18px;
+            text-transform: capitalize;
         }
+    }
 
-        .button{
-            top: 17px;
-        }
+    small{
+        font-size: 11px;
+        font-weight: 500;
+        color: #FF6440;
+        position: absolute;
     }
 }
 .button-float:hover{
@@ -955,5 +1042,14 @@ label.item.valid-lr {
         position: absolute;
         left: 5px;
         top: 9px;
+    }
+}
+
+
+.view-invite{
+
+    .spinner svg {
+        width: 80px;
+        height: 80px;
     }
 }

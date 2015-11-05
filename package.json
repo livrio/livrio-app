@@ -21,6 +21,9 @@
   "cordovaPlugins": [
     "com.ionic.keyboard",
     "cordova-plugin-camera",
+    {
+        "locator":"https://github.com/guptasachin25/cordova-plugin-contacts"    
+    },
     "cordova-plugin-geolocation",
     "cordova-plugin-globalization",
     "cordova-plugin-inappbrowser",
@@ -30,7 +33,9 @@
     "org.apache.cordova.splashscreen",
     "cordova-plugin-app-version",
     "phonegap-plugin-push",
-    "phonegap-plugin-barcodescanner",
+    {
+      "locator": "https://github.com/aureliosaraiva/phonegap-plugin-barcodescanner"
+    },
     {
       "locator": "https://github.com/jeduan/cordova-plugin-facebook4",
       "variables": {

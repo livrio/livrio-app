@@ -132,6 +132,13 @@ if (!window.cordova) {
         }
     };
 
+    window.navigator.contacts = {
+        find: function(o, s, f) {
+            console.log('FIND CONTACT',o);
+            s([]);
+        }
+    };
+
     cordova.plugins.notification = {
         badge: {
             hasPermission: function(f) {

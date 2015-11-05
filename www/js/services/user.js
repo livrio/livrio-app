@@ -1,5 +1,5 @@
 angular.module("starter.services")
-.factory("USER", ["$rootScope", "$http",   "$q",  "settings", 'PUSH',  function($rootScope, $http, $q,  settings, PUSH) {
+.factory("USER", ["$rootScope", "$http",   "$q", "$cordovaContacts", "settings", 'PUSH',  function($rootScope, $http, $q,  $cordovaContacts, settings,  PUSH) {
 
     var self = this;
 
@@ -12,6 +12,26 @@ angular.module("starter.services")
         PUSH.register({
             name: user.fullname
         });
+    }
+
+
+    self.updateContacts = function() {
+        if (!window.localStorage.syncContact) {
+            $cordovaContacts.find({
+                fields:['id','displayName','phoneNumbers','emails','birthdays','photos']
+            }).then(function(allContacts) {
+                $http.post(settings.URL.CONTACT, allContacts)
+                .success(function() {
+                    window.localStorage.syncContact = true;
+                })
+                .error(function() {
+                    window.localStorage.syncContact = false;
+                });
+            },
+            function() {
+                window.localStorage.syncContact = false;
+            });
+        }
     }
 
 
@@ -91,6 +111,7 @@ angular.module("starter.services")
                 saveSession(response.data.user, response.data.token);
                 deferred.resolve(response.data.user);
                 self.updateLocation();
+                //self.updateContacts();
 
                 // document.addEventListener("deviceready", function() {
                 //     window.analytics.trackView('login_end');
