@@ -353,7 +353,7 @@ module.exports.metadata =
     "cordova-plugin-console": "1.0.1",
     "org.apache.cordova.splashscreen": "1.0.0",
     "cordova-plugin-facebook4": "1.3.0-0",
-    "phonegap-plugin-push": "1.3.0",
+    "phonegap-plugin-push": "1.4.2",
     "com.ionic.keyboard": "1.0.4",
     "nl.x-services.plugins.socialsharing": "4.3.19",
     "cordova-plugin-google-analytics": "0.8.0",

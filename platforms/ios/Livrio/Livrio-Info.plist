@@ -230,6 +230,18 @@
           <string>fb708951699200694</string>
         </array>
       </dict>
+      <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>fb708951699200694</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>fb708951699200694</string>
+        </array>
+      </dict>
     </array>
     <key>LSApplicationQueriesSchemes</key>
     <array>

@@ -9,6 +9,8 @@ angular.module('starter.controllers')
 
     $scope.activeTab = 0;
     $scope.word = '';
+    $scope.hasScroll = false;
+    $scope.pagging = false;
     var scroll = true;
 /*
     $ionicPopup.confirm({
@@ -22,14 +24,19 @@ angular.module('starter.controllers')
 */
 
     function load() {
+        $scope.pagging = true;
         FRIEND.all(params).then(function(data) {
-            if (data.length == 0) {
-                scroll = false;
+            if (data.length >= 20) {
+                $scope.hasScroll = true;
+            }
+            else{
+                $scope.hasScroll = false;
             }
             angular.forEach(data, function(v) {
                 $scope.friendsResult.push(v);
             });
             $ionicScrollDelegate.resize();
+            $scope.pagging = false;
             $scope.$broadcast('scroll.infiniteScrollComplete');
         });
     }
@@ -63,7 +70,7 @@ angular.module('starter.controllers')
 
 
         params['limit'] = 20;
-        params['page'] = 0;
+        params['page'] = 1;
 
         if (tab == 1) {
             params['limit'] = 100;
@@ -82,7 +89,6 @@ angular.module('starter.controllers')
 
     $scope.searching = false;
     $scope.friendsResult = [];
-    $scope.searchStart = false;
 
     $scope.onSearch = function(input, reset) {
         console.log('search');
@@ -99,21 +105,24 @@ angular.module('starter.controllers')
         filterTextTimeout = $timeout(function() {
             console.log(input);
             $scope.searching = true;
-            $scope.searchStart = true;
             if (reset) {
                 $scope.friendsResult = [];
             }
             params['word'] = "%" + input + "%";
+            $scope.pagging = true;
             FRIEND.all(params).then(function(data) {
                 $scope.searching = false;
-                if (data.length == 0) {
-                    scroll = false;
+                if (data.length >= 20) {
+                    $scope.hasScroll = true;
+                }
+                else{
+                    $scope.hasScroll = false;
                 }
                 angular.forEach(data, function(v) {
                     $scope.friendsResult.push(v);
                 });
                 $ionicScrollDelegate.resize();
-
+                $scope.pagging = false;
                 $scope.$broadcast('scroll.infiniteScrollComplete');
             });
         }, 250); // delay 250 ms
@@ -129,8 +138,8 @@ angular.module('starter.controllers')
         }
         $scope.searching = false;
         $scope.friendsResult = [];
-        $scope.searchStart = false;
-        scroll = true;
+        $scope.hasScroll = false;
+
         delete params['word'];
         load();
     };
@@ -150,14 +159,11 @@ angular.module('starter.controllers')
     $scope.onChangeTab(null, 0);
 
     $scope.loadMore = function() {
-        if (!scroll) {
-            $scope.$broadcast('scroll.infiniteScrollComplete');
-            return;
-        }
+        console.log('infinite:scroll');
         params['page'] = params['page'] + 1;
         var word = $scope.word;
         if (word.length >= 3) {
-            $scope.onSearch($scope.word);
+            $scope.onSearch($scope.word, true);
         }
         else {
             load();
@@ -165,10 +171,6 @@ angular.module('starter.controllers')
 
         console.log(params);
     }
-
-    $scope.$on('$stateChangeSuccess', function() {
-        $scope.loadMore();
-    });
 
 
 });

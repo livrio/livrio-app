@@ -83,5 +83,6 @@
     <preference name="android-minSdkVersion" value="16" />
     <preference name="android-installLocation" value="auto" />
     <preference name="SplashScreenDelay" value="3000" />
+    <hook src="hooks/after_prepare/010_add_platform_class.js" type="after_prepare" />
     <icon src="resources/android/icon/drawable-xhdpi-icon.png" />
 </widget>

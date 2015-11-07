@@ -111,7 +111,7 @@ angular.module("starter.services")
                 saveSession(response.data.user, response.data.token);
                 deferred.resolve(response.data.user);
                 self.updateLocation();
-                self.updateContacts();
+                //self.updateContacts();
 
                 // document.addEventListener("deviceready", function() {
                 //     window.analytics.trackView('login_end');
