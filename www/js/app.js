@@ -55,7 +55,9 @@ angular.module('starter', [
 
     var trans = $filter('translate');
 
+    /*
     document.addEventListener("deviceready", function() {
+
         if (typeof navigator.globalization !== "undefined") {
             navigator.globalization.getPreferredLanguage(function(language) {
                 var lang = (language.value).toLowerCase().split("-")[0];
@@ -71,6 +73,7 @@ angular.module('starter', [
             }, null);
         }
     });
+    */
 
 
     document.addEventListener("deviceready", function() {
