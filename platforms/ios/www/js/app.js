@@ -54,8 +54,13 @@ angular.module('starter', [
 .run(function($rootScope, $http, $ionicPlatform, $ionicHistory, $translate, $state, $filter, USER) {
 
     var trans = $filter('translate');
+<<<<<<< HEAD
+
+=======
+>>>>>>> ffa5535e22cc5debebfc254bf8ef71fb5c57d8c0
     /*
     document.addEventListener("deviceready", function() {
+
         if (typeof navigator.globalization !== "undefined") {
             navigator.globalization.getPreferredLanguage(function(language) {
                 var lang = (language.value).toLowerCase().split("-")[0];
