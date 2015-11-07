@@ -1,6 +1,6 @@
 "use strict";
 var DOMAIN_API = "http://api.livr.io/v1";
-
+// 
 
 angular.module("starter.config",[
     'pascalprecht.translate'
@@ -33,6 +33,11 @@ angular.module("starter.config",[
     // $ionicConfigProvider.views.maxCache(10);
     // $ionicConfigProvider.views.forwardCache(true);
     $ionicConfigProvider.tabs.position('top');
+    $ionicConfigProvider.backButton.text('');
+    $ionicConfigProvider.backButton.previousTitleText(false);
+    $ionicConfigProvider.spinner.icon('android');
+    $ionicConfigProvider.backButton.icon('ion-android-arrow-back');
+    $ionicConfigProvider.navBar.alignTitle('left');
 
     $httpProvider.interceptors.push(function($q, $location, $cordovaToast) {
         return {

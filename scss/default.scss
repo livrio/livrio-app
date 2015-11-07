@@ -78,3 +78,28 @@
         position: inherit;
     }
 }
+
+.platform-ios.platform-cordova:not(.fullscreen) .no-header {
+    .has-header{
+        top: 0px;
+    }
+
+    .back-button, .button-photo {
+        margin-top: 20px;
+    }
+
+    .hero{
+
+        .cover{
+        
+            padding-top: 20px;
+        }
+    }
+}
+
+
+
+.platform-ios.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader) > .title {
+    left: 30px !important;
+    right: inherit !important;
+}

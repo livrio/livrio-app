@@ -54,7 +54,7 @@ angular.module('starter', [
 .run(function($rootScope, $http, $ionicPlatform, $ionicHistory, $translate, $state, $filter, USER) {
 
     var trans = $filter('translate');
-
+    /*
     document.addEventListener("deviceready", function() {
         if (typeof navigator.globalization !== "undefined") {
             navigator.globalization.getPreferredLanguage(function(language) {
@@ -71,6 +71,7 @@ angular.module('starter', [
             }, null);
         }
     });
+    */
 
 
     document.addEventListener("deviceready", function() {

@@ -112,20 +112,24 @@ ul.rating li i {
     }
 }
 
+.platform-ios.platform-cordova:not(.fullscreen) .tabs.tabs-top{
+    top: 0px; 
+}
+
 
 .button.button-stable {
     color: #fff;
 }
 .buttons-invites{
-    margin-top: 20px;
+    padding: 20px;
 
     .button{
-        width: 300px;
-        margin: 10px 20px;
+        width: 100%;
         text-transform: uppercase;
         font-size: 14px;
         color: #FFF;
         border: none;
+        margin-bottom: 20px;
     }
 
     .button.button-invite{
@@ -389,6 +393,16 @@ ul.rating li i {
             color: #fff;
             padding-right: 10px;
         }
+    }
+}
+
+.platform-ios.platform-cordova:not(.fullscreen)   {
+    .profile .photo{
+        top: 78px;
+    }
+
+    .profile .name{
+        bottom: 5px;
     }
 }
 

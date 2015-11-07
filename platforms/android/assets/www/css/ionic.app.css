@@ -7790,6 +7790,17 @@ a.button {
 .no-header .notice-library-empty {
   position: inherit; }
 
+.platform-ios.platform-cordova:not(.fullscreen) .no-header .has-header {
+  top: 0px; }
+.platform-ios.platform-cordova:not(.fullscreen) .no-header .back-button, .platform-ios.platform-cordova:not(.fullscreen) .no-header .button-photo {
+  margin-top: 20px; }
+.platform-ios.platform-cordova:not(.fullscreen) .no-header .hero .cover {
+  padding-top: 20px; }
+
+.platform-ios.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader) > .title {
+  left: 30px !important;
+  right: inherit !important; }
+
 .book-view .btn-more {
   position: absolute;
   top: 16px;
@@ -7823,12 +7834,16 @@ a.button {
 .book-view .collpase {
   height: 150px;
   overflow: hidden; }
+.book-view .details {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: flex-start; }
 .book-view .book-info .cover {
-  float: left;
   width: 125px; }
 .book-view .book-info .info {
   padding-left: 20px;
-  float: left; }
+  flex: 1; }
   .book-view .book-info .info p {
     color: #080C15;
     font-size: 12px; }
@@ -7845,18 +7860,24 @@ a.button {
   padding: 10px;
   height: initial;
   border-color: #dcdcdc; }
-  .book-card .row, .book-card .col {
-    padding: 0px; }
+  .book-card > div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    min-height: 100px;
+    position: relative; }
   .book-card .cover {
     width: 86px;
-    height: 128px;
-    background-size: cover;
-    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.24); }
+    background-size: cover; }
   .book-card .content {
     padding-left: 10px;
-    padding-top: 10px; }
+    padding-top: 10px;
+    flex: 1;
+    position: absolute;
+    height: 100%; }
     .book-card .content h2 {
-      font-size: 16px;
+      font-size: 14px;
       color: rgba(0, 0, 0, 0.87);
       line-height: 19px;
       white-space: normal;
@@ -7869,7 +7890,7 @@ a.button {
         .book-card .content h2 .btn-more:before {
           font-size: 22px; }
     .book-card .content h3 {
-      font-size: 14px;
+      font-size: 12px;
       color: rgba(0, 0, 0, 0.54);
       line-height: 16px;
       padding-right: 20px; }
@@ -7933,18 +7954,21 @@ ul.rating li i {
   .invite-tab.tabs-top {
     top: 0px; }
 
+.platform-ios.platform-cordova:not(.fullscreen) .tabs.tabs-top {
+  top: 0px; }
+
 .button.button-stable {
   color: #fff; }
 
 .buttons-invites {
-  margin-top: 20px; }
+  padding: 20px; }
   .buttons-invites .button {
-    width: 300px;
-    margin: 10px 20px;
+    width: 100%;
     text-transform: uppercase;
     font-size: 14px;
     color: #FFF;
-    border: none; }
+    border: none;
+    margin-bottom: 20px; }
   .buttons-invites .button.button-invite {
     background-color: #f9b000;
     margin-top: 20px; }
@@ -8119,6 +8143,11 @@ ul.rating li i {
       font-weight: bold;
       color: #fff;
       padding-right: 10px; }
+
+.platform-ios.platform-cordova:not(.fullscreen) .profile .photo {
+  top: 78px; }
+.platform-ios.platform-cordova:not(.fullscreen) .profile .name {
+  bottom: 5px; }
 
 .friend-list .item {
   margin: 0;
