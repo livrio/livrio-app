@@ -22,7 +22,7 @@
     "com.ionic.keyboard",
     "cordova-plugin-camera",
     {
-        "locator":"https://github.com/guptasachin25/cordova-plugin-contacts"    
+      "locator": "https://github.com/guptasachin25/cordova-plugin-contacts"
     },
     "cordova-plugin-geolocation",
     "cordova-plugin-globalization",
@@ -45,6 +45,7 @@
     }
   ],
   "cordovaPlatforms": [
-    "android"
+    "android",
+    "ios"
   ]
 }

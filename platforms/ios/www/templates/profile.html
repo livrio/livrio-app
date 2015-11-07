@@ -1,0 +1,97 @@
+
+
+<ion-view class="no-header">
+   <ion-nav-bar>
+
+   </ion-nav-bar>
+
+
+  <ion-content class="profile-view">
+
+        <div class="hero">
+         <button ng-click="onMenu()" class="button back-button buttons   button-clear header-item">
+            <i class="icon ion-navicon"></i>
+        </button>
+        <button type="button" class="button button-icon button-photo" ng-click="onCover()">
+                    <i class="icon ion-android-camera"></i>
+                </button>
+            <div class="cover" ng-style="cover">
+
+            </div>
+            <div class="content">
+                
+                <div class="avatar" ng-style="photo" ng-click="onPicture()">
+                    
+                </div>
+                <h3>{{form.fullname}}</h3>
+                <h4>livros {{user.amount_book}}</h4>
+            </div>
+
+            
+        </div>
+
+        <form ng-submit="doUpdate(formUpdate.$valid)" name="formUpdate" novalidate id="formUpdate">
+        <div class="list">
+
+
+            <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formUpdate.fullname.$invalid && formUpdate.$submitted}">
+                <span class="input-label">{{'profile.field_name' | translate}}</span>
+                <input type="text"  name="fullname" ng-model="form.fullname" ng-blur="onChangeField(formUpdate.fullname)" required>
+            </label>
+            <div class="form-errors" ng-messages="formUpdate.fullname.$error" ng-show="formUpdate.$submitted">
+                <div class="form-error" ng-message="required">{{'profile.field_name' | translate}} {{'required_field' | translate}}</div>
+            </div>
+
+         
+
+            <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formUpdate.birthday.$invalid && formUpdate.$submitted}">
+                <span class="input-label">{{'profile.field_birthday' | translate}}</span>
+                <input type="date"  name="birthday" ng-model="form.birthday" ng-blur="onChangeField(formUpdate.birthday)" required>
+            </label>
+            <div class="form-errors" ng-messages="formUpdate.birthday.$error" ng-show="formUpdate.$submitted">
+                <div class="form-error" ng-message="required">{{'profile.field_birthday' | translate}} {{'required_field' | translate}}</div>
+            </div>
+
+
+            <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formUpdate.gender.$invalid && formUpdate.$submitted}">
+                <span class="input-label">{{'profile.field_gender' | translate}}</span>
+                <select ng-blur="onChangeField(formUpdate.gender)" name="gender" ng-model="form.gender">
+                    <option value="male" >{{'profile.gender_male' | translate}}
+                    <option value="female">{{'profile.gender_female' | translate}}
+                </select>
+            </label>
+            <div class="form-errors" ng-messages="formUpdate.gender.$error" ng-show="formUpdate.$submitted">
+                <div class="form-error" ng-message="required">{{'profile.field_gender' | translate}} {{'required_field' | translate}}</div>
+            </div>
+
+           <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formUpdate.email.$invalid && formUpdate.$submitted}">
+                <span class="input-label">{{'profile.field_email' | translate}}</span>
+                <input type="text"  name="email" ng-model="form.email" ng-blur="onChangeField(formUpdate.email)" required>
+            </label>
+
+            <label class="item item-input item-stacked-label item-text-wrap" ng-class="{ 'has-error' : formUpdate.phone.$invalid && formUpdate.$submitted}">
+                <span class="input-label">{{'profile.field_phone' | translate}}</span>
+                <input type="text"  name="phone" ng-model="form.phone" ng-blur="onChangeField(formUpdate.phone)" placeholder="(Opcional)">
+                <small>
+            Nós informe seu número de celular, no futuro disponibilizaremos troca de mensagem para empréstimo de livro através do Whatsapp.
+            </small>
+            </label>
+            
+
+            <div class="form-errors" ng-messages="formUpdate.email.$error" ng-show="formUpdate.$submitted">
+                <div class="form-error" ng-message="required">{{'profile.field_email' | translate}} {{'required_field' | translate}}</div>
+            </div>
+
+
+        </div>
+
+        <p class="padding">
+        {{'profile.info' | translate}}
+        
+        </p>
+
+    </form>
+
+</ion-content>
+
+</ion-view>

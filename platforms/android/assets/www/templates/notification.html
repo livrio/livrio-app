@@ -1,0 +1,26 @@
+<ion-view title="{{'notification.title' | translate}}">
+<ion-content>
+
+    <ion-refresher pulling-text="{{'refresh' | translate}}" on-refresh="onRefresh()"></ion-refresher>
+
+<div class="list notifications">
+
+
+    <a ng-click="onAction(item)" class="item item-avatar item-text-wrap" href="{{item.href}}" ng-repeat="item in notifications.list" ng-class="{'unread':item.unread}">
+      
+      <img ng-src="{{item.photo}}">
+      <p ng-bind-html="item.text"></p>
+      <span class="time">{{item.date}}</span>
+
+    </a>
+
+</div>
+
+<div class="notice-library-empty" ng-show="notifications.list==0">
+    {{'notification.empty_list' | translate}}
+</div>
+
+  
+</ion-content>
+
+</ion-view>

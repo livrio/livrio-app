@@ -1,0 +1,55 @@
+<ion-view title="{{'config.title' | translate}}">
+
+    <ion-content class="view-config">
+
+            <ul class="list">
+
+                <ion-toggle class="item-text-wrap" ng-model="config.allowSearchEmail" toggle-class="toggle-calm" ng-change="onChangeField()">
+                    {{'config.allow_search_by_email' | translate}}
+                    <p>
+                        Se habilitado permite que seus amigos te encontre através do seu email.
+                    </p>
+                </ion-toggle>
+                
+
+
+
+                <ion-toggle class="item-text-wrap" ng-model="config.allowNotificationPush" toggle-class="toggle-calm" ng-change="onChangeField()">
+                    {{'config.allow_notification_push' | translate}}
+                    <p>
+                        Se habilitado você receberá notificações de empréstimos, solicitações de amizade, notificações de atraso na devolução do livro, etc.
+                    </p>
+                </ion-toggle>
+
+                <ion-toggle class="item-text-wrap" ng-model="config.allowNotificationEmail" toggle-class="toggle-calm" ng-change="onChangeField()">
+                    {{'config.allow_notification_email' | translate}}
+                    <p>
+                        Se habilitado você receberá notificações por email de atividade na sua rede de amigos.
+                    </p>
+                </ion-toggle>
+
+                <ion-toggle class="item-text-wrap" ng-model="config.enableIsbnDefault" toggle-class="toggle-calm" ng-change="onChangeField()">
+                    {{'config.enable_isbn_default' | translate}}
+                    <p>
+                        Se habilitado o leitor de código de barras (ISBN) será a opção padrão de cadastro de novos livros.
+                    </p>
+                </ion-toggle>
+
+                <ion-toggle class="item-text-wrap" ng-model="user.is_facebook" toggle-class="toggle-calm" ng-change="onChangeFieldFacebook()">
+                    {{'config.allow_connect_facebook' | translate}}
+                    <p>
+                        Se habilitado permite que seus amigos te encontre através do vinculo de amizade do Facebook. 
+                    </p>
+                </ion-toggle>
+
+                <ion-toggle ng-show="user.is_facebook" class="item-text-wrap" ng-model="config.allowAcceptFriendFacebook" toggle-class="toggle-calm" ng-change="onChangeField()">
+                    {{'config.allow_accept_friend_facebook' | translate}}
+                    <p>
+                        Quando habilitado permite que seus amigos do Facebook ao se cadastrarem no Livrio, sejam automaticamente seus amigos no Livro.
+                    </p>
+                </ion-toggle>
+
+            </ul>
+    </ion-content>
+
+</ion-view>

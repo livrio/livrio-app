@@ -1,0 +1,44 @@
+<ion-view title="{{'friends.title' | translate}}">
+
+    <ion-nav-buttons side="right">
+        <button class="button button-clean icon ion-android-share" type="button" ng-click="doInvite()"></button>
+    </ion-nav-buttons>
+
+    <ion-content>
+
+        <ion-refresher pulling-text="{{'refresh' | translate}}" on-refresh="onRefresh()"></ion-refresher>
+
+        <div class="wait-message" ng-show="loading">
+            <ion-spinner class="spinner-energized"></ion-spinner>
+            <span>{{'loading' | translate}}</span>
+        </div>
+
+        <div class="card padding center" ng-hide="user.is_facebook  || loading">
+            <div class="item item-text-wrap">
+                <p ng-bind-html="info_facebook">
+                </p>
+                <br />
+                <button class="button button-small button-facebook icon-left ion-social-facebook" ng-click="doFacebook()">{{'friends.btn_facebook' | translate}}</button>
+            </div>
+        </div>
+
+
+        <div class="list friend-list" ng-hide="loading">
+
+            <div class="item item-avatar" ng-repeat="item in friends" ui-sref="app.friendBook({id:item.id})">
+                <img ng-src="{{item.photo}}" />
+                {{item.fullname}}
+                <span class="amount">{{'friends.book' | translate}} {{item.amount_book}}</span>
+            </div>
+        </div>
+
+        <div class="notice-library-empty" ng-show="friends.length==0 && !loading" ng-bind-html="empty_list"  style="top: 160px">
+        </div>
+
+    </ion-content>
+
+    <a class="button button-float" ui-sref="app.friendAdd">
+        <i class="icon ion-android-person-add"></i>
+    </a>
+
+</ion-view>

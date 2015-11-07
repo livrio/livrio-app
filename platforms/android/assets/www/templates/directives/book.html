@@ -1,0 +1,34 @@
+<div class="item book-card" ng-hide="book.removed" ui-sref="app.book({id:book.id})">
+
+<div class="row">
+    <div class="cover" style="background-image: url({{book.thumb}})">
+        
+    </div>
+    <div class="col content">
+        <h2>{{book.title}}</h2>
+        <h3>{{book.author}}</h3>
+
+        <div class="user-loan" ng-show="book.loaned && book.is_owner && book.owner.id==user.id">
+            <img ng-src="{{book.loaned.photo}}" /> 
+            <span class="name">
+                <span>Emprestado para </span>
+                {{book.loaned.fullname}}
+            </span>
+        </div>
+
+        <div class="user-loan" ng-show="book.loaned && !book.is_owner && book.loaned.id==user.id">
+            <img ng-src="{{book.owner.photo}}" /> 
+            <span class="name">
+                <span>Recebido de </span>
+                {{book.owner.fullname}}
+            </span>
+        </div>
+
+    </div>
+</div>
+
+
+
+   
+
+</div>

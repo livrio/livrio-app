@@ -1,0 +1,47 @@
+<ion-view title="{{'about.title' | translate}}">
+
+    <ion-content class="about">
+
+        <div class="padding" style="text-align: center;">
+            <img src="img/logo2.png" style="width: 60%;"/>
+        </div>
+
+
+        <div class="list padding">
+
+            <div class="item item-divider">
+                {{'about.terms' | translate}}
+            </div>
+            
+            <a class="item" ui-sref="app.privacy">
+                {{'about.policy' | translate}}
+            </a>
+
+            
+            
+
+
+            <div class="item item-divider">
+                {{'about.about_app' | translate}}
+            </div>
+            
+            <div class="item" ng-click="onEasterEgg()">
+            {{'about.version' | translate }} {{versionApp}}
+                
+            </div>
+
+            <div class="item item-divider">
+                Informações de contato
+            </div>
+            
+            <div class="item">
+                http://livr.io<br />
+                app@liv.io
+            </div>
+
+
+        </div>
+
+    </ion-content>
+
+</ion-view>
