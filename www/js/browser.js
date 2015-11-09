@@ -139,6 +139,15 @@ if (!window.cordova) {
         }
     };
 
+    navigator.globalization = {
+        getPreferredLanguage: function(s) {
+            console.log('globalization','pt-br');
+            s({
+                value: 'pt-br'
+            });
+        }
+    };
+
     cordova.plugins.notification = {
         badge: {
             hasPermission: function(f) {
