@@ -56,7 +56,20 @@
     }
 }
 
+.form-search {
+    border-width: 0;
+    border-bottom-width: 1px;
+}
 
+.button-barcode {
+    background-color: #f9b000;
+    border: none;
+    display: block;
+    width: 100%;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 500;
+}
 
 
 .no-header {

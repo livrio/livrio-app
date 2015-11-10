@@ -1,6 +1,6 @@
 "use strict";
 var DOMAIN_API = "http://api.livr.io/v1";
-// 
+
 
 angular.module("starter.config",[
     'pascalprecht.translate'
@@ -19,12 +19,10 @@ angular.module("starter.config",[
         CONTACT: DOMAIN_API + "/contact",
         SHELF: DOMAIN_API + "/shelf",
         NOTIFICATION: DOMAIN_API + "/notification"
-    },
-    iOSApiKey: "961755098-c1f2cioji268glhuflmeil69trs5eudg.apps.googleusercontent.com"
+    }
 })
 .config(function($stateProvider, $httpProvider, $urlRouterProvider, $translateProvider, $ionicConfigProvider) {
 
-    
 
     $translateProvider.preferredLanguage("pt");
     $translateProvider.fallbackLanguage("pt");
@@ -71,7 +69,7 @@ angular.module("starter.config",[
         views: {
             "menuContent": {
                 templateUrl: "templates/book-form.html",
-                controller: "bookAddCtrl"
+                controller: "bookFormCtrl"
             }
         }
     })
@@ -81,6 +79,16 @@ angular.module("starter.config",[
         views: {
             "menuContent": {
                 templateUrl: "templates/book-form.html",
+                controller: "bookFormCtrl"
+            }
+        }
+    })
+
+    .state("app.add", {
+        url: "/book-add",
+        views: {
+            "menuContent": {
+                templateUrl: "templates/book-add.html",
                 controller: "bookAddCtrl"
             }
         }

@@ -16,6 +16,7 @@ angular.module("starter.services")
 
 
     self.updateContacts = function() {
+        var deferred = $q.defer();
         if (!window.localStorage.syncContact) {
             $cordovaContacts.find({
                 fields:['id','displayName','phoneNumbers','emails','birthdays','photos']
@@ -23,15 +24,22 @@ angular.module("starter.services")
                 $http.post(settings.URL.CONTACT, allContacts)
                 .success(function() {
                     window.localStorage.syncContact = true;
+                    deferred.resolve();
                 })
                 .error(function() {
                     window.localStorage.syncContact = false;
+                    deferred.reject();
                 });
             },
             function() {
                 window.localStorage.syncContact = false;
+                deferred.reject();
             });
         }
+        else {
+            deferred.resolve();
+        }
+        return deferred.promise;
     }
 
 

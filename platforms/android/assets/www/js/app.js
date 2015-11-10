@@ -54,25 +54,27 @@ angular.module('starter', [
 .run(function($rootScope, $http, $ionicPlatform, $ionicHistory, $translate, $state, $filter, USER) {
 
     var trans = $filter('translate');
-    /*
+
     document.addEventListener("deviceready", function() {
 
         if (typeof navigator.globalization !== "undefined") {
             navigator.globalization.getPreferredLanguage(function(language) {
+                $http.defaults.headers.common['X-App-Platform-Lang'] = language.value;
                 var lang = (language.value).toLowerCase().split("-")[0];
                 console.log(lang);
                 
 
-                $translate.use(lang).then(function(data) {
+                /*$translate.use(lang).then(function(data) {
                     console.log(data);
                     window.localStorage.lang = data;
                 }, function(error) {
                     
                 });
+                */
             }, null);
         }
     });
-    */
+    
 
 
     document.addEventListener("deviceready", function() {
@@ -81,6 +83,7 @@ angular.module('starter', [
         cordova.getAppVersion.getVersionNumber().then(function (version) {
             console.log(version);
             $rootScope.versionApp = version;
+            $http.defaults.headers.common['X-App-Version'] = version;
         });
     });
 
@@ -119,6 +122,10 @@ angular.module('starter', [
 
     $http.defaults.headers.common['Content-Type'] = 'application/json';
     //sessionStorage.token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJhdXJlbGlvQGNvZGV3YXkuY29tLmJyIiwibmFtZSI6IkF1clx1MDBlOWxpbyBTYXJhaXZhIiwiYWRtaW4iOnRydWUsInRva2VuIjoiYTJkYmU0Njg1ZTAzZDYxOWQ3ZTU1YjkwODllMjgwM2MifQ.HG-_yyj7KEs-tqiXKOs7C827OAzVsvT3ftH_tSU4vzQ';
+
+    $http.defaults.headers.common['X-App-Platform'] = ionic.Platform.platform();
+    $http.defaults.headers.common['X-App-Platform-Version'] = ionic.Platform.version();
+
 
     try {
         $rootScope.user = JSON.parse(window.localStorage.user);

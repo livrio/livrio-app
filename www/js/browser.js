@@ -85,12 +85,14 @@ if (!window.cordova) {
 
     cordova.plugins.barcodeScanner = {
         scan: function(success) {
-            var arrs = ["9788535248821","9788536502694","9788598078175","9788563560858"];
-            success({
-                format: 'EAN_13',
-                cancelled: false,
-                text: "9788575222669"
-            });
+            var arrs = ["9788535248821","9788536502694","9788598078175","9788563560858","9788575222669"];
+            setTimeout(function(){
+                success({
+                    format: 'EAN_13',
+                    cancelled: false,
+                    text: "9781612335155"
+                });
+            },5000);
         }
     };
     window.CameraPopoverOptions = {};

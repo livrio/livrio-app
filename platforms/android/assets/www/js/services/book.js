@@ -1,9 +1,105 @@
 angular.module('starter.services',[])
-.factory('BOOK', ['$rootScope', '$http', '$q', '$ionicPopup',  '$ionicLoading', '$cordovaToast', '$cordovaCamera', '$ionicActionSheet', '$state', '$filter', 'settings','USER', function($rootScope, $http, $q, $ionicPopup, $ionicLoading, $cordovaToast, $cordovaCamera, $ionicActionSheet, $state, $filter, settings, USER) {
+.factory('BOOK', ['$rootScope', '$http', '$q', '$ionicPopup',  '$ionicLoading', '$cordovaToast', '$cordovaCamera', '$ionicActionSheet', '$state', '$filter', '$cordovaBarcodeScanner', 'settings','USER', function($rootScope, $http, $q, $ionicPopup, $ionicLoading, $cordovaToast, $cordovaCamera, $ionicActionSheet, $state, $filter, $cordovaBarcodeScanner, settings, USER) {
 
     var self = this;
 
     var trans = $filter('translate');
+
+    self.isISBN = function(str) {
+
+        var sum,
+            weight,
+            digit,
+            check,
+            i;
+
+        str = str.replace(/[^0-9X]/gi, '');
+
+        if (str.length != 10 && str.length != 13) {
+            return false;
+        }
+
+        if (str.length == 13) {
+            sum = 0;
+            for (i = 0; i < 12; i++) {
+                digit = parseInt(str[i]);
+                if (i % 2 == 1) {
+                    sum += 3 * digit;
+                } else {
+                    sum += digit;
+                }
+            }
+            check = (10 - (sum % 10)) % 10;
+            return (check == str[str.length - 1]);
+        }
+
+        if (str.length == 10) {
+            weight = 10;
+            sum = 0;
+            for (i = 0; i < 9; i++) {
+                digit = parseInt(str[i]);
+                sum += weight * digit;
+                weight--;
+            }
+            check = 11 - (sum % 11);
+            if (check == 10) {
+                check = 'X';
+            }
+            return (check == str[ str.length - 1 ].toUpperCase());
+        }
+    }
+
+
+    self.getByISBN = function(isbn) {
+        var deferred = $q.defer();
+        isbn = isbn.replace(/[^0-9X]/gi, '');
+        var url = settings.URL.ISBN + "/" + isbn;
+
+        $http.get(url)
+        .success(function(response) {
+            if (!response.errors) {
+                deferred.resolve(response.data);
+            }
+            else {
+                deferred.reject({
+                    code: -1
+                });
+            }
+        })
+        .error(function() {
+            deferred.reject({
+                code: 0
+            });
+        });
+
+        return deferred.promise;
+    };
+
+    self.scanISBN = function() {
+        var deferred = $q.defer();
+        $cordovaBarcodeScanner.scan().then(function(code) {
+            if (self.isISBN(code.text)) {
+                deferred.resolve(code.text);
+                console.log('ISBN read:',code.text);
+            }
+            else {
+                deferred.reject({
+                    code: -1,
+                    text: code.text
+                });
+                console.log('ISBN invalid:',code.text);
+            }
+
+        }, function(error) {
+            deferred.reject({
+                    code: 0,
+                    text: 0
+                });
+            console.log('ISBN read:','invalid');
+        });
+
+        return deferred.promise;
+    };
 
 
     self.like = function(book) {
@@ -12,7 +108,6 @@ angular.module('starter.services',[])
         $http[type](settings.URL.BOOK + "/" + book.id + '/like')
         .success(function(response) {
             if (!response.errors) {
-                response.data.author = response.data.author.join(", ");
                 deferred.resolve(response.data);
             }
             else {
@@ -20,7 +115,43 @@ angular.module('starter.services',[])
             }
         });
         return deferred.promise;
-    }
+    };
+
+
+    self.save = function(data) {
+        var deferred = $q.defer();
+
+        var action = data.id ? 'put' : 'post';
+
+        $http[action](settings.URL.BOOK, data)
+        .success(function(response) {
+            if (!response.errors) {
+
+                if (action == 'post') {
+                    response.data.create = true;
+                    $cordovaToast.showLongBottom(trans('book_form.toast_create'));
+                }
+                else {
+                    response.data.update = true;
+                    $cordovaToast.showLongBottom(trans('book_form.toast_update'));
+                }
+
+                deferred.resolve(response.data);
+            }
+            else {
+                deferred.reject({
+                    code: -1
+                });
+            }
+        })
+        .error(function() {
+            deferred.reject({
+                code: 0
+            });
+        });
+
+        return deferred.promise;
+    };
 
     self.recommend = function(book, friend) {
 
@@ -124,7 +255,6 @@ angular.module('starter.services',[])
         $http.get(settings.URL.BOOK + "/" + id)
         .success(function(response) {
             if (!response.errors) {
-                response.data.author = response.data.author.join(", ");
                 deferred.resolve(response.data);
             }
             else {
@@ -143,6 +273,31 @@ angular.module('starter.services',[])
         window.location = "#/app/book-form/" + book.id;
     };
 
+    self.search = function(params) {
+        params = params || {};
+
+        params.sort = 'title';
+        params.order = 'asc';
+        var deferred = $q.defer();
+        $http.get(settings.URL.ISBN + '/search', {
+            params: params
+        })
+        .success(function(response) {
+            if (!response.errors) {
+                var library = response.data;
+                deferred.resolve(response.data);
+            }
+            else {
+                deferred.resolve([]);
+            }
+        })
+        .error(function() {
+            deferred.resolve([]);
+            console.log("TRATAR ERROR");
+        });
+        return deferred.promise;
+    };
+
 
     self.all = function(params) {
         params = params || {};
@@ -155,12 +310,7 @@ angular.module('starter.services',[])
         })
         .success(function(response) {
             if (!response.errors) {
-                var library = [];
-                angular.forEach(response.data, function(item) {
-
-                    item.author = item.author.join(", ");
-                    library.push(item);
-                });
+                var library = response.data;
                 deferred.resolve(response.data);
             }
             else {

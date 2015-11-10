@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-.controller('friendAddCtrl', function($scope, $ionicHistory, $timeout, $filter,  $ionicPopup, $ionicScrollDelegate, FRIEND) {
+.controller('friendAddCtrl', function($scope, $ionicHistory, $timeout, $filter,  $ionicPopup, $ionicModal, $ionicScrollDelegate, FRIEND, USER) {
 
     var trans = $filter('translate');
 
@@ -8,20 +8,33 @@ angular.module('starter.controllers')
     $scope.empty_list_search = trans('add_friend.empty_list_search');
 
     $scope.activeTab = 0;
-    $scope.word = '';
     $scope.hasScroll = false;
     $scope.pagging = false;
     var scroll = true;
-/*
-    $ionicPopup.confirm({
-        title: 'Acesso aos contatos',
-        cancelText:'Não, Obrigado!',
-        okText: 'OK',
-        template: 'Veja quem está no Livrio carregando seus contatos. Depois, fale para nós quem você quer adicionar como amigo.<br/ ><br /><small>As informações sobre os contatos da sua agenda, incluindo nomes, números de telefone e emails, serão enviadas ao Livrio para ajudar você e outras pessoas a encontrar amigos mais rapidamente e nos ajudar a aumentar a qualidade do nosso serviço.</small>'
-    }).then(function(res) {
 
+
+    $ionicModal.fromTemplateUrl('templates/permission-contact.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function(modal) {
+        $scope.modalPermission = modal;
     });
-*/
+
+    $scope.closeModal = function() {
+        $scope.modalPermission.hide();
+    };
+
+    $scope.onReadContact = function() {
+        $scope.readingContact = true;
+        USER.updateContacts().then(function() {
+            contactLoad = true;
+            $scope.readingContact = false;
+            $scope.modalPermission.hide();
+            $scope.onChangeTab($scope.formFriend, 2);
+        });
+    };
+
+    var contactLoad = false;
 
     function load() {
         $scope.pagging = true;
@@ -29,7 +42,7 @@ angular.module('starter.controllers')
             if (data.length >= 20) {
                 $scope.hasScroll = true;
             }
-            else{
+            else {
                 $scope.hasScroll = false;
             }
             angular.forEach(data, function(v) {
@@ -44,6 +57,10 @@ angular.module('starter.controllers')
     var params = {};
 
     $scope.onChangeTab = function(form, tab) {
+
+        if (tab == 2 && !contactLoad ) {
+            $scope.modalPermission.show();return;
+        }
 
         $scope.activeTab = tab;
         if (tab == 0) { //procurar
@@ -89,6 +106,7 @@ angular.module('starter.controllers')
 
     $scope.searching = false;
     $scope.friendsResult = [];
+    $scope.search = {};
 
     $scope.onSearch = function(input, reset) {
         console.log('search');
@@ -110,12 +128,13 @@ angular.module('starter.controllers')
             }
             params['word'] = "%" + input + "%";
             $scope.pagging = true;
+            $scope.searchStart = true;
             FRIEND.all(params).then(function(data) {
                 $scope.searching = false;
                 if (data.length >= 20) {
                     $scope.hasScroll = true;
                 }
-                else{
+                else {
                     $scope.hasScroll = false;
                 }
                 angular.forEach(data, function(v) {
@@ -133,12 +152,12 @@ angular.module('starter.controllers')
         if (form) {
             form.$setPristine();
             form.$setUntouched();
-            $scope.word = '';
-            console.log('clean:form');
+            $scope.search = {};
         }
         $scope.searching = false;
         $scope.friendsResult = [];
         $scope.hasScroll = false;
+        $scope.searchStart = false;
 
         delete params['word'];
         load();

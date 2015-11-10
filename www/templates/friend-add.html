@@ -17,7 +17,7 @@
     <form name="formFriend" novalidate ng-show="showSearch">
         <div class="item-input-inset item item-search">
             <label class="item-input-wrapper">
-                <input type="search" placeholder="{{'add_friend.placeholder' | translate}}" ng-keyup="onSearch(formFriend.word.$modelValue, true)" name="word" ng-model="word">
+                <input type="search" placeholder="{{'add_friend.placeholder' | translate}}" ng-keyup="onSearch(formFriend.word.$modelValue, true)" name="word" ng-model="search.word">
                 <button type="button" class="button button-icon icon button-small placeholder-icon" on-touch="onClean(formFriend)" ng-class="{'ion-android-close':searchStart, 'ion-android-search':!searchStart}">
                 </button>
             </label>

@@ -69,7 +69,7 @@ angular.module("starter.config",[
         views: {
             "menuContent": {
                 templateUrl: "templates/book-form.html",
-                controller: "bookAddCtrl"
+                controller: "bookFormCtrl"
             }
         }
     })
@@ -79,6 +79,16 @@ angular.module("starter.config",[
         views: {
             "menuContent": {
                 templateUrl: "templates/book-form.html",
+                controller: "bookFormCtrl"
+            }
+        }
+    })
+
+    .state("app.add", {
+        url: "/book-add",
+        views: {
+            "menuContent": {
+                templateUrl: "templates/book-add.html",
                 controller: "bookAddCtrl"
             }
         }
