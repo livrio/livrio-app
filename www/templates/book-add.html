@@ -1,0 +1,69 @@
+
+<ion-view title="Novo livro">
+
+
+<ion-content class="view-book-add">
+
+<form name="formBook" novalidate>
+    <div class="item-input-inset item item-search form-search">
+        <label class="item-input-wrapper">
+            <input type="search" placeholder="Procurar por título, autor ou ISBN" ng-keyup="onSearch(formBook.word.$modelValue, true)" name="word" ng-model="search.word">
+            <button type="button" class="button button-icon icon button-small placeholder-icon" on-touch="onClean(formBook)" ng-class="{'ion-android-close':searchStart, 'ion-android-search':!searchStart}">
+            </button>
+        </label>
+    </div>
+</form>
+
+
+<div class="wait-message" ng-show="searching">
+        <ion-spinner></ion-spinner>
+        <span>{{'search.loading' | translate}}</span>
+    </div>
+
+
+    <div class="notice-library-empty" ng-show="(librarys.length==0 && libraryFriends.length==0) && searchStart"  ng-bind-html="empty_search">
+
+        
+
+    </div>
+
+    <div class="list library" ng-hide="searching || !searchStart">
+
+
+        <div ng-repeat="item in librarys" class="item book-card">
+            <div>
+                
+                <img class="cover" ng-src="{{item.thumb}}" />
+                <div class="content">
+                    <h2>{{item.title}}</h2>
+                    <h3>{{item.author}}</h3>
+                </div>
+
+                <button class="button button-book-add icon-left button-small ion-plus" ng-click="onAdd(item)" ng-hide="item.added">Adicionar
+            </button>
+
+
+            </div>
+        </div>
+
+</div>
+
+
+
+
+
+<div class="notice-library-empty" style="top: 150px;" ng-hide="searchStart">
+
+Você possui um novo livro?
+<p><strong>Ótimo! Vamos te ajudar a cadastrar!</strong><br /><br />Existe três formas de cadastrar um livro: 1&ordm; - você pode ler o código de barras (ISBN) atrás do livro; 2&ordm; - você pode pesquisa pelo título do livro no campo acima; 3&ordm; - ou inserir manualmente.</p>
+<img src="img/official.svg" />
+
+</div>
+
+<div class="padding" ng-hide="searchStart">
+<button class="button button-barcode" ng-click="onScan()">Ler código de barras</button>
+<a href="#" ui-sref="app.book-form">Cadastrar manualmente</a>
+</div>
+</ion-content>
+
+</ion-view>

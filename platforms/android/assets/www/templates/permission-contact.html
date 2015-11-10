@@ -1,0 +1,32 @@
+<ion-modal-view>
+<ion-header-bar class="bar-assertive">
+<button ng-click="closeModal()" class="button back-button buttons  button-clear header-item"><i class="icon ion-android-arrow-back"></i> <span class="back-text"></span></button>
+<h1 class="title">Acesso os contatos</h1>
+</ion-header-bar>
+<ion-content class="view-contact">
+
+
+<div class="wait-message" ng-show="readingContact">
+    <ion-spinner class="spinner-energized"></ion-spinner>
+    <span>Carregando contatos</span>
+</div>
+
+<div class="text" ng-hide="readingContact">
+        
+
+<p>Veja quem está no Livrio carregando seus contatos. Depois, fale para nós quem você quer adicionar como amigo.</p>
+<img src="img/official.svg" />
+
+
+</div>
+
+<div ng-hide="readingContact">
+    <button type="button" ng-click="onReadContact()" class="button button-ok">continuar</button>
+</div>
+
+<div class="terms" ng-hide="readingContact">
+As informações sobre os contatos da sua agenda, incluindo nomes, números de telefone e emails, serão enviadas ao Livrio para ajudar você e outras pessoas a encontrar amigos mais rapidamente e nos ajudar a aumentar a qualidade do nosso serviço.
+</div>
+
+</ion-content>
+</ion-modal-view>
