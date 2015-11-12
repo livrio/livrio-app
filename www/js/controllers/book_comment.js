@@ -1,6 +1,6 @@
-angular.module('starter.controllers')
+angular.module('livrio.controllers')
 
-.controller('commentCtrl', function($scope, $rootScope, $filter, $timeout, $interval, $cordovaSocialSharing, BOOK,  FRIEND, settings) {
+.controller('book_comment_ctrl', function($scope, $filter, $interval, BOOK) {
 
 
     var book = $scope.bookView;
@@ -12,7 +12,6 @@ angular.module('starter.controllers')
 
     $scope.empty_list = trans('comment.empty_list');
 
-    
 
     $scope.comments = [];
 
@@ -40,13 +39,11 @@ angular.module('starter.controllers')
 
 
     $scope.onComment = function(form, message) {
-        console.log('message',message);
         if (message.length <= 2) {
             return;
         }
         BOOK.comment(book, message)
         .then(function(data) {
-            console.log(data);
             data.date = $filter('dateparse')(new Date(data.registration));
             $scope.comments.unshift(data);
         });

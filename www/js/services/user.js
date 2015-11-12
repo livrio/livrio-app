@@ -1,4 +1,4 @@
-angular.module("starter.services")
+angular.module("livrio.services")
 .factory("USER", ["$rootScope", "$http",   "$q", "$cordovaContacts", "settings", 'PUSH',  function($rootScope, $http, $q,  $cordovaContacts, settings,  PUSH) {
 
     var self = this;

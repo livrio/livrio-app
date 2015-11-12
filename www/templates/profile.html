@@ -24,7 +24,7 @@
                     
                 </div>
                 <h3>{{form.fullname}}</h3>
-                <h4>livros {{user.amount_book}}</h4>
+                <h4>{{'profile.book' | translate}} {{user.amount_book}}</h4>
             </div>
 
             
@@ -39,7 +39,7 @@
                 <input type="text"  name="fullname" ng-model="form.fullname" ng-blur="onChangeField(formUpdate.fullname)" required>
             </label>
             <div class="form-errors" ng-messages="formUpdate.fullname.$error" ng-show="formUpdate.$submitted">
-                <div class="form-error" ng-message="required">{{'profile.field_name' | translate}} {{'required_field' | translate}}</div>
+                <div class="form-error" ng-message="required">{{'profile.field_name' | translate}} {{'app.required_field' | translate}}</div>
             </div>
 
          
@@ -49,7 +49,7 @@
                 <input type="date"  name="birthday" ng-model="form.birthday" ng-blur="onChangeField(formUpdate.birthday)" required>
             </label>
             <div class="form-errors" ng-messages="formUpdate.birthday.$error" ng-show="formUpdate.$submitted">
-                <div class="form-error" ng-message="required">{{'profile.field_birthday' | translate}} {{'required_field' | translate}}</div>
+                <div class="form-error" ng-message="required">{{'profile.field_birthday' | translate}} {{'app.required_field' | translate}}</div>
             </div>
 
 
@@ -61,25 +61,23 @@
                 </select>
             </label>
             <div class="form-errors" ng-messages="formUpdate.gender.$error" ng-show="formUpdate.$submitted">
-                <div class="form-error" ng-message="required">{{'profile.field_gender' | translate}} {{'required_field' | translate}}</div>
+                <div class="form-error" ng-message="required">{{'profile.field_gender' | translate}} {{'app.required_field' | translate}}</div>
             </div>
 
            <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formUpdate.email.$invalid && formUpdate.$submitted}">
                 <span class="input-label">{{'profile.field_email' | translate}}</span>
-                <input type="text"  name="email" ng-model="form.email" ng-blur="onChangeField(formUpdate.email)" required>
+                <input type="email"  name="email" ng-model="form.email" ng-blur="onChangeField(formUpdate.email)" required>
             </label>
 
             <label class="item item-input item-stacked-label item-text-wrap" ng-class="{ 'has-error' : formUpdate.phone.$invalid && formUpdate.$submitted}">
                 <span class="input-label">{{'profile.field_phone' | translate}}</span>
-                <input type="text"  name="phone" ng-model="form.phone" ng-blur="onChangeField(formUpdate.phone)" placeholder="(Opcional)">
-                <small>
-            Nós informe seu número de celular, no futuro disponibilizaremos troca de mensagem para empréstimo de livro através do Whatsapp.
-            </small>
+                <input type="text"  name="phone" ng-model="form.phone" ng-blur="onChangeField(formUpdate.phone)" placeholder="{{'profile.placeholder_phone' | translate}}">
+                <small>{{'profile.info_phone' | translate}}</small>
             </label>
             
 
             <div class="form-errors" ng-messages="formUpdate.email.$error" ng-show="formUpdate.$submitted">
-                <div class="form-error" ng-message="required">{{'profile.field_email' | translate}} {{'required_field' | translate}}</div>
+                <div class="form-error" ng-message="required">{{'profile.field_email' | translate}} {{'app.required_field' | translate}}</div>
             </div>
 
 

@@ -22,6 +22,8 @@
         <script src="lib/ionic-rating/ionic-rating.min.js"></script>
         <script src="lib/angular-messages.min.js"></script>
         <script src="lib/angular-translate/angular-translate.min.js"></script>
+        <script src="lib/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
+        
 
 
         <!-- cordova script (this will be a 404 during development) -->
@@ -33,33 +35,34 @@
         <!-- your app's js -->
         <script src="js/app.js"></script>
         <script src="js/config.js"></script>
-        <script src="js/lang/pt.js"></script>
-        <script src="js/lang/en.js"></script>
 
         <script src="js/controllers/login.js"></script>
         <script src="js/controllers/main.js"></script>
         <script src="js/controllers/menu.js"></script>
         <script src="js/controllers/about.js"></script>
-        <script src="js/controllers/library.js"></script>
-        <script src="js/controllers/book_search.js"></script>
-        <script src="js/controllers/loan.js"></script>
-        <script src="js/controllers/friends.js"></script>
-        <script src="js/controllers/bookForm.js"></script>
-        <script src="js/controllers/bookAdd.js"></script>
-        <script src="js/controllers/libraryView.js"></script>
-        <script src="js/controllers/libraryFriend.js"></script>
-        <script src="js/controllers/profile.js"></script>
-        <script src="js/controllers/shelf.js"></script>
-        <script src="js/controllers/notification.js"></script>
-        <script src="js/controllers/friendAdd.js"></script>
-        <script src="js/controllers/loanAdd.js"></script>
         <script src="js/controllers/config.js"></script>
-        <script src="js/controllers/recommend.js"></script>
-        <script src="js/controllers/comment.js"></script>
-        <script src="js/controllers/invite.js"></script>
-        <script src="js/controllers/contact.js"></script>
+        <script src="js/controllers/profile.js"></script>
+        <script src="js/controllers/notification.js"></script>
 
-
+        <script src="js/controllers/book.js"></script>
+        <script src="js/controllers/book_search.js"></script>
+        <script src="js/controllers/book_loan.js"></script>
+        
+        <script src="js/controllers/book_form.js"></script>
+        <script src="js/controllers/book_add.js"></script>
+        <script src="js/controllers/book_view.js"></script>
+        <script src="js/controllers/book_shelf.js"></script>
+        <script src="js/controllers/book_recommend.js"></script>
+        <script src="js/controllers/book_comment.js"></script>
+        <script src="js/controllers/book_lend.js"></script>
+        
+        
+        <script src="js/controllers/friend.js"></script>
+        <script src="js/controllers/friend_profile.js"></script>
+        <script src="js/controllers/friend_invite.js"></script>
+        <script src="js/controllers/friend_search.js"></script>
+        
+        
         <script src="js/services/book.js"></script>
         <script src="js/services/loan.js"></script>
         <script src="js/services/shelf.js"></script>
@@ -71,7 +74,7 @@
 
 
     </head>
-    <body ng-app="starter" ng-controller="mainCtrl"> 
+    <body ng-app="livrio" ng-controller="main_ctrl"> 
         <ion-nav-view></ion-nav-view>
     </body>
 </html>

@@ -1,4 +1,4 @@
-angular.module('starter.services',[])
+angular.module('livrio.services',[])
 .factory('BOOK', ['$rootScope', '$http', '$q', '$ionicPopup',  '$ionicLoading', '$cordovaToast', '$cordovaCamera', '$ionicActionSheet', '$state', '$filter', '$cordovaBarcodeScanner', 'settings','USER', function($rootScope, $http, $q, $ionicPopup, $ionicLoading, $cordovaToast, $cordovaCamera, $ionicActionSheet, $state, $filter, $cordovaBarcodeScanner, settings, USER) {
 
     var self = this;
@@ -62,12 +62,14 @@ angular.module('starter.services',[])
             }
             else {
                 deferred.reject({
+                    text: isbn,
                     code: -1
                 });
             }
         })
         .error(function() {
             deferred.reject({
+                text: isbn,
                 code: 0
             });
         });
@@ -126,10 +128,11 @@ angular.module('starter.services',[])
         $http[action](settings.URL.BOOK, data)
         .success(function(response) {
             if (!response.errors) {
-
+                response.data.author = autor(response.data.author);
                 if (action == 'post') {
                     response.data.create = true;
                     $cordovaToast.showLongBottom(trans('book_form.toast_create'));
+                    USER.updateAmountBook();
                 }
                 else {
                     response.data.update = true;
@@ -163,9 +166,10 @@ angular.module('starter.services',[])
         .success(function(response) {
             if (!response.errors) {
                 deferred.resolve(true);
-                $cordovaToast.showLongBottom(trans('recommend.toast_request')).then(function() {});
+                $cordovaToast.showLongBottom(trans('recommend.toast_success'));
             }
             else {
+                $cordovaToast.showLongBottom(trans('recommend.toast_failure'));
                 deferred.resolve(false);
             }
         });
@@ -255,6 +259,7 @@ angular.module('starter.services',[])
         $http.get(settings.URL.BOOK + "/" + id)
         .success(function(response) {
             if (!response.errors) {
+                response.data.author = autor(response.data.author);
                 deferred.resolve(response.data);
             }
             else {
@@ -284,7 +289,9 @@ angular.module('starter.services',[])
         })
         .success(function(response) {
             if (!response.errors) {
-                var library = response.data;
+                angular.forEach(response.data, function(v) {
+                    v.author = autor(v.author);
+                });
                 deferred.resolve(response.data);
             }
             else {
@@ -298,6 +305,15 @@ angular.module('starter.services',[])
         return deferred.promise;
     };
 
+    function autor(v) {
+        if (v && !(typeof v === 'string')) {
+            return v.join(', ');
+        }
+        else {
+            return v;
+        }
+    }
+
 
     self.all = function(params) {
         params = params || {};
@@ -310,7 +326,9 @@ angular.module('starter.services',[])
         })
         .success(function(response) {
             if (!response.errors) {
-                var library = response.data;
+                angular.forEach(response.data, function(v) {
+                    v.author = autor(v.author);
+                });
                 deferred.resolve(response.data);
             }
             else {

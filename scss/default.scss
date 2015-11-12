@@ -116,3 +116,10 @@
     left: 30px !important;
     right: inherit !important;
 }
+
+.spinner-large{
+    .spinner svg {
+        width: 80px;
+        height: 80px;
+    }
+}

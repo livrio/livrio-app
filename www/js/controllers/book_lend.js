@@ -1,22 +1,20 @@
-angular.module('starter.controllers')
+angular.module('livrio.controllers')
 
-.controller('loanAddCtrl', function($scope, $rootScope, $ionicPopup, $timeout, $cordovaSocialSharing, $filter,  FRIEND, LOAN, settings) {
+.controller('book_lend_ctrl', function($scope, $state, $rootScope, $ionicPopup, $timeout, $cordovaSocialSharing, $cordovaToast, $filter, FRIEND, LOAN) {
 
     var trans = $filter('translate');
     var book = $rootScope.bookView;
     var filterTextTimeout;
 
-    $scope.loadText = trans('loading');
-
     $scope.searching = false;
     $scope.friends = [];
     $scope.searchStart = false;
 
-    $scope.empty_list = trans('loaned.empty_list');
-    $scope.empty_search = trans('loaned.empty_search');
+    $scope.empty_list = trans('lend.empty_list');
+    $scope.empty_search = trans('lend.empty_search');
 
     $scope.onSearch = function(input) {
-        console.log('search');
+
         if (input.length < 3) {
             if (filterTextTimeout) {
                 $timeout.cancel(filterTextTimeout);
@@ -28,7 +26,7 @@ angular.module('starter.controllers')
         }
 
         filterTextTimeout = $timeout(function() {
-            console.log(input);
+
             $scope.searching = true;
             $scope.searchStart = true;
             FRIEND.all({
@@ -37,12 +35,13 @@ angular.module('starter.controllers')
                 word: "%" + input + "%"
             }).then(function(data) {
                 $scope.friends = data;
+                $scope.searching = false;
             });
         }, 250); // delay 250 ms
     };
 
     $scope.onClean = function(form) {
-        console.log('clean');
+
         if (form) {
             form.$setPristine();
             form.$setUntouched();
@@ -69,9 +68,9 @@ angular.module('starter.controllers')
 
         var tpl = [
             "<div class=\"duration\"><select ng-model=\"data.type\">",
-                "<option value=\"1\">",trans('loan.option_day'),
-                "<option value=\"7\">",trans('loan.option_week'),
-                "<option value=\"30\">",trans('loan.option_month'),
+                "<option value=\"1\">",trans('lend.option_day'),
+                "<option value=\"7\">",trans('lend.option_week'),
+                "<option value=\"30\">",trans('lend.option_month'),
             "</select>",
 
             "<select ng-model=\"data.day\">",
@@ -80,46 +79,41 @@ angular.module('starter.controllers')
 
         ];
 
-        // An elaborate, custom popup
         $ionicPopup.show({
-            title: trans('loan.popup_title'),
+            title: trans('lend.popup_title'),
             template: tpl.join(''),
             cssClass: 'popup-loan',
             scope: $scope,
             buttons: [
                 {
-                    text: trans('loan.popup_btn_cancel')
+                    text: trans('lend.popup_btn_cancel')
                 },
                 {
-                    text: trans('loan.popup_btn_ok'),
+                    text: trans('lend.popup_btn_ok'),
                     onTap: function(e) {
                         var days = parseInt($scope.data.day,10) * parseInt($scope.data.type,10);
 
-                        $scope.loadText = trans('loan.loading_loan');
-                        $scope.loading = true;
-
                         LOAN.add(book.id, user.id, days,'sent')
                         .then(function(book) {
-                            $scope.loading = false;
-                            $scope.loadText = trans('loading');
                             $rootScope.bookView.loaned = book.loaned;
-                            window.location = '#/app/book/' + book.id;
+                            $cordovaToast.showLongBottom(trans('lend.toast_success'));
+                            $state.go('app.book-view',{
+                                id: book.id
+                            })
                         },
                         function() {
-                            $scope.loading = false;
-                            $scope.loadText = trans('loading');
+                            $cordovaToast.showLongBottom(trans('lend.toast_failure'));
                         });
 
                     }
                 }
             ]
-        }).then(function(res) {});
+        });
     };
 
     $scope.doInvite = function() {
 
         var image = book.thumb;
-        console.log(image);
         var name = $rootScope.user.fullname;
         var title = book.title;
 
@@ -127,7 +121,6 @@ angular.module('starter.controllers')
             var img = new Image();
             img.crossOrigin = 'Anonymous';
             img.onload = function() {
-                console.log('load');
                 var canvas = document.createElement('CANVAS'),
                 ctx = canvas.getContext('2d'), dataURL;
                 canvas.height = this.height;
@@ -141,15 +134,15 @@ angular.module('starter.controllers')
         }
 
         convertImgToBase64URL(image, function(output) {
-            console.log(output);
+
             $cordovaSocialSharing
-            .share(String.format(trans('loaned.invite_msg'),name, title), String.format(trans('loaned.invite_subject'),name), output, trans('loaned.invite_link'))
+            .share(String.format(trans('lend.invite_msg'),name, title), String.format(trans('lend.invite_subject'),name), output, trans('lend.invite_link'))
             .then(function(result) {
-              // Success!
+                $cordovaToast.showLongBottom(trans('lend.toast_external_success'));
             }, function(err) {
+                $cordovaToast.showLongBottom(trans('lend.toast_failure'));
             });
         }, 'image/jpeg')
     };
 
-    
 });

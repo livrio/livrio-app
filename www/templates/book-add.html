@@ -1,5 +1,5 @@
 
-<ion-view title="Novo livro">
+<ion-view title="{{'book_add.title' | translate}}">
 
 
 <ion-content class="view-book-add">
@@ -7,7 +7,7 @@
 <form name="formBook" novalidate>
     <div class="item-input-inset item item-search form-search">
         <label class="item-input-wrapper">
-            <input type="search" placeholder="Procurar por título, autor ou ISBN" ng-keyup="onSearch(formBook.word.$modelValue, true)" name="word" ng-model="search.word">
+            <input type="search" placeholder="{{'book_add.placeholder' | translate}}" ng-keyup="onSearch(formBook.word.$modelValue, true)" name="word" ng-model="search.word">
             <button type="button" class="button button-icon icon button-small placeholder-icon" on-touch="onClean(formBook)" ng-class="{'ion-android-close':searchStart, 'ion-android-search':!searchStart}">
             </button>
         </label>
@@ -21,11 +21,7 @@
     </div>
 
 
-    <div class="notice-library-empty" ng-show="(librarys.length==0 && libraryFriends.length==0) && searchStart"  ng-bind-html="empty_search">
-
-        
-
-    </div>
+    <div class="notice-library-empty" ng-show="librarys.length==0 && searchStart && !searching"  ng-bind-html="empty_search"></div>
 
     <div class="list library" ng-hide="searching || !searchStart">
 
@@ -39,7 +35,7 @@
                     <h3>{{item.author}}</h3>
                 </div>
 
-                <button class="button button-book-add icon-left button-small ion-plus" ng-click="onAdd(item)" ng-hide="item.added">Adicionar
+                <button class="button button-book-add icon-left button-small ion-plus" ng-click="onAdd(item)" ng-hide="item.added">{{'book_add.add' | translate}}
             </button>
 
 
@@ -52,17 +48,11 @@
 
 
 
-<div class="notice-library-empty" style="top: 150px;" ng-hide="searchStart">
-
-Você possui um novo livro?
-<p><strong>Ótimo! Vamos te ajudar a cadastrar!</strong><br /><br />Existe três formas de cadastrar um livro: 1&ordm; - você pode ler o código de barras (ISBN) atrás do livro; 2&ordm; - você pode pesquisa pelo título do livro no campo acima; 3&ordm; - ou inserir manualmente.</p>
-<img src="img/official.svg" />
-
-</div>
+<div class="notice-library-empty" style="top: 150px;" ng-hide="searchStart" ng-bind-html="empty_list"></div>
 
 <div class="padding" ng-hide="searchStart">
-<button class="button button-barcode" ng-click="onScan()">Ler código de barras</button>
-<a href="#" ui-sref="app.book-form">Cadastrar manualmente</a>
+<button class="button button-barcode" ng-click="onScan()">{{'book_add.btn_barcode' | translate}}</button>
+<a href="#" ui-sref="app.book-form">{{'book_add.btn_create' | translate}}</a>
 </div>
 </ion-content>
 

@@ -1,12 +1,11 @@
-// Ionic Starter App
 
 if (!String.format) {
     String.format = function(format) {
         var args = Array.prototype.slice.call(arguments, 1);
-        return format.replace(/{(\d+)}/g, function(match, number) { 
-            
-            if(typeof args[number] != 'undefined'){
-                return args[number]; 
+        return format.replace(/{(\d+)}/g, function(match, number) {
+
+            if (typeof args[number] != 'undefined') {
+                return args[number];
             }
             return match;
         });
@@ -14,40 +13,35 @@ if (!String.format) {
 }
 
 
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
+function formatDate(date) {
 
-function formatDate(date){
-
-    if(date){
-        var m = (date.getMonth()+1)+"";
+    if (date) {
+        var m = (date.getMonth() + 1) + "";
         var y = date.getFullYear();
-        var d = (date.getDate())+"";
+        var d = (date.getDate()) + "";
 
-        if(m.length==1){
-            m = "0"+m;
+        if (m.length == 1) {
+            m = "0" + m;
         }
 
-        if(d.length==1){
-            d = "0"+d;
+        if (d.length == 1) {
+            d = "0" + d;
         }
 
-
-        return y+ "-"+m+"-"+d;
+        return y + "-" + m + "-" + d;
     }
 
     return;
 }
 
-angular.module('starter', [
+angular.module('livrio', [
   'ionic',
   'ngMessages',
   'ngCordova',
-  'ionic.rating',
-  'starter.controllers',
-  'starter.services',
-  'starter.config',
-  'starter.directives',
+  'livrio.controllers',
+  'livrio.services',
+  'livrio.config',
+  'livrio.directives',
   'pascalprecht.translate'
   ])
 
@@ -60,28 +54,23 @@ angular.module('starter', [
         if (typeof navigator.globalization !== "undefined") {
             navigator.globalization.getPreferredLanguage(function(language) {
                 $http.defaults.headers.common['X-App-Platform-Lang'] = language.value;
-                var lang = (language.value).toLowerCase().split("-")[0];
-                console.log(lang);
-                
+                // var lang = (language.value).toLowerCase().split("-")[0];
+                var lang = language.value
 
-                /*$translate.use(lang).then(function(data) {
-                    console.log(data);
+                $translate.use(lang).then(function(data) {
                     window.localStorage.lang = data;
-                }, function(error) {
-                    
                 });
-                */
+
             }, null);
         }
     });
-    
+
 
 
     document.addEventListener("deviceready", function() {
-        // window.analytics.startTrackerWithId('UA-65249891-2');
+        window.analytics.startTrackerWithId('UA-65249891-2');
 
-        cordova.getAppVersion.getVersionNumber().then(function (version) {
-            console.log(version);
+        cordova.getAppVersion.getVersionNumber().then(function(version) {
             $rootScope.versionApp = version;
             $http.defaults.headers.common['X-App-Version'] = version;
         });
@@ -106,10 +95,8 @@ angular.module('starter', [
         else {
             $rootScope.backButtonPressedOnceToExit = true;
 
-            console.log();
-
             window.plugins.toast.showShortCenter(
-                trans('backbutton'),function(a) {},function(b) {}
+                trans('app.backbutton')
             );
             setTimeout(function() {
                 $rootScope.backButtonPressedOnceToExit = false;
@@ -121,8 +108,6 @@ angular.module('starter', [
 
 
     $http.defaults.headers.common['Content-Type'] = 'application/json';
-    //sessionStorage.token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJhdXJlbGlvQGNvZGV3YXkuY29tLmJyIiwibmFtZSI6IkF1clx1MDBlOWxpbyBTYXJhaXZhIiwiYWRtaW4iOnRydWUsInRva2VuIjoiYTJkYmU0Njg1ZTAzZDYxOWQ3ZTU1YjkwODllMjgwM2MifQ.HG-_yyj7KEs-tqiXKOs7C827OAzVsvT3ftH_tSU4vzQ';
-
     $http.defaults.headers.common['X-App-Platform'] = ionic.Platform.platform();
     $http.defaults.headers.common['X-App-Platform-Version'] = ionic.Platform.version();
 
@@ -130,39 +115,21 @@ angular.module('starter', [
     try {
         $rootScope.user = JSON.parse(window.localStorage.user);
         $http.defaults.headers.common['Authorization'] = window.localStorage.getItem('token');
-        window.location = '#/app/library';
+        window.location = '#/app/book';
         USER.updateLocation();
     }
     catch (e) {
         window.location = '#/login';
-        console.log(e);
     }
-
 
     $rootScope.online = true;
 
-    $rootScope.isRun = true;
-
-
-    document.addEventListener("online", function(){
+    document.addEventListener("online", function() {
         $rootScope.online = true;
-        console.log('offline');
     }, false);
 
-    document.addEventListener("offline", function(){
+    document.addEventListener("offline", function() {
         $rootScope.online = false;
-        console.log('offline');
     }, false);
 
-
-    document.addEventListener("pause", function(){
-
-        $rootScope.isRun = false;
-    }, false);
-
-
-    document.addEventListener("resume", function(){
-        console.log('resume');
-        $rootScope.isRun = true;
-    }, false);
 });

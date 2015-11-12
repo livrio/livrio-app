@@ -1,4 +1,4 @@
-angular.module('starter.services')
+angular.module('livrio.services')
 .factory('FRIEND', ['$http', '$q',  '$cordovaToast', '$filter', '$ionicModal','settings', function($http, $q, $cordovaToast, $filter, $ionicModal, settings) {
 
     var self = this;

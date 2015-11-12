@@ -1,6 +1,6 @@
-angular.module("starter.controllers")
+angular.module("livrio.controllers")
 
-.controller("bookSearchCtrl", function($scope, $rootScope, $ionicActionSheet, $filter, $timeout, BOOK) {
+.controller("book_search_ctrl", function($scope, $rootScope, $filter, $timeout, BOOK) {
 
     var filterTextTimeout;
 
@@ -15,7 +15,6 @@ angular.module("starter.controllers")
     $scope.empty_search = trans('search.empty_search');
 
     $scope.onSearch = function(input) {
-        console.log('search');
         if (input.length < 3) {
             if (filterTextTimeout) {
                 $timeout.cancel(filterTextTimeout);
@@ -27,7 +26,6 @@ angular.module("starter.controllers")
         }
 
         filterTextTimeout = $timeout(function() {
-            console.log(input);
             $scope.searching = true;
             $scope.searchStart = true;
             BOOK.all({
@@ -47,7 +45,6 @@ angular.module("starter.controllers")
     };
 
     $scope.onClean = function(form) {
-        console.log('clean');
         if (form) {
             form.$setPristine();
             form.$setUntouched();
@@ -58,18 +55,6 @@ angular.module("starter.controllers")
         $scope.libraryFriends = [];
         $scope.searchStart = false;
     };
-
-
-
-    $scope.onView = function(item) {
-        BOOK.view(item);
-    };
-
-
-    $scope.onActionBook = function(event, item) {
-        BOOK.menuAction(event, item);
-    };
-
 
 
 });

@@ -1,4 +1,4 @@
-angular.module("starter.directives",[])
+angular.module("livrio.directives",[])
 .directive('book', function() {
     return {
         restrict: 'E',

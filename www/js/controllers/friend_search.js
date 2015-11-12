@@ -1,11 +1,8 @@
-angular.module('starter.controllers')
+angular.module('livrio.controllers')
 
-.controller('friendAddCtrl', function($scope, $ionicHistory, $timeout, $filter,  $ionicPopup, $ionicModal, $ionicScrollDelegate, FRIEND, USER) {
+.controller('friend_search_ctrl', function($scope, $timeout, $filter, $ionicModal, $ionicScrollDelegate, FRIEND, USER) {
 
     var trans = $filter('translate');
-
-    $scope.empty_list = trans('add_friend.empty_list');
-    $scope.empty_list_search = trans('add_friend.empty_list_search');
 
     $scope.activeTab = 0;
     $scope.hasScroll = false;
@@ -13,9 +10,8 @@ angular.module('starter.controllers')
     var scroll = true;
 
 
-    $ionicModal.fromTemplateUrl('templates/permission-contact.html', {
-        scope: $scope,
-        animation: 'slide-in-up'
+    $ionicModal.fromTemplateUrl('templates/modal/permission-contact.html', {
+        scope: $scope
     }).then(function(modal) {
         $scope.modalPermission = modal;
     });
@@ -109,19 +105,21 @@ angular.module('starter.controllers')
     $scope.search = {};
 
     $scope.onSearch = function(input, reset) {
-        console.log('search');
-        if (input.length < 3) {
+        if (input.length == 0) {
+            $scope.onClean($scope.formFriend);
+            return;
+        } else if (input.length < 3) {
             if (filterTextTimeout) {
                 $timeout.cancel(filterTextTimeout);
             }
             return;
         }
+
         if (filterTextTimeout) {
             $timeout.cancel(filterTextTimeout);
         }
 
         filterTextTimeout = $timeout(function() {
-            console.log(input);
             $scope.searching = true;
             if (reset) {
                 $scope.friendsResult = [];
@@ -148,7 +146,6 @@ angular.module('starter.controllers')
     };
 
     $scope.onClean = function(form) {
-        console.log('clean');
         if (form) {
             form.$setPristine();
             form.$setUntouched();
@@ -160,6 +157,7 @@ angular.module('starter.controllers')
         $scope.searchStart = false;
 
         delete params['word'];
+        params['page'] = 1;
         load();
     };
 
@@ -178,17 +176,14 @@ angular.module('starter.controllers')
     $scope.onChangeTab(null, 0);
 
     $scope.loadMore = function() {
-        console.log('infinite:scroll');
         params['page'] = params['page'] + 1;
-        var word = $scope.word;
-        if (word.length >= 3) {
-            $scope.onSearch($scope.word, true);
+        var word = $scope.search.word;
+        if (word && word.length >= 3) {
+            $scope.onSearch($scope.search.word, true);
         }
         else {
             load();
         }
-
-        console.log(params);
     }
 
 

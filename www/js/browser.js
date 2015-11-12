@@ -85,14 +85,12 @@ if (!window.cordova) {
 
     cordova.plugins.barcodeScanner = {
         scan: function(success) {
-            var arrs = ["9788535248821","9788536502694","9788598078175","9788563560858","9788575222669"];
-            setTimeout(function(){
+            var arrs = ["9788535248821","9788536502694","9788598078175","9788563560858","9788575222669", "9781612335154", "9781612335155"];
                 success({
                     format: 'EAN_13',
                     cancelled: false,
-                    text: "9781612335155"
+                    text: arrs[Math.floor(Math.random()*arrs.length)]
                 });
-            },5000);
         }
     };
     window.CameraPopoverOptions = {};
@@ -143,9 +141,9 @@ if (!window.cordova) {
 
     navigator.globalization = {
         getPreferredLanguage: function(s) {
-            console.log('globalization','pt-br');
+            console.log('globalization','pt_BR');
             s({
-                value: 'pt-br'
+                value: 'pt_BR'
             });
         }
     };

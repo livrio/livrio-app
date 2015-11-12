@@ -1,4 +1,4 @@
-<ion-side-menus ng-controller="menuCtrl" enable-menu-with-back-views="false">
+<ion-side-menus ng-controller="menu_ctrl" enable-menu-with-back-views="false">
 
     <ion-side-menu-content >
 
@@ -40,18 +40,18 @@
 
                 
 
-                <a class="item item-icon-left ac" ui-sref="app.library" ui-sref-active="active" menu-close>
+                <a class="item item-icon-left ac" ui-sref="app.book" ui-sref-active="active" menu-close>
                     <i class="icon ion-ios-book"></i> {{'menu.my_books' | translate}}
                     <span class="badge"  ng-show="user.amount_book>0">{{user.amount_book}}</span>
                 </a>
 
-                <a class="item item-icon-left " ui-sref="app.friends" ui-sref-active="active" menu-close>
+                <a class="item item-icon-left " ui-sref="app.friend" ui-sref-active="active" menu-close>
                     <i class="icon ion-android-contacts"></i> {{'menu.my_friends' | translate}}
                 </a>
 
                 
 
-                <a class="item item-icon-left " ui-sref="app.loan" ui-sref-active="active" menu-close>
+                <a class="item item-icon-left " ui-sref="app.book-loan" ui-sref-active="active" menu-close>
                     <i class="icon ion-arrow-swap"></i> {{'menu.my_loans' | translate}}
                 </a>
 
@@ -60,8 +60,8 @@
                     <span class="badge" ng-show="notifications.unview>0">{{notifications.unview}}</span>
                 </a>
 
-                <a class="item item-icon-left background"  ui-sref="app.invite" menu-close>
-                    <i class="icon ion-android-person-add"></i> Convidar amigos
+                <a class="item item-icon-left background"  ui-sref="app.friend-invite" menu-close>
+                    <i class="icon ion-android-person-add"></i> {{'menu.friend_invite' | translate}}
                 </a>
 
                 <a class="item item-icon-left ac" ui-sref="app.book-search" ui-sref-active="active" menu-close>
@@ -81,7 +81,7 @@
                 <p>{{'menu.empty_shelfs' | translate}}</p>
                 </div>
 
-                <a ui-sref="app.shelf({id:item.id})" ui-sref-active="active" class="item item-icon-left " ng-repeat="item in shelfs | orderBy: 'name'" menu-close>
+                <a ui-sref="app.book-shelf({id:item.id})" ui-sref-active="active" class="item item-icon-left " ng-repeat="item in shelfs | orderBy: 'name'" menu-close>
                     <i class="icon ion-android-bookmark"></i>
                     {{item.name}}
                     <span class="badge"  ng-show="item.amount>0">{{item.amount}}</span>

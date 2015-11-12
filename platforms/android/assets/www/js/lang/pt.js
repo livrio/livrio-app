@@ -55,7 +55,8 @@ angular.module("starter.config")
             terms: 'Termos Legais',
             policy: 'Termos de uso e Política de Privacidade',
             about_app: 'Sobre este aplicativo',
-            version: 'Versão Android: '
+            version: 'Versão Android: ',
+            info_contact: 'Informações de contato'
         },
         profile: {
             title: 'Meu perfil',

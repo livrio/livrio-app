@@ -1,6 +1,6 @@
-angular.module('starter.controllers')
+angular.module('livrio.controllers')
 
-.controller('shelfCtrl', function($scope, $rootScope, $stateParams, $filter, SHELF, BOOK) {
+.controller('book_shelf_ctrl', function($scope, $rootScope, $stateParams, $filter, SHELF, BOOK) {
 
     var id = $stateParams.id;
 

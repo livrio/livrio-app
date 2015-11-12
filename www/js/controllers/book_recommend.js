@@ -1,6 +1,6 @@
-angular.module('starter.controllers')
+angular.module('livrio.controllers')
 
-.controller('recommendCtrl', function($scope, $rootScope, $filter, $timeout, $cordovaSocialSharing, BOOK,  FRIEND, settings) {
+.controller('book_recommend_ctrl', function($scope, $rootScope, $state, $filter, $timeout, $cordovaSocialSharing, BOOK,  FRIEND) {
 
     var filterTextTimeout;
 
@@ -16,7 +16,6 @@ angular.module('starter.controllers')
     $scope.empty_search = trans('recommend.empty_search');
 
     $scope.onSearch = function(input) {
-        console.log('search');
         if (input.length < 3) {
             if (filterTextTimeout) {
                 $timeout.cancel(filterTextTimeout);
@@ -28,7 +27,6 @@ angular.module('starter.controllers')
         }
 
         filterTextTimeout = $timeout(function() {
-            console.log(input);
             $scope.searching = true;
             $scope.searchStart = true;
             FRIEND.all({
@@ -37,12 +35,12 @@ angular.module('starter.controllers')
                 word: "%" + input + "%"
             }).then(function(data) {
                 $scope.friends = data;
+                $scope.searching = false;
             });
         }, 250); // delay 250 ms
     };
 
     $scope.onClean = function(form) {
-        console.log('clean');
         if (form) {
             form.$setPristine();
             form.$setUntouched();
@@ -54,11 +52,11 @@ angular.module('starter.controllers')
     };
 
     $scope.doRecommend = function(user) {
-        console.log(user);
-
         BOOK.recommend(book, user.id)
         .then(function() {
-            window.location = '#/app/book/' + book.id;
+            $state.go('app.book-view',{
+                id: book.id
+            });
         });
 
     };
@@ -66,7 +64,6 @@ angular.module('starter.controllers')
     $scope.doInvite = function() {
 
         var image = book.thumb;
-        console.log(image);
         var name = $rootScope.user.fullname;
         var title = book.title;
 
@@ -74,7 +71,6 @@ angular.module('starter.controllers')
             var img = new Image();
             img.crossOrigin = 'Anonymous';
             img.onload = function() {
-                console.log('load');
                 var canvas = document.createElement('CANVAS'),
                 ctx = canvas.getContext('2d'), dataURL;
                 canvas.height = this.height;
@@ -88,12 +84,12 @@ angular.module('starter.controllers')
         }
 
         convertImgToBase64URL(image, function(output) {
-            console.log(output);
             $cordovaSocialSharing
             .share(String.format(trans('recommend.invite_msg'),name, title), String.format(trans('recommend.invite_subject'),name), output, trans('recommend.invite_link'))
             .then(function(result) {
-              // Success!
+                $cordovaToast.showLongBottom(trans('recommend.toast_success'));
             }, function(err) {
+                $cordovaToast.showLongBottom(trans('recommend.toast_failure'));
             });
         }, 'image/jpeg')
     };

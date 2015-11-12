@@ -10,7 +10,7 @@
         </ion-nav-title>
 
         <ion-nav-buttons side="right">
-            <button class="button button-clean" type="submit">SALVAR</button>
+            <button class="button button-clean" type="submit">{{'book_form.btn_save' | translate}}</button>
         </ion-nav-buttons>
 
 
@@ -27,7 +27,7 @@
 
                 <div class="item item-input item-stacked-label" ng-class="{ 'has-error' : formLibrary.isbn.$invalid && formLibrary.$submitted}">
                     <span class="input-label">{{'book_form.field_isbn' | translate}}</span>
-                    <input ng-blur="doScan(formLibrary.isbn)"  type="number"  name="isbn" ng-model="form.isbn" ng-readonly="form.id" required>
+                    <input ng-blur="doScan(formLibrary.isbn)"  type="text"  name="isbn" ng-model="form.isbn" ng-readonly="form.id" required>
                 </div>
                 <div class="form-errors" ng-messages="formLibrary.isbn.$error" ng-show="formLibrary.$submitted">
                   <div class="form-error" ng-message="required">{{'book_form.field_isbn' | translate}} {{'required_field' | translate}}</div>

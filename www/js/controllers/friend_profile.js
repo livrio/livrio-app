@@ -1,6 +1,6 @@
-angular.module("starter.controllers")
+angular.module("livrio.controllers")
 
-.controller("libraryFriendCtrl", function($scope, $ionicNavBarDelegate, $ionicHistory, $stateParams, $rootScope, $http, $ionicPopup, $filter, $ionicLoading, FRIEND, BOOK, settings) {
+.controller("friend_profile_ctrl", function($scope, $ionicNavBarDelegate, $stateParams, $filter, FRIEND, BOOK) {
 
     $scope.librarys = [];
 
@@ -12,7 +12,7 @@ angular.module("starter.controllers")
 
     var trans = $filter('translate');
 
-    $scope.empty_list = trans('friends.empty_list_book');
+    $scope.empty_list = trans('friend_profile.empty_list_book');
 
     FRIEND.view(id)
     .then(function(friend) {
@@ -24,7 +24,6 @@ angular.module("starter.controllers")
         $scope.photo = {
             'background-image': 'url(' + friend.photo + ')'
         };
-        console.log(friend.fullname);
         $ionicNavBarDelegate.title(friend.fullname);
         $scope.onRefresh();
     });
@@ -39,10 +38,4 @@ angular.module("starter.controllers")
             $scope.$broadcast('scroll.refreshComplete');
         });
     };
-
-
-    $scope.onActionBook = function(event, item) {
-        BOOK.menuAction(event, item);
-    };
-
 });

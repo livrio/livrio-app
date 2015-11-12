@@ -1,10 +1,10 @@
-<ion-view title="{{'recommend.title' | translate}}">
+<ion-view title="{{'lend.title' | translate}}">
     
     <form name="formSearch" novalidate>
         <ion-header-bar class="bar-assertive item-input-inset  bar-subheader">
             <label class="item-input-wrapper">
             
-                <input type="search" placeholder="{{'recommend.placeholder' | translate}}" ng-keyup="onSearch(formSearch.word.$modelValue)" name="word" ng-model="word">
+                <input type="search" placeholder="{{'lend.placeholder' | translate}}" ng-keyup="onSearch(formSearch.word.$modelValue)" name="word" ng-model="word">
                 <button type="button" class="button button-icon icon button-small placeholder-icon" on-touch="onClean(formSearch)" ng-class="{'ion-android-close':searchStart, 'ion-android-search':!searchStart}">
                 </button>
             </label>
@@ -13,15 +13,15 @@
 
     <ion-content>
 
-    <div class="wait-message spinner-large " ng-show="searching">
-        <ion-spinner class="spinner-energized "></ion-spinner>
+    <div class="wait-message spinner-large" ng-show="searching">
+        <ion-spinner class="spinner-energized"></ion-spinner>
         <span>{{'app.searching' | translate}}</span>
     </div>
 
 
         <div class="list friend-list" ng-hide="searching">
 
-            <div class="item item-avatar" ng-repeat="item in friends" ng-click="doRecommend(item)">
+            <div class="item item-avatar" ng-repeat="item in friends" ng-click="doLoan(item)">
             <img ng-src="{{item.photo}}" />
             {{item.fullname}}
             </div>
@@ -30,9 +30,7 @@
 
         <div class="notice-library-empty" ng-hide="searchStart" ng-bind-html="empty_list"></div>
         <div class="notice-library-empty" ng-show="friends.length==0 && searchStart && !searching"  ng-bind-html="empty_search"></div>
-        <div class="center" ng-show="friends.length==0 && searchStart && !searching">
-            <button type="button" ng-click="doInvite()" class="button icon ion-android-share-alt button-recommend"></button>
-        </div>
+    <div class="center" ng-show="friends.length==0 && searchStart && !searching"><button type="button" ng-click="doInvite()" class="button icon ion-android-share-alt button-recommend"></button></div>
 
 
     </ion-content>

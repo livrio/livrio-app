@@ -1,6 +1,20 @@
-angular.module("starter.controllers")
-.controller("mainCtrl", function($scope, $ionicHistory, $rootScope, $http, $ionicModal, $ionicLoading, $ionicPopup, $cordovaToast, $filter, settings) {
+angular.module("livrio.controllers")
+.controller("main_ctrl", function($scope, $ionicHistory, $rootScope, $http, $ionicModal, $ionicLoading, $ionicPopup, $cordovaToast, $filter, settings) {
 
+
+    $ionicModal.fromTemplateUrl('templates/modal/terms.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.modalTerms = modal;
+    });
+
+    $scope.onCloseModalTerms = function() {
+        $scope.modalTerms.hide();
+    };
+
+    $rootScope.$on("modal.terms",function() {
+        $scope.modalTerms.show();
+    });
 
     // document.addEventListener("backbutton", function() {
     //     console.log($state.current);

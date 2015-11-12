@@ -1,16 +1,14 @@
-angular.module("starter.controllers")
+angular.module("livrio.controllers")
 
-.controller("libraryCtrl", function($scope, $rootScope, $ionicActionSheet, $filter, BOOK) {
+.controller("book_ctrl", function($scope, $rootScope, $filter, BOOK) {
 
+    var trans = $filter('translate');
 
     $scope.librarys = [];
 
     $scope.loading = true;
 
-    var trans = $filter('translate');
-
-    $scope.empty_list = trans('library.empty_list');
-
+    $scope.empty_list = trans('book.empty_list');
 
     $scope.onRefresh = function() {
         BOOK.all().then(function(books) {
@@ -24,20 +22,9 @@ angular.module("starter.controllers")
         });
     };
 
-
-    $scope.onView = function(item) {
-        BOOK.view(item);
-    };
-
-
-    $scope.onActionBook = function(event, item) {
-        BOOK.menuAction(event, item);
-    };
-
     $scope.onRefresh();
 
-
-    $rootScope.$on("library.refresh",function() {
+    $rootScope.$on("book.refresh",function() {
         $scope.onRefresh();
     });
 

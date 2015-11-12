@@ -1,4 +1,4 @@
-angular.module("starter.config")
+angular.module("livrio.config")
 .config(function($translateProvider) {
 
 

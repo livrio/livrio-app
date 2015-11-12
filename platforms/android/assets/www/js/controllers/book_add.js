@@ -9,9 +9,8 @@ angular.module("starter.controllers")
 
     $scope.readingISBN = false;
 
-    $ionicModal.fromTemplateUrl('templates/book-barcode.html', {
-        scope: $scope,
-        animation: 'slide-in-up'
+    $ionicModal.fromTemplateUrl('templates/book-add-list.html', {
+        scope: $scope
     }).then(function(modal) {
         $scope.modalPermission = modal;
     });
@@ -29,7 +28,6 @@ angular.module("starter.controllers")
 
 
     $rootScope.$on("book.add",function(e, book) {
-        console.log(arguments);
         $scope.books.push(book);
         $scope.modalPermission.show();
         $ionicScrollDelegate.$getByHandle('mainScroll').scrollBottom();
@@ -46,7 +44,6 @@ angular.module("starter.controllers")
 
         BOOK.scanISBN()
         .then(function(v) {
-            console.log(v);
             $scope.readingISBN = true;
             $scope.modalPermission.show();
             BOOK.getByISBN(v)
@@ -73,25 +70,16 @@ angular.module("starter.controllers")
                 $scope.readingISBN = false;
                 hideModalIsEmpty();
                 if (o.code == -1) {
-                    $ionicPopup.confirm({
-                        template: 'Não conseguimos localizar os dados do livros com esse ISBN!<br />Quer cadastra-lo manualmente?'
-                    })
-                    .thne(function(res) {
-                        if (res) {
-                            window.location = '#/app/book-form';
-                        }
+                    $ionicPopup.alert({
+                        template: trans('book_form.isbn_not_found')
                     });
                 }
             });
         },
         function(o) {
-            console.log('ISBN invalid!');
-
             if (o.code == -1) {
                 $ionicPopup.alert({
-                    title: 'Código invalido',
-                    okText: 'OK',
-                    template: 'O código de barras <strong>' + o.text + '</strong> é invalido.'
+                    template: String.format(trans('book_form.barcode_invalid'), o.text)
                 });
             }
         });
@@ -109,11 +97,10 @@ angular.module("starter.controllers")
 
     var trans = $filter('translate');
 
-    $scope.empty_list = trans('search.empty_list');
-    $scope.empty_search = trans('search.empty_search');
+    $scope.empty_list = trans('book_form.empty_list');
+    $scope.empty_search = trans('book_form.empty_search');
 
     $scope.onSearch = function(input) {
-        console.log('search');
         if (input.length < 3) {
             if (filterTextTimeout) {
                 $timeout.cancel(filterTextTimeout);
@@ -125,7 +112,6 @@ angular.module("starter.controllers")
         }
 
         filterTextTimeout = $timeout(function() {
-            console.log(input);
             $scope.searching = true;
             $scope.searchStart = true;
             $scope.librarys = [];
@@ -157,9 +143,6 @@ angular.module("starter.controllers")
         })
         .then(function() {
             item.added = true;
-        },
-        function() {
-            console.log('ERROR');
         });
     }
 });

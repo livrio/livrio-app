@@ -1,17 +1,18 @@
 
-angular.module("starter.controllers")
+angular.module("livrio.controllers")
 
-.controller("bookAddCtrl", function($scope, $rootScope, $ionicModal, $ionicPopup, $timeout, $filter, $ionicScrollDelegate, BOOK) {
+.controller("book_add_ctrl", function($scope, $rootScope, $ionicModal, $ionicPopup, $timeout, $filter, $ionicScrollDelegate, BOOK) {
 
     var trans = $filter('translate');
+
+    $scope.empty_list = trans('book_add.empty_list');
 
     $scope.books = [];
 
     $scope.readingISBN = false;
 
-    $ionicModal.fromTemplateUrl('templates/book-barcode.html', {
-        scope: $scope,
-        animation: 'slide-in-up'
+    $ionicModal.fromTemplateUrl('templates/modal/book-add-list.html', {
+        scope: $scope
     }).then(function(modal) {
         $scope.modalPermission = modal;
     });
@@ -19,17 +20,17 @@ angular.module("starter.controllers")
 
     $scope.onClose = function() {
         $scope.modalPermission.hide();
-        window.location = '#/app/library';
+        $rootScope.$emit("book.refresh");
+        window.location = '#/app/book';
     };
 
     $scope.onForm = function() {
         $scope.modalPermission.hide();
-        window.location = '#/app/book-form';
+        window.location = '#/app/book-form/';
     };
 
 
     $rootScope.$on("book.add",function(e, book) {
-        console.log(arguments);
         $scope.books.push(book);
         $scope.modalPermission.show();
         $ionicScrollDelegate.$getByHandle('mainScroll').scrollBottom();
@@ -46,14 +47,13 @@ angular.module("starter.controllers")
 
         BOOK.scanISBN()
         .then(function(v) {
-            console.log(v);
             $scope.readingISBN = true;
             $scope.modalPermission.show();
             BOOK.getByISBN(v)
             .then(function(book) {
                 if (book.is_book) {
                     $ionicPopup.alert({
-                        template: String.format(trans('book_form.isbn_duplicate'), book.title)
+                        template: String.format(trans('book_add.isbn_duplicate'), book.title)
                     });
                     $scope.readingISBN = false;
                     hideModalIsEmpty();
@@ -62,7 +62,7 @@ angular.module("starter.controllers")
                     BOOK.save({
                         isbn: book.isbn
                     })
-                    .then(function() {
+                    .then(function(book) {
                         $scope.books.push(book);
                         $scope.readingISBN = false;
                         $ionicScrollDelegate.$getByHandle('mainScroll').scrollBottom();
@@ -73,25 +73,16 @@ angular.module("starter.controllers")
                 $scope.readingISBN = false;
                 hideModalIsEmpty();
                 if (o.code == -1) {
-                    $ionicPopup.confirm({
-                        template: 'Não conseguimos localizar os dados do livros com esse ISBN!<br />Quer cadastra-lo manualmente?'
-                    })
-                    .thne(function(res) {
-                        if (res) {
-                            window.location = '#/app/book-form';
-                        }
+                    $ionicPopup.alert({
+                        template: String.format(trans('book_add.isbn_not_found'), o.text)
                     });
                 }
             });
         },
         function(o) {
-            console.log('ISBN invalid!');
-
             if (o.code == -1) {
                 $ionicPopup.alert({
-                    title: 'Código invalido',
-                    okText: 'OK',
-                    template: 'O código de barras <strong>' + o.text + '</strong> é invalido.'
+                    template: String.format(trans('book_add.barcode_invalid'), o.text)
                 });
             }
         });
@@ -107,13 +98,9 @@ angular.module("starter.controllers")
     $scope.search = {};
 
 
-    var trans = $filter('translate');
-
-    $scope.empty_list = trans('search.empty_list');
-    $scope.empty_search = trans('search.empty_search');
+    $scope.empty_search = trans('book_add.empty_search');
 
     $scope.onSearch = function(input) {
-        console.log('search');
         if (input.length < 3) {
             if (filterTextTimeout) {
                 $timeout.cancel(filterTextTimeout);
@@ -125,7 +112,6 @@ angular.module("starter.controllers")
         }
 
         filterTextTimeout = $timeout(function() {
-            console.log(input);
             $scope.searching = true;
             $scope.searchStart = true;
             $scope.librarys = [];
@@ -157,9 +143,6 @@ angular.module("starter.controllers")
         })
         .then(function() {
             item.added = true;
-        },
-        function() {
-            console.log('ERROR');
         });
     }
 });

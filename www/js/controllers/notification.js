@@ -1,4 +1,4 @@
-angular.module('starter.controllers')
+angular.module('livrio.controllers')
 
 .filter('dateparse', function($filter) {
 
@@ -42,7 +42,7 @@ angular.module('starter.controllers')
     };
 })
 
-.controller('notificationCtrl', function($scope, $rootScope, $ionicHistory, $ionicPopup, $timeout, $filter, PUSH, FRIEND) {
+.controller('notification_ctrl', function($scope, $rootScope, $ionicHistory, $ionicPopup, $timeout, $filter, PUSH, FRIEND) {
 
     var trans = $filter('translate');
     $timeout(function() {
