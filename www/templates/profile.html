@@ -1,14 +1,8 @@
 
 
-<ion-view class="no-header">
+<ion-view class="no-header profile-view">
    <ion-nav-bar>
-
-   </ion-nav-bar>
-
-
-  <ion-content class="profile-view">
-
-        <div class="hero">
+    <div class="hero">
          <button ng-click="onMenu()" class="button back-button buttons   button-clear header-item">
             <i class="icon ion-navicon"></i>
         </button>
@@ -29,6 +23,12 @@
 
             
         </div>
+   </ion-nav-bar>
+
+
+  <ion-content>
+
+        
 
         <form ng-submit="doUpdate(formUpdate.$valid)" name="formUpdate" novalidate id="formUpdate">
         <div class="list">
