@@ -354,11 +354,11 @@ angular.module('livrio.services',[])
         $http.post(settings.URL.BOOK + "/" + book.id + "/request-return")
         .success(function(response) {
             if (!response.errors) {
-                $cordovaToast.showLongBottom(trans('book.toast_request_return')).then(function() {});
+                $cordovaToast.showLongBottom(trans('book.toast_request_return'));
                 deferred.resolve();
             }
             else if (response.errors[0].code === 301) {
-                $cordovaToast.showLongBottom(trans('book.toast_request_duplicate')).then(function() {});
+                $cordovaToast.showLongBottom(trans('book.toast_request_duplicate'));
             }
             else {
                 deferred.reject();
@@ -383,7 +383,7 @@ angular.module('livrio.services',[])
         .success(function(response) {
 
             if (!response.errors) {
-                $cordovaToast.showLongBottom(trans('book.toast_cover_update')).then(function() {});
+                $cordovaToast.showLongBottom(trans('book.toast_cover_update'));
                 $rootScope.$emit("library.refresh");
                 $rootScope.$emit("shelf.refresh");
                 $rootScope.$emit("library.shelf.refresh");
