@@ -1,6 +1,6 @@
 
 angular.module('livrio.controllers', [])
-.controller('login_ctrl', function($scope, $rootScope, $ionicSlideBoxDelegate, $ionicPopup, $ionicLoading, $filter,  settings, USER ) {
+.controller('login_ctrl', function($scope, $rootScope, $ionicSlideBoxDelegate, $ionicHistory, $ionicPopup, $filter,  settings, USER ) {
 
     var trans = $filter('translate');
 
@@ -66,7 +66,7 @@ angular.module('livrio.controllers', [])
 
             USER.auth(post)
             .then(function(data) {
-                $ionicLoading.hide();
+                $ionicHistory.clearCache();
                 window.location = '#/app/book';
             },
             function(error) {
@@ -109,6 +109,7 @@ angular.module('livrio.controllers', [])
 
                 USER.auth(post)
                 .then(function(data) {
+                    $ionicHistory.clearCache();
                     window.location = '#/app/book';
                     firstLogin(data.first_name);
                     hideLoading();

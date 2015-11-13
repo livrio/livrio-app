@@ -75,7 +75,7 @@ angular.module("livrio.services")
 
         var post = {
             version: $rootScope.versionApp,
-            device: 'android',
+            device: ionic.Platform.platform() + ':' + ionic.Platform.version(),
             origin: 'livrio'
         };
 
@@ -122,12 +122,6 @@ angular.module("livrio.services")
                 saveSession(response.data.user, response.data.token);
                 deferred.resolve(response.data.user);
                 self.updateLocation();
-                //self.updateContacts();
-
-                // document.addEventListener("deviceready", function() {
-                //     window.analytics.trackView('login_end');
-                //     window.analytics.setUserId(response.data.user.id);
-                // });
             }
             else {
                 deferred.reject(response);
