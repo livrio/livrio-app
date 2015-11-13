@@ -204,6 +204,7 @@ angular.module('livrio.services')
 
         params.sort = 'registration';
         params.order = 'desc';
+        params.limit = 30;
         var deferred = $q.defer();
         $http.get(settings.URL.NOTIFICATION, {
             params: params
