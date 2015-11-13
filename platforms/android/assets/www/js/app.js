@@ -34,6 +34,22 @@ function formatDate(date) {
     return;
 }
 
+function convertImgToBase64URL(url, callback, outputFormat) {
+    var img = new Image();
+    img.crossOrigin = 'Anonymous';
+    img.onload = function() {
+        var canvas = document.createElement('CANVAS'),
+        ctx = canvas.getContext('2d'), dataURL;
+        canvas.height = this.height;
+        canvas.width = this.width;
+        ctx.drawImage(this, 0, 0);
+        dataURL = canvas.toDataURL(outputFormat);
+        callback(dataURL);
+        canvas = null;
+    };
+    img.src = url;
+}
+
 angular.module('livrio', [
   'ionic',
   'ngMessages',
@@ -85,12 +101,12 @@ angular.module('livrio', [
         else if ($ionicHistory.backView()) {
             $ionicHistory.goBack();
         }
-        else if ($state.current.name != 'app.library') {
+        else if ($state.current.name != 'app.book') {
             $ionicHistory.nextViewOptions({
                 disableAnimate: true,
                 disableBack: true
             });
-            $state.go('app.library');
+            $state.go('app.book');
         }
         else {
             $rootScope.backButtonPressedOnceToExit = true;

@@ -326,6 +326,7 @@ angular.module('livrio.services',[])
 
         params.sort = 'title';
         params.order = 'asc';
+        params.limit = 20;
         var deferred = $q.defer();
         $http.get(settings.URL.BOOK, {
             params: params

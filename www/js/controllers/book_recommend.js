@@ -67,31 +67,27 @@ angular.module('livrio.controllers')
         var name = $rootScope.user.fullname;
         var title = book.title;
 
-        function convertImgToBase64URL(url, callback, outputFormat) {
-            var img = new Image();
-            img.crossOrigin = 'Anonymous';
-            img.onload = function() {
-                var canvas = document.createElement('CANVAS'),
-                ctx = canvas.getContext('2d'), dataURL;
-                canvas.height = this.height;
-                canvas.width = this.width;
-                ctx.drawImage(this, 0, 0);
-                dataURL = canvas.toDataURL(outputFormat);
-                callback(dataURL);
-                canvas = null;
-            };
-            img.src = url;
-        }
+        if (image.indexOf('cover.gif') === -1 ) {
 
-        convertImgToBase64URL(image, function(output) {
+            convertImgToBase64URL(image, function(output) {
+                $cordovaSocialSharing
+                .share(String.format(trans('recommend.invite_msg'),name, title), String.format(trans('recommend.invite_subject'),name), output, trans('recommend.invite_link'))
+                .then(function(result) {
+                    $cordovaToast.showLongBottom(trans('recommend.toast_success'));
+                }, function(err) {
+                    $cordovaToast.showLongBottom(trans('recommend.toast_failure'));
+                });
+            }, 'image/jpeg');
+
+        } else {
             $cordovaSocialSharing
-            .share(String.format(trans('recommend.invite_msg'),name, title), String.format(trans('recommend.invite_subject'),name), output, trans('recommend.invite_link'))
+            .share(String.format(trans('recommend.invite_msg'),name, title), String.format(trans('recommend.invite_subject'),name), null, trans('recommend.invite_link'))
             .then(function(result) {
                 $cordovaToast.showLongBottom(trans('recommend.toast_success'));
             }, function(err) {
                 $cordovaToast.showLongBottom(trans('recommend.toast_failure'));
             });
-        }, 'image/jpeg')
+        }
     };
 
 

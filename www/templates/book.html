@@ -7,7 +7,7 @@
 
     <ion-content>
 
-        <ion-refresher pulling-text="{{'app.refresh' | translate}}" on-refresh="onRefresh()"></ion-refresher>
+        <ion-refresher pulling-text="{{'app.refresh' | translate}}" on-refresh="onRefresh(true)"></ion-refresher>
 
 
         <div class="wait-message" ng-show="loading">
@@ -23,6 +23,12 @@
 
         <div class="notice-library-empty" ng-show="librarys.length==0 && !loading" ng-bind-html="empty_list">
         </div>
+
+        <ion-infinite-scroll ng-if="hasScroll"
+            on-infinite="loadMore()"
+            spinner="android"
+            distance="5%">
+        </ion-infinite-scroll>
 
     </ion-content>
 

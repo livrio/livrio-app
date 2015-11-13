@@ -224,7 +224,6 @@ angular.module('livrio.services')
                 list: []
             };
             deferred.resolve([]);
-            console.log("TRATAR ERROR");
         });
         return deferred.promise;
     };
@@ -237,26 +236,23 @@ angular.module('livrio.services')
                 token: token
             }
         };
-        $http.put(settings.URL.USER + "/" + $rootScope.user.id, post)
-        .success(function() {});
+        $http.put(settings.URL.USER + "/" + $rootScope.user.id, post);
     };
 
-    /**
-    curl -u e777cc0ffe2634e969007579aa430968f5418ac96a9e4c05: -H "Content-Type: application/json" -H "X-Ionic-Application-Id: 857a12a1" https://push.ionic.io/api/v1/push -d '{"tokens":["APA91bEFLqNScXLqPMIA0QdF0MlWJmU4yQTU_Z-1bOeiLDyvyJZ9tFaksZUDYjfm4KZVbeqBJFFGXECBJjZVxCoViYhZxdH8A7BwVX22WdJ6UoatlBLkgtOzMxBiI4UFMQ377XVrxECL"],"notification":{"alert":"I come from planet Ion."}}'
-    */
+
     self.register = function(userInfo) {
 
-        var push = PushNotification.init({ "android": {"senderID": "966956371758","iconColor":"#f9b000","icon":"notify"}} );
+        var push = PushNotification.init({
+            "android": {"senderID": "966956371758","iconColor":"#f9b000","icon":"notify"},
+            "ios": {"alert": "true", "badge": "true", "sound": "true"}
+        } );
 
         push.on('registration', function(data) {
-            console.log(JSON.stringify(data));
-            console.log(data.registrationId);
-            doUpdateToken('android',data.registrationId);
+            var device = ionic.Platform.isAndroid() ? 'android' : 'ios';
+            doUpdateToken(device,data.registrationId);
         });
 
         push.on('notification', function(data) {
-            console.log(JSON.stringify(data));
-            
             self.all();
             self.markView();
             if (!data.additionalData.foreground) {
@@ -265,58 +261,6 @@ angular.module('livrio.services')
 
 
         });
-        /*
-        $rootScope.$on('$cordovaPush:tokenReceived', function(event, data) {
-            console.log("Successfully registered token " + data.token);
-            console.log('Ionic Push: Got token ', data.token, data.platform);
-            doUpdateToken(data.platform,data.token);
-        });
-
-
-        $rootScope.$on('$cordovaPush:notificationReceived', function(event, notification) {
-            console.log('$cordovaPush:notificationReceived');
-            console.log(notification);
-            switch (notification.event) {
-                case 'message':
-                    console.log(JSON.stringify(notification));
-                    self.all();
-                break;
-            }
-        });
-
-
-        var user = $ionicUser.get();
-        if (!user.user_id) {
-            user.user_id = $ionicUser.generateGUID();
-        };
-
-        // Add some metadata to your user object.
-        angular.extend(user, userInfo);
-
-        // Identify your user with the Ionic User Service
-        $ionicUser.identify(user).then(function() {
-            console.log('Identified user ' + user.name + ' ID ' + user.user_id);
-
-            $ionicPush.register({
-                canShowAlert: true, //Can pushes show an alert on your screen?
-                canSetBadge: true, //Can pushes update app icon badges?
-                canPlaySound: true, //Can notifications play a sound?
-                canRunActionsOnWake: true, //Can run actions outside the app,
-                onNotification: function(notification) {
-                    console.log('notification');
-                    console.log(JSON.stringify(notification));
-                    return true;
-                }
-            }).then(function(deviceToken, t) {
-                console.log(deviceToken);
-                console.log(t);
-            },
-            function() {
-                console.log('error token');
-            });
-
-        });
-*/
     };
 
     return self;

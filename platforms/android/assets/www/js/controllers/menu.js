@@ -1,6 +1,6 @@
 angular.module('livrio.controllers')
 
-.controller('menu_ctrl', function($scope, $state, $rootScope, $ionicPopover, $ionicSideMenuDelegate, SHELF, PUSH) {
+.controller('menu_ctrl', function($scope, $state, $rootScope, $ionicPopover, $ionicHistory, $ionicSideMenuDelegate, SHELF, PUSH) {
 
     SHELF.all();
 
@@ -10,9 +10,13 @@ angular.module('livrio.controllers')
         SHELF.add()
         .then(function(item) {
             $ionicSideMenuDelegate.toggleLeft();
-            $state.go('app.shelf',{
+            $ionicHistory.nextViewOptions({
+                disableBack: true
+            });
+            $state.go('app.book-shelf',{
                 id: item.id
             });
+            $ionicHistory.clearCache();
         });
     };
 
@@ -20,6 +24,7 @@ angular.module('livrio.controllers')
         window.localStorage.clear();
         window.localStorage.email = $rootScope.user.email;
         window.location = '#/login';
+        $ionicHistory.clearCache();
     };
 });
 
