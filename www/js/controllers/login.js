@@ -82,7 +82,7 @@ angular.module('livrio.controllers', [])
 
                     $ionicPopup.alert({
                         template: trans('login.login_invalid')
-                    }).then(function() {});
+                    });
                 }
             });
         }
@@ -125,7 +125,7 @@ angular.module('livrio.controllers', [])
                 if (p.email) {
                     $ionicPopup.alert({
                         template: trans('login.email_duplicate')
-                    }).then(function() {});
+                    });
                 }
 
             });
@@ -153,12 +153,12 @@ angular.module('livrio.controllers', [])
             if (error && error.status == 96) {
                 $ionicPopup.alert({
                     template: trans('login.login_facebook')
-                }).then(function() {});
+                });
             }
             else {
                 $ionicPopup.alert({
                     template: trans('app.offline')
-                }).then(function() {});
+                });
             }
         });
 
