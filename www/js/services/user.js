@@ -47,7 +47,6 @@ angular.module("livrio.services")
         var user = $rootScope.user;
 
         navigator.geolocation.getCurrentPosition(function(position) {
-            console.log(position);
             $http.put(settings.URL.USER + "/" + user.id, {
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude
@@ -101,7 +100,6 @@ angular.module("livrio.services")
             deferred.reject({
                 status: 0
             });
-            console.error('TRATAR ERROR');
         });
 
         return deferred.promise;
@@ -128,7 +126,6 @@ angular.module("livrio.services")
             }
         })
         .error(function(error) {
-            console.log('arguments', arguments);
             deferred.reject({
                 status: 0
             });
@@ -142,7 +139,6 @@ angular.module("livrio.services")
 
         facebookConnectPlugin.login(['email','public_profile','user_friends'], function(res) {
             if (res.status === 'connected') {
-                console.log(res.authResponse.accessToken);
                 var params = {
                     token: res.authResponse.accessToken,
                     origin: 'facebook'
@@ -170,7 +166,6 @@ angular.module("livrio.services")
                             //tenta efetuar login navamente
                             self.auth(params)
                             .then(function(data) {
-                                console.log('facebook create');
                                 data.create = true
                                 deferred.resolve(data);
                             },
@@ -189,7 +184,6 @@ angular.module("livrio.services")
             }
         },
         function() {
-            console.info(arguments);
             deferred.reject();
         });
         return deferred.promise;
