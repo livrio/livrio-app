@@ -1,0 +1,70 @@
+<ion-view title="{{'friend_search.title' | translate}}">
+
+
+
+
+
+<ion-content class="has-header view-friend-add" scroll="false">
+
+    <div class="invite-tab tabs tabs-background-assertive tabs-top" >
+
+        <a class="tab-item" ng-class="{'active':activeTab==0}" ng-click="onChangeTab(formFriend, 0)">{{'friend_search.tab_search' | translate}}</a>
+        <a class="tab-item"  ng-class="{'active':activeTab==1}" ng-click="onChangeTab(formFriend, 1)">{{'friend_search.tab_suggest' | translate}}</a>
+        <a class="tab-item" ng-class="{'active':activeTab==2}" ng-click="onChangeTab(formFriend, 2)">{{'friend_search.tab_contact' | translate}}</a>
+        
+    </div>
+
+    <form name="formFriend" novalidate ng-show="showSearch">
+        <div class="item-input-inset item item-search">
+            <label class="item-input-wrapper">
+                <input type="search" placeholder="{{'friend_search.placeholder' | translate}}" ng-keyup="onSearch(formFriend.word.$modelValue, true)" name="word" ng-model="search.word">
+                <button type="button" class="button button-icon icon button-small placeholder-icon" on-touch="onClean(formFriend)" ng-class="{'ion-android-close':searchStart, 'ion-android-search':!searchStart}">
+                </button>
+            </label>
+        </div>
+    </form>
+
+
+
+    <ion-scroll  direction="y" style="width: 100%; height: 100%">
+
+        <div class="wait-message" ng-show="searching">
+            <ion-spinner class="spinner-energized"></ion-spinner>
+            <span>{{'app.loading' | translate}}</span>
+        </div>
+
+        <div class="list friend-list add" ng-hide="searching">
+            <div class="item  item-button-right" ng-repeat="item in friendsResult" ng-class="{'item-avatar':!item.is_contact}">
+            <img ng-src="{{item.photo}}" ng-hide="item.is_contact" />
+            <h2>{{item.fullname}}</h2>
+            <span class="amount" ng-show="item.is_suggest">{{'friend_search.book' | translate}} {{item.amount_book}}</span>
+            <small ng-show="item.invited">{{'friend_search.invite_sent' | translate}}</small>
+            <small ng-show="item.added">{{'friend_search.request_sent' | translate}}</small>
+
+
+
+            <button class="button button-success button-invite-friend icon-left button-small ion-paper-airplane" ng-show="!item.invited && item.is_contact" ng-click="onInvite(item)">{{'friend_search.invite' | translate}}
+            </button>
+
+            <button class="button button-success button-small button-invite-friend icon-left ion-android-person-add" ng-show="!item.is_contact && !item.added"  ng-click="onAdd(item)">{{'friend_search.add' | translate}}
+            </button>
+
+            </div>
+        </div>
+        <div style="height: 200px">
+            <div class="wait-message" style="padding-top: 0px;" ng-show="pagging">
+                <ion-spinner class="spinner-energized"></ion-spinner>
+                <span>{{'app.loading' | translate}}</span>
+            </div>
+        </div>
+    </ion-scroll>
+
+<ion-infinite-scroll ng-if="hasScroll"
+    on-infinite="loadMore()"
+    spinner="android"
+    distance="5%">
+  </ion-infinite-scroll>
+
+</ion-content>
+
+</ion-view>

@@ -1,0 +1,20 @@
+<ion-modal-view>
+
+
+<ion-header-bar class="bar-assertive">
+<h1 class="title">{{book_title}}</h1>
+<button class="button button-clean" type="button" ng-click="onSaveShelf()">{{'book_shelf.btn_ok' | translate}}</button>
+</ion-header-bar>
+
+    <ion-content>
+    
+
+     
+
+        <div class="list">
+            <ion-checkbox ng-model="item.checked" ng-checked="item.checked" class="checkbox-calm" ng-repeat="item in shelfList | orderBy: 'name'">
+                {{item.name}}
+            </ion-checkbox>
+        </div>
+    </ion-content>
+</ion-modal-view>

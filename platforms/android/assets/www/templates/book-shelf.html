@@ -1,0 +1,33 @@
+<ion-view>
+
+    <ion-nav-title>
+        {{shelf.name}}
+    </ion-nav-title>
+
+
+    <ion-nav-buttons side="right">
+        <button type="button" class="button button-clean icon ion-android-delete" ng-click="onDelete(shelf)"></button>
+        <button type="button" class="button icon button-clean ion-android-create" ng-click="onUpdate(shelf)"></button>
+    </ion-nav-buttons>
+
+    <ion-content>
+
+        <ion-refresher pulling-text="{{'refresh' | translate}}" on-refresh="onRefresh()"></ion-refresher>
+
+        <div class="wait-message" ng-show="loading">
+            <ion-spinner class="spinner-energized"></ion-spinner>
+            <span>{{'loading' | translate}}</span>
+        </div>
+
+        <book ng-repeat="item in librarys" book="item"></book>
+
+        <div class="notice-library-empty" ng-show="librarys.length==0 && !loading"  ng-bind-html="empty_list">
+        </div>
+
+    </ion-content>
+
+    <a class="button button-float" ui-sref="app.bookAdd" ng-click="onAddBook(shelf)">
+        <i class="icon ion-plus"></i>
+    </a>
+
+</ion-view>
