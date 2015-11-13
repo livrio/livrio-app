@@ -1,7 +1,7 @@
 
-angular.module("starter.controllers")
+angular.module("livrio.controllers")
 
-.controller("bookFormCtrl", function($scope, $stateParams, $rootScope, $cordovaCamera, $ionicActionSheet, $filter, settings,  BOOK) {
+.controller("book_form_ctrl", function($scope, $stateParams, $rootScope, $cordovaCamera, $ionicActionSheet, $filter, settings, BOOK) {
 
     var id = $stateParams.id;
 
@@ -63,11 +63,11 @@ angular.module("starter.controllers")
     $scope.onPicture = function() {
         var hideSheet = $ionicActionSheet.show({
             buttons: [
-                { text: "<i class=\"icon ion-android-camera\"></i> " + trans('book.sheet_photo') },
-                { text: "<i class=\"icon ion-image\"></i> " + trans('book.sheet_picture')}
+                { text: "<i class=\"icon ion-android-camera\"></i> " + trans('book_form.sheet_photo') },
+                { text: "<i class=\"icon ion-image\"></i> " + trans('book_form.sheet_picture')}
             ],
-            cancelText: trans('book.sheet_cancel'),
-            titleText: trans('book.sheet_title') + ' ' + $scope.form.title,
+            cancelText: trans('book_form.sheet_cancel'),
+            titleText: trans('book_form.sheet_title') + ' ' + $scope.form.title,
             cancel: function() {
                 hideSheet();
             },
@@ -94,12 +94,8 @@ angular.module("starter.controllers")
         };
 
         $cordovaCamera.getPicture(options).then(function(imageData) {
-            console.log(imageData);
             $scope.form.thumb = 'data:image/jpeg;base64,' + imageData;
             $scope.form.cover_source = imageData;
-        }, function(err) {
-            console.log(JSON.stringify(arguments));
-            console.error('TRATAR ERROR');
         });
     };
 

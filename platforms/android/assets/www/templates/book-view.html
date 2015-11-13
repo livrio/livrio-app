@@ -10,7 +10,7 @@
 
     <div class="wait-message" ng-show="loading">
         <ion-spinner class="spinner-energized"></ion-spinner>
-        <span>{{'loading' | translate}}</span>
+        <span>{{'app.loading' | translate}}</span>
     </div>
 
     
@@ -40,19 +40,19 @@
 
             <a class="tab-item" ng-click="onLike(bookView)" ng-class="{'active':bookView.is_like}">
             <i class="icon ion-thumbsup"></i>
-            curtir
+            {{'book.btn_like' | translate }}
             </a>
 
 
 
-            <a class="tab-item" ui-sref="app.recommend({id:bookView.id})">
+            <a class="tab-item" ui-sref="app.book-recommend({id:bookView.id})">
             <i class="icon ion-share"></i>
-            Recomendar
+            {{'book.btn_recommend' | translate }}
             </a>
 
-            <a class="tab-item"  ui-sref="app.comment({id:bookView.id})">
+            <a class="tab-item"  ui-sref="app.book-comment({id:bookView.id})">
             <i class="icon ion-chatboxes"></i>
-            Comentários
+            {{'book.btn_comment' | translate }}
             </a>
         </div>
 
@@ -63,14 +63,14 @@
 
         <div class="item tabs tabs-secondary tabs-icon-left" ng-hide="bookView.loaned">
 
-            <a class="tab-item request-loan" ng-hide="bookView.loaned || !bookView.is_owner" ui-sref="app.loanAdd({id:bookView.id})">
+            <a class="tab-item request-loan" ng-hide="bookView.loaned || !bookView.is_owner" ui-sref="app.book-lend({id:bookView.id})">
             <i class="icon ion-forward"></i>
-            {{'book.btn_start_loan' | translate }}
+            {{'book.btn_lend' | translate }}
             </a>
 
             <a class="tab-item request-loan" ng-hide="bookView.loaned || bookView.is_owner" ng-click="onRequestLoan(bookView)">
             <i class="icon ion-forward"></i>
-            {{'book.btn_request_book' | translate }}
+            {{'book.btn_loan' | translate }}
             </a>
 
 

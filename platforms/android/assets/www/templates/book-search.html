@@ -15,9 +15,9 @@
     <ion-content>
 
 
-        <div class="wait-message" ng-show="searching">
+        <div class="wait-message spinner-large" ng-show="searching">
             <ion-spinner></ion-spinner>
-            <span>{{'search.loading' | translate}}</span>
+            <span>{{'app.searching' | translate}}</span>
         </div>
 
         <div class="notice-library-empty" ng-hide="searchStart" ng-bind-html="empty_list">
@@ -25,7 +25,7 @@
 
         </div>
 
-        <div class="notice-library-empty" ng-show="(librarys.length==0 && libraryFriends.length==0) && searchStart"  ng-bind-html="empty_search">
+        <div class="notice-library-empty" ng-show="(librarys.length==0 && libraryFriends.length==0) && searchStart && !searching"  ng-bind-html="empty_search">
 
             
 

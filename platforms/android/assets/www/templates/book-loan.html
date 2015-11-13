@@ -1,37 +1,23 @@
-<ion-view title="{{'loaned.title' | translate}}">
-    
-    <form name="formSearch" novalidate>
-        <ion-header-bar class="bar-assertive item-input-inset  bar-subheader">
-            <label class="item-input-wrapper">
-            
-                <input type="search" placeholder="{{'loaned.placeholder' | translate}}" ng-keyup="onSearch(formSearch.word.$modelValue)" name="word" ng-model="word">
-                <button type="button" class="button button-icon icon button-small placeholder-icon" on-touch="onClean(formSearch)" ng-class="{'ion-android-close':searchStart, 'ion-android-search':!searchStart}">
-                </button>
-            </label>
-        </ion-header-bar>
-    </form>
-
+    <ion-view title="{{'book_loan.title' | translate}}">
     <ion-content>
 
-    <div class="wait-message" ng-show="loading">
-        <ion-spinner class="spinner-energized"></ion-spinner>
-        <span>{{'loading' | translate}}</span>
-    </div>
+        <ion-refresher pulling-text="{{'app.refresh' | translate}}" on-refresh="onRefresh()"></ion-refresher>
 
-
-        <div class="list friend-list">
-
-            <div class="item item-avatar" ng-repeat="item in friends" ng-click="doLoan(item)" ng-hide="loading">
-            <img ng-src="{{item.photo}}" />
-            {{item.fullname}}
-            </div>
-
+        <div class="wait-message" ng-show="loading">
+            <ion-spinner class="spinner-energized"></ion-spinner>
+            <span>{{'app.loading' | translate}}</span>
         </div>
 
-        <div class="notice-library-empty" ng-hide="searchStart" ng-bind-html="empty_list"></div>
-        <div class="notice-library-empty" ng-show="friends.length==0 && searchStart"  ng-bind-html="empty_search"></div>
-    <div class="center" ng-show="friends.length==0 && searchStart"><button type="button" ng-click="doInvite()" class="button icon ion-android-share-alt button-recommend"></button></div>
+        <div class="list" ng-hide="loading">
+            <book ng-repeat="item in bookLoans" book="item"></book>
 
+            <book ng-repeat="item in bookLoaneds" book="item"></book>
+        </div>
+
+        <div class="notice-library-empty" ng-hide="bookLoaneds.length || bookLoans.length || loading" ng-bind-html="empty_list">
+
+
+    </div>
 
     </ion-content>
 </ion-view>

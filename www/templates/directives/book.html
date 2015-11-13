@@ -1,6 +1,8 @@
 <div class="item book-card" ng-hide="book.removed" ui-sref="app.book-view({id:book.id})">
 
+    <button ng-click="onActionBook($event, book)" ng-show="button" class="button button-clean button-icon ion-android-more-vertical" type="button"></button>
     <div>
+
         
         <img class="cover" ng-src="{{book.thumb}}" />
         <div class="content">

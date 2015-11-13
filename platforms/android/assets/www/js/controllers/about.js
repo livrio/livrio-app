@@ -1,5 +1,11 @@
-angular.module('starter.controllers')
+angular.module('livrio.controllers')
 
-.controller('aboutCtrl', function() {
+.controller('about_ctrl', function($scope, $rootScope) {
 
+    $scope.onTerms = function() {
+        $rootScope.$emit("modal.terms");
+    };
+
+
+    $scope.versionName = ionic.Platform.isAndroid() ? 'Android' : 'iPhone';
 });

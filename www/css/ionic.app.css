@@ -7883,7 +7883,21 @@ a.button {
     flex-wrap: nowrap;
     align-items: flex-start;
     min-height: 100px;
-    position: relative; }
+    position: relative;
+    z-index: 9; }
+  .book-card .button {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 26px;
+    padding: 0;
+    margin: 0;
+    color: #5C5C5C;
+    min-height: 0;
+    height: 26px;
+    line-height: 0;
+    width: 25px;
+    z-index: 10; }
   .book-card .cover {
     width: 86px;
     background-size: cover; }

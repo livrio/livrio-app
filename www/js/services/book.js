@@ -1,5 +1,5 @@
 angular.module('livrio.services',[])
-.factory('BOOK', ['$rootScope', '$http', '$q', '$ionicPopup',  '$ionicLoading', '$cordovaToast', '$cordovaCamera', '$ionicActionSheet', '$state', '$filter', '$cordovaBarcodeScanner', 'settings','USER', function($rootScope, $http, $q, $ionicPopup, $ionicLoading, $cordovaToast, $cordovaCamera, $ionicActionSheet, $state, $filter, $cordovaBarcodeScanner, settings, USER) {
+.factory('BOOK', ['$rootScope', '$http', '$q', '$ionicPopup', '$ionicHistory', '$ionicLoading', '$cordovaToast', '$cordovaCamera', '$ionicActionSheet', '$state', '$filter', '$cordovaBarcodeScanner', 'settings','USER', function($rootScope, $http, $q, $ionicPopup, $ionicHistory, $ionicLoading, $cordovaToast, $cordovaCamera, $ionicActionSheet, $state, $filter, $cordovaBarcodeScanner, settings, USER) {
 
     var self = this;
 
@@ -22,7 +22,7 @@ angular.module('livrio.services',[])
         if (str.length == 13) {
             sum = 0;
             for (i = 0; i < 12; i++) {
-                digit = parseInt(str[i]);
+                digit = parseInt(str[i], 10);
                 if (i % 2 == 1) {
                     sum += 3 * digit;
                 } else {
@@ -37,7 +37,7 @@ angular.module('livrio.services',[])
             weight = 10;
             sum = 0;
             for (i = 0; i < 9; i++) {
-                digit = parseInt(str[i]);
+                digit = parseInt(str[i], 10);
                 sum += weight * digit;
                 weight--;
             }
@@ -124,8 +124,12 @@ angular.module('livrio.services',[])
         var deferred = $q.defer();
 
         var action = data.id ? 'put' : 'post';
+        var url = settings.URL.BOOK;
+        if (action == 'put') {
+            url = url + '/' + data.id;
+        }
 
-        $http[action](settings.URL.BOOK, data)
+        $http[action](url, data)
         .success(function(response) {
             if (!response.errors) {
                 response.data.author = autor(response.data.author);
@@ -138,7 +142,8 @@ angular.module('livrio.services',[])
                     response.data.update = true;
                     $cordovaToast.showLongBottom(trans('book_form.toast_update'));
                 }
-
+                $rootScope.$emit('book.refresh');
+                $rootScope.$emit('book_shelf.refresh');
                 deferred.resolve(response.data);
             }
             else {
@@ -210,6 +215,11 @@ angular.module('livrio.services',[])
 
 
     self.delete = function(book) {
+
+        if (book.loaned) {
+            $cordovaToast.showLongBottom(trans('book.toast_delete_loaned'));
+            return;
+        }
         $ionicPopup.confirm({
             title: trans('book.question_delete'),
             cancelText: trans('book.question_delete_no'),
@@ -217,31 +227,28 @@ angular.module('livrio.services',[])
             template: book.title
         }).then(function(res) {
             if (res) {
-                $ionicLoading.show({
-                    template: trans('book.wait_delete')
-                });
                 book.removed = true;
                 $http.delete(settings.URL.BOOK + "/" + book.id)
                 .success(function(response) {
                     $ionicLoading.hide();
                     if (!response.errors) {
-                        $cordovaToast.showLongBottom(trans('book.toast_delete')).then(function() {});
-                        window.location = "#/app/library";
-                        $rootScope.$emit("library.refresh");
-                        $rootScope.$emit("shelf.refresh");
-                        $rootScope.$emit("library.shelf.refresh");
+                        $ionicHistory.clearCache();
+                        $cordovaToast.showLongBottom(trans('book.toast_delete'));
+                        $rootScope.$emit("book.refresh");
+                        $rootScope.$emit('book_shelf.refresh');
+                        $state.go('app.book');
+
                         USER.updateAmountBook(true);
                     }
                     else {
                         book.removed = false;
                         $ionicPopup.alert({
-                            template: trans('book.msg_delete_lock')
-                        }).then(function() {});
+                            template: trans('book.toast_delete_loaned')
+                        });
                     }
                 })
                 .error(function() {
-                    $ionicLoading.hide();
-                    console.log("TRATAR ERROR");
+                    $cordovaToast.showLongBottom(trans('book.toast_delete_failure'));
                     book.removed = false;
                     $rootScope.$emit("error.http");
                 });
@@ -268,7 +275,6 @@ angular.module('livrio.services',[])
         })
         .error(function() {
             deferred.reject();
-            console.log("TRATAR ERROR");
         });
         return deferred.promise;
     };
@@ -443,18 +449,14 @@ angular.module('livrio.services',[])
     };
 
     self.menuAction = function(event, book) {
-        console.log(arguments);
         event.stopPropagation();
 
-        var options = [
-                { text: "<i class=\"icon ion-edit\"></i> " + trans('book.sheet_update') }
-            ];
+        var options = [];
 
-        if (book.loaned) {
-            //options.push({ text: "<i class=\"icon ion-arrow-swap\"></i> " + trans('book.sheet_request_return') });
-        }
-        else {
-            //options.push({ text: "<i class=\"icon ion-arrow-swap\"></i> " + trans('book.sheet_loan') });
+        options.push({ text: "<i class=\"icon ion-android-bookmark\"></i> " + trans('book.sheet_shelfs') });
+
+        if (!book.is_ref) {
+            options.push({ text: "<i class=\"icon ion-edit\"></i> " + trans('book.sheet_update') });
         }
 
         $ionicActionSheet.show({
@@ -467,18 +469,11 @@ angular.module('livrio.services',[])
                 return true;
             },
             buttonClicked: function(index) {
-                if (index === 0) {
+                if (index === 1) {
                     self.update(book);
                 }
-                else if (index === 1) {
-                    if (book.loaned) {
-                        self.requestReturn(book);
-                    }
-                    else {
-                        $state.go('app.loanAdd',{
-                            id: book.id
-                        });
-                    }
+                else if (index == 0) {
+                    $rootScope.$emit("book.shelf", book);
                 }
                 return true;
             }

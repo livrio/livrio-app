@@ -42,7 +42,10 @@ angular.module('livrio.controllers')
     }
 
     $scope.onUpdate = function(item) {
-        SHELF.update(item);
+        SHELF.update(item).
+        then(function(shelf) {
+            item = shelf;
+        });
     };
 
     $scope.onAddBook = function(item) {
@@ -57,9 +60,7 @@ angular.module('livrio.controllers')
 
     $scope.onRefresh();
 
-    $rootScope.$on("library.shelf.refresh",function() {
-        $scope.librarys = [];
-        $scope.loading = true;
+    $rootScope.$on("book_shelf.refresh",function() {
         $scope.onRefresh();
     });
 

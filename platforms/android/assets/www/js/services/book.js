@@ -1,5 +1,5 @@
-angular.module('starter.services',[])
-.factory('BOOK', ['$rootScope', '$http', '$q', '$ionicPopup',  '$ionicLoading', '$cordovaToast', '$cordovaCamera', '$ionicActionSheet', '$state', '$filter', '$cordovaBarcodeScanner', 'settings','USER', function($rootScope, $http, $q, $ionicPopup, $ionicLoading, $cordovaToast, $cordovaCamera, $ionicActionSheet, $state, $filter, $cordovaBarcodeScanner, settings, USER) {
+angular.module('livrio.services',[])
+.factory('BOOK', ['$rootScope', '$http', '$q', '$ionicPopup', '$ionicHistory', '$ionicLoading', '$cordovaToast', '$cordovaCamera', '$ionicActionSheet', '$state', '$filter', '$cordovaBarcodeScanner', 'settings','USER', function($rootScope, $http, $q, $ionicPopup, $ionicHistory, $ionicLoading, $cordovaToast, $cordovaCamera, $ionicActionSheet, $state, $filter, $cordovaBarcodeScanner, settings, USER) {
 
     var self = this;
 
@@ -22,7 +22,7 @@ angular.module('starter.services',[])
         if (str.length == 13) {
             sum = 0;
             for (i = 0; i < 12; i++) {
-                digit = parseInt(str[i]);
+                digit = parseInt(str[i], 10);
                 if (i % 2 == 1) {
                     sum += 3 * digit;
                 } else {
@@ -37,7 +37,7 @@ angular.module('starter.services',[])
             weight = 10;
             sum = 0;
             for (i = 0; i < 9; i++) {
-                digit = parseInt(str[i]);
+                digit = parseInt(str[i], 10);
                 sum += weight * digit;
                 weight--;
             }
@@ -62,12 +62,14 @@ angular.module('starter.services',[])
             }
             else {
                 deferred.reject({
+                    text: isbn,
                     code: -1
                 });
             }
         })
         .error(function() {
             deferred.reject({
+                text: isbn,
                 code: 0
             });
         });
@@ -122,14 +124,19 @@ angular.module('starter.services',[])
         var deferred = $q.defer();
 
         var action = data.id ? 'put' : 'post';
+        var url = settings.URL.BOOK;
+        if (action == 'put') {
+            url = url + '/' + data.id;
+        }
 
-        $http[action](settings.URL.BOOK, data)
+        $http[action](url, data)
         .success(function(response) {
             if (!response.errors) {
-
+                response.data.author = autor(response.data.author);
                 if (action == 'post') {
                     response.data.create = true;
                     $cordovaToast.showLongBottom(trans('book_form.toast_create'));
+                    USER.updateAmountBook();
                 }
                 else {
                     response.data.update = true;
@@ -163,9 +170,10 @@ angular.module('starter.services',[])
         .success(function(response) {
             if (!response.errors) {
                 deferred.resolve(true);
-                $cordovaToast.showLongBottom(trans('recommend.toast_request')).then(function() {});
+                $cordovaToast.showLongBottom(trans('recommend.toast_success'));
             }
             else {
+                $cordovaToast.showLongBottom(trans('recommend.toast_failure'));
                 deferred.resolve(false);
             }
         });
@@ -206,6 +214,11 @@ angular.module('starter.services',[])
 
 
     self.delete = function(book) {
+
+        if (book.loaned) {
+            $cordovaToast.showLongBottom(trans('book.toast_delete_loaned'));
+            return;
+        }
         $ionicPopup.confirm({
             title: trans('book.question_delete'),
             cancelText: trans('book.question_delete_no'),
@@ -213,31 +226,27 @@ angular.module('starter.services',[])
             template: book.title
         }).then(function(res) {
             if (res) {
-                $ionicLoading.show({
-                    template: trans('book.wait_delete')
-                });
                 book.removed = true;
                 $http.delete(settings.URL.BOOK + "/" + book.id)
                 .success(function(response) {
                     $ionicLoading.hide();
                     if (!response.errors) {
-                        $cordovaToast.showLongBottom(trans('book.toast_delete')).then(function() {});
-                        window.location = "#/app/library";
-                        $rootScope.$emit("library.refresh");
-                        $rootScope.$emit("shelf.refresh");
-                        $rootScope.$emit("library.shelf.refresh");
+                        $ionicHistory.clearCache();
+                        $cordovaToast.showLongBottom(trans('book.toast_delete'));
+                        $rootScope.$emit("book.refresh");
+                        $state.go('app.book');
+
                         USER.updateAmountBook(true);
                     }
                     else {
                         book.removed = false;
                         $ionicPopup.alert({
-                            template: trans('book.msg_delete_lock')
-                        }).then(function() {});
+                            template: trans('book.toast_delete_loaned')
+                        });
                     }
                 })
                 .error(function() {
-                    $ionicLoading.hide();
-                    console.log("TRATAR ERROR");
+                    $cordovaToast.showLongBottom(trans('book.toast_delete_failure'));
                     book.removed = false;
                     $rootScope.$emit("error.http");
                 });
@@ -255,6 +264,7 @@ angular.module('starter.services',[])
         $http.get(settings.URL.BOOK + "/" + id)
         .success(function(response) {
             if (!response.errors) {
+                response.data.author = autor(response.data.author);
                 deferred.resolve(response.data);
             }
             else {
@@ -263,7 +273,6 @@ angular.module('starter.services',[])
         })
         .error(function() {
             deferred.reject();
-            console.log("TRATAR ERROR");
         });
         return deferred.promise;
     };
@@ -284,7 +293,9 @@ angular.module('starter.services',[])
         })
         .success(function(response) {
             if (!response.errors) {
-                var library = response.data;
+                angular.forEach(response.data, function(v) {
+                    v.author = autor(v.author);
+                });
                 deferred.resolve(response.data);
             }
             else {
@@ -298,6 +309,15 @@ angular.module('starter.services',[])
         return deferred.promise;
     };
 
+    function autor(v) {
+        if (v && !(typeof v === 'string')) {
+            return v.join(', ');
+        }
+        else {
+            return v;
+        }
+    }
+
 
     self.all = function(params) {
         params = params || {};
@@ -310,7 +330,9 @@ angular.module('starter.services',[])
         })
         .success(function(response) {
             if (!response.errors) {
-                var library = response.data;
+                angular.forEach(response.data, function(v) {
+                    v.author = autor(v.author);
+                });
                 deferred.resolve(response.data);
             }
             else {
@@ -425,18 +447,14 @@ angular.module('starter.services',[])
     };
 
     self.menuAction = function(event, book) {
-        console.log(arguments);
         event.stopPropagation();
 
-        var options = [
-                { text: "<i class=\"icon ion-edit\"></i> " + trans('book.sheet_update') }
-            ];
+        var options = [];
 
-        if (book.loaned) {
-            //options.push({ text: "<i class=\"icon ion-arrow-swap\"></i> " + trans('book.sheet_request_return') });
-        }
-        else {
-            //options.push({ text: "<i class=\"icon ion-arrow-swap\"></i> " + trans('book.sheet_loan') });
+        options.push({ text: "<i class=\"icon ion-android-bookmark\"></i> " + trans('book.sheet_shelfs') });
+
+        if (!book.is_ref) {
+            options.push({ text: "<i class=\"icon ion-edit\"></i> " + trans('book.sheet_update') });
         }
 
         $ionicActionSheet.show({
@@ -449,18 +467,11 @@ angular.module('starter.services',[])
                 return true;
             },
             buttonClicked: function(index) {
-                if (index === 0) {
+                if (index === 1) {
                     self.update(book);
                 }
-                else if (index === 1) {
-                    if (book.loaned) {
-                        self.requestReturn(book);
-                    }
-                    else {
-                        $state.go('app.loanAdd',{
-                            id: book.id
-                        });
-                    }
+                else if (index == 0) {
+                    $rootScope.$emit("book.shelf", book);
                 }
                 return true;
             }

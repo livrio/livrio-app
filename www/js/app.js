@@ -85,12 +85,12 @@ angular.module('livrio', [
         else if ($ionicHistory.backView()) {
             $ionicHistory.goBack();
         }
-        else if ($state.current.name != 'app.library') {
+        else if ($state.current.name != 'app.book') {
             $ionicHistory.nextViewOptions({
                 disableAnimate: true,
                 disableBack: true
             });
-            $state.go('app.library');
+            $state.go('app.book');
         }
         else {
             $rootScope.backButtonPressedOnceToExit = true;

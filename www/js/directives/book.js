@@ -3,7 +3,8 @@ angular.module("livrio.directives",[])
     return {
         restrict: 'E',
         scope: {
-            book: '=book'
+            book: '=book',
+            button: '='
         },
         controller: function($scope, $rootScope, BOOK) {
 

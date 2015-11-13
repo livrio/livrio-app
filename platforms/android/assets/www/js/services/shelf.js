@@ -1,4 +1,4 @@
-angular.module("starter.services")
+angular.module("livrio.services")
 .factory("SHELF", ["$rootScope", "$http", "$ionicHistory", "$state", "$q", "$ionicPopup", "$ionicLoading", "$cordovaToast", "$filter", "settings", "BOOK", function($rootScope, $http, $ionicHistory, $state, $q, $ionicPopup, $ionicLoading, $cordovaToast, $filter, settings, BOOK) {
 
     var self = this;

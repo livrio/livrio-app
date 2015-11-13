@@ -1,14 +1,12 @@
 "use strict";
 
-angular.module('starter.controllers')
-.controller('profileCtrl', function( $scope, $rootScope, $ionicSideMenuDelegate, $ionicActionSheet, $http, $cordovaToast, $cordovaCamera, $filter, settings) {
+angular.module('livrio.controllers')
+.controller('profile_ctrl', function( $scope, $rootScope, $ionicSideMenuDelegate, $ionicActionSheet, $http, $cordovaToast, $cordovaCamera, $filter, settings) {
 
     var user = $rootScope.user;
     var trans = $filter('translate');
 
-    console.log(user.birthday);
     user.birthday = new Date(user.birthday + " 23:59:59");
-    console.log(user.birthday);
     $scope.form = user;
 
     $scope.onMenu = function(){
@@ -33,17 +31,12 @@ angular.module('starter.controllers')
 
     var id = $rootScope.user.id;
 
-    $scope.onSave = function() {
-        $cordovaToast.showLongBottom(trans('profile.toast_save')).then(function() {});
-    };
-
 
     $scope.onPicture = function() {
         var hideSheet = $ionicActionSheet.show({
             buttons: [
                 { text: "<i class=\"icon ion-android-camera\"></i> " + trans('profile.sheet_photo') },
                 { text: "<i class=\"icon ion-image\"></i> " + trans('profile.sheet_picture')}
-                
             ],
             destructiveText: "<i class=\"icon ion-trash-a\"></i> " + trans('profile.sheet_remove'),
             titleText: trans('profile.sheet_title'),
@@ -110,22 +103,20 @@ angular.module('starter.controllers')
 
         $http.put(settings.URL.USER + '/' + id, post)
         .success(function(response) {
-            console.log(JSON.stringify(response));
             if (!response.errors) {
                 window.localStorage.user = JSON.stringify(response.data);
                 $rootScope.user = response.data;
                 $scope.form = $rootScope.user;
+                $cordovaToast.showLongBottom(trans('profile.toast_save'));
             }
             else {
                 $scope.form.photo = old;
                 $scope.form.cover = old2;
-                $cordovaToast.showLongBottom(trans('profile.toast_photo_error')).then(function() {});
+                $cordovaToast.showLongBottom(trans('profile.toast_photo_error'));
             }
         })
         .error(function() {
             $scope.form.photo = old;
-            console.log(JSON.stringify(arguments));
-            console.error('TRATAR ERROR');
         });
     }
 
@@ -151,7 +142,6 @@ angular.module('starter.controllers')
         }
 
         $cordovaCamera.getPicture(options).then(function(imageData) {
-            console.log(imageData);
             var post = {};
             if (cover) {
                 post.cover_source = imageData;
@@ -163,9 +153,6 @@ angular.module('starter.controllers')
             save(post, cover);
 
 
-        }, function(err) {
-            console.log(JSON.stringify(arguments));
-            console.error('TRATAR ERROR');
         });
     };
 
@@ -184,9 +171,7 @@ angular.module('starter.controllers')
             .success(function(response) {
                 window.localStorage.user = JSON.stringify(response.data);
                 $rootScope.user = response.data;
-            })
-            .error(function() {
-                console.log(JSON.stringify(arguments));
+                $cordovaToast.showLongBottom(trans('profile.toast_save'));
             });
         }
     };

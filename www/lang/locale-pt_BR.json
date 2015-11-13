@@ -6,25 +6,25 @@
         "searching": "Pesquisando",
         "refresh": "Atualizar",
         "loading": "Carregando",
-        "required_field": "é obrigatório"
+        "required_field": "é obrigatório",
+        "name": "Livrio"
     },
     "book": {
         "empty_list": "Nenhum livro cadastrado. <p>Clique no <i class=\"ion ion-plus\"></i> para começar.</p><img src=\"img/bored.svg\" />",
+        "toast_delete_loaned": "Não é possível excluir um livro emprestado!",
         "question_delete": "Deseja excluir este livro?",
         "question_delete_no": "Cancelar",
         "question_delete_yes": "Excluir",
-        "wait_delete": "Excluindo...",
-        "toast_delete": "Livro excluido!",
-        "msg_delete_lock": "Você não pode excluir um livro que está emprestado",
+        "toast_delete": "Livro excluído!",
+        "toast_delete_failure": "Ops, tente mais tarde!",
         "toast_request_return": "Seu amigo será avisado!",
         "toast_request_duplicate": "book.toast_request_duplicate",
         "toast_cover_update": "Capa atualizada!",
         "sheet_photo": "Tirar foto",
         "sheet_picture": "Galeria",
         "sheet_title": "Capa do livro: ",
+        "sheet_shelfs": "Estantes",
         "sheet_update": "Editar",
-        "sheet_request_return": "Solicitar devolução",
-        "sheet_loan": "Emprestar",
         "sheet_delete": "Excluir",
         "sheet_cancel": "Cancelar",
         "isbn": "ISBN",
@@ -78,10 +78,7 @@
         "cover": "Capa",
         "field_publisher": "Editora",
         "field_publisher_year": "Ano de publicação",
-        "field_page": "Páginas",
-        "btn_shelf_cancel": "Cancelar",
-        "btn_shelf_save": "Salvar",
-        "btn_add_shelf": "Criar estante"
+        "field_page": "Páginas"
     },
     "lend": {
         "empty_list": "<p>Utilize o campo acima para encontrar seu amigo.</p><img src=\"img/official.svg\" />",
@@ -132,9 +129,10 @@
         "popup_create_ok": "Criar",
         "toast_create": "Estante criada!",
         "popup_update_title": "Editar estante",
-        "popup_update_msg": "Qual o novo nome da estante?",
+        "popup_update_msg": "Informe o novo nome da estante: <strong>{0}</strong>?",
         "popup_update_cancel": "Cancelar",
         "popup_update_ok": "Editar",
+        "toast_update": "Estante atualizada!",
         "popup_delete_title": "Deseja excluir esta estante?",
         "popup_delete_cancel": "Cancelar",
         "popup_delete_ok": "Excluir",
@@ -293,6 +291,9 @@
         "text": "Veja quem está no Livrio carregando seus contatos. Depois, fale para nós quem você quer adicionar como amigo.",
         "btn_ok": "Continuar",
         "terms": "As informações sobre os contatos da sua agenda, incluindo nomes, números de telefone e emails, serão enviadas ao Livrio para ajudar você e outras pessoas a encontrar amigos mais rapidamente e nos ajudar a aumentar a qualidade do nosso serviço."
+    },
+    "book_shelf": {
+        "btn_ok": "CONCLUIR"
     },
     "menu": {
         "my_books": "Meus livros",

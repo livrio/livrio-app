@@ -1,5 +1,5 @@
 angular.module("livrio.controllers")
-.controller("main_ctrl", function($scope, $ionicHistory, $rootScope, $http, $ionicModal, $ionicLoading, $ionicPopup, $cordovaToast, $filter, settings) {
+.controller("main_ctrl", function($scope, $ionicHistory, $rootScope, $http, $ionicModal, $ionicLoading, $ionicPopup, $cordovaToast, $filter, BOOK, SHELF, settings) {
 
 
     $ionicModal.fromTemplateUrl('templates/modal/terms.html', {
@@ -15,14 +15,6 @@ angular.module("livrio.controllers")
     $rootScope.$on("modal.terms",function() {
         $scope.modalTerms.show();
     });
-
-    // document.addEventListener("backbutton", function() {
-    //     console.log($state.current);
-    //     if ($state.current && $state.current.name != 'app.library') {
-
-    //     }
-    //     console.log('backbutton');
-    // }, false);
 
     var trans = $filter('translate');
 
@@ -91,6 +83,56 @@ angular.module("livrio.controllers")
 
     $rootScope.$on("error.http",function(e) {
         $cordovaToast.showLongBottom("Você está offline!").then(function() {});
+    });
+
+
+    $ionicModal.fromTemplateUrl('templates/modal/shelfs.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.modalShelf = modal;
+    });
+
+
+    var book_shelf;
+    $scope.onSaveShelf = function() {
+        var ids = [];
+        angular.forEach($scope.shelfList, function(v) {
+            if (v.checked) {
+                ids.push(v.id);
+            }
+        });
+
+        console.log(book_shelf);
+
+        BOOK.save({
+            id: book_shelf.id,
+            shelfs: ids
+        })
+        .then(function(book) {
+            book_shelf = book;
+            SHELF.all();
+            $ionicHistory.clearCache();
+        });
+        $scope.modalShelf.hide();
+    };
+
+
+    $rootScope.$on("book.shelf",function(e, book) {
+        book_shelf = book;
+        $scope.book_title = book.title;
+
+        $scope.shelfList = $rootScope.shelfs;
+
+        angular.forEach($scope.shelfList, function(v) {
+            v.checked = false;
+            angular.forEach(book.shelfs, function(v1) {
+                if (v1.id == v.id) {
+                    v.checked = true;
+                }
+            });
+        });
+
+        $scope.modalShelf.show();
     });
 
 

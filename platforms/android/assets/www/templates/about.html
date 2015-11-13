@@ -13,7 +13,7 @@
                 {{'about.terms' | translate}}
             </div>
             
-            <a class="item" ui-sref="app.privacy">
+            <a class="item" ng-click="onTerms()">
                 {{'about.policy' | translate}}
             </a>
 
@@ -26,12 +26,12 @@
             </div>
             
             <div class="item">
-            {{'about.version' | translate }} {{versionApp}}
+            {{'about.version' | translate }} {{versionName}} <strong>{{versionApp}}</strong>
                 
             </div>
 
             <div class="item item-divider">
-                {{'about.info_contact' | translate}}
+                Informações de contato
             </div>
             
             <div class="item">

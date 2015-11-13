@@ -1,5 +1,5 @@
-angular.module('starter.services')
-.factory('PUSH', ['$rootScope', '$http', '$q', '$filter', '$interval', 'settings', function($rootScope, $http, $q, $filter, $interval, settings) {
+angular.module('livrio.services')
+.factory('PUSH', ['$rootScope', '$http', '$state', '$q', '$filter', '$interval', 'settings', function($rootScope, $http, $state, $q, $filter, $interval, settings) {
 
     var self = this;
 
@@ -25,33 +25,33 @@ angular.module('starter.services')
 
             if (item.type === 'system_first_book') {
                 text = String.format(trans('notification.msg_system_first_book'), item.user.fullname);
-                href = "#/app/friends";
+                href = "#/app/friend-invite";
             }
             else if (item.type === 'system_welcome') {
                 text = String.format(trans('notification.msg_system_welcome'), item.user.fullname);
-                href = "#/app/book-form";
+                href = "#/app/book-add";
             }
             else if (item.type === 'system_library_empty') {
                 text = String.format(trans('notification.msg_system_library_empty'), item.user.fullname);
-                href = "#/app/book-form";
+                href = "#/app/book-add";
             }
             else if (item.type === 'friend') {
                 text = String.format(trans('notification.msg_friend'), item.created_by.fullname);
-                href = "#/app/friend/" + item.created_by.id;
+                href = "#/app/friend-profile/" + item.created_by.id;
 
             }
             else if (item.type === 'loan_request') {
                 text = String.format(trans('notification.msg_loan_request'), item.created_by.fullname, item.book.title);
                 item.question = true;
-                href = "#/app/book/" + item.book.id;
+                href = "#/app/book-view/" + item.book.id;
             }
             else if (item.type === 'friend_like_book') {
                 text = String.format(trans('notification.msg_friend_like_book'), item.created_by.fullname, item.book.title);
-                href = "#/app/book/" + item.book.id;
+                href = "#/app/book-view/" + item.book.id;
             }
              else if (item.type === 'friend_recommend_book') {
                 text = String.format(trans('notification.msg_friend_recommend_book'), item.created_by.fullname, item.book.title);
-                href = "#/app/book/" + item.book.id;
+                href = "#/app/book-view/" + item.book.id;
             }
             else if (item.type === 'loan_confirm_yes') {
                 item.question = true;
@@ -61,30 +61,30 @@ angular.module('starter.services')
                     text = text + ' &horbar; ' + item.content.msg ;
                 }
 
-                href = "#/app/book/" + item.book.id;
+                href = "#/app/book-view/" + item.book.id;
             }
             else if (item.type === 'loan_confirm_no') {
                 text = String.format(trans('notification.msg_loan_confirm_no'), item.created_by.fullname, item.book.title);
-                href = "#/app/book/" + item.book.id;
+                href = "#/app/book-view/" + item.book.id;
                 if (item.content.reason) {
                     text = text + ' &horbar; ' + item.content.reason ;
                 }
             }
             else if (item.type === 'loan_request_return') {
                 text = String.format(trans('notification.msg_loan_request_return'), item.created_by.fullname, item.book.title);
-                href = "#/app/book/" + item.book.id;
+                href = "#/app/book-view/" + item.book.id;
             }
             else if (item.type === 'loan_return_confirm') {
                 text = String.format(trans('notification.msg_loan_return_confirm'), item.created_by.fullname, item.book.title);
-                href = "#/app/book/" + item.book.id;
+                href = "#/app/book-view/" + item.book.id;
             }
             else if (item.type === 'loan_confirm') {
                 text = String.format(trans('notification.msg_loan_confirm'), item.created_by.fullname, item.book.title);
-                href = "#/app/book/" + item.book.id;
+                href = "#/app/book-view/" + item.book.id;
             }
             else if (item.type === 'loan_confirm') {
                 text = String.format(trans('notification.msg_loan_confirm'), item.created_by.fullname, item.book.title);
-                href = "#/app/book/" + item.book.id;
+                href = "#/app/book-view/" + item.book.id;
             }
             else if (item.type === 'loan_sent_canceled') {
                 text = String.format(trans('notification.msg_loan_sent_canceled'), item.created_by.fullname, item.book.title);
@@ -92,7 +92,7 @@ angular.module('starter.services')
                     text = text + ' &horbar; ' + item.content.reason ;
                 }
 
-                href = "#/app/book/" + item.book.id;
+                href = "#/app/book-view/" + item.book.id;
             }
             else if (item.type === 'loan_sent_refused') {
                 text = String.format(trans('notification.msg_loan_sent_refused'), item.created_by.fullname, item.book.title);
@@ -100,7 +100,7 @@ angular.module('starter.services')
                     text = text + ' &horbar; ' + item.content.reason ;
                 }
 
-                href = "#/app/book/" + item.book.id;
+                href = "#/app/book-view/" + item.book.id;
             }
             else if (item.type === 'request_friend') {
                 text = String.format(trans('notification.msg_request_friend'), item.created_by.fullname);

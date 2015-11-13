@@ -19,7 +19,7 @@
             <span>{{'loading' | translate}}</span>
         </div>
 
-        <book ng-repeat="item in librarys" book="item"></book>
+        <book button="true" ng-repeat="item in librarys" book="item"></book>
 
         <div class="notice-library-empty" ng-show="librarys.length==0 && !loading"  ng-bind-html="empty_list">
         </div>

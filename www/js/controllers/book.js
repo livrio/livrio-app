@@ -1,6 +1,6 @@
 angular.module("livrio.controllers")
 
-.controller("book_ctrl", function($scope, $rootScope, $filter, BOOK) {
+.controller("book_ctrl", function($scope, $rootScope, $filter, $ionicModal, BOOK, SHELF) {
 
     var trans = $filter('translate');
 

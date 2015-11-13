@@ -1,6 +1,6 @@
-angular.module('starter.controllers')
+angular.module('livrio.controllers')
 
-.controller('menuCtrl', function($scope, $state, $rootScope, $ionicPopover, $ionicSideMenuDelegate, SHELF, PUSH) {
+.controller('menu_ctrl', function($scope, $state, $rootScope, $ionicPopover, $ionicSideMenuDelegate, SHELF, PUSH) {
 
     SHELF.all();
 

@@ -1,18 +1,26 @@
-angular.module("starter.config")
+angular.module("livrio.config")
 .config(function($translateProvider) {
 
 
-    $translateProvider.translations('pt', {
+    $translateProvider.translations('pt', 
+
+
+
+    {
         app_name: 'Livrio',
         required_field: 'é obrigatório',
         refresh: 'Atualizar',
         loading: 'Carregando',
         welcome: 'Olá <strong>{0}</strong>, seja bem vindo ao <strong>Livrio.</strong> Por aqui, a gente compartilha livros com quem também ama livros. Eu vou te ajudar a cadastrar os seus e libertá-los para o mundo.',
-        offline: 'Você precisa estar conectado a internet. Por favor verifique sua conexão',
-        backbutton: 'Pressione o botão voltar para sair',
+        
+
 
         app: {
-            loading: 'Carregando'
+            loading: 'Carregando',
+            backbutton: 'Pressione o botão voltar para sair',
+            offline: 'Você precisa estar conectado a internet. Por favor verifique sua conexão'
+
+
         },
 
 
@@ -55,8 +63,7 @@ angular.module("starter.config")
             terms: 'Termos Legais',
             policy: 'Termos de uso e Política de Privacidade',
             about_app: 'Sobre este aplicativo',
-            version: 'Versão Android: ',
-            info_contact: 'Informações de contato'
+            version: 'Versão Android: '
         },
         profile: {
             title: 'Meu perfil',
@@ -340,5 +347,8 @@ angular.module("starter.config")
         }
 
 
-    });
+    }
+
+
+    );
 });

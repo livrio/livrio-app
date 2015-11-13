@@ -1,4 +1,4 @@
-angular.module("starter.services")
+angular.module("livrio.services")
 .factory("USER", ["$rootScope", "$http",   "$q", "$cordovaContacts", "settings", 'PUSH',  function($rootScope, $http, $q,  $cordovaContacts, settings,  PUSH) {
 
     var self = this;
@@ -58,6 +58,9 @@ angular.module("starter.services")
     self.updateAmountBook = function(sub) {
         if (sub) {
             $rootScope.user.amount_book--;
+            if ($rootScope.user.amount_book < 0) {
+                $rootScope.user.amount_book = 0;
+            }
         }
         else {
             $rootScope.user.amount_book++;

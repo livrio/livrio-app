@@ -1,15 +1,17 @@
 
-angular.module("starter.controllers")
+angular.module("livrio.controllers")
 
-.controller("bookAddCtrl", function($scope, $rootScope, $ionicModal, $ionicPopup, $timeout, $filter, $ionicScrollDelegate, BOOK) {
+.controller("book_add_ctrl", function($scope, $rootScope, $ionicModal, $ionicPopup, $timeout, $filter, $ionicScrollDelegate, BOOK) {
 
     var trans = $filter('translate');
+
+    $scope.empty_list = trans('book_add.empty_list');
 
     $scope.books = [];
 
     $scope.readingISBN = false;
 
-    $ionicModal.fromTemplateUrl('templates/book-add-list.html', {
+    $ionicModal.fromTemplateUrl('templates/modal/book-add-list.html', {
         scope: $scope
     }).then(function(modal) {
         $scope.modalPermission = modal;
@@ -18,12 +20,13 @@ angular.module("starter.controllers")
 
     $scope.onClose = function() {
         $scope.modalPermission.hide();
-        window.location = '#/app/library';
+        $rootScope.$emit("book.refresh");
+        window.location = '#/app/book';
     };
 
     $scope.onForm = function() {
         $scope.modalPermission.hide();
-        window.location = '#/app/book-form';
+        window.location = '#/app/book-form/';
     };
 
 
@@ -50,7 +53,7 @@ angular.module("starter.controllers")
             .then(function(book) {
                 if (book.is_book) {
                     $ionicPopup.alert({
-                        template: String.format(trans('book_form.isbn_duplicate'), book.title)
+                        template: String.format(trans('book_add.isbn_duplicate'), book.title)
                     });
                     $scope.readingISBN = false;
                     hideModalIsEmpty();
@@ -59,7 +62,7 @@ angular.module("starter.controllers")
                     BOOK.save({
                         isbn: book.isbn
                     })
-                    .then(function() {
+                    .then(function(book) {
                         $scope.books.push(book);
                         $scope.readingISBN = false;
                         $ionicScrollDelegate.$getByHandle('mainScroll').scrollBottom();
@@ -71,7 +74,7 @@ angular.module("starter.controllers")
                 hideModalIsEmpty();
                 if (o.code == -1) {
                     $ionicPopup.alert({
-                        template: trans('book_form.isbn_not_found')
+                        template: String.format(trans('book_add.isbn_not_found'), o.text)
                     });
                 }
             });
@@ -79,7 +82,7 @@ angular.module("starter.controllers")
         function(o) {
             if (o.code == -1) {
                 $ionicPopup.alert({
-                    template: String.format(trans('book_form.barcode_invalid'), o.text)
+                    template: String.format(trans('book_add.barcode_invalid'), o.text)
                 });
             }
         });
@@ -95,10 +98,7 @@ angular.module("starter.controllers")
     $scope.search = {};
 
 
-    var trans = $filter('translate');
-
-    $scope.empty_list = trans('book_form.empty_list');
-    $scope.empty_search = trans('book_form.empty_search');
+    $scope.empty_search = trans('book_add.empty_search');
 
     $scope.onSearch = function(input) {
         if (input.length < 3) {

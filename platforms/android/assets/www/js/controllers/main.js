@@ -1,14 +1,20 @@
-angular.module("starter.controllers")
-.controller("mainCtrl", function($scope, $ionicHistory, $rootScope, $http, $ionicModal, $ionicLoading, $ionicPopup, $cordovaToast, $filter, settings) {
+angular.module("livrio.controllers")
+.controller("main_ctrl", function($scope, $ionicHistory, $rootScope, $http, $ionicModal, $ionicLoading, $ionicPopup, $cordovaToast, $filter, settings) {
 
 
-    // document.addEventListener("backbutton", function() {
-    //     console.log($state.current);
-    //     if ($state.current && $state.current.name != 'app.library') {
+    $ionicModal.fromTemplateUrl('templates/modal/terms.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.modalTerms = modal;
+    });
 
-    //     }
-    //     console.log('backbutton');
-    // }, false);
+    $scope.onCloseModalTerms = function() {
+        $scope.modalTerms.hide();
+    };
+
+    $rootScope.$on("modal.terms",function() {
+        $scope.modalTerms.show();
+    });
 
     var trans = $filter('translate');
 

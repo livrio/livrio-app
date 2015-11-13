@@ -58,6 +58,9 @@ angular.module("livrio.services")
     self.updateAmountBook = function(sub) {
         if (sub) {
             $rootScope.user.amount_book--;
+            if ($rootScope.user.amount_book < 0) {
+                $rootScope.user.amount_book = 0;
+            }
         }
         else {
             $rootScope.user.amount_book++;

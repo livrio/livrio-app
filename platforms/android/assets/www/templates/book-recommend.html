@@ -13,15 +13,15 @@
 
     <ion-content>
 
-    <div class="wait-message" ng-show="loading">
-        <ion-spinner class="spinner-energized"></ion-spinner>
-        <span>{{'loading' | translate}}</span>
+    <div class="wait-message spinner-large " ng-show="searching">
+        <ion-spinner class="spinner-energized "></ion-spinner>
+        <span>{{'app.searching' | translate}}</span>
     </div>
 
 
-        <div class="list friend-list">
+        <div class="list friend-list" ng-hide="searching">
 
-            <div class="item item-avatar" ng-repeat="item in friends" ng-click="doRecommend(item)" ng-hide="loading">
+            <div class="item item-avatar" ng-repeat="item in friends" ng-click="doRecommend(item)">
             <img ng-src="{{item.photo}}" />
             {{item.fullname}}
             </div>
@@ -29,8 +29,10 @@
         </div>
 
         <div class="notice-library-empty" ng-hide="searchStart" ng-bind-html="empty_list"></div>
-        <div class="notice-library-empty" ng-show="friends.length==0 && searchStart"  ng-bind-html="empty_search"></div>
-    <div class="center" ng-show="friends.length==0 && searchStart"><button type="button" ng-click="doInvite()" class="button icon ion-android-share-alt button-recommend"></button></div>
+        <div class="notice-library-empty" ng-show="friends.length==0 && searchStart && !searching"  ng-bind-html="empty_search"></div>
+        <div class="center" ng-show="friends.length==0 && searchStart && !searching">
+            <button type="button" ng-click="doInvite()" class="button icon ion-android-share-alt button-recommend"></button>
+        </div>
 
 
     </ion-content>
