@@ -1,11 +1,9 @@
 "use strict";
 
-angular.module('starter.controllers')
-.controller('configCtrl', function( $scope, $rootScope, $http, settings) {
+angular.module('livrio.controllers')
+.controller('config_ctrl', function( $scope, $rootScope, $http, settings) {
 
     var user = $rootScope.user;
-
-    console.log(user);
 
     $scope.config = user.config;
 
@@ -18,9 +16,6 @@ angular.module('starter.controllers')
         .success(function(response) {
             window.localStorage.user = JSON.stringify(response.data);
             $rootScope.user = response.data;
-        })
-        .error(function() {
-            console.log(JSON.stringify(arguments));
         });
     };
 });

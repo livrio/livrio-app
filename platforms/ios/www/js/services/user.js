@@ -1,4 +1,4 @@
-angular.module("starter.services")
+angular.module("livrio.services")
 .factory("USER", ["$rootScope", "$http",   "$q", "$cordovaContacts", "settings", 'PUSH',  function($rootScope, $http, $q,  $cordovaContacts, settings,  PUSH) {
 
     var self = this;
@@ -16,6 +16,7 @@ angular.module("starter.services")
 
 
     self.updateContacts = function() {
+        var deferred = $q.defer();
         if (!window.localStorage.syncContact) {
             $cordovaContacts.find({
                 fields:['id','displayName','phoneNumbers','emails','birthdays','photos']
@@ -23,15 +24,22 @@ angular.module("starter.services")
                 $http.post(settings.URL.CONTACT, allContacts)
                 .success(function() {
                     window.localStorage.syncContact = true;
+                    deferred.resolve();
                 })
                 .error(function() {
                     window.localStorage.syncContact = false;
+                    deferred.reject();
                 });
             },
             function() {
                 window.localStorage.syncContact = false;
+                deferred.reject();
             });
         }
+        else {
+            deferred.resolve();
+        }
+        return deferred.promise;
     }
 
 
@@ -39,7 +47,6 @@ angular.module("starter.services")
         var user = $rootScope.user;
 
         navigator.geolocation.getCurrentPosition(function(position) {
-            console.log(position);
             $http.put(settings.URL.USER + "/" + user.id, {
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude
@@ -50,6 +57,9 @@ angular.module("starter.services")
     self.updateAmountBook = function(sub) {
         if (sub) {
             $rootScope.user.amount_book--;
+            if ($rootScope.user.amount_book < 0) {
+                $rootScope.user.amount_book = 0;
+            }
         }
         else {
             $rootScope.user.amount_book++;
@@ -64,7 +74,7 @@ angular.module("starter.services")
 
         var post = {
             version: $rootScope.versionApp,
-            device: 'android',
+            device: ionic.Platform.platform() + ':' + ionic.Platform.version(),
             origin: 'livrio'
         };
 
@@ -90,7 +100,6 @@ angular.module("starter.services")
             deferred.reject({
                 status: 0
             });
-            console.error('TRATAR ERROR');
         });
 
         return deferred.promise;
@@ -111,19 +120,12 @@ angular.module("starter.services")
                 saveSession(response.data.user, response.data.token);
                 deferred.resolve(response.data.user);
                 self.updateLocation();
-                //self.updateContacts();
-
-                // document.addEventListener("deviceready", function() {
-                //     window.analytics.trackView('login_end');
-                //     window.analytics.setUserId(response.data.user.id);
-                // });
             }
             else {
                 deferred.reject(response);
             }
         })
         .error(function(error) {
-            console.log('arguments', arguments);
             deferred.reject({
                 status: 0
             });
@@ -137,7 +139,6 @@ angular.module("starter.services")
 
         facebookConnectPlugin.login(['email','public_profile','user_friends'], function(res) {
             if (res.status === 'connected') {
-                console.log(res.authResponse.accessToken);
                 var params = {
                     token: res.authResponse.accessToken,
                     origin: 'facebook'
@@ -165,7 +166,6 @@ angular.module("starter.services")
                             //tenta efetuar login navamente
                             self.auth(params)
                             .then(function(data) {
-                                console.log('facebook create');
                                 data.create = true
                                 deferred.resolve(data);
                             },
@@ -184,7 +184,6 @@ angular.module("starter.services")
             }
         },
         function() {
-            console.info(arguments);
             deferred.reject();
         });
         return deferred.promise;

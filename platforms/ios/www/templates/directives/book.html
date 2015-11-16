@@ -1,6 +1,8 @@
-<div class="item book-card" ng-hide="book.removed" ui-sref="app.book({id:book.id})">
+<div class="item book-card" ng-hide="book.removed" ui-sref="app.book-view({id:book.id})">
 
+    <button ng-click="onActionBook($event, book)" ng-show="button" class="button button-clean button-icon ion-android-more-vertical" type="button"></button>
     <div>
+
         
         <img class="cover" ng-src="{{book.thumb}}" />
         <div class="content">
@@ -10,7 +12,7 @@
             <div class="user-loan" ng-show="book.loaned && book.is_owner && book.owner.id==user.id">
                 <img ng-src="{{book.loaned.photo}}" /> 
                 <span class="name">
-                    <span>Emprestado para </span>
+                    <span>{{'book.lent' | translate}}</span>
                     {{book.loaned.fullname}}
                 </span>
             </div>
@@ -18,7 +20,7 @@
             <div class="user-loan" ng-show="book.loaned && !book.is_owner && book.loaned.id==user.id">
                 <img ng-src="{{book.owner.photo}}" /> 
                 <span class="name">
-                    <span>Recebido de </span>
+                    <span>{{'book.loan' | translate}} </span>
                     {{book.owner.fullname}}
                 </span>
             </div>

@@ -1,4 +1,4 @@
-angular.module('starter.services')
+angular.module('livrio.services')
 .factory('LOAN', ['$rootScope', '$http', '$q', '$ionicPopup', '$ionicLoading', '$cordovaToast', '$filter',  'settings', function($rootScope, $http, $q, $ionicPopup, $ionicLoading, $cordovaToast, $filter, settings) {
 
     var self = this;
@@ -25,7 +25,6 @@ angular.module('starter.services')
         })
         .error(function() {
             deferred.reject();
-            console.log("TRATAR ERROR");
         });
 
         return deferred.promise;

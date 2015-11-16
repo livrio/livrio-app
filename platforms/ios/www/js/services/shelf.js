@@ -1,4 +1,4 @@
-angular.module("starter.services")
+angular.module("livrio.services")
 .factory("SHELF", ["$rootScope", "$http", "$ionicHistory", "$state", "$q", "$ionicPopup", "$ionicLoading", "$cordovaToast", "$filter", "settings", "BOOK", function($rootScope, $http, $ionicHistory, $state, $q, $ionicPopup, $ionicLoading, $cordovaToast, $filter, settings, BOOK) {
 
     var self = this;
@@ -23,17 +23,15 @@ angular.module("starter.services")
                 })
                 .success(function(response) {
                     if (!response.errors) {
-                        $cordovaToast.showLongBottom(trans('shelf.toast_create')).then(function() {});
+                        $cordovaToast.showLongBottom(trans('shelf.toast_create'));
                         $rootScope.shelfs.push(response.data);
                         deferred.resolve(response.data);
                     }
                     else {
-                        console.log('ERROR SHELF CREATE');
                         deferred.reject();
                     }
                 })
                 .error(function() {
-                    console.log("TRATAR ERROR");
                     deferred.reject();
                 });
             }
@@ -44,18 +42,39 @@ angular.module("starter.services")
         return deferred.promise;
     };
 
-    self.update = function(book) {
+    self.update = function(shelf) {
+        var deferred = $q.defer();
         $ionicPopup.prompt({
             title: trans('shelf.popup_update_title'),
-            template: trans('shelf.popup_update_msg'),
+            template: String.format(trans('shelf.popup_update_msg'), shelf.name) + '<input ng-model="data.response" type="text" placeholder="" class="ng-pristine ng-valid ng-touched">',
             cancelText: trans('shelf.popup_update_cancel'),
             okText: trans('shelf.popup_update_ok')
         }).then(function(res) {
-            console.log(res);
+
             if (res) {
-                create(res);
+                $http.put(settings.URL.SHELF + '/' + shelf.id, {
+                    name: res
+                })
+                .success(function(response) {
+                    if (!response.errors) {
+                        $cordovaToast.showLongBottom(trans('shelf.toast_update'));
+                        shelf.name = response.data.name;
+                        self.all();
+                        deferred.resolve(response.data);
+                    }
+                    else {
+                        deferred.reject();
+                    }
+                })
+                .error(function() {
+                    deferred.reject();
+                });
+            }
+            else {
+                deferred.reject();
             }
         });
+        return deferred.promise;
     };
 
     self.delete = function(shelf) {
@@ -70,19 +89,14 @@ angular.module("starter.services")
                 .success(function(response) {
                     if (!response.errors) {
                         self.all();
-                        $cordovaToast.showLongBottom(trans('shelf.toast_delete')).then(function() {});
+                        $cordovaToast.showLongBottom(trans('shelf.toast_delete'));
                         $ionicHistory.nextViewOptions({
                             disableBack: true
                         });
-                        $state.go('app.library');
-                    }
-                    else {
-                        console.log('EROOR DELETE');
+                        $state.go('app.book');
                     }
                 })
                 .error(function() {
-                    $ionicLoading.hide();
-                    console.log("TRATAR ERROR");
                     $rootScope.$emit("error.http");
                 });
             }

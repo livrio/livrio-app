@@ -1,6 +1,6 @@
 
 <ion-view >
-
+<form ng-submit="doSave(formLibrary)" name="formLibrary" novalidate>
     <ion-nav-bar class="bar-assertive">
 
         <ion-nav-back-button></ion-nav-back-button>
@@ -10,13 +10,13 @@
         </ion-nav-title>
 
         <ion-nav-buttons side="right">
-            <button type="button" class="button button-clean icon ion-ios-barcode-outline" ng-click="doScan()"></button>
+            <button class="button button-clean" type="submit">{{'book_form.btn_save' | translate}}</button>
         </ion-nav-buttons>
 
 
     </ion-nav-bar>
 
-<form ng-submit="doSave(formLibrary)" name="formLibrary" novalidate>
+
   <ion-content class="book-form">
 
             <div class="list">
@@ -27,7 +27,7 @@
 
                 <div class="item item-input item-stacked-label" ng-class="{ 'has-error' : formLibrary.isbn.$invalid && formLibrary.$submitted}">
                     <span class="input-label">{{'book_form.field_isbn' | translate}}</span>
-                    <input ng-blur="doScan(formLibrary.isbn)"  type="number"  name="isbn" ng-model="form.isbn" ng-readonly="form.id" required>
+                    <input ng-blur="doScan(formLibrary.isbn)"  type="text"  name="isbn" ng-model="form.isbn" ng-readonly="form.id" required>
                 </div>
                 <div class="form-errors" ng-messages="formLibrary.isbn.$error" ng-show="formLibrary.$submitted">
                   <div class="form-error" ng-message="required">{{'book_form.field_isbn' | translate}} {{'required_field' | translate}}</div>
@@ -67,12 +67,6 @@
                     </div>
                 </div>
 
-            <label class="item item-input item-stacked-label" ng-click="onShelf()">
-             <span class="input-label">{{'book_form.shelf' | translate}}</span>
-              <input type="text"  ng-model="shelfText" readonly="on">
-          </label>
-
-
 
 
           <label class="item item-input item-stacked-label">
@@ -106,8 +100,5 @@
 
   </ion-content>
 
-  <button type="submit" class="button button-float">
-        <i class="icon ion-checkmark"></i>
-    </button>
 </form>
 </ion-view>

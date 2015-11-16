@@ -1,12 +1,8 @@
 
-angular.module('starter.controllers', [])
-.controller('loginCtrl', function($scope, $rootScope, $ionicSlideBoxDelegate, $ionicPopup, $ionicLoading, $filter,  settings, USER ) {
+angular.module('livrio.controllers', [])
+.controller('login_ctrl', function($scope, $rootScope, $ionicSlideBoxDelegate, $ionicHistory, $ionicPopup, $filter,  settings, USER ) {
 
     var trans = $filter('translate');
-
-    // document.addEventListener("deviceready", function() {
-    //     window.analytics.trackView('login_start');
-    // });
 
     $scope.tab = 0;
 
@@ -23,7 +19,7 @@ angular.module('starter.controllers', [])
 
     function hideLoading() {
         $scope.loading = false;
-        $scope.loadingText = 'Entrando';
+        $scope.loadingText = trans('login.loading_login');
     }
 
     $scope.onChangeTab = function(index) {
@@ -40,14 +36,14 @@ angular.module('starter.controllers', [])
     function firstLogin(name) {
 
         $ionicPopup.alert({
-            template: String.format(trans('welcome'),name) + '<div style="text-align: center;margin-top: 20px;"><img src="img/official.svg" style="width:130px"/></div>'
+            template: String.format(trans('app.welcome'),name) + '<div style="text-align: center;margin-top: 20px;"><img src="img/official.svg" style="width:130px"/></div>'
         }).then(function() {});
     }
 
     function testOffline() {
         if (!$rootScope.online) {
             $ionicPopup.alert({
-                template: trans('offline')
+                template: trans('app.offline')
             }).then(function() {});
             return true;
         }
@@ -70,25 +66,23 @@ angular.module('starter.controllers', [])
 
             USER.auth(post)
             .then(function(data) {
-                $ionicLoading.hide();
-                window.location = '#/app/library';
+                $ionicHistory.clearCache();
+                window.location = '#/app/book';
             },
             function(error) {
-                console.log(error);
                 hideLoading();
                 if (error.status === 0) {
                     $ionicPopup.alert({
-                        template: trans('offline')
+                        template: trans('app.offline')
                     }).then(function() {});
                 }
                 else if (error.status == 96) {
-                    console.log('97');
                 }
                 else {
 
                     $ionicPopup.alert({
                         template: trans('login.login_invalid')
-                    }).then(function() {});
+                    });
                 }
             });
         }
@@ -99,7 +93,7 @@ angular.module('starter.controllers', [])
             return;
         }
         if (isValid) {
-            
+
             showLoading(trans('login.loading_create'));
 
             var post = {
@@ -115,7 +109,8 @@ angular.module('starter.controllers', [])
 
                 USER.auth(post)
                 .then(function(data) {
-                    window.location = '#/app/library';
+                    $ionicHistory.clearCache();
+                    window.location = '#/app/book';
                     firstLogin(data.first_name);
                     hideLoading();
                 },
@@ -130,7 +125,7 @@ angular.module('starter.controllers', [])
                 if (p.email) {
                     $ionicPopup.alert({
                         template: trans('login.email_duplicate')
-                    }).then(function() {});
+                    });
                 }
 
             });
@@ -147,9 +142,8 @@ angular.module('starter.controllers', [])
 
         USER.authFacebook()
         .then(function(user) {
-            console.log(user);
             hideLoading();
-            window.location = '#/app/library';
+            window.location = '#/app/book';
             if (user.create) {
                 firstLogin(user.first_name);
             }
@@ -159,12 +153,12 @@ angular.module('starter.controllers', [])
             if (error && error.status == 96) {
                 $ionicPopup.alert({
                     template: trans('login.login_facebook')
-                }).then(function() {});
+                });
             }
             else {
                 $ionicPopup.alert({
-                    template: trans('offline')
-                }).then(function() {});
+                    template: trans('app.offline')
+                });
             }
         });
 

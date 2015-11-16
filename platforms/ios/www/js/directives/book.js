@@ -1,9 +1,10 @@
-angular.module("starter.directives",[])
+angular.module("livrio.directives",[])
 .directive('book', function() {
     return {
         restrict: 'E',
         scope: {
-            book: '=book'
+            book: '=book',
+            button: '='
         },
         controller: function($scope, $rootScope, BOOK) {
 
