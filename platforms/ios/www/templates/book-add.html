@@ -1,0 +1,59 @@
+
+<ion-view title="{{'book_add.title' | translate}}">
+
+
+<ion-content class="view-book-add">
+
+<form name="formBook" novalidate>
+    <div class="item-input-inset item item-search form-search">
+        <label class="item-input-wrapper">
+            <input type="search" placeholder="{{'book_add.placeholder' | translate}}" ng-keyup="onSearch(formBook.word.$modelValue, true)" name="word" ng-model="search.word">
+            <button type="button" class="button button-icon icon button-small placeholder-icon" on-touch="onClean(formBook)" ng-class="{'ion-android-close':searchStart, 'ion-android-search':!searchStart}">
+            </button>
+        </label>
+    </div>
+</form>
+
+
+<div class="wait-message" ng-show="searching">
+        <ion-spinner></ion-spinner>
+        <span>{{'search.loading' | translate}}</span>
+    </div>
+
+
+    <div class="notice-library-empty" ng-show="librarys.length==0 && searchStart && !searching"  ng-bind-html="empty_search"></div>
+
+    <div class="list library" ng-hide="searching || !searchStart">
+
+
+        <div ng-repeat="item in librarys" class="item book-card">
+            <div>
+                
+                <img class="cover" ng-src="{{item.thumb}}" />
+                <div class="content">
+                    <h2>{{item.title}}</h2>
+                    <h3>{{item.author}}</h3>
+                </div>
+
+                <button class="button button-book-add icon-left button-small ion-plus" ng-click="onAdd(item)" ng-hide="item.added">{{'book_add.add' | translate}}
+            </button>
+
+
+            </div>
+        </div>
+
+</div>
+
+
+
+
+
+<div class="notice-library-empty" style="top: 150px;" ng-hide="searchStart" ng-bind-html="empty_list"></div>
+
+<div class="padding" ng-hide="searchStart">
+<button class="button button-barcode" ng-click="onScan()">{{'book_add.btn_barcode' | translate}}</button>
+<a href="#" ui-sref="app.book-form">{{'book_add.btn_create' | translate}}</a>
+</div>
+</ion-content>
+
+</ion-view>
