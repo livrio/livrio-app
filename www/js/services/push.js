@@ -189,7 +189,7 @@ angular.module('livrio.services')
 
     self.get = function(id) {
         var list = $rootScope.notifications.list;
-        
+
         for (var i=0;i < list.length;i++) {
             if (id == list[i].id) {
                 return list[i];
