@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		0C3DA374FFA24BD190794490 /* CDVBarcodeScanner.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8FF6EB1C9ADF4880B264E424 /* CDVBarcodeScanner.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		12CC9E6CADCB40B9815F31C4 /* CDVCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = D90EC6E801034163A8B03F70 /* CDVCamera.m */; };
