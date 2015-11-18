@@ -34,22 +34,9 @@
         </div>
 
         <div class="list friend-list add" ng-hide="searching">
-            <div class="item  item-button-right" ng-repeat="item in friendsResult" ng-class="{'item-avatar':!item.is_contact}">
-            <img ng-src="{{item.photo}}" ng-hide="item.is_contact" />
-            <h2>{{item.fullname}}</h2>
-            <span class="amount" ng-show="item.is_suggest">{{'friend_search.book' | translate}} {{item.amount_book}}</span>
-            <small ng-show="item.invited">{{'friend_search.invite_sent' | translate}}</small>
-            <small ng-show="item.added">{{'friend_search.request_sent' | translate}}</small>
+            
+        <friend friend="item" ng-repeat="item in friendsResult" button="true"></friend>
 
-
-
-            <button class="button button-success button-invite-friend icon-left button-small ion-paper-airplane" ng-show="!item.invited && item.is_contact" ng-click="onInvite(item)">{{'friend_search.invite' | translate}}
-            </button>
-
-            <button class="button button-success button-small button-invite-friend icon-left ion-android-person-add" ng-show="!item.is_contact && !item.added"  ng-click="onAdd(item)">{{'friend_search.add' | translate}}
-            </button>
-
-            </div>
         </div>
         <div style="height: 200px">
             <div class="wait-message" style="padding-top: 0px;" ng-show="pagging">

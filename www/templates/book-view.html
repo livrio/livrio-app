@@ -61,7 +61,7 @@
 
 
 
-        <div class="item tabs tabs-secondary tabs-icon-left" ng-hide="bookView.loaned">
+        <div class="item tabs tabs-secondary tabs-icon-left" ng-hide="bookView.loaned || !bookView.owner.is_friend">
 
             <a class="tab-item request-loan" ng-hide="bookView.loaned || !bookView.is_owner" ui-sref="app.book-lend({id:bookView.id})">
             <i class="icon ion-forward"></i>

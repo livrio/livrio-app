@@ -45,7 +45,8 @@ $calm: #63c9ce !default;
 @import "scss/default";
 @import "scss/book_view";
 @import "scss/books";
-
+@import "scss/friends"; 
+ 
 
 ul.rating li {
   display: inline;
@@ -350,48 +351,6 @@ ul.rating li i {
         color: #fff;
     }
 
-
-
-
-    &.friends{
-        height: 150px;
-
-        .photo{
-            width: 75px;
-            height: 75px;
-            left: 50%;
-            margin-left: -30px;
-        }
-
-        .button-icon{
-            top: 0px;
-            left: 10px;
-            position: absolute;
-            &::before{
-                color: #fff;
-                text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
-            }
-        }
-
-        .name{
-            text-align: left;
-            padding-left: 10px;
-        }
-
-        .book-count{
-
-            position: absolute;
-            bottom: 10px;
-            width: 100%;
-            text-align: right;
-            font-size: 15px;
-            text-transform: uppercase;
-            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
-            font-weight: bold;
-            color: #fff;
-            padding-right: 10px;
-        }
-    }
 }
 
 .platform-ios.platform-cordova:not(.fullscreen)   {
@@ -403,27 +362,6 @@ ul.rating li i {
         bottom: 5px;
     }
 }
-
-.friend-list{
-
-    .item{
-        margin:0;
-        border: none;
-        border-bottom: 1px solid $divider;
-        padding-top: 25px;font-size: 17px;
-        img{
-            /*border-radius: 0; */
-        }
-
-        .amount {
-            display: block;
-            font-size: 12px;
-            color: #444;
-        }
-
-    }
-}
-
 
 
 
