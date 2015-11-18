@@ -1,0 +1,27 @@
+.friend-card {
+
+    margin:0;
+    border: none;
+    border-bottom: 1px solid $divider;
+    padding-top: 25px;font-size: 17px;
+
+    .help-inline{
+        display: block;
+        font-size: 12px;
+    }
+
+
+
+    .amount {
+        display: block;
+        font-size: 12px;
+        color: #444;
+    }
+
+    &.item-button-right { 
+        padding-right: 110px;
+    }
+
+    
+
+}
