@@ -25,3 +25,46 @@
     
 
 }
+
+
+.friend-profile-view {
+
+    .notice-library-empty {
+        margin-top: 30px;
+    }
+
+    .scroll-view{
+          position: absolute;
+          top: 1px; 
+          bottom: 0;
+          left: 0;
+          right: 0;
+    }
+
+    &.has-invite .scroll-view{
+          top: 50px; 
+    }
+
+    
+
+    .list{
+        background: #fff;
+        /*box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.12), 0px 2px 2px 0px rgba(0,0,0,0.24);*/
+        margin: 0px;
+        border-top: none;
+        .item{
+            border-top: none;
+            background-color: transparent;
+        }
+
+        .item-divider {
+            font-size: 16px;
+            padding: 16px;
+        }
+    }
+
+    .request-friend{
+        font-size: 14px !important;
+    }
+}
+

@@ -72,4 +72,10 @@ angular.module("livrio.controllers")
         page++;
         $scope.onRefresh();
     };
+
+
+    $scope.onRequestInvite = function(item) {
+        item.invited = true;
+        FRIEND.add(item);
+    };
 });
