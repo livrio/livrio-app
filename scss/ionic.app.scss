@@ -21,10 +21,9 @@ $assertive:                          #d6123c !default;
 /*$stable: #c7b299 !default;*/
 $action: #f9b000 !default;
 $energized:                       #ff6440 !default;
-$divider: #C0C0C0;
+$divider: #dcdcdc;
 $font-family-sans-serif:          "Roboto", "Segoe UI", sans-serif !default;
 $font-family-title:          "Roboto Slab", "Roboto", "Segoe UI", sans-serif !default;
-$font-family-light-sans-serif:    "Roboto-Light", "Segoe UI-Light", sans-serif-light !default;
 
 
 $calm: #63c9ce !default;
@@ -34,11 +33,18 @@ $calm: #63c9ce !default;
   fill: $assertive; 
 }
 
+
+@import "scss/fonts";
+
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
-@import url(http://fonts.googleapis.com/css?family=Roboto:500,300,700,400);
-@import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,300,700);
+// @import url(http://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,300);
+// @import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,300,700);
 
+@import "scss/hero";
+@import "scss/default";
+@import "scss/book_view";
+@import "scss/books";
 
 
 ul.rating li {
@@ -51,14 +57,95 @@ ul.rating li i {
   font-size: 30px;
 }
 
+
+
 .tabs-striped .tab-item.tab-item-active {
     border-color: $assertive;
+}
+
+.view-friend-add{
+    .notice-tab{
+        background-color: #efefef;
+        padding: 16px;
+        text-align: left;
+        margin-bottom: 3px;
+        box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.12), 0px 2px 2px 0px rgba(0,0,0,0.24);
+    }
+
+
+    .button-invite-friend{
+        text-transform: uppercase;
+        font-size: 10px;
+        padding: 0px 10px;
+        height: 20px;
+        line-height: 22px;
+        min-height: 0;
+        top: 50%;
+        margin-top: -10px;
+    }
+}
+
+.invite-tab{
+    position: relative;
+    &.tabs-background-assertive{
+        background-color: $assertive;
+        border: none;
+    }
+
+    a{
+        color: rgba(249, 249, 249, 0.6);
+        text-transform: uppercase;
+        font-weight: 500;
+        max-width: inherit;
+
+
+        &.active{
+            color: #fff;
+        }
+    }
+
+    &.tabs-top {
+
+        top: 0px;
+    }
+}
+
+.platform-ios.platform-cordova:not(.fullscreen) .tabs.tabs-top{
+    top: 0px; 
 }
 
 
 .button.button-stable {
     color: #fff;
 }
+.buttons-invites{
+    padding: 20px;
+
+    .button{
+        width: 100%;
+        text-transform: uppercase;
+        font-size: 14px;
+        color: #FFF;
+        border: none;
+        margin-bottom: 20px;
+    }
+
+    .button.button-invite{
+        background-color: $action;
+        margin-top: 20px;
+    }
+
+    .button.button-whatsapp{
+        background-color: #065e52;
+    }
+
+    .button.button-shered{
+        background-color: #63c9ce;
+    }
+    
+
+}
+
 
 .bar.bar-assertive, .bar.bar-assertive .button{
     border: none;
@@ -91,6 +178,14 @@ ul.rating li i {
     }
 
     
+}
+
+.button-recommend {
+    border-radius: 50%;
+    background-color: #f9b000;
+    color: #fff;
+    border: none;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
 }
 
 .button .badge{
@@ -193,7 +288,11 @@ ul.rating li i {
 .tab-title{
     text-transform: uppercase;
 }
-
+/*
+.has-header {
+    top: 50px;
+}
+*/
 
 .profile{
     
@@ -295,8 +394,18 @@ ul.rating li i {
     }
 }
 
+.platform-ios.platform-cordova:not(.fullscreen)   {
+    .profile .photo{
+        top: 78px;
+    }
+
+    .profile .name{
+        bottom: 5px;
+    }
+}
+
 .friend-list{
-    
+
     .item{
         margin:0;
         border: none;
@@ -357,6 +466,11 @@ ul.rating li i {
             top: 10px;
         }
 
+        &.background{
+            background-color: $assertive;
+            color: #fff;
+        }
+
         
 
 
@@ -397,13 +511,16 @@ ul.rating li i {
     
     &.add {
         h2{
-            line-height: 36px;
-            text-transform: uppercase;
+            line-height: 18px;
+            text-transform: capitalize;
         }
+    }
 
-        .button{
-            top: 17px;
-        }
+    small{
+        font-size: 11px;
+        font-weight: 500;
+        color: #FF6440;
+        position: absolute;
     }
 }
 .button-float:hover{
@@ -415,12 +532,30 @@ ul.rating li i {
 
 .notice-library-empty{
     text-align: center;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
-    color: #808080;
+    color: #585858;
     text-transform: uppercase;
-    line-height: 200px;
-    height: 100%;
+    line-height: 30px;
+    height: 200px;
+    position: absolute;
+    top: 100px;
+    width: 100%;
+
+    p {
+            font-size: 12px;
+            color: #808080;
+            line-height: 20px;
+            padding: 0 20px;
+    }
+
+    img {
+        width: 130px;
+    }
+
+    i{
+        font-size: 22px;
+    }
 }
 
 .button-facebook {
@@ -444,108 +579,9 @@ ul.rating li i {
     text-transform: uppercase;
 }
 
-.tab-nav.tabs{
-    /*box-shadow: 0px 0px 17px -1px rgba(0, 0, 0, 0.49);*/
-}
 
 
 
-.library {
-
-    
-    .book {
-        
-        border: none;
-        border-bottom: 1px solid $divider;
-
-        
-        position: relative;
-        padding: 0 16px 16px 16px;
-        
-        margin-bottom: 16px;
-
-        
-
-        
-
-
-
-        .btn-more {
-            position: absolute;
-            top: -10px;
-            padding: 0px;
-            margin: 0;
-            min-height: 0;
-            height: 35px;
-            right: 16px;
-
-           
-        }
-
-
-        .loan{
-            position: absolute;
-            left: 53px;
-            top: -5px;
-            font-size: 40px;
-            color: #3F51B5;
-
-            &.expired{
-                color: $assertive;
-            }
-
-
-
-
-        }
-
-        &:first-child{
-            padding-top: 16px;
-
-            .btn-more {
-                top: 8px;
-            }
-
-            .loan{
-                top: 11px;
-            }
-        }
-
-        img {
-            width: 60px;
-            overflow: hidden;
-            float: left;
-            
-        }
-
-        p{
-            font-size: 11px;
-            margin: 0;
-            line-height: 17px;
-            color: #2C2B2B;
-        }
-
-        div.ct{
-            padding-left: 80px;
-            padding-right: 20px;
-        }
-
-
-        h2{
-            white-space: normal;
-            
-            font-size: 15px
-        }
-
-        h3{
-            color: #737373;
-            font-size: 11px;
-            text-transform: uppercase;
-        }
-
-
-    }
-}
 
 .book-head {
     padding-left: 10px;
@@ -559,7 +595,7 @@ ul.rating li i {
         margin: 0;
     }
 
-    h3{
+    h3{ 
         font-size: 11px;
         color: #fff;
         text-transform: uppercase;
@@ -597,82 +633,8 @@ ul.rating li i {
 }
 
 
-.book-view{
-    
-    
-
-    .request-loan{
-        font-size: 15px;
-        font-weight: 500;
-        text-transform: uppercase;
-    }
-
-    .card {
-        margin:0;
-        box-shadow: none;
-
-        .item{
-            border: none;
-        }
-
-        .item-line{
-            border-top: 1px solid $divider;
-        }
-
-        
-
-        .item-avatar{
-            padding-left: 90px;
-            img{
-                max-width: 56px;
-                max-height: 56px;
-            }
-        }
-    }
 
 
-    .info {
-        padding-left: 20px;
-        float: left;
-
-        p {
-            color: #555;
-            font-size: 12px;
-            span{
-                display: block;
-                font-size: 13px;
-                font-weight: 500;
-            }
-        }
-    }
-
-    .loan{
-        p {
-            color: #555;
-            font-size: 12px;
-            span{
-                display: block;
-                font-size: 13px;
-                font-weight: 500;
-            }
-        }
-
-        .button-small{
-            font-size: 11px;
-            line-height: 12px;
-            min-height: 19px;
-        }
-    }
-
-    .cover{
-        float: left;
-        width: 125px;
-    }
-
-    .description{
-        font-size: 12px;
-    }
-}
 .action-sheet-options.action-sheet-group{
     background-color: #fff;
     .button.action-sheet-destructive{
@@ -706,14 +668,21 @@ ul.rating li i {
     }
     .button-photo{
         position: absolute;
-        right: 20px;
-        bottom: 20px;
+        top: 0px;
+        right: 10px;
         color: #fff;
     }
 
     a.link{
         color: #333;
         font-weight: 500;
+    }
+
+    .hero h3 {
+        margin-bottom: 10px;
+        .light {
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.58);
+        }
     }
 }
 
@@ -767,6 +736,8 @@ label.item.valid-lr {
     .popup {
         background: #fff;
         box-shadow: 0px 0px 23px 4px rgba(0, 0, 0, 0.16);
+
+        
         
         .popup-head{
             padding: 24px 24px 0 24px;
@@ -808,7 +779,7 @@ label.item.valid-lr {
             height: 36px;
             min-height: 36px;
             margin: 0;
-            margin-left: 20px;
+            margin-left: 14px;
             
             flex: none;
 
@@ -830,6 +801,10 @@ label.item.valid-lr {
         }
     }
 
+    &.isbn-popup .popup{
+        width: 300px;
+    }
+
     &.popup-loan{
     
         .duration{
@@ -849,26 +824,6 @@ label.item.valid-lr {
         }
 
         .button{
-            margin-right:10px  !important;
-            &:last-child{
-                margin-right:0 !important;
-            }
-
-        }
-    }
-
-    &.popup-invite-email {
-        p{
-            line-height: 13px;
-        }
-
-        .input-label{
-            width: 100%;
-        }
-        
-
-        .button{
-            margin-right:10px  !important;
             &:last-child{
                 margin-right:0 !important;
             }
@@ -883,6 +838,15 @@ label.item.valid-lr {
 
 .login {
     background-color: #fab001;
+
+    .spinner svg {
+        width: 80px;
+        height: 80px;
+    }
+
+    .wait-message span{
+        color: #fff;
+    }
 
 
     .item {
@@ -948,7 +912,7 @@ label.item.valid-lr {
 
 
 .book-form {
-    margin-bottom: 50px;
+    
     .item {
         border: none;
         padding-right: 16px;
@@ -986,7 +950,8 @@ label.item.valid-lr {
         font-weight: normal;
     }
 
-    .isbn {
+
+    .isbn { 
         padding-top: 16px;
         display: block;
         .input-label{
@@ -1002,8 +967,8 @@ label.item.valid-lr {
         .button-scan {
             width: 40px;
             height: 40px;
-            background: $action !important;
-            color: #000;
+            background: #63c9ce !important;
+            color: #fff;
             border: none;
             min-width: 40px; 
             min-height: 40px;
@@ -1033,15 +998,156 @@ label.item.valid-lr {
     color: #111;
 }
 
+.list {
+    .item{
+        border-left: none;
+        border-right: none;
+    }
+}
 .list .item.item-line, .card .item.item-line{
     margin-top: 16px;
-    border-top: 1px solid $divider;
+    border-top: 1px solid $divider !important;
+
+    &.no-margin{
+        margin-top: 0px;
+    }
 }
 
 .list .item.item-line-bottom, .card .item.item-line-bottom{
     margin-bottom: 16px;
     border-bottom: 1px solid $divider;
     border-radius: 0;
+    &.no-margin{
+        margin-bottom: 0px;
+    }
 }
 
 
+
+.view-config {
+    .item-toggle{
+        padding-right: 80px;
+
+        p{
+            margin-top: 5px;
+            color: #656565;
+            font-size: 12px;
+            line-height: 14px;
+        }
+    }
+}
+
+
+.input-comment {
+    border-top: 1px solid $divider;
+
+    input{
+        padding-left: 25px !important;
+
+    }
+
+    .photo{
+        width: 32px;
+        height: 32px;
+        background-size: cover;
+        border-radius: 50%;
+        position: absolute;
+        left: 5px;
+        top: 9px;
+    }
+}
+
+
+.view-invite{
+
+    .spinner svg {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+
+.view-contact {
+    padding: 20px;
+
+    .spinner svg {
+        width: 80px;
+        height: 80px;
+    }
+
+    .text{
+        text-align: center;
+        margin-bottom: 20px;
+
+        font-size: 16px;
+        font-weight: 500;
+        color: #585858;
+        text-transform: uppercase;
+        line-height: 30px;
+
+
+        p {
+            font-size: 12px;
+            color: #808080;
+            line-height: 20px;
+            padding: 0 20px;
+        }
+
+        img {
+            width: 130px;
+        }
+    }
+
+    .terms{
+        font-size: 11px;
+        line-height: 14px;
+        text-align: center;
+        display: block;
+        margin-top: 20px;
+    }
+
+    .button-ok{
+        display: block;
+        background-color: #f9b000;
+        width: 100%;
+        border: none;
+        color: #FFF;
+        font-size: 18px;
+        text-transform: uppercase;
+        font-weight: 500;
+    }
+}
+
+
+.view-book-add{
+
+    .notice-library-empty{
+        position: inherit;
+        height: auto;
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+
+    a{
+        text-decoration: underline;
+        color: #333;
+        text-align: center;
+        display: block;
+        margin-top: 7px;
+    }
+}
+
+.view-book-barcode {
+    .spinner svg {
+        width: 80px;
+        height: 80px;
+    }
+    
+    a{
+        text-decoration: underline;
+        color: #333;
+        text-align: center;
+        display: block;
+        margin-top: 7px;
+    }
+}

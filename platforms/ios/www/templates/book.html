@@ -1,0 +1,39 @@
+<ion-view title="{{'library.title' | translate}}">
+
+    <ion-nav-buttons side="right">
+        <a class="button button-clean icon ion-android-search" ui-sref="app.book-search"></a>
+    </ion-nav-buttons>
+
+
+    <ion-content>
+
+        <ion-refresher pulling-text="{{'app.refresh' | translate}}" on-refresh="onRefresh(true)"></ion-refresher>
+
+
+        <div class="wait-message" ng-show="loading">
+            <ion-spinner></ion-spinner>
+            <span>{{'app.loading' | translate}}</span>
+        </div>
+
+
+        <div class="list">
+            <book button="true" ng-repeat="item in librarys" book="item"></book>
+        </div>
+        
+
+        <div class="notice-library-empty" ng-show="librarys.length==0 && !loading" ng-bind-html="empty_list">
+        </div>
+
+        <ion-infinite-scroll ng-if="hasScroll"
+            on-infinite="loadMore()"
+            spinner="android"
+            distance="5%">
+        </ion-infinite-scroll>
+
+    </ion-content>
+
+    <a class="button button-float" ui-sref="app.book-add">
+        <i class="icon ion-plus"></i>
+    </a>
+
+</ion-view>

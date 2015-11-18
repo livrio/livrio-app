@@ -1,0 +1,49 @@
+
+/* Hero
+==================================*/
+
+
+.hero {
+    height: 236px;
+    background-color: #fff;
+    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.12), 0px 2px 2px 0px rgba(0,0,0,0.24);
+        
+    .cover{
+        height: 125px;
+        background-size: cover;
+    }
+}
+
+
+
+.hero > .content {
+    top: 76px;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    z-index: 1;
+}
+.hero > .content > .avatar {
+    background-position: center;
+    background-size: cover;
+    border: solid 2px #fff;
+    border-radius: 50%;
+    display: inline-block;
+    height: 88px;
+    left: auto;
+    position: relative;
+    width: 88px;
+    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.12), 0px 2px 2px 0px rgba(0,0,0,0.24);
+}
+.hero h1 .hero h2, .hero h3, .hero h4, .hero h5, .hero h6 {
+    color: #333;
+    margin: 0;
+    font-weight: lighter;
+}
+
+.hero h4{
+    color: rgba(0, 0, 0, 0.61);
+    text-transform: capitalize;
+    font-size: 15px;
+    margin-top: 8px;
+}

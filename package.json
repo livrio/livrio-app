@@ -15,12 +15,37 @@
     "gulp-util": "^2.2.14",
     "shelljs": "^0.3.0",
     "jshint-stylish": "~2.0.0",
-    "gulp-jshint": "~1.11.0"
+    "gulp-jshint": "~1.11.0",
+    "grunt-po2json-angular-translate": "0.0.3"
   },
   "cordovaPlugins": [
-    "com.ionic.keyboard"
+    "com.ionic.keyboard",
+    "cordova-plugin-camera",
+    {
+      "locator": "https://github.com/guptasachin25/cordova-plugin-contacts"
+    },
+    "cordova-plugin-geolocation",
+    "cordova-plugin-globalization",
+    "cordova-plugin-inappbrowser",
+    "cordova-plugin-whitelist",
+    "nl.x-services.plugins.socialsharing",
+    "nl.x-services.plugins.toast",
+    "org.apache.cordova.splashscreen",
+    "cordova-plugin-app-version",
+    "phonegap-plugin-push",
+    {
+      "locator": "https://github.com/aureliosaraiva/phonegap-plugin-barcodescanner"
+    },
+    {
+      "locator": "https://github.com/jeduan/cordova-plugin-facebook4",
+      "variables": {
+        "APP_ID": "708951699200694",
+        "APP_NAME": "Livrio"
+      }
+    }
   ],
   "cordovaPlatforms": [
-    "android"
+    "android",
+    "ios"
   ]
 }

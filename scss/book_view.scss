@@ -1,0 +1,94 @@
+.book-view{
+
+    .btn-more{
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        font-size: 20px;
+        opacity: 0.5;
+    }
+
+    .card.loaned-action{
+        margin: 10px; 
+    }
+
+
+    .bar-option {
+        padding: 16px 0;
+        height: 80px;
+
+        small{
+            display: block;
+        }
+    }
+
+    .list{
+        background: #fff;
+        box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.12), 0px 2px 2px 0px rgba(0,0,0,0.24);
+        .item{
+            background-color: transparent;
+        }
+
+        .item-divider {
+            font-size: 16px;
+            padding: 16px;
+        }
+    }
+
+    
+
+    .request-loan {
+        font-size: 14px !important;
+    }
+
+
+    .ly {
+        width: 100%;
+        height: 50px;
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0) -25%,#ffffff 100%);
+        position: absolute;
+        top: 100px;
+        z-index: 10;
+    }
+
+    .collpase{
+
+        height: 150px; 
+        overflow: hidden;
+    }
+
+    .details{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: flex-start;
+    }
+
+    .book-info{
+
+        .cover{
+            width: 125px;
+        }
+
+
+        .info {
+            padding-left: 20px;
+            flex: 1;
+
+            p {
+                color: #080C15;
+                font-size: 12px;
+                strong{
+                    display: block;
+                    font-size: 13px;
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+
+    .item.description{
+        font-size: 12px;
+        padding: 16px;
+    }
+}
