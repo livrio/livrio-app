@@ -25,7 +25,7 @@
             <img ng-src="{{bookView.thumb}}" class="cover">
 
             <div class="info">
-            <p><strong>{{'book.isbn' | translate }}</strong>{{bookView.isbn}}</p>
+            <p ng-show="bookView.isbn"><strong>{{'book.isbn' | translate }}</strong>{{bookView.isbn}}</p>
             <p ng-show="bookView.author" style="width: 178px;"><strong>{{'book.author' | translate }}</strong>{{bookView.author}}</p>
             <p ng-show="bookView.page_count>0"><strong>{{'book.page' | translate }}</strong>{{bookView.page_count}}</p>
             <p ng-show="bookView.publisher"><strong>{{'book.publisher' | translate }}</strong>{{bookView.publisher}} 
