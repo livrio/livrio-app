@@ -1,6 +1,6 @@
 <ion-view class="no-header">
    <ion-nav-bar>
-        <div class="hero" >
+        <div class="hero border-bottom" >
                 <button ng-click="$ionicGoBack()" class="button back-button buttons   button-clear header-item">
                     <i class="icon ion-android-arrow-back"></i>
                 </button>
@@ -21,11 +21,28 @@
             </div>
    </ion-nav-bar>
     
-  <ion-content>
+  <ion-content class="bg-color friend-profile-view" scroll="false" ng-class="{'has-invite':friend.invited}">
+
+
+
+    <div class="card" ng-show="friend.invited">
+        <div class="item item-avatar item-text-wrap"  style="padding-bottom: 0;">
+            <img ng-src="{{friend.invited.photo}}">
+            {{friend.invited.fullname}}
+            <p>
+                Solicitou amizade!
+            </p>
+        </div>
+        <div class="item item-line no-margin tabs tabs-secondary">
+            <a class="tab-item danger" ng-click="onResponseFriend(friend, 'yes')">Remover</a>
+            <a class="tab-item success" ng-click="onResponseFriend(friend, 'yes')">Aceitar</a>
+            
+        </div>
+    </div>
     
     
 
-
+<ion-scroll  direction="y">
          <ion-refresher pulling-text="{{'app.refresh' | translate}}" on-refresh="onRefresh(true)">
         </ion-refresher>
 
@@ -35,7 +52,7 @@
         </div>
 
         
-        <div class="list">
+        <div class="list" ng-show="librarys.length">
 
             <book ng-repeat="item in librarys" book="item"></book>
         </div>
@@ -44,12 +61,14 @@
    
 
     
+
+</ion-scroll>
+
 <ion-infinite-scroll ng-if="hasScroll"
             on-infinite="loadMore()"
             spinner="android"
             distance="5%">
         </ion-infinite-scroll>
-
 </ion-content>
 
 </ion-view>

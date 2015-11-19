@@ -105,7 +105,7 @@ angular.module('livrio.services')
             else if (item.type === 'request_friend') {
                 text = String.format(trans('notification.msg_request_friend'), item.created_by.fullname);
 
-                //href = "#/app/friend/" + item.book.id;
+                href = "#/app/friend-profile/" + item.created_by.id;
             }
 
             item.text = text;

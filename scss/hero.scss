@@ -6,7 +6,11 @@
 .hero {
     height: 236px;
     background-color: #fff;
-    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.12), 0px 2px 2px 0px rgba(0,0,0,0.24);
+    /*box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.12), 0px 2px 2px 0px rgba(0,0,0,0.24);*/
+
+    &.border-bottom{
+        border-bottom: 2px solid rgba(0, 0, 0, 0.24); 
+    }
         
     .cover{
         height: 125px;
