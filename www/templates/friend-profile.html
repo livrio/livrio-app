@@ -21,33 +21,22 @@
             </div>
    </ion-nav-bar>
     
-  <ion-content class="bg-color friend-profile-view" scroll="false" ng-class="{'has-invite':!friend.invited && !friend.is_friend}">
-
-    <div class="list friend-invite-button" ng-hide="friend.is_friend || friend.invited">
-        <div class="item tabs tabs-secondary tabs-icon-left ">
-
-            <a class="tab-item request-friend" ng-click="onRequestInvite(friend)">
-            <i class="icon ion-android-person-add"></i>
-            Solicitar amizade
-            </a>
+  <ion-content class="bg-color friend-profile-view" scroll="false" ng-class="{'has-invite':friend.invited}">
 
 
 
-        </div>
-    </div>
-
-
-    <div class="card" ng-show="false">
+    <div class="card" ng-show="friend.invited">
         <div class="item item-avatar item-text-wrap"  style="padding-bottom: 0;">
-            <img src="img/avatar.png">
-            Aurélio Saraiva
+            <img ng-src="{{friend.invited.photo}}">
+            {{friend.invited.fullname}}
             <p>
                 Solicitou amizade!
             </p>
         </div>
         <div class="item item-line no-margin tabs tabs-secondary">
-            <a class="tab-item success">Aceitar</a>
-            <a class="tab-item danger" >Remover</a>
+            <a class="tab-item danger" ng-click="onResponseFriend(friend, 'yes')">Remover</a>
+            <a class="tab-item success" ng-click="onResponseFriend(friend, 'yes')">Aceitar</a>
+            
         </div>
     </div>
     

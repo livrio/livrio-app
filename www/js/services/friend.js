@@ -68,15 +68,14 @@ angular.module('livrio.services')
         return deferred.promise;
     };
 
-    self.confirm = function(item, response) {
+    self.confirm = function(item, question) {
         var deferred = $q.defer();
-        $http.post(settings.URL.FRIEND + "/" +  item.created_by.id  + "/response",{
-            notification: item.id,
-            response: response
+        $http.post(settings.URL.FRIEND + "/" +  item.id  + "/response",{
+            response: question
         })
         .success(function(response) {
             if (!response.errors) {
-                if (response == 'yes'){
+                if (question == 'yes') {
                     $cordovaToast.showLongBottom(trans('friends.toast_friend'));
                 }
                 deferred.resolve(true);

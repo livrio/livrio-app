@@ -78,4 +78,11 @@ angular.module("livrio.controllers")
         item.invited = true;
         FRIEND.add(item);
     };
+
+    $scope.onResponseFriend = function(item, response) {
+        FRIEND.confirm(item, response)
+        .then(function() {
+            item.invited = false;
+        });
+    }
 });
