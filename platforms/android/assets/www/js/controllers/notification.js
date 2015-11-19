@@ -59,6 +59,7 @@ angular.module('livrio.controllers')
 
     $scope.onAction = function(item) {
         PUSH.markRead(item);
+        /*
         if (item.type == 'request_friend') {
             $ionicPopup.confirm({
                 title: trans('notification.question_friend_title'),
@@ -75,6 +76,7 @@ angular.module('livrio.controllers')
                  }
              });
         }
+        */
     }
 
 });

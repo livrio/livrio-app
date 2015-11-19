@@ -19,13 +19,8 @@
         </div>
 
 
-        <div class="list friend-list" ng-hide="loading">
-
-            <div class="item item-avatar" ng-repeat="item in friends" ui-sref="app.friend-profile({id:item.id})">
-                <img ng-src="{{item.photo}}" />
-                {{item.fullname}}
-                <span class="amount">{{'friend.book' | translate}} {{item.amount_book}}</span>
-            </div>
+        <div class="list" ng-hide="loading">
+            <friend friend="item" ng-repeat="item in friends"></friend>
         </div>
 
         <div class="notice-library-empty" ng-show="friend.length==0 && !loading" ng-bind-html="empty_list"  style="top: 160px">
