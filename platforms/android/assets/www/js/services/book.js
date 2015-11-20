@@ -110,6 +110,7 @@ angular.module('livrio.services',[])
         $http[type](settings.URL.BOOK + "/" + book.id + '/like')
         .success(function(response) {
             if (!response.errors) {
+                response.data.author = autor(response.data.author);
                 deferred.resolve(response.data);
             }
             else {
