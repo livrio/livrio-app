@@ -7938,8 +7938,7 @@ a.button {
     align-items: flex-start;
     min-height: 100px;
     position: relative;
-    z-index: 9;
-    min-height: 121px; }
+    z-index: 9; }
   .book-card .button {
     position: absolute;
     right: 10px;
@@ -7956,19 +7955,6 @@ a.button {
   .book-card .cover {
     width: 86px;
     background-size: cover; }
-  .book-card .image-loader-container {
-    width: 86px;
-    height: 121px;
-    position: absolute;
-    left: 0px;
-    background-color: #fff;
-    border: 1px solid #CCC; }
-    .book-card .image-loader-container .spinner svg {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      margin-left: -14px;
-      margin-top: -14px; }
   .book-card .content {
     padding-left: 10px;
     padding-top: 10px;
