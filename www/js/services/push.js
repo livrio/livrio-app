@@ -253,7 +253,7 @@ angular.module('livrio.services')
 
         if (pushObject == null) {
             pushObject = PushNotification.init({
-                "android": {"senderID": "966956371758","iconColor":"#f9b000","icon":"notify"},
+                "android": {"senderID": "966956371758","iconColor":"#f9b000","icon":"notify","forceShow":"true","clearNotifications":"false"},
                 "ios": {"alert": "true", "badge": "true", "sound": "true"}
             } );
         }
@@ -276,11 +276,47 @@ angular.module('livrio.services')
             pushObject.on('notification', function(data) {
                 self.all();
                 self.markView();
+                console.log(JSON.stringify(data));
                 if (!data.additionalData.foreground) {
                     window.location = '#/app/notification';
                 }
+                /*
+                else {
+                    cordova.plugins.notification.local.schedule({
+                        title: data.title,
+                        text: data.message,
+                        smallIcon: "notify",
+                        icon: data.image,
+                        data: data.additionalData
+                    });
+                }
+*/
 
+            });
 
+            cordova.plugins.notification.local.on("click", function (notification) {
+                self.all();
+                console.log(JSON.stringify(notification));
+
+                try{
+                    notification.data = JSON.parse(notification.data);
+                }catch(e){}
+
+                if (notification.data && notification.data.href) {
+                    if (window.location.hash == notification.data.href) {
+                        $rootScope.$emit('book.view.refresh');
+                    }
+                    else {
+                        console.log(notification.data.href);
+                        window.location = notification.data.href;
+                    }
+                }
+                else {
+                    console.log('NOT_HREF');
+                    console.log(notification.data.href);
+                    self.markView();
+                    window.location = '#/app/notification';
+                }
             });
         }
     };
