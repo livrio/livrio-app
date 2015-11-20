@@ -9,11 +9,15 @@
                 "parents": {
                     "/*": [
                         {
-                            "xml": "<feature name=\"Whitelist\"><param name=\"android-package\" value=\"org.apache.cordova.whitelist.WhitelistPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "xml": "<feature name=\"Keyboard\"><param name=\"android-package\" value=\"com.ionic.keyboard.IonicKeyboard\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"SplashScreen\"><param name=\"android-package\" value=\"org.apache.cordova.splashscreen.SplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "xml": "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Contacts\"><param name=\"android-package\" value=\"org.apache.cordova.contacts.ContactManager\" /></feature>",
                             "count": 1
                         },
                         {
@@ -41,34 +45,6 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"PushNotification\"><param name=\"android-package\" value=\"com.adobe.phonegap.push.PushPlugin\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Keyboard\"><param name=\"android-package\" value=\"com.ionic.keyboard.IonicKeyboard\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"SocialSharing\"><param name=\"android-package\" value=\"nl.xservices.plugins.SocialSharing\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"UniversalAnalytics\"><param name=\"android-package\" value=\"com.danielcwilson.plugins.analytics.UniversalAnalyticsPlugin\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"AppVersion\"><param name=\"android-package\" value=\"uk.co.whiteoctober.cordova.AppVersion\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Toast\"><param name=\"android-package\" value=\"nl.xservices.plugins.Toast\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"File\"><param name=\"android-package\" value=\"org.apache.cordova.file.FileUtils\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         },
@@ -77,7 +53,27 @@
                             "count": 1
                         },
                         {
+                            "xml": "<feature name=\"UniversalAnalytics\"><param name=\"android-package\" value=\"com.danielcwilson.plugins.analytics.UniversalAnalyticsPlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
                             "xml": "<feature name=\"InAppBrowser\"><param name=\"android-package\" value=\"org.apache.cordova.inappbrowser.InAppBrowser\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Whitelist\"><param name=\"android-package\" value=\"org.apache.cordova.whitelist.WhitelistPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SocialSharing\"><param name=\"android-package\" value=\"nl.xservices.plugins.SocialSharing\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Toast\"><param name=\"android-package\" value=\"nl.xservices.plugins.Toast\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SplashScreen\"><param name=\"android-package\" value=\"org.apache.cordova.splashscreen.SplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         },
                         {
@@ -85,21 +81,11 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"Contacts\"><param name=\"android-package\" value=\"org.apache.cordova.contacts.ContactManager\" /></feature>",
-                            "count": 1
-                        }
-                    ]
-                }
-            },
-            "res/values/facebookconnect.xml": {
-                "parents": {
-                    "/*": [
-                        {
-                            "xml": "<string name=\"fb_app_id\">708951699200694</string>",
+                            "xml": "<feature name=\"PushNotification\"><param name=\"android-package\" value=\"com.adobe.phonegap.push.PushPlugin\" /></feature>",
                             "count": 1
                         },
                         {
-                            "xml": "<string name=\"fb_app_name\">Livrio</string>",
+                            "xml": "<feature name=\"AppVersion\"><param name=\"android-package\" value=\"uk.co.whiteoctober.cordova.AppVersion\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -107,6 +93,40 @@
             },
             "AndroidManifest.xml": {
                 "parents": {
+                    "/*": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+                            "count": 3
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.READ_CONTACTS\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WRITE_CONTACTS\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
+                            "count": 1
+                        }
+                    ],
                     "application": [
                         {
                             "xml": "<meta-data android:name=\"com.facebook.sdk.ApplicationId\" android:value=\"@string/fb_app_id\" />",
@@ -121,41 +141,53 @@
                             "count": 1
                         }
                     ],
-                    "/*": [
+                    "/manifest/application": [
                         {
-                            "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
-                            "count": 3
+                            "xml": "<activity android:clearTaskOnLaunch=\"true\" android:configChanges=\"orientation|keyboardHidden\" android:exported=\"false\" android:name=\"com.google.zxing.client.android.CaptureActivity\" android:theme=\"@android:style/Theme.NoTitleBar.Fullscreen\" android:windowSoftInputMode=\"stateAlwaysHidden\"><intent-filter><action android:name=\"com.google.zxing.client.android.SCAN\" /><category android:name=\"android.intent.category.DEFAULT\" /></intent-filter></activity>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<activity android:label=\"@string/share_name\" android:name=\"com.google.zxing.client.android.encode.EncodeActivity\"><intent-filter><action android:name=\"com.phonegap.plugins.barcodescanner.ENCODE\" /><category android:name=\"android.intent.category.DEFAULT\" /></intent-filter></activity>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<activity android:label=\"@string/share_name\" android:name=\"com.google.zxing.client.android.HelpActivity\"><intent-filter><action android:name=\"android.intent.action.VIEW\" /><category android:name=\"android.intent.category.DEFAULT\" /></intent-filter></activity>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<activity android:exported=\"true\" android:name=\"com.adobe.phonegap.push.PushHandlerActivity\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<receiver android:exported=\"true\" android:name=\"com.google.android.gms.gcm.GcmReceiver\" android:permission=\"com.google.android.c2dm.permission.SEND\"><intent-filter><action android:name=\"com.google.android.c2dm.intent.RECEIVE\" /><category android:name=\"io.livr.app\" /></intent-filter></receiver>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<service android:exported=\"false\" android:name=\"com.adobe.phonegap.push.GCMIntentService\"><intent-filter><action android:name=\"com.google.android.c2dm.intent.RECEIVE\" /></intent-filter></service>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<service android:exported=\"false\" android:name=\"com.adobe.phonegap.push.PushInstanceIDListenerService\"><intent-filter><action android:name=\"com.google.android.gms.iid.InstanceID\" /></intent-filter></service>",
+                            "count": 1
+                        }
+                    ],
+                    "/manifest": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.CAMERA\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.FLASHLIGHT\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-feature android:name=\"android.hardware.camera\" android:required=\"false\" />",
+                            "count": 1
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
                             "count": 1
                         },
-                        {
-                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<uses-permission android:name=\"android.permission.READ_CONTACTS\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<uses-permission android:name=\"android.permission.WRITE_CONTACTS\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\" />",
-                            "count": 1
-                        }
-                    ],
-                    "/manifest": [
                         {
                             "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
                             "count": 1
@@ -179,43 +211,19 @@
                         {
                             "xml": "<uses-permission android:name=\"io.livr.app.permission.C2D_MESSAGE\" />",
                             "count": 1
-                        },
-                        {
-                            "xml": "<uses-permission android:name=\"android.permission.CAMERA\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<uses-permission android:name=\"android.permission.FLASHLIGHT\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<uses-feature android:name=\"android.hardware.camera\" android:required=\"false\" />",
-                            "count": 1
                         }
-                    ],
-                    "/manifest/application": [
+                    ]
+                }
+            },
+            "res/values/facebookconnect.xml": {
+                "parents": {
+                    "/*": [
                         {
-                            "xml": "<activity android:exported=\"true\" android:name=\"com.adobe.phonegap.push.PushHandlerActivity\" />",
+                            "xml": "<string name=\"fb_app_id\">708951699200694</string>",
                             "count": 1
                         },
                         {
-                            "xml": "<receiver android:name=\"com.adobe.phonegap.push.CordovaGCMBroadcastReceiver\" android:permission=\"com.google.android.c2dm.permission.SEND\"><intent-filter><action android:name=\"com.google.android.c2dm.intent.RECEIVE\" /><action android:name=\"com.google.android.c2dm.intent.REGISTRATION\" /><category android:name=\"io.livr.app\" /></intent-filter></receiver>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<service android:name=\"com.adobe.phonegap.push.GCMIntentService\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<activity android:clearTaskOnLaunch=\"true\" android:configChanges=\"orientation|keyboardHidden\" android:exported=\"false\" android:name=\"com.google.zxing.client.android.CaptureActivity\" android:theme=\"@android:style/Theme.NoTitleBar.Fullscreen\" android:windowSoftInputMode=\"stateAlwaysHidden\"><intent-filter><action android:name=\"com.google.zxing.client.android.SCAN\" /><category android:name=\"android.intent.category.DEFAULT\" /></intent-filter></activity>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<activity android:label=\"@string/share_name\" android:name=\"com.google.zxing.client.android.encode.EncodeActivity\"><intent-filter><action android:name=\"com.phonegap.plugins.barcodescanner.ENCODE\" /><category android:name=\"android.intent.category.DEFAULT\" /></intent-filter></activity>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<activity android:label=\"@string/share_name\" android:name=\"com.google.zxing.client.android.HelpActivity\"><intent-filter><action android:name=\"android.intent.action.VIEW\" /><category android:name=\"android.intent.category.DEFAULT\" /></intent-filter></activity>",
+                            "xml": "<string name=\"fb_app_name\">Livrio</string>",
                             "count": 1
                         }
                     ]
@@ -716,39 +724,24 @@
         }
     },
     "installed_plugins": {
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "io.livr.app"
-        },
-        "cordova-plugin-console": {
-            "PACKAGE_NAME": "io.livr.app"
-        },
-        "org.apache.cordova.splashscreen": {
-            "PACKAGE_NAME": "io.livr.app"
-        },
-        "cordova-plugin-facebook4": {
-            "APP_ID": "708951699200694",
-            "APP_NAME": "Livrio",
-            "PACKAGE_NAME": "io.livr.app"
-        },
-        "phonegap-plugin-push": {
+        "android.support.v4": {
             "PACKAGE_NAME": "io.livr.app"
         },
         "com.ionic.keyboard": {
             "PACKAGE_NAME": "io.livr.app"
         },
-        "nl.x-services.plugins.socialsharing": {
-            "PACKAGE_NAME": "io.livr.app"
-        },
-        "cordova-plugin-google-analytics": {
-            "PACKAGE_NAME": "io.livr.app"
-        },
-        "uk.co.whiteoctober.cordova.appversion": {
-            "PACKAGE_NAME": "io.livr.app"
-        },
-        "nl.x-services.plugins.toast": {
-            "PACKAGE_NAME": "io.livr.app"
-        },
         "cordova-plugin-camera": {
+            "PACKAGE_NAME": "io.livr.app"
+        },
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "io.livr.app"
+        },
+        "cordova-plugin-contacts": {
+            "PACKAGE_NAME": "io.livr.app"
+        },
+        "cordova-plugin-facebook4": {
+            "APP_ID": "708951699200694",
+            "APP_NAME": "Livrio",
             "PACKAGE_NAME": "io.livr.app"
         },
         "cordova-plugin-file": {
@@ -760,19 +753,33 @@
         "cordova-plugin-globalization": {
             "PACKAGE_NAME": "io.livr.app"
         },
+        "cordova-plugin-google-analytics": {
+            "PACKAGE_NAME": "io.livr.app"
+        },
         "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "io.livr.app"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "io.livr.app"
+        },
+        "nl.x-services.plugins.socialsharing": {
+            "PACKAGE_NAME": "io.livr.app"
+        },
+        "nl.x-services.plugins.toast": {
+            "PACKAGE_NAME": "io.livr.app"
+        },
+        "org.apache.cordova.splashscreen": {
             "PACKAGE_NAME": "io.livr.app"
         },
         "phonegap-plugin-barcodescanner": {
             "PACKAGE_NAME": "io.livr.app"
         },
-        "cordova-plugin-contacts": {
+        "phonegap-plugin-push": {
+            "PACKAGE_NAME": "io.livr.app"
+        },
+        "uk.co.whiteoctober.cordova.appversion": {
             "PACKAGE_NAME": "io.livr.app"
         }
     },
-    "dependent_plugins": {
-        "android.support.v4": {
-            "PACKAGE_NAME": "io.livr.app"
-        }
-    }
+    "dependent_plugins": {}
 }
