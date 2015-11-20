@@ -12,11 +12,11 @@
 
     <ion-content>
 
-        <ion-refresher pulling-text="{{'refresh' | translate}}" on-refresh="onRefresh()"></ion-refresher>
+        <ion-refresher pulling-text="{{'app.refresh' | translate}}" on-refresh="onRefresh()"></ion-refresher>
 
         <div class="wait-message" ng-show="loading">
             <ion-spinner class="spinner-energized"></ion-spinner>
-            <span>{{'loading' | translate}}</span>
+            <span>{{'app.loading' | translate}}</span>
         </div>
 
         <book button="true" ng-repeat="item in librarys" book="item"></book>
