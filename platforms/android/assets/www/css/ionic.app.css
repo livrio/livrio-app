@@ -7860,7 +7860,7 @@ a.button {
   position: inherit; }
 
 .platform-ios.platform-cordova:not(.fullscreen) .no-header .has-header {
-  top: 0px; }
+  top: 236px; }
 .platform-ios.platform-cordova:not(.fullscreen) .no-header .back-button, .platform-ios.platform-cordova:not(.fullscreen) .no-header .button-photo {
   margin-top: 20px; }
 .platform-ios.platform-cordova:not(.fullscreen) .no-header .hero .cover {

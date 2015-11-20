@@ -344,6 +344,13 @@ module.exports = [
         "clobbers": [
             "cordova.getAppVersion"
         ]
+    },
+    {
+        "file": "plugins/com.xmartlabs.cordova.market/www/market.js",
+        "id": "com.xmartlabs.cordova.market.Market",
+        "clobbers": [
+            "cordova.plugins.market"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -366,7 +373,8 @@ module.exports.metadata =
     "org.apache.cordova.splashscreen": "1.0.0",
     "phonegap-plugin-barcodescanner": "4.0.2",
     "phonegap-plugin-push": "1.4.4",
-    "uk.co.whiteoctober.cordova.appversion": "0.1.7"
+    "uk.co.whiteoctober.cordova.appversion": "0.1.7",
+    "com.xmartlabs.cordova.market": "1.1"
 }
 // BOTTOM OF METADATA
 });

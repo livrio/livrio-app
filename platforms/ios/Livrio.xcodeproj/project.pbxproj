@@ -87,6 +87,7 @@
 		E6CB6DF15393440C8CE15225 /* Toast+UIView.m in Sources */ = {isa = PBXBuildFile; fileRef = ECA5CBF4D4CA4FFF94B3AB76 /* Toast+UIView.m */; };
 		F3657168EE84496984A1B726 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F1971810B604D74ABBEFBB5 /* libGoogleAnalyticsServices.a */; };
 		F4967F27A6364A39A5391282 /* FacebookConnectPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 059EC3AA8BD846979D1437FB /* FacebookConnectPlugin.m */; };
+		303D211DA26345C0974E9C62 /* CDVMarket.m in Sources */ = {isa = PBXBuildFile; fileRef = E603669349C14423B3DAA5ED /* CDVMarket.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -233,6 +234,8 @@
 		F7C882D5F0D24279A74E60EF /* FacebookConnectPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookConnectPlugin.h; path = "cordova-plugin-facebook4/FacebookConnectPlugin.h"; sourceTree = "<group>"; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = Livrio/config.xml; sourceTree = "<group>"; };
 		F979AF2CA5AB4887A8D9CA72 /* UIImage+CropScaleOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+CropScaleOrientation.m"; path = "cordova-plugin-camera/UIImage+CropScaleOrientation.m"; sourceTree = "<group>"; };
+		E603669349C14423B3DAA5ED /* CDVMarket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVMarket.m"; path = "com.xmartlabs.cordova.market/CDVMarket.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		DC299D89B343423CB7FF3A2B /* CDVMarket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVMarket.h"; path = "com.xmartlabs.cordova.market/CDVMarket.h"; sourceTree = "<group>"; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -435,6 +438,8 @@
 				25004F5F9645485CBD8053BA /* PushPlugin.h */,
 				40AB91EC14FE43B0BB8B2DD4 /* AppVersion.m */,
 				C6E582FD975142CDA2768901 /* AppVersion.h */,
+				E603669349C14423B3DAA5ED /* CDVMarket.m */,
+				DC299D89B343423CB7FF3A2B /* CDVMarket.h */,
 			);
 			name = Plugins;
 			path = Livrio/Plugins;
@@ -651,6 +656,7 @@
 				388B8B25878C4B51BE9DA9D5 /* AppDelegate+notification.m in Sources */,
 				6A2D8C8149BC4CCB9E6C1C21 /* PushPlugin.m in Sources */,
 				C31DD5DDABA449EE9CA6D7AA /* AppVersion.m in Sources */,
+				303D211DA26345C0974E9C62 /* CDVMarket.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

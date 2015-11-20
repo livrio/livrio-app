@@ -9,9 +9,7 @@ angular.module("livrio.services")
         window.localStorage.user = JSON.stringify(user);
         $rootScope.user = user;
 
-        PUSH.register({
-            name: user.fullname
-        });
+        PUSH.register( true);
     }
 
 
@@ -77,6 +75,12 @@ angular.module("livrio.services")
             device: ionic.Platform.platform() + ':' + ionic.Platform.version(),
             origin: 'livrio'
         };
+
+        if (window.localStorage.pushToken) {
+            try {
+                post['deviceToken'] = JSON.parse(window.localStorage.pushToken);
+            } catch (e) {}
+        }
 
         angular.extend(post, params);
 

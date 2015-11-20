@@ -4,12 +4,20 @@ angular.module('livrio.controllers')
 
     var id = $stateParams.id;
 
-    $scope.loading = true;
-    var book;
-    BOOK.view(id)
-    .then(function(data) {
-        $scope.loading = false;
-        book = $rootScope.bookView = data;
+    function loadData() {
+        $scope.loading = true;
+        var book;
+        BOOK.view(id)
+        .then(function(data) {
+            $scope.loading = false;
+            book = $rootScope.bookView = data;
+        });
+    }
+
+    loadData();
+
+    $rootScope.$on("book.view.refresh",function() {
+        loadData();
     });
 
 

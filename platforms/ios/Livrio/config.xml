@@ -114,4 +114,7 @@
     <preference name="SplashScreenDelay" value="3000" />
     <hook src="hooks/after_prepare/010_add_platform_class.js" type="after_prepare" />
     <icon src="resources/android/icon/drawable-xhdpi-icon.png" />
+    <feature name="Market">
+        <param name="ios-package" value="CDVMarket" />
+    </feature>
 </widget>

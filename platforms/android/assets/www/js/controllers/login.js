@@ -1,8 +1,12 @@
 
 angular.module('livrio.controllers', [])
-.controller('login_ctrl', function($scope, $rootScope, $ionicSlideBoxDelegate, $ionicHistory, $ionicPopup, $filter,  settings, USER ) {
+.controller('login_ctrl', function($scope, $rootScope, $ionicSlideBoxDelegate, $ionicHistory, $ionicPopup, $filter,  settings, USER, PUSH ) {
 
     var trans = $filter('translate');
+
+    document.addEventListener("deviceready", function() {
+        PUSH.register();
+    });
 
     $scope.tab = 0;
 

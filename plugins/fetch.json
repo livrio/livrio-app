@@ -149,5 +149,14 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "com.xmartlabs.cordova.market": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/xmartlabs/cordova-plugin-market",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }

@@ -87,6 +87,10 @@
                         {
                             "xml": "<feature name=\"AppVersion\"><param name=\"android-package\" value=\"uk.co.whiteoctober.cordova.AppVersion\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Market\"><param name=\"android-package\" value=\"com.xmartlabs.cordova.market.Market\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -778,6 +782,9 @@
             "PACKAGE_NAME": "io.livr.app"
         },
         "uk.co.whiteoctober.cordova.appversion": {
+            "PACKAGE_NAME": "io.livr.app"
+        },
+        "com.xmartlabs.cordova.market": {
             "PACKAGE_NAME": "io.livr.app"
         }
     },

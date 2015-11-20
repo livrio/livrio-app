@@ -23,7 +23,13 @@ angular.module('livrio.controllers')
     $scope.doLogout = function() {
         window.localStorage.clear();
         window.localStorage.email = $rootScope.user.email;
-        window.location = '#/login';
+        if (ionic.Platform.isAndroid()) {
+            window.location = '#/login';
+        }
+        else {
+            ionic.Platform.exitApp();
+            window.location = '#/login';
+        }
         $ionicHistory.clearCache();
     };
 });

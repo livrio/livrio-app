@@ -32,6 +32,7 @@
     "nl.x-services.plugins.toast",
     "org.apache.cordova.splashscreen",
     "cordova-plugin-app-version",
+    "cordova-plugin-market",
     "phonegap-plugin-push",
     {
       "locator": "https://github.com/aureliosaraiva/phonegap-plugin-barcodescanner"

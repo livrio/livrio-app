@@ -38,6 +38,9 @@ angular.module('livrio.services')
                 text = String.format(trans('notification.msg_system_welcome'), item.user.fullname);
                 href = "#/app/book-add";
             }
+            else if (item.type === 'system_updated') {
+                text = item.content.text ;
+            }
             else if (item.type === 'system_library_empty') {
                 text = String.format(trans('notification.msg_system_library_empty'), item.user.fullname);
                 href = "#/app/book-add";
@@ -244,24 +247,31 @@ angular.module('livrio.services')
                 token: token
             }
         };
-        $http.put(settings.URL.USER + "/" + $rootScope.user.id, post);
+        $http.put(settings.URL.USER + "/" + $rootScope.user.id, post)
+        .success(function(){
+            console.log('SAVE:SUCCESS');
+        }).error(function(){
+            console.log('SAVE:ERROR');
+        });
     };
-
-    var pushObject = null;
 
     self.register = function(save) {
 
-        if (pushObject == null) {
-            pushObject = PushNotification.init({
-                "android": {"senderID": "966956371758","iconColor":"#f9b000","icon":"notify","forceShow":"true","clearNotifications":"false"},
-                "ios": {"alert": "true", "badge": "true", "sound": "true"}
-            } );
-        }
 
+        var pushObject = PushNotification.init({
+            "android": {"senderID": "966956371758","iconColor":"#f9b000","icon":"notify","forceShow":"true","clearNotifications":"false"},
+            "ios": {"alert": "true", "badge": "true", "sound": "true"}
+        } );
+        
         pushObject.on('registration', function(data) {
+            console.log(data.registrationId);
             var device = ionic.Platform.isAndroid() ? 'android' : 'ios';
             if (save) {
                 doUpdateToken(device,data.registrationId);
+                console.log('SAVE');
+            }
+            else {
+                console.log('SAVE:NO');
             }
 
             var tokenPUSH = {
@@ -270,46 +280,27 @@ angular.module('livrio.services')
             };
 
             window.localStorage.pushToken = JSON.stringify(tokenPUSH);
+
         });
 
         if (save) {
             pushObject.on('notification', function(data) {
                 self.all();
-                self.markView();
                 console.log(JSON.stringify(data));
-                if (!data.additionalData.foreground) {
-                    window.location = '#/app/notification';
-                }
-                /*
-                else {
-                    cordova.plugins.notification.local.schedule({
-                        title: data.title,
-                        text: data.message,
-                        smallIcon: "notify",
-                        icon: data.image,
-                        data: data.additionalData
-                    });
-                }
-*/
 
-            });
-
-            cordova.plugins.notification.local.on("click", function (notification) {
-                self.all();
-                console.log(JSON.stringify(notification));
-
-                try{
-                    notification.data = JSON.parse(notification.data);
-                }catch(e){}
-
-                if (notification.data && notification.data.href) {
-                    if (window.location.hash == notification.data.href) {
+                if (data.additionalData && data.additionalData.href) {
+                    if (window.location.hash == data.additionalData.href) {
                         $rootScope.$emit('book.view.refresh');
                     }
                     else {
-                        console.log(notification.data.href);
-                        window.location = notification.data.href;
+                        window.location = data.additionalData.href;
                     }
+                }
+                else if (data.additionalData && data.additionalData.update){
+                    if (ionic.Platform.isAndroid()) {
+                        cordova.plugins.market.open('io.livr.app');
+                    }
+                    
                 }
                 else {
                     console.log('NOT_HREF');
@@ -317,7 +308,10 @@ angular.module('livrio.services')
                     self.markView();
                     window.location = '#/app/notification';
                 }
+
+
             });
+
         }
     };
 
