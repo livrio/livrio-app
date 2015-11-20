@@ -21,17 +21,6 @@ angular.module("livrio.controllers")
     };
 
 
-    $scope.doFacebook = function() {
-        $scope.loading = true;
-        FRIEND.addOnFacebook()
-        .then(function() {
-            $scope.onRefresh();
-            $rootScope.user.is_facebook = true;
-        },
-        function() {});
-    };
-
-
     $scope.onRefresh();
 
     $rootScope.$on("friend.refresh",function() {

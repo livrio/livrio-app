@@ -10,15 +10,6 @@
             <span>{{'app.loading' | translate}}</span>
         </div>
 
-        <div class="card padding center" ng-hide="user.is_facebook  || loading">
-            <div class="item item-text-wrap">
-                <p ng-bind-html="info_facebook"></p>
-                <br />
-                <button class="button button-small button-facebook icon-left ion-social-facebook" ng-click="doFacebook()">{{'friend.btn_facebook' | translate}}</button>
-            </div>
-        </div>
-
-
         <div class="list" ng-hide="loading">
             <friend friend="item" ng-repeat="item in friends"></friend>
         </div>
