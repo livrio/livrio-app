@@ -21,7 +21,7 @@
             </div>
    </ion-nav-bar>
     
-  <ion-content class="bg-color friend-profile-view" scroll="false" ng-class="{'has-invite':friend.invited}">
+  <ion-content class="bg-color friend-profile-view" scroll="false" ng-class="{'has-invite':friend.invited}" >
 
 
 
@@ -42,7 +42,7 @@
     
     
 
-<ion-scroll  direction="y">
+<ion-scroll  direction="y" lazy-scroll>
          <ion-refresher pulling-text="{{'app.refresh' | translate}}" on-refresh="onRefresh(true)">
         </ion-refresher>
 

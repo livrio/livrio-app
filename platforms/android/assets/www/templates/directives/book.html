@@ -4,7 +4,8 @@
     <div>
 
         
-        <img class="cover" ng-src="{{book.thumb}}" />
+        <img class="cover" image-lazy-src="{{book.thumb}}" image-lazy-loader="android" image-lazy-distance-from-bottom-to-load="100"/>
+
         <div class="content">
             <h2>{{book.title}}</h2>
             <h3>{{book.author}}</h3>

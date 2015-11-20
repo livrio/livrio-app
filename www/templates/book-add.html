@@ -2,7 +2,7 @@
 <ion-view title="{{'book_add.title' | translate}}">
 
 
-<ion-content class="view-book-add">
+<ion-content class="view-book-add" lazy-scroll>
 
 <form name="formBook" novalidate>
     <div class="item-input-inset item item-search form-search">
@@ -29,7 +29,7 @@
         <div ng-repeat="item in librarys" class="item book-card">
             <div>
                 
-                <img class="cover" ng-src="{{item.thumb}}" />
+                <img class="cover" image-lazy-src="{{item.thumb}}" image-lazy-loader="android" image-lazy-distance-from-bottom-to-load="100"/>
                 <div class="content">
                     <h2>{{item.title}}</h2>
                     <h3>{{item.author}}</h3>

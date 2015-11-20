@@ -58,6 +58,7 @@ angular.module('livrio', [
   'livrio.services',
   'livrio.config',
   'livrio.directives',
+  'ionicLazyLoad',
   'pascalprecht.translate'
   ])
 
