@@ -247,28 +247,42 @@ angular.module('livrio.services')
         $http.put(settings.URL.USER + "/" + $rootScope.user.id, post);
     };
 
+    var pushObject = null;
 
-    self.register = function(userInfo) {
+    self.register = function(save) {
 
-        var push = PushNotification.init({
-            "android": {"senderID": "966956371758","iconColor":"#f9b000","icon":"notify"},
-            "ios": {"alert": "true", "badge": "true", "sound": "true"}
-        } );
+        if (pushObject == null) {
+            pushObject = PushNotification.init({
+                "android": {"senderID": "966956371758","iconColor":"#f9b000","icon":"notify"},
+                "ios": {"alert": "true", "badge": "true", "sound": "true"}
+            } );
+        }
 
-        push.on('registration', function(data) {
+        pushObject.on('registration', function(data) {
             var device = ionic.Platform.isAndroid() ? 'android' : 'ios';
-            doUpdateToken(device,data.registrationId);
-        });
-
-        push.on('notification', function(data) {
-            self.all();
-            self.markView();
-            if (!data.additionalData.foreground) {
-                window.location = '#/app/notification';
+            if (save) {
+                doUpdateToken(device,data.registrationId);
             }
 
+            var tokenPUSH = {
+                platform: device,
+                token: data.registrationId
+            };
 
+            window.localStorage.pushToken = JSON.stringify(tokenPUSH);
         });
+
+        if (save) {
+            pushObject.on('notification', function(data) {
+                self.all();
+                self.markView();
+                if (!data.additionalData.foreground) {
+                    window.location = '#/app/notification';
+                }
+
+
+            });
+        }
     };
 
     return self;
