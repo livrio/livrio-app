@@ -4,7 +4,8 @@ angular.module("livrio.directives",[])
         restrict: 'E',
         scope: {
             book: '=book',
-            button: '='
+            button: '=',
+            owner: '='
         },
         controller: function($scope, $rootScope, BOOK) {
 

@@ -92,3 +92,16 @@
         padding: 16px;
     }
 }
+
+
+.book-search-view{
+
+    .item-divider{
+        text-transform: inherit;
+        background-color: #d6123c;
+        color: #fff;
+        padding: 16px 16px;
+        font-family: $font-family-title;
+        font-size: 19px;
+    }
+}

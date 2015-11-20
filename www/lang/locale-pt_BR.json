@@ -2,7 +2,7 @@
     "app": {
         "backbutton": "Pressione o botão voltar para sair",
         "offline": "Você precisa estar conectado a internet. Por favor verifique sua conexão",
-        "welcome": "Olá <strong>{0}</strong>, seja bem vindo ao <strong>Livrio.</strong> Por aqui, a gente compartilha livros com quem também ama livros. Eu vou te ajudar a cadastrar os seus e libertá-los para o mundo.",
+        "welcome": "Olá <strong>{0}</strong>, seja bem vindo ao <strong>Livrio.</strong> Por aqui, a gente compartilha livros com quem também ama livros. Eu vou te ajudar a cadastrar os seus livros e libertá-los para o mundo.",
         "loading": "Carregando",
         "searching": "Pesquisando",
         "refresh": "Atualizar",

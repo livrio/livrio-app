@@ -55,9 +55,6 @@ angular.module("livrio.config",[
                     window.location.reload();
                 }
 
-                if (response.status == 0) {
-                    $cordovaToast.showLongBottom(trans('app.offline'));
-                }
                 return $q.reject(response);
             }
         };

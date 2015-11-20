@@ -28,7 +28,7 @@ $font-family-title:          "Roboto Slab", "Roboto", "Segoe UI", sans-serif !de
 
 $calm: #63c9ce !default;
 
-.spinner svg {
+.spinner svg { 
   stroke: $assertive;
   fill: $assertive; 
 }
@@ -404,7 +404,7 @@ ul.rating li i {
         }
 
         &.background{
-            background-color: ##8231B0;
+            background-color: #D79802;
             color: #fff;
         }
 
