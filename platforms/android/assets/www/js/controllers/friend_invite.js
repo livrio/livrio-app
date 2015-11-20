@@ -1,6 +1,6 @@
 angular.module('livrio.controllers')
 
-.controller('friend_invite_ctrl', function($scope, $filter, $cordovaSocialSharing, $cordovaToast) {
+.controller('friend_invite_ctrl', function($scope, $rootScope, $filter, $cordovaSocialSharing, $cordovaToast) {
 
     var trans = $filter('translate');
 
@@ -8,6 +8,9 @@ angular.module('livrio.controllers')
     var invite_msg = trans('friend_invite.invite_msg');
     var invite_subject = trans('friend_invite.invite_subject');
     var invite_link = trans('friend_invite.invite_link');
+
+
+    $scope.info_title = String.format(trans('friend_invite.info_title'),$rootScope.user.first_name);
 
 
 

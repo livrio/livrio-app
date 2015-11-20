@@ -29,11 +29,13 @@ angular.module("livrio.controllers")
             $scope.searching = true;
             $scope.searchStart = true;
             BOOK.all({
+                limit: 40,
                 history: true,
                 word: "%" + input + "%"
             }).then(function(data) {
                 $scope.librarys = data;
                 BOOK.all({
+                    limit: 40,
                     search_friend:true,
                     word: "%" + input + "%"
                 }).then(function(data) {

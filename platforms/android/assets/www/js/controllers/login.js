@@ -110,7 +110,7 @@ angular.module('livrio.controllers', [])
                 USER.auth(post)
                 .then(function(data) {
                     $ionicHistory.clearCache();
-                    window.location = '#/app/book';
+                    window.location = '#/app/friend-invite';
                     firstLogin(data.first_name);
                     hideLoading();
                 },

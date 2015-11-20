@@ -141,7 +141,7 @@
     },
     "friend": {
         "info_facebook": "Para ter acesso aos livros incríveis que estão parados nas estantes deles, encontre-os por aqui.",
-        "empty_list": "Você não tem amigos cadastrados<p>Clique no <i class=\"ion ion-android-share\"></i> para convidar seus amigos.</p><img src=\"img/bored.svg\" />",
+        "empty_list": "Você não tem amigos cadastrados<p>Clique no <i class=\"ion ion-android-person-add\"></i> para convidar seus amigos.</p><img src=\"img/bored.svg\" />",
         "book": "Livros",
         "title": "Meus amigos",
         "btn_facebook": "Conectar ao Facebook"
