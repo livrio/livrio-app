@@ -4,7 +4,8 @@ angular.module("livrio.directives",[])
         restrict: 'E',
         scope: {
             book: '=book',
-            button: '='
+            button: '=',
+            owner: '='
         },
         controller: function($scope, $rootScope, BOOK) {
 
@@ -15,6 +16,43 @@ angular.module("livrio.directives",[])
             };
         },
         templateUrl: 'templates/directives/book.html'
+    };
+})
+.directive('friend', function() {
+    return {
+        restrict: 'E',
+        scope: {
+            friend: '=friend',
+            button: '='
+        },
+        controller: function($scope, $state, $rootScope, FRIEND) {
+
+            $scope.user = $rootScope.user;
+
+            $scope.onLink = function(item) {
+                if (!item.is_contact) {
+                    $state.go('app.friend-profile',{
+                        id: item.id
+                    });
+                }
+            }
+
+            $scope.onAdd = function(e, item) {
+                e.stopPropagation();
+                item.added = true;
+                $scope.button = false;
+                FRIEND.add(item);
+            };
+
+            $scope.onInvite = function(e, item) {
+                e.stopPropagation();
+                item.invited = true;
+                $scope.button = false;
+                FRIEND.invite(item);
+            };
+
+        },
+        templateUrl: 'templates/directives/friend.html'
     };
 })
 .directive('bookaction', function($q, $ionicPopup, $filter, BOOK, LOAN) {

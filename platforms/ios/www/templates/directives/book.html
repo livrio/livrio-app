@@ -4,12 +4,13 @@
     <div>
 
         
-        <img class="cover" ng-src="{{book.thumb}}" />
+        <img class="cover" image-lazy-src="{{book.thumb}}" image-lazy-loader="android" image-lazy-distance-from-bottom-to-load="100"/>
+
         <div class="content">
             <h2>{{book.title}}</h2>
             <h3>{{book.author}}</h3>
 
-            <div class="user-loan" ng-show="book.loaned && book.is_owner && book.owner.id==user.id">
+            <div class="user-loan" ng-show="book.loaned && book.is_owner && book.owner.id==user.id && !owner">
                 <img ng-src="{{book.loaned.photo}}" /> 
                 <span class="name">
                     <span>{{'book.lent' | translate}}</span>
@@ -17,10 +18,18 @@
                 </span>
             </div>
 
-            <div class="user-loan" ng-show="book.loaned && !book.is_owner && book.loaned.id==user.id">
+            <div class="user-loan" ng-show="book.loaned && !book.is_owner && book.loaned.id==user.id && !owner">
                 <img ng-src="{{book.owner.photo}}" /> 
                 <span class="name">
                     <span>{{'book.loan' | translate}} </span>
+                    {{book.owner.fullname}}
+                </span>
+            </div>
+
+            <div class="user-loan" ng-show="owner">
+                <img ng-src="{{book.owner.photo}}" /> 
+                <span class="name">
+                    <span>Livro de </span>
                     {{book.owner.fullname}}
                 </span>
             </div>

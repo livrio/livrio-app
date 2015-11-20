@@ -2,10 +2,10 @@
     "app": {
         "backbutton": "Pressione o botão voltar para sair",
         "offline": "Você precisa estar conectado a internet. Por favor verifique sua conexão",
-        "welcome": "Olá <strong>{0}</strong>, seja bem vindo ao <strong>Livrio.</strong> Por aqui, a gente compartilha livros com quem também ama livros. Eu vou te ajudar a cadastrar os seus e libertá-los para o mundo.",
+        "welcome": "Olá <strong>{0}</strong>, seja bem vindo ao <strong>Livrio.</strong> Por aqui, a gente compartilha livros com quem também ama livros. Eu vou te ajudar a cadastrar os seus livros e libertá-los para o mundo.",
+        "loading": "Carregando",
         "searching": "Pesquisando",
         "refresh": "Atualizar",
-        "loading": "Carregando",
         "required_field": "é obrigatório",
         "name": "Livrio"
     },
@@ -28,7 +28,7 @@
         "sheet_delete": "Excluir",
         "sheet_cancel": "Cancelar",
         "isbn": "ISBN",
-        "author": "Autor(a)",
+        "author": "Autor/Organizador",
         "page": "Páginas",
         "publisher": "Editora",
         "btn_like": "Curir",
@@ -41,9 +41,9 @@
         "loan": "Recebido de"
     },
     "book_add": {
-        "empty_list": "Você possui um novo livro?<p><strong>Ótimo! Vamos te ajudar a cadastrar!</strong><br /><br />Existe três formas de cadastrar um livro: 1&ordm; - você pode ler o código de barras (ISBN) atrás do livro; 2&ordm; - você pode pesquisa pelo título do livro no campo acima; 3&ordm; - ou inserir manualmente.</p><img src=\"img/official.svg\" />",
+        "empty_list": "Você possui um novo livro?<p><strong>Ótimo! Vamos te ajudar a cadastrar!</strong><br /><br />Existe três formas de cadastrar um livro: 1&ordm; - você pode ler o código de barras (ISBN) atrás do livro; 2&ordm; - pesquisar pelo título do livro no campo acima; 3&ordm; - ou inserir manualmente.</p><img src=\"img/official.svg\" />",
         "isbn_duplicate": "O livro <strong>{0}</strong> já está cadastrado!",
-        "isbn_not_found": "Nenhum livro encontrado com o ISBN: <strong>{0}</strong>.<br />Você pode cadastrar este livro manualmente.",
+        "isbn_not_found": "Nenhum livro encontrado com o ISBN: <strong>{0}</strong>.<br />Mas não desista! Você pode cadastrar este livro manualmente.",
         "barcode_invalid": "O ISBN <strong>{0}</strong> é invalido.",
         "empty_search": "Nenhum livro encontrado<p>Faça uma nova busca, conferindo os dados do livro.</p><img src=\"img/bored.svg\" />",
         "title": "Novo livro",
@@ -74,7 +74,7 @@
         "btn_save": "SALVAR",
         "field_isbn": "ISBN",
         "field_title": "Título",
-        "field_author": "Autor",
+        "field_author": "Autor/Organizador",
         "cover": "Capa",
         "field_publisher": "Editora",
         "field_publisher_year": "Ano de publicação",
@@ -141,10 +141,10 @@
     },
     "friend": {
         "info_facebook": "Para ter acesso aos livros incríveis que estão parados nas estantes deles, encontre-os por aqui.",
-        "empty_list": "Você não tem amigos cadastrados<p>Clique no <i class=\"ion ion-android-share\"></i> para convidar seus amigos.</p><img src=\"img/bored.svg\" />",
+        "empty_list": "Você não tem amigos cadastrados<p>Clique no <i class=\"ion ion-android-person-add\"></i> para convidar seus amigos.</p><img src=\"img/bored.svg\" />",
+        "book": "Livros",
         "title": "Meus amigos",
-        "btn_facebook": "Conectar ao Facebook",
-        "book": "Livros"
+        "btn_facebook": "Conectar ao Facebook"
     },
     "friend_invite": {
         "invite_msg": "Oi, agora todos os meus livros estão disponíveis no Livrio e você pode pedir emprestado a hora que quiser.",
@@ -153,10 +153,10 @@
         "toast_share_whatsapp": "Convite enviado!",
         "toast_share_error": "Ops, tente mais tarde!",
         "toast_share_facebook": "Recomendação enviada!",
-        "toast_share": "Compartlhado!",
+        "toast_share": "Compartilhado!",
         "title": "Convidar amigos",
         "loading": "Enviando",
-        "info_title": "Olá Aurélio, convide seus amigos!!",
+        "info_title": "Olá {0}, convide seus amigos!!",
         "info_text": "Quanto mais amigos você tiver, mais livros você terá acesso.",
         "btn_search": "Procurar amigos",
         "btn_facebook": "Recomendar no Facebook",
@@ -245,7 +245,7 @@
         "field_email": "E-mail",
         "field_phone": "Celular",
         "placeholder_phone": "(Opcional)",
-        "info_phone": "Nós informe seu número de celular, no futuro disponibilizaremos troca de mensagem para empréstimo de livro através do Whatsapp.",
+        "info_phone": "Digite seu número de celular, no futuro faremos trocas de mensagens para os empréstimos através do Whatsapp.",
         "info": "Fique tranquilo. Suas informações só serão utilizadas para sugerir livros que tenham mais a ver com você!"
     },
     "friends": {
@@ -265,32 +265,31 @@
     "config": {
         "title": "Configurações",
         "allow_search_by_email": "Permitir que me encontrem pelo email.",
-        "help_allow_search_by_email": "Se habilitado permite que seus amigos te encontre através do seu email.",
+        "help_allow_search_by_email": "Se habilitado permite que seus amigos encontrem você pelo email.",
         "allow_notification_push": "Permitir notificações push",
         "help_allow_notification_push": "Se habilitado você receberá notificações de empréstimos, solicitações de amizade, notificações de atraso na devolução do livro, etc.",
         "allow_notification_email": "Permitir notificações por email",
-        "help_allow_notification_email": "Se habilitado você receberá notificações por email de atividade na sua rede de amigos.",
+        "help_allow_notification_email": "Se habilitado você receberá notificações por email de atividades na sua rede de amigos.",
         "allow_accept_friend_facebook": "Vincular amizades do Facebook",
-        "help_allow_accept_friend_facebook": "Quando habilitado permite que seus amigos do Facebook ao se cadastrarem no Livrio, sejam automaticamente seus amigos no Livro."
+        "help_allow_accept_friend_facebook": "Quando habilitado permite que seus amigos do Facebook ao se cadastrarem no aplicativo, sejam automaticamente seus amigos."
     },
     "friend_search": {
+        "invite_sent": "Convite enviado!",
+        "request_sent": "Solicitação enviada!",
+        "invite": "Convidar",
+        "add": "Adicionar",
         "title": "Procurar amigos",
         "tab_search": "Procurar",
         "tab_suggest": "Sugestões",
         "tab_contact": "Contatos",
-        "placeholder": "Procurar por nome ou email",
-        "book": "Livros",
-        "invite_sent": "Convite enviado!",
-        "request_sent": "Solicitação enviada!",
-        "invite": "Convidar",
-        "add": "Adicionar"
+        "placeholder": "Procurar por nome ou email"
     },
     "friend_contact": {
         "title": "Acesso aos contatos",
         "loading": "Carregando contatos",
-        "text": "Veja quem está no Livrio carregando seus contatos. Depois, fale para nós quem você quer adicionar como amigo.",
+        "text": "Veja quem está no Livrio carregando seus contatos. Depois, nos fale quem você quer adicionar como amigo.",
         "btn_ok": "Continuar",
-        "terms": "As informações sobre os contatos da sua agenda, incluindo nomes, números de telefone e emails, serão enviadas ao Livrio para ajudar você e outras pessoas a encontrar amigos mais rapidamente e nos ajudar a aumentar a qualidade do nosso serviço."
+        "terms": "As informações sobre os contatos da sua agenda, incluindo nomes, números de telefone e emails, serão enviadas ao Livrio para ajudar você e outras pessoas a encontrar amigos mais rapidamente e nos ajudar a oferecer uma boa experiência para todos."
     },
     "book_shelf": {
         "btn_ok": "CONCLUIR"
@@ -303,7 +302,7 @@
         "friend_invite": "Convidar amigos",
         "search": "Procurar livro",
         "shelfs": "Estantes",
-        "empty_shelfs": "Você ainda não tem estantes. Organize seus livros por temas.",
+        "empty_shelfs": "Você ainda não tem estantes. Que tal organizar seus livros por temas?.",
         "profile": "Meu perfil",
         "config": "Configurações",
         "about": "Sobre o aplicativo",

@@ -1,6 +1,4 @@
 @charset "UTF-8";
-@import url(http://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,300);
-@import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,300,700);
 /*
 To customize the look and feel of Ionic, you can override the variables
 in ionic's _variables.scss file.
@@ -21,6 +19,60 @@ $dark:                            #444 !default;
 .spinner svg {
   stroke: #d6123c;
   fill: #d6123c; }
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/roboto/Roboto-Light.woff2') format('woff2'), url('../fonts/roboto/Roboto-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/roboto/Roboto-Regular.woff2') format('woff2'), url('../fonts/roboto/Roboto-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/roboto/Roboto-RegularItalic.woff2') format('woff2'), url('../fonts/roboto/Roboto-RegularItalic.woff') format('woff');
+  font-weight: 400;
+  font-style: italic; }
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/roboto/Roboto-Medium.woff2') format('woff2'), url('../fonts/roboto/Roboto-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/roboto/Roboto-MediumItalic.woff2') format('woff2'), url('../fonts/roboto/Roboto-MediumItalic.woff') format('woff');
+  font-weight: 500;
+  font-style: italic; }
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/roboto/Roboto-Bold.woff2') format('woff2'), url('../fonts/roboto/Roboto-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Roboto Slab';
+  src: url('../fonts/roboto-slab/RobotoSlab-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Roboto Slab';
+  src: url('../fonts/roboto-slab/RobotoSlab-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Roboto Slab';
+  src: url('../fonts/roboto-slab/RobotoSlab-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal; }
 
 /*!
   Ionicons, v2.0.1
@@ -7705,7 +7757,9 @@ a.button {
 .hero {
   height: 236px;
   background-color: #fff;
-  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.24); }
+  /*box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.12), 0px 2px 2px 0px rgba(0,0,0,0.24);*/ }
+  .hero.border-bottom {
+    border-bottom: 2px solid rgba(0, 0, 0, 0.24); }
   .hero .cover {
     height: 125px;
     background-size: cover; }
@@ -7800,6 +7854,8 @@ a.button {
   position: absolute;
   color: #fff;
   text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.67); }
+  .no-header .back-button i:before {
+    font-size: 33px; }
 .no-header .notice-library-empty {
   position: inherit; }
 
@@ -7872,6 +7928,14 @@ a.button {
   font-size: 12px;
   padding: 16px; }
 
+.book-search-view .item-divider {
+  text-transform: inherit;
+  background-color: #d6123c;
+  color: #fff;
+  padding: 16px 16px;
+  font-family: "Roboto Slab", "Roboto", "Segoe UI", sans-serif;
+  font-size: 19px; }
+
 .book-card {
   background-color: #fff;
   padding: 10px;
@@ -7884,8 +7948,9 @@ a.button {
     align-items: flex-start;
     min-height: 100px;
     position: relative;
-    z-index: 9; }
-  .book-card .button {
+    z-index: 9;
+    min-height: 121px; }
+  .book-card .button.ion-android-more-vertical {
     position: absolute;
     right: 10px;
     top: 10px;
@@ -7901,6 +7966,19 @@ a.button {
   .book-card .cover {
     width: 86px;
     background-size: cover; }
+  .book-card .image-loader-container {
+    width: 86px;
+    height: 121px;
+    position: absolute;
+    left: 0px;
+    background-color: #fff;
+    border: 1px solid #CCC; }
+    .book-card .image-loader-container .spinner svg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-left: -14px;
+      margin-top: -14px; }
   .book-card .content {
     padding-left: 10px;
     padding-top: 10px;
@@ -7958,6 +8036,47 @@ a.button {
     .book-card .button-book-add:before {
       margin-top: 1px;
       font-size: 14px; }
+
+.friend-card {
+  margin: 0;
+  border: none;
+  border-bottom: 1px solid #dcdcdc;
+  padding-top: 25px;
+  font-size: 17px; }
+  .friend-card .help-inline {
+    display: block;
+    font-size: 12px; }
+  .friend-card .amount {
+    display: block;
+    font-size: 12px;
+    color: #444; }
+  .friend-card.item-button-right {
+    padding-right: 110px; }
+
+.friend-profile-view .notice-library-empty {
+  margin-top: 30px; }
+.friend-profile-view .scroll-view {
+  position: absolute;
+  top: 1px;
+  bottom: 0;
+  left: 0;
+  right: 0; }
+.friend-profile-view.has-invite .scroll-view {
+  top: 162px;
+  border-top: 1px solid #dcdcdc; }
+.friend-profile-view .list {
+  background: #fff;
+  /*box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.12), 0px 2px 2px 0px rgba(0,0,0,0.24);*/
+  margin: 0px;
+  border-top: none; }
+  .friend-profile-view .list .item {
+    border-top: none;
+    background-color: transparent; }
+  .friend-profile-view .list .item-divider {
+    font-size: 16px;
+    padding: 16px; }
+.friend-profile-view .request-friend {
+  font-size: 14px !important; }
 
 ul.rating li {
   display: inline;
@@ -8163,52 +8282,11 @@ ul.rating li i {
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
     font-weight: bold;
     color: #fff; }
-  .profile.friends {
-    height: 150px; }
-    .profile.friends .photo {
-      width: 75px;
-      height: 75px;
-      left: 50%;
-      margin-left: -30px; }
-    .profile.friends .button-icon {
-      top: 0px;
-      left: 10px;
-      position: absolute; }
-      .profile.friends .button-icon::before {
-        color: #fff;
-        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25); }
-    .profile.friends .name {
-      text-align: left;
-      padding-left: 10px; }
-    .profile.friends .book-count {
-      position: absolute;
-      bottom: 10px;
-      width: 100%;
-      text-align: right;
-      font-size: 15px;
-      text-transform: uppercase;
-      text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
-      font-weight: bold;
-      color: #fff;
-      padding-right: 10px; }
 
 .platform-ios.platform-cordova:not(.fullscreen) .profile .photo {
   top: 78px; }
 .platform-ios.platform-cordova:not(.fullscreen) .profile .name {
   bottom: 5px; }
-
-.friend-list .item {
-  margin: 0;
-  border: none;
-  border-bottom: 1px solid #dcdcdc;
-  padding-top: 25px;
-  font-size: 17px; }
-  .friend-list .item img {
-    /*border-radius: 0; */ }
-  .friend-list .item .amount {
-    display: block;
-    font-size: 12px;
-    color: #444; }
 
 .sidemenu .item {
   border: none;
@@ -8233,7 +8311,7 @@ ul.rating li i {
     right: 10px;
     top: 10px; }
   .sidemenu .item.background {
-    background-color: #d6123c;
+    background-color: #D79802;
     color: #fff; }
 
 .button-float {

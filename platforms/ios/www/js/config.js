@@ -39,6 +39,7 @@ angular.module("livrio.config",[
     $ionicConfigProvider.spinner.icon('android');
     $ionicConfigProvider.backButton.icon('ion-android-arrow-back');
     $ionicConfigProvider.navBar.alignTitle('left');
+    $ionicConfigProvider.scrolling.jsScrolling(false);
 
     $httpProvider.interceptors.push(function($q, $location, $cordovaToast, $filter) {
         // var trans = $filter('translate');
@@ -54,9 +55,6 @@ angular.module("livrio.config",[
                     window.location.reload();
                 }
 
-                if (response.status == 0) {
-                    $cordovaToast.showLongBottom(trans('app.offline'));
-                }
                 return $q.reject(response);
             }
         };

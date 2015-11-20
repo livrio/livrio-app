@@ -27,6 +27,13 @@ angular.module('livrio.services')
                 text = String.format(trans('notification.msg_system_first_book'), item.user.fullname);
                 href = "#/app/friend-invite";
             }
+            else if (item.type === 'info_text') {
+                text = item.content.text ;
+                href = "#";
+                if (item.content.href) {
+                    href = item.content.href;
+                }
+            }
             else if (item.type === 'system_welcome') {
                 text = String.format(trans('notification.msg_system_welcome'), item.user.fullname);
                 href = "#/app/book-add";
@@ -105,7 +112,7 @@ angular.module('livrio.services')
             else if (item.type === 'request_friend') {
                 text = String.format(trans('notification.msg_request_friend'), item.created_by.fullname);
 
-                //href = "#/app/friend/" + item.book.id;
+                href = "#/app/friend-profile/" + item.created_by.id;
             }
 
             item.text = text;

@@ -12,7 +12,7 @@
     </form>
 
 
-    <ion-content>
+    <ion-content lazy-scroll class="book-search-view">
 
 
         <div class="wait-message spinner-large" ng-show="searching">
@@ -40,7 +40,7 @@
                 {{'search.book_friend' | translate}}
             </div>
 
-            <book ng-repeat="item in libraryFriends" book="item"></book>
+            <book ng-repeat="item in libraryFriends" book="item"  owner="true"></book>
 
 
         </div>
