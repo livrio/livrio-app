@@ -38,6 +38,9 @@ angular.module('livrio.services')
                 text = String.format(trans('notification.msg_system_welcome'), item.user.fullname);
                 href = "#/app/book-add";
             }
+            else if (item.type === 'system_updated') {
+                text = item.content.text ;
+            }
             else if (item.type === 'system_library_empty') {
                 text = String.format(trans('notification.msg_system_library_empty'), item.user.fullname);
                 href = "#/app/book-add";
@@ -305,8 +308,7 @@ angular.module('livrio.services')
                     self.markView();
                     window.location = '#/app/notification';
                 }
-                
-               
+
 
             });
 
