@@ -171,7 +171,6 @@ angular.module('livrio.services')
         })
         .error(function() {
             deferred.resolve(false);
-            console.log("TRATAR ERROR");
         });
         return deferred.promise;
     };
@@ -303,8 +302,6 @@ angular.module('livrio.services')
                     
                 }
                 else {
-                    console.log('NOT_HREF');
-                    console.log(notification.data.href);
                     self.markView();
                     window.location = '#/app/notification';
                 }
