@@ -39,7 +39,7 @@ angular.module("livrio.config",[
     $ionicConfigProvider.spinner.icon('android');
     $ionicConfigProvider.backButton.icon('ion-android-arrow-back');
     $ionicConfigProvider.navBar.alignTitle('left');
-    $ionicConfigProvider.scrolling.jsScrolling(false);
+    $ionicConfigProvider.scrolling.jsScrolling(!ionic.Platform.isAndroid());
 
     $httpProvider.interceptors.push(function($q, $location, $cordovaToast, $filter) {
         // var trans = $filter('translate');
