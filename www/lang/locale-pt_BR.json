@@ -36,6 +36,7 @@
         "btn_comment": "Comentários",
         "btn_lend": "Emprestar este livro",
         "btn_loan": "Pedir emprestado",
+        "btn_loaned": "Livro emprestado",
         "synopsis": "Sinopse",
         "lent": "Emprestado para",
         "loan": "Recebido de"
