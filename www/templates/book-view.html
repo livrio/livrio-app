@@ -62,7 +62,7 @@
 
 
 
-        <div class="item tabs tabs-secondary tabs-icon-left" ng-show="bookView.owner.is_friend || bookView.is_owner">
+        <div class="item tabs tabs-secondary tabs-icon-left" ng-show="(bookView.owner.is_friend || bookView.is_owner) && !bookView.loaned">
 
             <a class="tab-item request-loan" ng-show="!bookView.loaned && bookView.is_owner && bookView.owner.id==user.id" ui-sref="app.book-lend({id:bookView.id})">
             <i class="icon ion-forward"></i>
@@ -74,12 +74,16 @@
             {{'book.btn_loan' | translate }}
             </a>
 
-            <a class="tab-item request-loan" ng-show="bookView.loaned && !bookView.is_owner && book.loaned.id!=user.id">
-            {{'book.btn_loaned' | translate }}
-            </a>
+            
 
 
         </div>
+        <div class="item tabs tabs-secondary tabs-icon-left" ng-show="bookView.loaned && (!bookView.is_owner && bookView.loaned.id!=user.id)">
+            <a class="tab-item request-loan" >
+            {{'book.btn_loaned' | translate }}
+            </a>
+        </div>
+
     </div>
 
     <bookaction book="bookView" status="bookView.loaned.status" on-change-status="onChangeStatus(status)"></bookaction>
