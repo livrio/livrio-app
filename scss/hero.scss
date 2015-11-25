@@ -4,7 +4,7 @@
 
 
 .hero {
-    height: 236px;
+    height: 107px;
     background-color: #fff;
     /*box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.12), 0px 2px 2px 0px rgba(0,0,0,0.24);*/
 
@@ -13,7 +13,7 @@
     }
         
     .cover{
-        height: 125px;
+        height: 107px;
         background-size: cover;
     }
 }
@@ -21,7 +21,7 @@
 
 
 .hero > .content {
-    top: 76px;
+    top: 55px;
     position: absolute;
     text-align: center;
     width: 100%;
@@ -49,5 +49,6 @@
     color: rgba(0, 0, 0, 0.61);
     text-transform: capitalize;
     font-size: 15px;
-    margin-top: 8px;
+    margin-top: 0px;
+    font-weight: 400;
 }

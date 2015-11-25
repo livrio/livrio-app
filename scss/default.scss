@@ -97,7 +97,7 @@
 
 .platform-ios.platform-cordova:not(.fullscreen) .no-header {
     .has-header{
-        top: 236px;
+        top: 200px;
     }
 
     .back-button, .button-photo {
@@ -119,6 +119,8 @@
     left: 30px !important;
     right: inherit !important;
 }
+
+
 
 .spinner-large{
     .spinner svg {
