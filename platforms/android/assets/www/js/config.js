@@ -1,6 +1,10 @@
 "use strict";
 var DOMAIN_API = "http://api.livr.io/v1";
+<<<<<<< HEAD
 DOMAIN_API = "http://livrio.codeway.in/v1";
+=======
+// 
+>>>>>>> 9a2c72072b1d34777fb100ded5bfe8f3096e9af2
 
 angular.module("livrio.config",[
     'pascalprecht.translate'
@@ -39,7 +43,7 @@ angular.module("livrio.config",[
     $ionicConfigProvider.spinner.icon('android');
     $ionicConfigProvider.backButton.icon('ion-android-arrow-back');
     $ionicConfigProvider.navBar.alignTitle('left');
-    $ionicConfigProvider.scrolling.jsScrolling(false);
+    $ionicConfigProvider.scrolling.jsScrolling(!ionic.Platform.isAndroid());
 
     $httpProvider.interceptors.push(function($q, $location, $cordovaToast, $filter) {
         // var trans = $filter('translate');

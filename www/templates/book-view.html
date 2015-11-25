@@ -54,23 +54,28 @@
             <i class="icon ion-chatboxes"></i>
             {{'book.btn_comment' | translate }}
             </a>
+
+
         </div>
 
 
 
 
 
+        <div class="item tabs tabs-secondary tabs-icon-left" ng-show="bookView.owner.is_friend || bookView.is_owner">
 
-        <div class="item tabs tabs-secondary tabs-icon-left" ng-hide="bookView.loaned || (!bookView.owner.is_friend && !bookView.is_owner)">
-
-            <a class="tab-item request-loan" ng-hide="bookView.loaned || !bookView.is_owner" ui-sref="app.book-lend({id:bookView.id})">
+            <a class="tab-item request-loan" ng-show="!bookView.loaned && bookView.is_owner && bookView.owner.id==user.id" ui-sref="app.book-lend({id:bookView.id})">
             <i class="icon ion-forward"></i>
             {{'book.btn_lend' | translate }}
             </a>
 
-            <a class="tab-item request-loan" ng-hide="bookView.loaned || bookView.is_owner" ng-click="onRequestLoan(bookView)">
+            <a class="tab-item request-loan" ng-show="!bookView.loaned && !bookView.is_owner" ng-click="onRequestLoan(bookView)">
             <i class="icon ion-forward"></i>
             {{'book.btn_loan' | translate }}
+            </a>
+
+            <a class="tab-item request-loan" ng-show="bookView.loaned && !bookView.is_owner && book.loaned.id!=user.id">
+            {{'book.btn_loaned' | translate }}
             </a>
 
 
