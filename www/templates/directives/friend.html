@@ -6,10 +6,10 @@
     <span class="help-inline" ng-show="friend.added">{{'friend_search.request_sent' | translate}}</span>
 
 
-    <button class="button button-success button-invite-friend icon-left button-small ion-paper-airplane" ng-show="!friend.is_friend && !friend.invited && friend.is_contact" ng-click="onInvite($event, friend)">{{'friend_search.invite' | translate}}
+    <button class="button button-success button-invite-friend button-small" ng-show="!friend.is_friend && !friend.invited && friend.is_contact" ng-click="onInvite($event, friend)">{{'friend_search.invite' | translate}}
     </button>
 
-    <button class="button button-success button-small button-invite-friend icon-left ion-android-person-add" ng-show="!friend.is_friend && !friend.is_contact && !friend.added"  ng-click="onAdd($event, friend)">{{'friend_search.add' | translate}}
+    <button class="button button-success button-small button-invite-friend" ng-show="!friend.is_friend && !friend.is_contact && !friend.added"  ng-click="onAdd($event, friend)">{{'friend_search.add' | translate}}
     </button>
 
 
