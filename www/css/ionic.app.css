@@ -7908,6 +7908,8 @@ a.button {
   height: 150px;
   overflow: hidden; }
 .book-view .details {
+  display: -webkit-box;
+  display: -webkit-flex;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
