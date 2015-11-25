@@ -7942,6 +7942,8 @@ a.button {
   height: initial;
   border-color: #dcdcdc; }
   .book-card > div {
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
