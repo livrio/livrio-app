@@ -303,13 +303,9 @@ angular.module('livrio.services')
                     if (ionic.Platform.isAndroid()) {
                         cordova.plugins.market.open('io.livr.app');
                     }
-<<<<<<< HEAD
-                    else{
+                    else {
                         cordova.plugins.market.open('id1053466697');
                     }
-                    
-=======
->>>>>>> 9a2c72072b1d34777fb100ded5bfe8f3096e9af2
                 }
                 else {
                     self.markView();
