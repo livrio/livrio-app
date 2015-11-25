@@ -38,6 +38,9 @@ angular.module('livrio.services')
                 text = String.format(trans('notification.msg_system_welcome'), item.user.fullname);
                 href = "#/app/book-add";
             }
+            else if (item.type === 'system_updated') {
+                text = item.content.text ;
+            }
             else if (item.type === 'system_library_empty') {
                 text = String.format(trans('notification.msg_system_library_empty'), item.user.fullname);
                 href = "#/app/book-add";
@@ -168,7 +171,6 @@ angular.module('livrio.services')
         })
         .error(function() {
             deferred.resolve(false);
-            console.log("TRATAR ERROR");
         });
         return deferred.promise;
     };
@@ -244,31 +246,73 @@ angular.module('livrio.services')
                 token: token
             }
         };
-        $http.put(settings.URL.USER + "/" + $rootScope.user.id, post);
+        $http.put(settings.URL.USER + "/" + $rootScope.user.id, post)
+        .success(function(){
+            console.log('SAVE:SUCCESS');
+        }).error(function(){
+            console.log('SAVE:ERROR');
+        });
     };
 
+    self.register = function(save) {
 
-    self.register = function(userInfo) {
 
-        var push = PushNotification.init({
-            "android": {"senderID": "966956371758","iconColor":"#f9b000","icon":"notify"},
+        var pushObject = PushNotification.init({
+            "android": {"senderID": "966956371758","iconColor":"#f9b000","icon":"notify","forceShow":"true","clearNotifications":"false"},
             "ios": {"alert": "true", "badge": "true", "sound": "true"}
         } );
-
-        push.on('registration', function(data) {
+        
+        pushObject.on('registration', function(data) {
+            console.log(data.registrationId);
             var device = ionic.Platform.isAndroid() ? 'android' : 'ios';
-            doUpdateToken(device,data.registrationId);
-        });
-
-        push.on('notification', function(data) {
-            self.all();
-            self.markView();
-            if (!data.additionalData.foreground) {
-                window.location = '#/app/notification';
+            if (save) {
+                doUpdateToken(device,data.registrationId);
+                console.log('SAVE');
+            }
+            else {
+                console.log('SAVE:NO');
             }
 
+            var tokenPUSH = {
+                platform: device,
+                token: data.registrationId
+            };
+
+            window.localStorage.pushToken = JSON.stringify(tokenPUSH);
 
         });
+
+        if (save) {
+            pushObject.on('notification', function(data) {
+                self.all();
+                console.log(JSON.stringify(data));
+
+                if (data.additionalData && data.additionalData.href) {
+                    if (window.location.hash == data.additionalData.href) {
+                        $rootScope.$emit('book.view.refresh');
+                    }
+                    else {
+                        window.location = data.additionalData.href;
+                    }
+                }
+                else if (data.additionalData && data.additionalData.update){
+                    if (ionic.Platform.isAndroid()) {
+                        cordova.plugins.market.open('io.livr.app');
+                    }
+                    else{
+                        cordova.plugins.market.open('id1053466697');
+                    }
+                    
+                }
+                else {
+                    self.markView();
+                    window.location = '#/app/notification';
+                }
+
+
+            });
+
+        }
     };
 
     return self;

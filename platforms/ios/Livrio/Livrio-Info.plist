@@ -57,7 +57,7 @@
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>
-    <string>1.4.1</string>
+    <string>1.4.4</string>
     <key>CFBundleSignature</key>
     <string>????</string>
     <key>CFBundleURLTypes</key>
@@ -68,45 +68,9 @@
           <string>fb708951699200694</string>
         </array>
       </dict>
-      <dict>
-        <key>CFBundleURLSchemes</key>
-        <array>
-          <string>fb708951699200694</string>
-        </array>
-      </dict>
-      <dict>
-        <key>CFBundleURLSchemes</key>
-        <array>
-          <string>fb708951699200694</string>
-        </array>
-      </dict>
-      <dict>
-        <key>CFBundleURLSchemes</key>
-        <array>
-          <string>fb708951699200694</string>
-        </array>
-      </dict>
-      <dict>
-        <key>CFBundleURLSchemes</key>
-        <array>
-          <string>fb708951699200694</string>
-        </array>
-      </dict>
-      <dict>
-        <key>CFBundleURLSchemes</key>
-        <array>
-          <string>fb708951699200694</string>
-        </array>
-      </dict>
-      <dict>
-        <key>CFBundleURLSchemes</key>
-        <array>
-          <string>fb708951699200694</string>
-        </array>
-      </dict>
     </array>
     <key>CFBundleVersion</key>
-    <string>1.4.1</string>
+    <string>1.4.4</string>
     <key>FacebookAppID</key>
     <string>708951699200694</string>
     <key>FacebookDisplayName</key>
@@ -126,11 +90,11 @@
       <dict>
         <key>akamaihd.net</key>
         <dict>
-          <key>NSExceptionRequiresForwardSecrecy</key>
-          <false/>
           <key>NSIncludesSubdomains</key>
           <true/>
         </dict>
+        <key>api.facebook.com</key>
+        <dict/>
         <key>facebook.com</key>
         <dict>
           <key>NSExceptionRequiresForwardSecrecy</key>
@@ -140,11 +104,13 @@
         </dict>
         <key>fbcdn.net</key>
         <dict>
-          <key>NSExceptionRequiresForwardSecrecy</key>
-          <false/>
           <key>NSIncludesSubdomains</key>
           <true/>
         </dict>
+        <key>graph.facebook.com</key>
+        <dict/>
+        <key>m.facebook.com</key>
+        <dict/>
       </dict>
       <key>NSAllowsArbitraryLoads</key>
       <true/>
@@ -152,9 +118,13 @@
     <key>NSLocationWhenInUseUsageDescription</key>
     <string></string>
     <key>NSMainNibFile</key>
-    <string>MainViewController</string>
+    <string></string>
     <key>NSMainNibFile~ipad</key>
     <string></string>
+    <key>UIBackgroundModes</key>
+    <array>
+      <string>remote-notification</string>
+    </array>
     <key>UIInterfaceOrientation</key>
     <array>
       <string>UIInterfaceOrientationPortrait</string>

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.livr.app" version="1.4.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="io.livr.app" version="1.4.4" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <preference name="AllowInlineMediaPlayback" value="false" />
     <preference name="BackupWebStorage" value="cloud" />
     <preference name="DisallowOverscroll" value="false" />
@@ -16,6 +16,9 @@
     </feature>
     <feature name="Keyboard">
         <param name="ios-package" onload="true" value="IonicKeyboard" />
+    </feature>
+    <feature name="Market">
+        <param name="ios-package" value="CDVMarket" />
     </feature>
     <feature name="Camera">
         <param name="ios-package" value="CDVCamera" />
@@ -114,7 +117,4 @@
     <preference name="SplashScreenDelay" value="3000" />
     <hook src="hooks/after_prepare/010_add_platform_class.js" type="after_prepare" />
     <icon src="resources/android/icon/drawable-xhdpi-icon.png" />
-    <feature name="Market">
-        <param name="ios-package" value="CDVMarket" />
-    </feature>
 </widget>

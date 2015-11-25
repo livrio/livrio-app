@@ -133,7 +133,9 @@ angular.module('livrio', [
         $rootScope.user = JSON.parse(window.localStorage.user);
         $http.defaults.headers.common['Authorization'] = window.localStorage.getItem('token');
         window.location = '#/app/book';
-        USER.updateLocation();
+        document.addEventListener("deviceready", function() {
+            USER.updateLocation();
+        });
     }
     catch (e) {
         window.location = '#/login';

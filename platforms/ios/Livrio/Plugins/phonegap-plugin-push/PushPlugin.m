@@ -33,7 +33,8 @@
 @synthesize callbackId;
 @synthesize notificationCallbackId;
 @synthesize callback;
-
+@synthesize clearBadge;
+@synthesize handlerObj;
 
 - (void)unregister:(CDVInvokedUrlCommand*)command;
 {
@@ -45,6 +46,8 @@
 
 - (void)init:(CDVInvokedUrlCommand*)command;
 {
+    [self.commandDelegate runInBackground:^ {
+        
     NSLog(@"Push Plugin register called");
     self.callbackId = command.callbackId;
     
@@ -59,6 +62,7 @@
     id badgeArg = [iosOptions objectForKey:@"badge"];
     id soundArg = [iosOptions objectForKey:@"sound"];
     id alertArg = [iosOptions objectForKey:@"alert"];
+    id clearBadgeArg = [iosOptions objectForKey:@"clearBadge"];
     
     if (([badgeArg isKindOfClass:[NSString class]] && [badgeArg isEqualToString:@"true"]) || [badgeArg boolValue])
     {
@@ -88,7 +92,17 @@
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
     UserNotificationTypes |= UIUserNotificationActivationModeBackground;
 #endif
-    
+        
+        if (clearBadgeArg == nil || ([clearBadgeArg isKindOfClass:[NSString class]] && [clearBadgeArg isEqualToString:@"false"]) || ![clearBadgeArg boolValue]) {
+            NSLog(@"PushPlugin.register: setting badge to false");
+            clearBadge = NO;
+        } else {
+            NSLog(@"PushPlugin.register: setting badge to true");
+            clearBadge = YES;
+            [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+        }
+        NSLog(@"PushPlugin.register: clear badge is set to %d", clearBadge);
+        
     if (notificationTypes == UIRemoteNotificationTypeNone)
         NSLog(@"PushPlugin.register: Push notification type is set to none");
     
@@ -110,9 +124,15 @@
     
     if (notificationMessage)			// if there is a pending startup notification
         [self notificationReceived];	// go ahead and process it
+
+    }];
 }
 
 - (void)didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    if (self.callbackId == nil) {
+        NSLog(@"Unexpected call to didRegisterForRemoteNotificationsWithDeviceToken, ignoring: %@", deviceToken);
+        return;
+    }
     NSLog(@"Push Plugin register success: %@", deviceToken);
     
     NSMutableDictionary *results = [NSMutableDictionary dictionary];
@@ -176,6 +196,10 @@
 
 - (void)didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {
+    if (self.callbackId == nil) {
+        NSLog(@"Unexpected call to didFailToRegisterForRemoteNotificationsWithError, ignoring: %@", error);
+        return;
+    }
     NSLog(@"Push Plugin register failed");
     [self failWithMessage:@"" withError:error];
 }
@@ -259,6 +283,14 @@
     [self.commandDelegate sendPluginResult:commandResult callbackId:command.callbackId];
 }
 
+- (void)getApplicationIconBadgeNumber:(CDVInvokedUrlCommand *)command
+{
+    NSInteger badge = [UIApplication sharedApplication].applicationIconBadgeNumber;
+
+    CDVPluginResult *commandResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsInt:(int)badge];
+    [self.commandDelegate sendPluginResult:commandResult callbackId:command.callbackId];
+}
+
 -(void)successWithMessage:(NSString *)message
 {
     if (self.callbackId != nil)
@@ -274,6 +306,42 @@
     CDVPluginResult *commandResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:errorMessage];
     
     [self.commandDelegate sendPluginResult:commandResult callbackId:self.callbackId];
+}
+
+-(void) finish:(CDVInvokedUrlCommand*)command
+{
+    NSLog(@"Push Plugin finish called");
+
+    [self.commandDelegate runInBackground:^ {
+        UIApplication *app = [UIApplication sharedApplication];
+        float finishTimer = (app.backgroundTimeRemaining > 20.0) ? 20.0 : app.backgroundTimeRemaining;
+    
+        [NSTimer scheduledTimerWithTimeInterval:finishTimer
+                                     target:self
+                                   selector:@selector(stopBackgroundTask:)
+                                   userInfo:nil
+                                    repeats:NO];
+
+        CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }];
+}
+
+-(void)stopBackgroundTask:(NSTimer*)timer
+{
+    UIApplication *app = [UIApplication sharedApplication];
+    
+    NSLog(@"Push Plugin stopBackgroundTask called");
+    
+    if (handlerObj) {
+        NSLog(@"Push Plugin handlerObj");
+        completionHandler = [handlerObj[@"handler"] copy];
+        if (completionHandler) {
+            NSLog(@"Push Plugin: stopBackgroundTask (remaining t: %f)", app.backgroundTimeRemaining);
+            completionHandler(UIBackgroundFetchResultNewData);
+            completionHandler = nil;
+        }
+    }
 }
 
 @end

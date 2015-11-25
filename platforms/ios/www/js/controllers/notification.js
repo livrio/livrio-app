@@ -59,24 +59,12 @@ angular.module('livrio.controllers')
 
     $scope.onAction = function(item) {
         PUSH.markRead(item);
-        /*
-        if (item.type == 'request_friend') {
-            $ionicPopup.confirm({
-                title: trans('notification.question_friend_title'),
-                cancelText: trans('notification.question_friend_no'),
-                okText: trans('notification.question_friend_yes'),
-                template: String.format(trans('notification.question_friend_msg'), item.created_by.fullname)
-            })
-            .then(function(res) {
-                 if (res) {
-                     FRIEND.confirm(item, 'yes');
-                 }
-                 else {
-                     FRIEND.confirm(item, 'no');
-                 }
-             });
+
+        if (item.type == 'system_update') {
+            if (ionic.Platform.isAndroid()) {
+                cordova.plugins.market.open('io.livr.app');
+            }
         }
-        */
     }
 
 });

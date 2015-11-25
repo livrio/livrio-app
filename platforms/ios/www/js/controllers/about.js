@@ -7,5 +7,5 @@ angular.module('livrio.controllers')
     };
 
 
-    $scope.versionName = ionic.Platform.isAndroid() ? 'Android' : 'iPhone';
+    $scope.versionName = ionic.Platform.isAndroid() ? 'Android' : 'iOS';
 });

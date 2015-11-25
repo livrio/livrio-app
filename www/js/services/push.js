@@ -299,6 +299,9 @@ angular.module('livrio.services')
                     if (ionic.Platform.isAndroid()) {
                         cordova.plugins.market.open('io.livr.app');
                     }
+                    else{
+                        cordova.plugins.market.open('id1053466697');
+                    }
                     
                 }
                 else {

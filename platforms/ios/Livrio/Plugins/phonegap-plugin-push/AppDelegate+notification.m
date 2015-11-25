@@ -62,23 +62,56 @@ static char launchNotificationKey;
     [pushHandler didFailToRegisterForRemoteNotificationsWithError:error];
 }
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    NSLog(@"didReceiveNotification");
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    NSLog(@"didReceiveNotification with fetchCompletionHandler");
 
-    // Get application state for iOS4.x+ devices, otherwise assume active
-    UIApplicationState appState = UIApplicationStateActive;
-    if ([application respondsToSelector:@selector(applicationState)]) {
-        appState = application.applicationState;
-    }
-
-    if (appState == UIApplicationStateActive) {
+    // app is in the foreground so call notification callback
+    if (application.applicationState == UIApplicationStateActive) {
+        NSLog(@"app active");
         PushPlugin *pushHandler = [self getCommandInstance:@"PushNotification"];
         pushHandler.notificationMessage = userInfo;
         pushHandler.isInline = YES;
         [pushHandler notificationReceived];
-    } else {
-        //save it for later
-        self.launchNotification = userInfo;
+        
+        completionHandler(UIBackgroundFetchResultNewData);
+    }
+    // app is in background or in stand by
+    else {
+        NSLog(@"app in-active");
+        
+        // do some convoluted logic to find out if this should be a silent push.
+        long silent = 0;
+        id aps = [userInfo objectForKey:@"aps"];
+        id contentAvailable = [aps objectForKey:@"content-available"];
+        if ([contentAvailable isKindOfClass:[NSString class]] && [contentAvailable isEqualToString:@"1"]) {
+            silent = 1;
+        } else if ([contentAvailable isKindOfClass:[NSNumber class]]) {
+            silent = [contentAvailable integerValue];
+        }
+        
+        if (silent == 1) {
+            NSLog(@"this should be a silent push");
+            void (^safeHandler)(UIBackgroundFetchResult) = ^(UIBackgroundFetchResult result){
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completionHandler(result);
+                });
+            };
+            
+            NSMutableDictionary* params = [NSMutableDictionary dictionaryWithCapacity:2];
+            [params setObject:safeHandler forKey:@"handler"];
+            
+            PushPlugin *pushHandler = [self getCommandInstance:@"PushNotification"];
+            pushHandler.notificationMessage = userInfo;
+            pushHandler.isInline = NO;
+            pushHandler.handlerObj = params;
+            [pushHandler notificationReceived];
+        } else {
+            NSLog(@"just put it in the shade");
+            //save it for later
+            self.launchNotification = userInfo;
+            
+            completionHandler(UIBackgroundFetchResultNewData);
+        }
     }
 }
 
@@ -86,22 +119,21 @@ static char launchNotificationKey;
 
     NSLog(@"active");
 
-    //zero badge
-    application.applicationIconBadgeNumber = 0;
+    PushPlugin *pushHandler = [self getCommandInstance:@"PushNotification"];
+    if (pushHandler.clearBadge) {
+        NSLog(@"PushPlugin clearing badge");
+        //zero badge
+        application.applicationIconBadgeNumber = 0;        
+    } else {
+        NSLog(@"PushPlugin skip clear badge");
+    }
 
     if (self.launchNotification) {
-        PushPlugin *pushHandler = [self getCommandInstance:@"PushNotification"];
         pushHandler.isInline = NO;
         pushHandler.notificationMessage = self.launchNotification;
         self.launchNotification = nil;
         [pushHandler performSelectorOnMainThread:@selector(notificationReceived) withObject:pushHandler waitUntilDone:NO];
     }
-}
-
-- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
-{
-    //register to receive notifications
-    [application registerForRemoteNotifications];
 }
 
 //For interactive notification only
