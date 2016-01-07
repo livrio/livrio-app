@@ -115,6 +115,15 @@ angular.module('livrio.services')
             else if (item.type === 'request_friend') {
                 text = String.format(trans('notification.msg_request_friend'), item.created_by.fullname);
 
+                if (item.content && item.content.response) {
+                    if (item.content.response == 'no') {
+                        text = text + ' &horbar; recusado!'
+                    }
+                    else if (item.content.response == 'yes') {
+                        text = text + ' &horbar; aceito!'
+                    }
+                }
+
                 href = "#/app/friend-profile/" + item.created_by.id;
             }
 
