@@ -143,8 +143,6 @@ angular.module('livrio.services',[])
                     response.data.update = true;
                     $cordovaToast.showLongBottom(trans('book_form.toast_update'));
                 }
-                $rootScope.$emit('book.refresh');
-                $rootScope.$emit('book_shelf.refresh');
                 deferred.resolve(response.data);
             }
             else {
@@ -457,9 +455,9 @@ angular.module('livrio.services',[])
 
         options.push({ text: "<i class=\"icon ion-android-bookmark\"></i> " + trans('book.sheet_shelfs') });
 
-        if (!book.is_ref) {
-            options.push({ text: "<i class=\"icon ion-edit\"></i> " + trans('book.sheet_update') });
-        }
+
+        options.push({ text: "<i class=\"icon ion-edit\"></i> " + trans('book.sheet_update') });
+        
 
         $ionicActionSheet.show({
             buttons: options,

@@ -12,6 +12,7 @@ angular.module("livrio.directives",[])
             $scope.user = $rootScope.user;
 
             $scope.onActionBook = function(event, item) {
+                $rootScope.tmp_book_update = item;
                 BOOK.menuAction(event, item);
             };
         },

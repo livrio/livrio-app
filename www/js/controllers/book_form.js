@@ -29,6 +29,7 @@ angular.module("livrio.controllers")
     $scope.doSave = function(form) {
         if (form.$valid) {
             var post = {
+                id: id || false,
                 isbn: $scope.form.isbn,
                 title: $scope.form.title,
                 author: $scope.form.author,
@@ -44,7 +45,8 @@ angular.module("livrio.controllers")
                     $rootScope.$emit("book.add",book);
                 }
                 else {
-
+                    $rootScope.$emit("book.refresh");
+                    window.location = '#/app/book';
                 }
             },
             function(o) {

@@ -7978,12 +7978,13 @@ a.button {
     left: 0px;
     background-color: #fff;
     border: 1px solid #CCC; }
-    .book-card .image-loader-container .spinner svg {
+    .book-card .image-loader-container > img.loader {
       position: absolute;
       top: 50%;
       left: 50%;
-      margin-left: -14px;
-      margin-top: -14px; }
+      margin-left: -20px;
+      margin-top: -20px;
+      width: 40px; }
   .book-card .content {
     padding-left: 10px;
     padding-top: 10px;

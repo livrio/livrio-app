@@ -21,6 +21,7 @@ angular.module("livrio.controllers")
     $scope.onClose = function() {
         $scope.modalPermission.hide();
         $rootScope.$emit("book.refresh");
+        $rootScope.$emit('book_shelf.refresh');
         window.location = '#/app/book';
     };
 
