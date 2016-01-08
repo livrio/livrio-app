@@ -7857,6 +7857,13 @@ a.button {
   text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.67); }
   .no-header .back-button i:before {
     font-size: 33px; }
+.no-header .button-action {
+  position: absolute;
+  right: 0;
+  color: #fff;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.67); }
+  .no-header .button-action i:before {
+    font-size: 33px; }
 .no-header .notice-library-empty {
   position: inherit; }
 

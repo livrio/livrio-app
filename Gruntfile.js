@@ -1,5 +1,8 @@
 module.exports = function(grunt) {
 
+// Load the plugin that provides the "uglify" task.
+  grunt.loadNpmTasks('grunt-angular-translate');
+  
   // Project configuration.
   grunt.initConfig({
     i18nextract: {
@@ -18,8 +21,7 @@ module.exports = function(grunt) {
     },
   });
 
-  // Load the plugin that provides the "uglify" task.
-  grunt.loadNpmTasks('grunt-angular-translate');
+  
 
   // Default task(s).
   grunt.registerTask('default', ['i18nextract']);

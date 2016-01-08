@@ -90,6 +90,16 @@
         }
     }
 
+    .button-action {
+        position: absolute;
+        right: 0;
+        color: #fff;
+        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.67);
+        i:before{
+            font-size: 33px;
+        }
+    }
+
     .notice-library-empty {
         position: inherit;
     }

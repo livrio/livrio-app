@@ -1,11 +1,11 @@
 {
     "app": {
         "backbutton": "Pressione o botão voltar para sair",
-        "offline": "Você precisa estar conectado a internet. Por favor verifique sua conexão",
         "welcome": "Olá <strong>{0}</strong>, seja bem vindo ao <strong>Livrio.</strong> Por aqui, a gente compartilha livros com quem também ama livros. Eu vou te ajudar a cadastrar os seus livros e libertá-los para o mundo.",
+        "offline": "Você precisa estar conectado a internet. Por favor verifique sua conexão",
+        "refresh": "Atualizar",
         "loading": "Carregando",
         "searching": "Pesquisando",
-        "refresh": "Atualizar",
         "required_field": "é obrigatório",
         "name": "Livrio"
     },
@@ -144,20 +144,19 @@
         "info_facebook": "Para ter acesso aos livros incríveis que estão parados nas estantes deles, encontre-os por aqui.",
         "empty_list": "Você não tem amigos cadastrados<p>Clique no <i class=\"ion ion-android-person-add\"></i> para convidar seus amigos.</p><img src=\"img/bored.svg\" />",
         "book": "Livros",
-        "title": "Meus amigos",
-        "btn_facebook": "Conectar ao Facebook"
+        "title": "Meus amigos"
     },
     "friend_invite": {
         "invite_msg": "Oi, agora todos os meus livros estão disponíveis no Livrio e você pode pedir emprestado a hora que quiser.",
         "invite_subject": "Vem ver",
         "invite_link": "http://livr.io/get",
+        "info_title": "Olá {0}, convide seus amigos!!",
         "toast_share_whatsapp": "Convite enviado!",
         "toast_share_error": "Ops, tente mais tarde!",
         "toast_share_facebook": "Recomendação enviada!",
         "toast_share": "Compartilhado!",
         "title": "Convidar amigos",
         "loading": "Enviando",
-        "info_title": "Olá {0}, convide seus amigos!!",
         "info_text": "Quanto mais amigos você tiver, mais livros você terá acesso.",
         "btn_search": "Procurar amigos",
         "btn_facebook": "Recomendar no Facebook",
@@ -165,7 +164,14 @@
         "btn_share": "Compartilhar"
     },
     "friend_profile": {
-        "empty_list_book": "Nenhum livro encontrado<p>Seu amigo ainda não cadastrou nenhum livro.</p><img src=\"img/bored.svg\" />"
+        "empty_list_book": "Nenhum livro encontrado<p>Seu amigo ainda não cadastrou nenhum livro.</p><img src=\"img/bored.svg\" />",
+        "question_delete": "Defazer amizade",
+        "question_delete_no": "Cancelar",
+        "question_delete_yes": "Defazer",
+        "question_text": "Você não poderá mais solicitar empréstimos! Deseja continuar?",
+        "toast_remove_friend": "Amizade desfeita!",
+        "sheet_remove": "Defazer amizade",
+        "sheet_cancel": "Cancelar"
     },
     "login": {
         "loading_login": "Entrando",
@@ -207,10 +213,6 @@
         "time_yesterday": "Ontem",
         "time_days": "há {0} dias",
         "time_week": "há {0} semanas",
-        "question_friend_title": "Solicitação de amizade",
-        "question_friend_no": "Recusar",
-        "question_friend_yes": "Aceitar",
-        "question_friend_msg": "Você deseja se conectar com <strong>{0}</strong>",
         "msg_system_first_book": "Parabéns <span>{0}</span>! Você cadastrou seu primeiro livro. Que tal agora convidar seus amigos?",
         "msg_system_welcome": "Olá <span>{0}</span>, seja bem vindo ao <strong>Livrio.</strong> Por aqui, a gente compartilha livros com quem também ama livros. Eu vou te ajudar a cadastrar os seus livros e libertá-los para o mundo.",
         "msg_system_library_empty": "<span>{0}</span> você ainda não cadastrou nenhum livro. Cadastre e compartilhe com seus amigos!",
