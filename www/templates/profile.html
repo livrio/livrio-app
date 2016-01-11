@@ -68,17 +68,32 @@
                 <span class="input-label">{{'profile.field_email' | translate}}</span>
                 <input type="email"  name="email" ng-model="form.email" ng-blur="onChangeField(formUpdate.email)" required>
             </label>
+            <div class="form-errors" ng-messages="formUpdate.email.$error" ng-show="formUpdate.$submitted">
+                <div class="form-error" ng-message="required">{{'profile.field_email' | translate}} {{'app.required_field' | translate}}</div>
+            </div>
 
             <label class="item item-input item-stacked-label item-text-wrap" ng-class="{ 'has-error' : formUpdate.phone.$invalid && formUpdate.$submitted}">
                 <span class="input-label">{{'profile.field_phone' | translate}}</span>
                 <input type="text"  name="phone" ng-model="form.phone" ng-blur="onChangeField(formUpdate.phone)" placeholder="{{'profile.placeholder_phone' | translate}}">
                 <small>{{'profile.info_phone' | translate}}</small>
             </label>
-            
 
-            <div class="form-errors" ng-messages="formUpdate.email.$error" ng-show="formUpdate.$submitted">
-                <div class="form-error" ng-message="required">{{'profile.field_email' | translate}} {{'app.required_field' | translate}}</div>
-            </div>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">{{'profile.field_state' | translate}}</span>
+                <select ng-blur="onChangeField(formUpdate.state)" name="state" ng-model="form.state">
+                    <option value="SC" >Santa Catarina
+                </select>
+            </label>
+
+            <label class="item item-input item-stacked-label item-text-wrap">
+                <span class="input-label">{{'profile.field_city' | translate}}</span>
+                <input type="text"  name="city" ng-model="form.city" ng-blur="onChangeField(formUpdate.city)" placeholder="{{'profile.placeholder_city' | translate}}">
+                <small>{{'profile.info_city' | translate}}</small>
+            </label>
+
+
+
+            
 
 
         </div>

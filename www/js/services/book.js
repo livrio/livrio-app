@@ -6,7 +6,7 @@ angular.module('livrio.services',[])
     var trans = $filter('translate');
 
     self.isISBN = function(str) {
-
+        str = str + ""
         var sum,
             weight,
             digit,
@@ -51,6 +51,7 @@ angular.module('livrio.services',[])
 
 
     self.getByISBN = function(isbn) {
+        isbn = isbn + ""
         var deferred = $q.defer();
         isbn = isbn.replace(/[^0-9X]/gi, '');
         var url = settings.URL.ISBN + "/" + isbn;
@@ -121,7 +122,7 @@ angular.module('livrio.services',[])
     };
 
 
-    self.save = function(data) {
+    self.save = function(data, hide_toast) {
         var deferred = $q.defer();
 
         var action = data.id ? 'put' : 'post';
@@ -136,12 +137,16 @@ angular.module('livrio.services',[])
                 response.data.author = autor(response.data.author);
                 if (action == 'post') {
                     response.data.create = true;
-                    $cordovaToast.showLongBottom(trans('book_form.toast_create'));
+                    if (!hide_toast) {
+                        $cordovaToast.showLongBottom(trans('book_form.toast_create'));
+                    }
                     USER.updateAmountBook();
                 }
                 else {
                     response.data.update = true;
-                    $cordovaToast.showLongBottom(trans('book_form.toast_update'));
+                    if (!hide_toast) {
+                        $cordovaToast.showLongBottom(trans('book_form.toast_update'));
+                    }
                 }
                 deferred.resolve(response.data);
             }

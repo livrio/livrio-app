@@ -1,7 +1,7 @@
 
 angular.module("livrio.controllers")
 
-.controller("book_add_ctrl", function($scope, $rootScope, $ionicModal, $ionicPopup, $timeout, $filter, $ionicScrollDelegate, BOOK) {
+.controller("book_add_ctrl", function($scope, $rootScope, $ionicModal, $ionicPopup, $timeout, $filter, $ionicScrollDelegate, $cordovaToast, BOOK) {
 
     var trans = $filter('translate');
 
@@ -102,6 +102,7 @@ angular.module("livrio.controllers")
     $scope.empty_search = trans('book_add.empty_search');
 
     $scope.onSearch = function(input) {
+        console.log(input)
         if (input.length < 3) {
             if (filterTextTimeout) {
                 $timeout.cancel(filterTextTimeout);
@@ -139,11 +140,13 @@ angular.module("livrio.controllers")
 
 
     $scope.onAdd = function(item) {
+        item.added = true;
+        $cordovaToast.showLongBottom(trans('book_form.toast_create'));
         BOOK.save({
             ref: item.id
-        })
+        }, true)
         .then(function() {
-            item.added = true;
+            
         });
     }
 });

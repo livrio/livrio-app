@@ -7882,6 +7882,21 @@ a.button {
   width: 80px;
   height: 80px; }
 
+.item-stacked-label select {
+  display: block;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #dbdbdb;
+  color: #000;
+  padding-top: 2px;
+  padding-left: 0;
+  height: 34px;
+  vertical-align: middle;
+  line-height: 16px;
+  width: 100%;
+  font-weight: 500;
+  font-size: 16px; }
+
 .book-view .btn-more {
   position: absolute;
   top: 16px;
@@ -8768,3 +8783,6 @@ label.item.valid-lr {
   text-align: center;
   display: block;
   margin-top: 7px; }
+
+.help dt {
+  font-size: 14px; }

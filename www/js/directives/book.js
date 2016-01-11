@@ -326,11 +326,11 @@ angular.module("livrio.directives",[])
                 if (!book) {
                     return;
                 }
-                $scope.show = book.loaned && book.loaned.id == $rootScope.user.id;
                 var user = $rootScope.user;
                 var loaned = book.loaned;
 
                 if (!book.is_owner) {
+                    $scope.show = book.loaned && book.loaned.id == $rootScope.user.id;
                     var owner = book.owner;
                     $scope.photo = owner.photo;
                     $scope.fullname = owner.fullname;
@@ -339,6 +339,7 @@ angular.module("livrio.directives",[])
 
                 }
                 else {
+                    $scope.show = book.loaned && book.owner.id == $rootScope.user.id;
                     $scope.photo = loaned.photo;
                     $scope.fullname = loaned.fullname;
                     $scope.user_id = loaned.id;

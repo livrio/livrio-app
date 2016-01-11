@@ -8,8 +8,8 @@ angular.module('livrio.services')
     self.all = function(params) {
         params = params || {};
 
-        params.sort = 'name';
-        params.order = 'asc';
+        params.sort = params.sort || 'name';
+        params.order = params.order || 'asc';
         var deferred = $q.defer();
         $http.get(settings.URL.FRIEND, {
             params: params
@@ -170,11 +170,11 @@ angular.module('livrio.services')
                         $ionicHistory.nextViewOptions({
                             disableBack: true
                         });
-                        $state.go('app.friend');
+                        $state.go('app.book');
                     }
                 });
 
-                                    
+
             }
         });
     };
@@ -190,6 +190,7 @@ angular.module('livrio.services')
         options.push({ text: "<i class=\"icon ion-close\"></i> " + trans('friend_profile.sheet_remove') });
 
         $ionicActionSheet.show({
+            titleText: friend.fullname,
             buttons: options,
 
             cancelText: trans('friend_profile.sheet_cancel'),

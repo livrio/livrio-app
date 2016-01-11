@@ -8,6 +8,11 @@
                     {{'config.allow_search_by_email' | translate}}
                     <p>{{'config.help_allow_search_by_email' | translate}}</p>
                 </ion-toggle>
+
+                <ion-toggle class="item-text-wrap" ng-model="config.allowLocation" toggle-class="toggle-calm" ng-change="onChangeField()">
+                    {{'config.allow_location' | translate}}
+                    <p>{{'config.help_allow_location' | translate}}</p>
+                </ion-toggle>
                 
                 <ion-toggle class="item-text-wrap" ng-model="config.allowNotificationPush" toggle-class="toggle-calm" ng-change="onChangeField()">
                     {{'config.allow_notification_push' | translate}}

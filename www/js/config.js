@@ -1,6 +1,6 @@
 "use strict";
 var DOMAIN_API = "http://api.livr.io/v1";
-DOMAIN_API = "http://livrio.codeway.in/v1";
+// DOMAIN_API = "http://livrio.codeway.in/v1";
 
 angular.module("livrio.config",[
     'pascalprecht.translate'
@@ -18,6 +18,7 @@ angular.module("livrio.config",[
         FRIEND: DOMAIN_API + "/friend",
         CONTACT: DOMAIN_API + "/contact",
         SHELF: DOMAIN_API + "/shelf",
+        QUESTION: DOMAIN_API + "/question",
         NOTIFICATION: DOMAIN_API + "/notification"
     }
 })
@@ -48,7 +49,6 @@ angular.module("livrio.config",[
         }
         return {
             responseError: function(response) {
-                console.log(response);
                 if (response.status === 401 || response.status === 403) {
                     $location.path("/login");
                     window.localStorage.clear();
@@ -109,6 +109,16 @@ angular.module("livrio.config",[
             "menuContent": {
                 templateUrl: "templates/about.html",
                 controller: "about_ctrl"
+            }
+        }
+    })
+
+    .state("app.help", {
+        url: "/help",
+        views: {
+            "menuContent": {
+                templateUrl: "templates/help.html",
+                controller: "help_ctrl"
             }
         }
     })
