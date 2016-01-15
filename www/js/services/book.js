@@ -453,8 +453,8 @@ angular.module('livrio.services',[])
         return deferred.promise;
     };
 
-    self.menuAction = function(event, book) {
-        event.stopPropagation();
+    self.menuAction = function(book) {
+
 
         var options = [];
 

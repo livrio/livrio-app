@@ -13,6 +13,10 @@ angular.module("livrio.controllers")
     };
 
     $rootScope.$on("modal.terms",function() {
+        $http.get(settings.URL.TERMS)
+        .success(function(response) {
+            $scope.terms_content = response.data;
+        });
         $scope.modalTerms.show();
     });
 

@@ -3,8 +3,6 @@
 <button ng-click="closeModal()" class="button back-button buttons  button-clear header-item"><i class="icon ion-android-arrow-back"></i> <span class="back-text"></span></button>
 <h1 class="title">{{question_selected.question}}</h1>
 </ion-header-bar>
-<ion-content class="padding">
-
-{{question_selected.response}}
+<ion-content class="padding" ng-bind-html="question_selected.response">
 </ion-content>
 </ion-modal-view>

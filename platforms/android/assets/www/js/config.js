@@ -19,6 +19,7 @@ angular.module("livrio.config",[
         CONTACT: DOMAIN_API + "/contact",
         SHELF: DOMAIN_API + "/shelf",
         QUESTION: DOMAIN_API + "/question",
+        TERMS: DOMAIN_API + "/terms",
         NOTIFICATION: DOMAIN_API + "/notification"
     }
 })
@@ -40,7 +41,9 @@ angular.module("livrio.config",[
     $ionicConfigProvider.spinner.icon('android');
     $ionicConfigProvider.backButton.icon('ion-android-arrow-back');
     $ionicConfigProvider.navBar.alignTitle('left');
-    $ionicConfigProvider.scrolling.jsScrolling(!ionic.Platform.isAndroid());
+
+    var v = parseInt(ionic.Platform.version(),10);
+    $ionicConfigProvider.scrolling.jsScrolling(ionic.Platform.isAndroid() && v <= 4 || (!ionic.Platform.isAndroid()));
 
     $httpProvider.interceptors.push(function($q, $location, $cordovaToast, $filter) {
         // var trans = $filter('translate');
