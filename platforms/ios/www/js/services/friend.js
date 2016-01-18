@@ -1,5 +1,5 @@
 angular.module('livrio.services')
-.factory('FRIEND', ['$http', '$q',  '$cordovaToast', '$filter', '$ionicModal','settings', function($http, $q, $cordovaToast, $filter, $ionicModal, settings) {
+.factory('FRIEND', ['$rootScope','$http', '$q',  '$cordovaToast', '$filter', '$ionicModal', '$ionicActionSheet', '$ionicPopup', '$state', '$ionicHistory', 'settings', function($rootScope, $http, $q, $cordovaToast, $filter, $ionicModal, $ionicActionSheet, $ionicPopup, $state, $ionicHistory, settings) {
 
     var self = this;
 
@@ -8,8 +8,8 @@ angular.module('livrio.services')
     self.all = function(params) {
         params = params || {};
 
-        params.sort = 'name';
-        params.order = 'asc';
+        params.sort = params.sort || 'name';
+        params.order = params.order || 'asc';
         var deferred = $q.defer();
         $http.get(settings.URL.FRIEND, {
             params: params
@@ -150,6 +150,57 @@ angular.module('livrio.services')
             animation: 'slide-in-up'
         }).then(function(modal) {
             modal.show();
+        });
+    };
+
+    self.removeFriend = function(item) {
+        $ionicPopup.confirm({
+            title: trans('friend_profile.question_delete'),
+            cancelText: trans('friend_profile.question_delete_no'),
+            okText: trans('friend_profile.question_delete_yes'),
+            template: trans('friend_profile.question_text')
+        }).then(function(res) {
+            if (res) {
+
+                $http.post(settings.URL.FRIEND + "/" + item.id + "/remove")
+                .success(function(response) {
+                    if (!response.errors) {
+                        $cordovaToast.showLongBottom(trans('friend_profile.toast_remove_friend'));
+                        $rootScope.$emit("friend.refresh");
+                        $ionicHistory.nextViewOptions({
+                            disableBack: true
+                        });
+                        $state.go('app.book');
+                    }
+                });
+
+
+            }
+        });
+    };
+
+
+
+
+    self.menuAction = function(event, friend) {
+        event.stopPropagation();
+
+        var options = [];
+
+        options.push({ text: "<i class=\"icon ion-close\"></i> " + trans('friend_profile.sheet_remove') });
+
+        $ionicActionSheet.show({
+            titleText: friend.fullname,
+            buttons: options,
+
+            cancelText: trans('friend_profile.sheet_cancel'),
+            buttonClicked: function(index) {
+                if (index == 0) {
+                    self.removeFriend(friend);
+
+                }
+                return true;
+            }
         });
     };
 

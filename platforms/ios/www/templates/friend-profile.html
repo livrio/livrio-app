@@ -4,6 +4,9 @@
                 <button ng-click="$ionicGoBack()" class="button back-button buttons   button-clear header-item">
                     <i class="icon ion-android-arrow-back"></i>
                 </button>
+                <button  ng-click="onAction($event)" ng-show="friend.is_friend" class="button button-action buttons   button-clear header-item">
+                    <i class="icon ion-android-more-vertical"></i>
+                </button>
                 <div class="cover" ng-style="cover">
 
                 </div>
@@ -14,11 +17,14 @@
                     </div>
                     <h3>{{friend.fullname}}</h3>
                     <h4>livros {{friend.amount_book}}</h4>
+                    <h4 ng-show="friend.city && friend.state">{{friend.city}}/{{friend.state}}</h4>
                 </div>
 
 
                 
             </div>
+
+
    </ion-nav-bar>
     
   <ion-content class="bg-color friend-profile-view" scroll="false" ng-class="{'has-invite':friend.invited}" >

@@ -146,7 +146,7 @@ angular.module("livrio.controllers")
             ref: item.id
         }, true)
         .then(function() {
-            
+            $rootScope.$emit("book.refresh");
         });
     }
 });

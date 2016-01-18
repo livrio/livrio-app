@@ -20,6 +20,12 @@ angular.module('livrio.controllers')
         $scope.modalPermission.hide();
     };
 
+    $scope.onRefreshContact = function(){
+        delete window.localStorage.syncContact;
+        $scope.modalPermission.show();
+
+    };
+
     $scope.onReadContact = function() {
         $scope.readingContact = true;
         USER.updateContacts().then(function() {
