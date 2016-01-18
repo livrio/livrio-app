@@ -325,7 +325,7 @@ angular.module("livrio.directives",[])
                 if (!book) {
                     return;
                 }
-                $scope.show = book.loaned;
+                $scope.show = book.loaned && book.loaned.id == $rootScope.user.id;
                 var user = $rootScope.user;
                 var loaned = book.loaned;
 

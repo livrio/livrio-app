@@ -1,6 +1,6 @@
 "use strict";
 var DOMAIN_API = "http://api.livr.io/v1";
-
+// 
 
 angular.module("livrio.config",[
     'pascalprecht.translate'

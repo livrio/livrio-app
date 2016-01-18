@@ -247,9 +247,9 @@ angular.module('livrio.services')
             }
         };
         $http.put(settings.URL.USER + "/" + $rootScope.user.id, post)
-        .success(function(){
+        .success(function() {
             console.log('SAVE:SUCCESS');
-        }).error(function(){
+        }).error(function() {
             console.log('SAVE:ERROR');
         });
     };
@@ -261,7 +261,7 @@ angular.module('livrio.services')
             "android": {"senderID": "966956371758","iconColor":"#f9b000","icon":"notify","forceShow":"true","clearNotifications":"false"},
             "ios": {"alert": "true", "badge": "true", "sound": "true"}
         } );
-        
+
         pushObject.on('registration', function(data) {
             console.log(data.registrationId);
             var device = ionic.Platform.isAndroid() ? 'android' : 'ios';
@@ -287,6 +287,10 @@ angular.module('livrio.services')
                 self.all();
                 console.log(JSON.stringify(data));
 
+                if (!ionic.Platform.isAndroid()) {
+                    pushObject.finish();
+                }
+
                 if (data.additionalData && data.additionalData.href) {
                     if (window.location.hash == data.additionalData.href) {
                         $rootScope.$emit('book.view.refresh');
@@ -295,19 +299,20 @@ angular.module('livrio.services')
                         window.location = data.additionalData.href;
                     }
                 }
-                else if (data.additionalData && data.additionalData.update){
+                else if (data.additionalData && data.additionalData.update) {
                     if (ionic.Platform.isAndroid()) {
                         cordova.plugins.market.open('io.livr.app');
                     }
-                    else{
+                    else {
                         cordova.plugins.market.open('id1053466697');
                     }
-                    
                 }
                 else {
                     self.markView();
                     window.location = '#/app/notification';
                 }
+
+
 
 
             });
