@@ -7755,17 +7755,17 @@ a.button {
 /* Hero
 ==================================*/
 .hero {
-  height: 236px;
+  height: 107px;
   background-color: #fff;
   /*box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.12), 0px 2px 2px 0px rgba(0,0,0,0.24);*/ }
   .hero.border-bottom {
     border-bottom: 2px solid rgba(0, 0, 0, 0.24); }
   .hero .cover {
-    height: 125px;
+    height: 107px;
     background-size: cover; }
 
 .hero > .content {
-  top: 76px;
+  top: 55px;
   position: absolute;
   text-align: center;
   width: 100%;
@@ -7792,7 +7792,8 @@ a.button {
   color: rgba(0, 0, 0, 0.61);
   text-transform: capitalize;
   font-size: 15px;
-  margin-top: 8px; }
+  margin-top: 0px;
+  font-weight: 400; }
 
 .tabs-secondary a {
   color: #080C15;
@@ -7856,11 +7857,18 @@ a.button {
   text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.67); }
   .no-header .back-button i:before {
     font-size: 33px; }
+.no-header .button-action {
+  position: absolute;
+  right: 0;
+  color: #fff;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.67); }
+  .no-header .button-action i:before {
+    font-size: 33px; }
 .no-header .notice-library-empty {
   position: inherit; }
 
 .platform-ios.platform-cordova:not(.fullscreen) .no-header .has-header {
-  top: 236px; }
+  top: 200px; }
 .platform-ios.platform-cordova:not(.fullscreen) .no-header .back-button, .platform-ios.platform-cordova:not(.fullscreen) .no-header .button-photo {
   margin-top: 20px; }
 .platform-ios.platform-cordova:not(.fullscreen) .no-header .hero .cover {
@@ -7873,6 +7881,21 @@ a.button {
 .spinner-large .spinner svg {
   width: 80px;
   height: 80px; }
+
+.item-stacked-label select {
+  display: block;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #dbdbdb;
+  color: #000;
+  padding-top: 2px;
+  padding-left: 0;
+  height: 34px;
+  vertical-align: middle;
+  line-height: 16px;
+  width: 100%;
+  font-weight: 500;
+  font-size: 16px; }
 
 .book-view .btn-more {
   position: absolute;
@@ -7908,6 +7931,8 @@ a.button {
   height: 150px;
   overflow: hidden; }
 .book-view .details {
+  display: -webkit-box;
+  display: -webkit-flex;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -7942,6 +7967,8 @@ a.button {
   height: initial;
   border-color: #dcdcdc; }
   .book-card > div {
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -7973,12 +8000,13 @@ a.button {
     left: 0px;
     background-color: #fff;
     border: 1px solid #CCC; }
-    .book-card .image-loader-container .spinner svg {
+    .book-card .image-loader-container > img.loader {
       position: absolute;
       top: 50%;
       left: 50%;
-      margin-left: -14px;
-      margin-top: -14px; }
+      margin-left: -20px;
+      margin-top: -20px;
+      width: 40px; }
   .book-card .content {
     padding-left: 10px;
     padding-top: 10px;
@@ -8455,7 +8483,7 @@ ul.rating li i {
   color: #333;
   font-weight: 500; }
 .profile-view .hero h3 {
-  margin-bottom: 10px; }
+  margin-bottom: 0px; }
   .profile-view .hero h3 .light {
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.58); }
 
@@ -8755,3 +8783,6 @@ label.item.valid-lr {
   text-align: center;
   display: block;
   margin-top: 7px; }
+
+.help dt {
+  font-size: 14px; }

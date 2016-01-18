@@ -19,7 +19,12 @@
 
   <ion-content class="book-form">
 
-            <div class="list">
+        <div class="wait-message spinner-large " ng-show="searching">
+            <ion-spinner class="spinner-energized "></ion-spinner>
+            <span>{{'app.searching' | translate}}</span>
+        </div>
+
+            <div class="list" ng-hide="searching">
 
 
 
@@ -30,7 +35,7 @@
                     <input ng-blur="doScan(formLibrary.isbn)"  type="text"  name="isbn" ng-model="form.isbn" ng-readonly="form.id" required>
                 </div>
                 <div class="form-errors" ng-messages="formLibrary.isbn.$error" ng-show="formLibrary.$submitted">
-                  <div class="form-error" ng-message="required">{{'book_form.field_isbn' | translate}} {{'required_field' | translate}}</div>
+                  <div class="form-error" ng-message="required">{{'book_form.field_isbn' | translate}} {{'app.required_field' | translate}}</div>
                 </div>
 
 
@@ -42,7 +47,7 @@
                     <input type="text"  name="title" ng-model="form.title" required>
                 </label>
                 <div class="form-errors" ng-messages="formLibrary.title.$error" ng-show="formLibrary.$submitted">
-                    <div class="form-error" ng-message="required">{{'book_form.field_title' | translate}} {{'required_field' | translate}}</div>
+                    <div class="form-error" ng-message="required">{{'book_form.field_title' | translate}} {{'app.required_field' | translate}}</div>
                 </div>
 
                 <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formLibrary.author.$invalid && formLibrary.$submitted}">
@@ -50,7 +55,7 @@
                     <input type="text"  name="author" ng-model="form.author" required>
                 </label>
                 <div class="form-errors" ng-messages="formLibrary.author.$error" ng-show="formLibrary.$submitted">
-                    <div class="form-error" ng-message="required">{{'book_form.field_author' | translate}} {{'required_field' | translate}}</div>
+                    <div class="form-error" ng-message="required">{{'book_form.field_author' | translate}} {{'app.required_field' | translate}}</div>
                 </div>
 
 

@@ -2,6 +2,7 @@
     <img ng-src="{{friend.photo}}" ng-show="friend.photo"/>
     {{friend.fullname}}
     <span class="amount" ng-show="friend.amount_book && !(friend.invited || friend.added)">{{'friend.book' | translate}} {{friend.amount_book}}</span>
+    <span class="amount" ng-show="friend.city && friend.state">{{friend.city}}/{{friend.state}}</span>
     <span class="help-inline" ng-show="friend.invited">{{'friend_search.invite_sent' | translate}}</span>
     <span class="help-inline" ng-show="friend.added">{{'friend_search.request_sent' | translate}}</span>
 

@@ -7857,6 +7857,13 @@ a.button {
   text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.67); }
   .no-header .back-button i:before {
     font-size: 33px; }
+.no-header .button-action {
+  position: absolute;
+  right: 0;
+  color: #fff;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.67); }
+  .no-header .button-action i:before {
+    font-size: 33px; }
 .no-header .notice-library-empty {
   position: inherit; }
 
@@ -7874,6 +7881,21 @@ a.button {
 .spinner-large .spinner svg {
   width: 80px;
   height: 80px; }
+
+.item-stacked-label select {
+  display: block;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #dbdbdb;
+  color: #000;
+  padding-top: 2px;
+  padding-left: 0;
+  height: 34px;
+  vertical-align: middle;
+  line-height: 16px;
+  width: 100%;
+  font-weight: 500;
+  font-size: 16px; }
 
 .book-view .btn-more {
   position: absolute;
@@ -7978,12 +8000,13 @@ a.button {
     left: 0px;
     background-color: #fff;
     border: 1px solid #CCC; }
-    .book-card .image-loader-container .spinner svg {
+    .book-card .image-loader-container > img.loader {
       position: absolute;
       top: 50%;
       left: 50%;
-      margin-left: -14px;
-      margin-top: -14px; }
+      margin-left: -20px;
+      margin-top: -20px;
+      width: 40px; }
   .book-card .content {
     padding-left: 10px;
     padding-top: 10px;
@@ -8760,3 +8783,6 @@ label.item.valid-lr {
   text-align: center;
   display: block;
   margin-top: 7px; }
+
+.help dt {
+  font-size: 14px; }

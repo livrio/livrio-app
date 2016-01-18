@@ -45,12 +45,13 @@
         background-color: #fff;
         border: 1px solid #CCC;
 
-        .spinner svg {
+        > img.loader {
             position: absolute;
             top: 50%;
             left: 50%;
-            margin-left: -14px;
-            margin-top: -14px;
+            margin-left: -20px;
+            margin-top: -20px;
+            width: 40px;
         }
     }
 

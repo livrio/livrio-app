@@ -84,5 +84,10 @@ angular.module("livrio.controllers")
         .then(function() {
             item.invited = false;
         });
-    }
+    };
+
+
+    $scope.onAction = function(e) {
+        FRIEND.menuAction(e, $scope.friend);
+    };
 });

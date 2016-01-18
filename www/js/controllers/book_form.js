@@ -1,7 +1,7 @@
 
 angular.module("livrio.controllers")
 
-.controller("book_form_ctrl", function($scope, $stateParams, $rootScope, $cordovaCamera, $ionicActionSheet, $filter, settings, BOOK) {
+.controller("book_form_ctrl", function($scope, $stateParams, $rootScope, $cordovaCamera, $ionicActionSheet, $filter, $ionicPopup, settings, BOOK) {
 
     var id = $stateParams.id;
 
@@ -26,9 +26,32 @@ angular.module("livrio.controllers")
     }
 
 
+    $scope.doScan = function(o) {
+        var isbn = o.$modelValue;
+        if (!BOOK.isISBN(isbn)) {
+            $ionicPopup.alert({
+                template: String.format(trans('book_form.barcode_invalid'), isbn)
+            });
+        }
+        else {
+            $scope.searching = true;
+            console.log(isbn);
+            BOOK.getByISBN(isbn)
+            .then(function(data) {
+                $scope.form = data;
+                $scope.searching = false;
+            }, function() {
+                $ionicPopup.alert({
+                    template: String.format(trans('book_form.isbn_not_found'), isbn)
+                });
+                $scope.searching = false;
+            });
+        }
+    }
     $scope.doSave = function(form) {
         if (form.$valid) {
             var post = {
+                id: id || false,
                 isbn: $scope.form.isbn,
                 title: $scope.form.title,
                 author: $scope.form.author,
@@ -38,13 +61,16 @@ angular.module("livrio.controllers")
                 page_count: $scope.form.page_count
             };
 
+
+
             BOOK.save(post)
             .then(function(book) {
                 if (book.create) {
                     $rootScope.$emit("book.add",book);
                 }
                 else {
-
+                    $rootScope.$emit("book.refresh");
+                    window.location = '#/app/book';
                 }
             },
             function(o) {
