@@ -32,4 +32,9 @@ angular.module('livrio.controllers')
         LOAN.requestLoan(book);
     };
 
+    $scope.onActionBook = function(event, item) {
+        $rootScope.tmp_book_update = item;
+        BOOK.menuAction(event, item);
+    };
+
 });

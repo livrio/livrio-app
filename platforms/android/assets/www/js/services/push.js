@@ -130,6 +130,7 @@ angular.module('livrio.services')
             item.text = text;
             // item.registration = new Date();
             item.date = $filter('dateparse')(new Date(item.registration));
+            console.log(new Date(item.registration));
             item.photo = item.created_by.photo;
             item.unview = !item.view;
             item.unread = !item.read;

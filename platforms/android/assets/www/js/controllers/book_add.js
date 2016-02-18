@@ -67,6 +67,13 @@ angular.module("livrio.controllers")
                         $scope.books.push(book);
                         $scope.readingISBN = false;
                         $ionicScrollDelegate.$getByHandle('mainScroll').scrollBottom();
+                    },
+                    function(){
+                        $ionicPopup.alert({
+                            template: String.format(trans('book_add.isbn_duplicate'), book.title)
+                        });
+                        $scope.readingISBN = false;
+                        hideModalIsEmpty();
                     });
                 }
             },

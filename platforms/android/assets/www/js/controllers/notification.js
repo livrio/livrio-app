@@ -3,14 +3,14 @@ angular.module('livrio.controllers')
 .filter('dateparse', function($filter) {
 
     var trans = $filter('translate');
-    
-    function prettyDate(date) {
-            diff = (((new Date()).getTime() - date.getTime()) / 1000),
-            day_diff = Math.floor(diff / 86400);
 
+    function prettyDate(date) {
+        diff = (((new Date()).getTime() - date.getTime()) / 1000),
+        day_diff = Math.floor(diff / 86400);
+        console.log(day_diff);
         if (isNaN(day_diff) || day_diff < 0 || day_diff >= 31) return;
 
-        if (day_diff == 0 && diff < 60){
+        if (day_diff == 0 && diff < 60) {
             return trans('notification.time_now');
         }
         else if (day_diff == 0 && diff < 120) {
@@ -38,6 +38,7 @@ angular.module('livrio.controllers')
     }
 
     return function(input) {
+        console.log('input',input, prettyDate(input));
         return prettyDate(input);
     };
 })
