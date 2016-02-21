@@ -41,6 +41,26 @@ angular.module('livrio.controllers')
         return prettyDate(input);
     };
 })
+.filter('nl2br', ['$filter',
+  function($filter) {
+    return function(data) {
+      if (!data) return data;
+      return data.replace(/\n\r?/g, '<br />');
+    };
+  }
+])
+.filter('concat', ['$filter',
+  function($filter) {
+    return function(v) {
+      if (v && !(typeof v === 'string')) {
+            return v.join(', ');
+        }
+        else {
+            return v;
+        }
+    };
+  }
+])
 
 .controller('notification_ctrl', function($scope, $rootScope, $ionicHistory, $ionicPopup, $timeout, $filter, PUSH, FRIEND) {
 

@@ -7,7 +7,7 @@ angular.module('livrio.controllers')
     function prettyDate(date) {
         diff = (((new Date()).getTime() - date.getTime()) / 1000),
         day_diff = Math.floor(diff / 86400);
-        console.log(day_diff);
+
         if (isNaN(day_diff) || day_diff < 0 || day_diff >= 31) return;
 
         if (day_diff == 0 && diff < 60) {
@@ -38,10 +38,17 @@ angular.module('livrio.controllers')
     }
 
     return function(input) {
-        console.log('input',input, prettyDate(input));
         return prettyDate(input);
     };
 })
+.filter('nl2br', ['$filter',
+  function($filter) {
+    return function(data) {
+      if (!data) return data;
+      return data.replace(/\n\r?/g, '<br />');
+    };
+  }
+])
 
 .controller('notification_ctrl', function($scope, $rootScope, $ionicHistory, $ionicPopup, $timeout, $filter, PUSH, FRIEND) {
 

@@ -1,0 +1,13 @@
+<div class="item book-info">
+    <img ng-src="{{book.thumb}}" class="cover">
+
+    <div class="info">
+        <p ng-show="book.isbn"><strong>{{'book.isbn' | translate }}</strong>{{book.isbn}}</p>
+        <p ng-show="book.author" style="width: 178px;"><strong>{{'book.author' | translate }}</strong>{{book.author}}</p>
+        <p ng-show="book.page_count>0"><strong>{{'book.page' | translate }}</strong>{{book.page_count}}</p>
+        <p ng-show="book.publisher"><strong>{{'book.publisher' | translate }}</strong>{{book.publisher}} 
+        <span ng-show="book.published_year">({{book.published_year}})</span></p>
+
+
+    </div>
+</div>

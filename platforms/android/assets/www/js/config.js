@@ -1,7 +1,7 @@
 "use strict";
-// var DOMAIN_API = "http://api.livr.io/v1";
-// 
-var DOMAIN_API = "http://api-test.livr.io/v1";
+var DOMAIN_API = "http://api.livr.io/v1";
+
+// var DOMAIN_API = "http://api-test.livr.io/v1";
 
 angular.module("livrio.config",[
     'pascalprecht.translate'
@@ -241,6 +241,43 @@ angular.module("livrio.config",[
             }
         }
     })
+
+    .state("app.loan", {
+        url: "/loan/:id",
+        views: {
+            "menuContent": {
+                templateUrl: "templates/loan-view.html",
+                controller: "loan_view_ctrl"
+            }
+        }
+    })
+
+    .state('app.loan.book', {
+        url: '/book',
+        views: {
+            'tab-book': {
+                templateUrl: 'templates/loan-tab-book.html'
+            }
+        }
+      })
+
+    .state('app.loan.friend', {
+        url: '/friend',
+        views: {
+            'tab-friend': {
+                templateUrl: 'templates/loan-tab-friend.html'
+            }
+        }
+      })
+
+    .state('app.loan.message', {
+        url: '/message',
+        views: {
+            'tab-message': {
+                templateUrl: 'templates/loan-tab-message.html'
+            }
+        }
+      })
 
     /*
         ----> ROUTE: AMIGOS

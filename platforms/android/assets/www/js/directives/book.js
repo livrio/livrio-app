@@ -19,6 +19,16 @@ angular.module("livrio.directives",[])
         templateUrl: 'templates/directives/book.html'
     };
 })
+angular.module("livrio.directives")
+.directive('bookinfo', function() {
+    return {
+        restrict: 'E',
+        scope: {
+            book: '=book'
+        },
+        templateUrl: 'templates/directives/book-info.html'
+    };
+})
 .directive('friend', function() {
     return {
         restrict: 'E',

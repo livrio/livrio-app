@@ -1,0 +1,164 @@
+<ion-view title="Padrão Javascript">
+
+    <ion-content class="loan-view book-view" scroll="false">
+
+    
+
+
+        <div class="tabs tabs-icon-only tabs-top">
+          <a class="tab-item active" ng-class="{'active':activeTab==0}" ng-click="activeTab=0">
+            <i class="icon ion-ios-book" ng-class="{'ion-ios-book':activeTab==0, 'ion-ios-book-outline':activeTab!=0}"></i>
+          </a>
+          <a class="tab-item" ng-class="{'active':activeTab==1}"  ng-click="activeTab=1">
+            <i class="icon ion-ios-person-outline" ng-class="{'ion-ios-person':activeTab==1, 'ion-ios-person-outline':activeTab!=1}"></i>
+          </a>
+          <a class="tab-item" ng-class="{'active':activeTab==2}"  ng-click="activeTab=2">
+            <i class="icon ion-ios-chatboxes-outline" ng-class="{'ion-ios-chatboxes':activeTab==2, 'ion-ios-chatboxes-outline':activeTab!=2}"></i>
+          </a>
+        </div>
+
+
+        <div ng-show="activeTab==0">
+
+            <div class="wait-message spinner-large" ng-show="loading_book">
+                <ion-spinner></ion-spinner>
+                <span>{{'app.loading' | translate}}</span>
+            </div>
+
+        <div class="list" ng-hide="loading_book">
+            <!-- <i class="btn-more icon ion-information-circled"></i> -->
+            <bookinfo book="book"></bookinfo>
+
+            <div class="item tabs tabs-secondary tabs-icon-top bar-option">
+                <a href="" class="tab-item success">Emprestado em<br />21/01/2016</a>
+                <a href="" class="tab-item danger">Devolução em<br />21/02/2016</a>
+
+            </div>
+   
+
+
+        </div>
+
+        </div>
+
+        <div ng-show="activeTab==1">
+
+        <div class="hero" >
+
+            
+            <div class="cover" style="background-image: url(img/bg.jpg);">
+
+            </div>
+            <div class="content">
+                
+                <div class="avatar" style="background-image: url(https://livrio-static.s3-sa-east-1.amazonaws.com/user/56bbe014f387bc234877fd5a/photo.jpg);">
+                    
+                </div>
+                <h3>Aurélio Saraiva</h3>
+                <h4>livros 20</h4>
+                <h4>Florinópolis/SC</h4>
+            </div>
+
+
+                
+        </div>
+
+        <div class="list">
+            <div class="item item-wrap-text address">
+                Endereço
+                <p>Rua: São Jorge, 181 ap 401 - Centro - Florinópolis - SC</p>
+
+            </div>
+
+            <div class="item item-wrap-text address">
+                Email
+                <p>aureliosaraiva@gmail.com</p>
+
+            </div>
+
+            <div class="item item-wrap-text address">
+                Telefone
+                <p>(48) 8411-4499</p>
+
+            </div>
+        </div>
+
+
+
+        </div>
+
+
+        <div ng-show="activeTab==2" class="messager" id="userMessagesView">
+
+        <ion-scroll delegate-handle="userMessageScroll" direction="y">
+
+        
+
+        
+            <div ng-repeat="message in messages" class="message-wrapper">
+      
+                  <div ng-if="user._id !== message.userId">
+                      
+                    <img class="profile-pic left" 
+                          ng-src="{{toUser.pic}}" />
+      
+                      <div class="chat-bubble left">
+      
+                          <div class="message" ng-bind-html="message.text | nl2br">
+                          </div>
+      
+                          <div class="message-detail">
+                              <span am-time-ago="message.date"></span>
+                          </div>
+      
+                      </div>
+                  </div>
+      
+                  <div ng-if="user._id === message.userId">
+                    
+                       <img  class="profile-pic right" 
+                          ng-src="{{user.pic}}"/>
+                    
+                      <div class="chat-bubble right">
+      
+                          <div class="message" ng-bind-html="message.text | nl2br">
+                          </div>
+      
+                          <div class="message-detail">
+                              <span am-time-ago="message.date"></span>
+                          </div>
+      
+                      </div>
+                    
+                  </div>
+      
+                  <div class="cf"></div>
+      
+            </div>
+
+            </ion-scroll>
+
+            <form ng-show="activeTab==2" name="sendMessageForm" ng-submit="sendMessage(sendMessageForm)" novalidate>
+              <ion-footer-bar class="bar-stable item-input-inset message-footer" keyboard-attach>
+                  <label class="item-input-wrapper">
+                      <textarea ng-model="input.message" value="" placeholder="Digite aqui sua mensagem" required minlength="1" maxlength="1000" msd-elastic></textarea>
+                  </label>
+                  <div class="footer-btn-wrap">
+                    <button class="button button-icon icon ion-android-send footer-btn" type="submit"
+                        ng-disabled="!input.message || input.message === ''">
+                    </button>
+                  </div>
+              </ion-footer-bar>
+          </form>
+
+
+        </div>
+
+
+   
+
+    </ion-content>
+
+    
+
+</ion-view>

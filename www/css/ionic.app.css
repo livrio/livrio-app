@@ -7930,25 +7930,6 @@ a.button {
 .book-view .collpase {
   height: 150px;
   overflow: hidden; }
-.book-view .details {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-items: flex-start; }
-.book-view .book-info .cover {
-  width: 125px; }
-.book-view .book-info .info {
-  padding-left: 20px;
-  flex: 1; }
-  .book-view .book-info .info p {
-    color: #080C15;
-    font-size: 12px; }
-    .book-view .book-info .info p strong {
-      display: block;
-      font-size: 13px;
-      font-weight: 500; }
 .book-view .item.description {
   font-size: 12px;
   padding: 16px; }
@@ -7960,6 +7941,26 @@ a.button {
   padding: 16px 16px;
   font-family: "Roboto Slab", "Roboto", "Segoe UI", sans-serif;
   font-size: 19px; }
+
+.book-info {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: flex-start; }
+  .book-info .cover {
+    width: 125px; }
+  .book-info .info {
+    padding-left: 20px;
+    flex: 1; }
+    .book-info .info p {
+      color: #080C15;
+      font-size: 12px; }
+      .book-info .info p strong {
+        display: block;
+        font-size: 13px;
+        font-weight: 500; }
 
 .book-card {
   background-color: #fff;
@@ -8105,6 +8106,142 @@ a.button {
     padding: 16px; }
 .friend-profile-view .request-friend {
   font-size: 14px !important; }
+
+.loan-view {
+  /*    border-color: #d6123c;*/ }
+  .loan-view .tabs {
+    background: none;
+    border-bottom: 1px solid #ddd; }
+    .loan-view .tabs .tab-item.active {
+      opacity: 1;
+      color: #444;
+      border-bottom: 2px solid #d6123c; }
+  .loan-view .tabs.tabs-top {
+    position: initial; }
+  .loan-view .has-tabs-top {
+    top: 50px; }
+  .loan-view .bar-option {
+    padding: 16px 0;
+    height: 60px; }
+    .loan-view .bar-option small {
+      display: block; }
+    .loan-view .bar-option .tab-item {
+      font-size: 11px; }
+  .loan-view .address {
+    font-size: 13px;
+    font-weight: 500;
+    color: #080C15; }
+    .loan-view .address p {
+      font-weight: normal;
+      font-size: 12px;
+      text-transform: none; }
+  .loan-view .hero {
+    height: initial;
+    padding-bottom: 10px; }
+  .loan-view .hero > .content {
+    position: initial;
+    margin-top: -50px; }
+
+.messager .message {
+  font-size: 11px; }
+.messager .message-detail {
+  white-space: nowrap;
+  font-size: 11px; }
+.messager .bar.item-input-inset .item-input-wrapper input {
+  width: 100% !important; }
+.messager .message-wrapper {
+  position: relative; }
+.messager .message-wrapper:last-child {
+  margin-bottom: 10px; }
+.messager img.profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 10px; }
+.messager img.profile-pic.left {
+  left: 10px; }
+.messager img.profile-pic.right {
+  right: 10px; }
+.messager .chat-bubble {
+  border-radius: 5px;
+  display: inline-block;
+  padding: 5px 15px;
+  position: relative;
+  margin: 10px;
+  max-width: 80%; }
+.messager .chat-bubble:before {
+  content: "\00a0";
+  display: block;
+  height: 16px;
+  width: 16px;
+  position: absolute; }
+.messager .chat-bubble.left {
+  background-color: #e6e6e6;
+  float: left;
+  margin-left: 65px;
+  font-size: 10px; }
+.messager .chat-bubble.left:before {
+  background-color: #e6e6e6;
+  left: -5px;
+  -webkit-transform: rotate(45deg);
+  bottom: 10px; }
+.messager .chat-bubble.right {
+  background-color: #e6e6e6;
+  float: right;
+  margin-right: 65px; }
+.messager .chat-bubble.right:before {
+  background-color: #e6e6e6;
+  -webkit-transform: rotate(45deg);
+  bottom: 10px;
+  right: -5px; }
+.messager .user-messages-top-icon {
+  font-size: 28px;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  top: -3px;
+  right: 5px; }
+.messager .msg-header-username {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  top: -3px; }
+.messager .bold {
+  font-weight: bold; }
+.messager .cf {
+  clear: both !important; }
+.messager input, .messager textarea, .messager .item-input, .messager .item-input-wrapper {
+  background: #fff !important;
+  padding: 5px;
+  font-size: 12px; }
+.messager .footer-btn-wrap {
+  position: relative;
+  height: 100%;
+  width: 40px;
+  top: 0px; }
+  .messager .footer-btn-wrap .button {
+    bottom: 0px !important;
+    right: 0px !important;
+    top: initial !important; }
+.messager .footer-btn {
+  position: absolute !important;
+  bottom: 0; }
+.messager .bar.bar-stable.bar-footer {
+  overflow: visible !important;
+  background: #f4f4f4 !important;
+  border-top: 1px solid #D6123C; }
+.messager .bar-footer textarea {
+  resize: none;
+  width: 100%; }
+.messager button.ion-android-send {
+  color: #D6123C; }
+.messager .scroll-view {
+  position: absolute;
+  top: 55px;
+  bottom: 50px;
+  left: 0;
+  right: 0; }
 
 ul.rating li {
   display: inline;

@@ -101,7 +101,7 @@ angular.module('livrio.services')
                 if (item.content.reason) {
                     text = text + ' &horbar; ' + item.content.reason ;
                 }
-
+                console.log(text)
                 href = "#/app/book-view/" + item.book.id;
             }
             else if (item.type === 'loan_sent_refused') {
@@ -135,6 +135,7 @@ angular.module('livrio.services')
             item.unview = !item.view;
             item.unread = !item.read;
             item.href = href;
+            console.log(item)
         }
         catch (e) {}
         return item;

@@ -14,20 +14,38 @@ angular.module('livrio.services')
         }
     }
 
+
+    self.get = function(id){
+        var deferred = $q.defer();
+
+        $http.get(toRouter('/books/{0}/loan',id))
+        .success(function(response) {
+            if (response._status == 'OK') {
+                deferred.resolve(response);
+            }
+            else {
+                deferred.reject();
+            }
+        })
+        .error(function() {
+            deferred.reject();
+        });
+
+        return deferred.promise;
+    }
+
     self.add = function(book, user, duration, status) {
         var post = {
-            book: book,
-            user: user,
+            'friend_id': user,
             duration: duration || 1,
             status: status || 'requested'
         };
 
         var deferred = $q.defer();
-        $http.put(settings.URL.LOAN + "/start", post)
+        $http.post(toRouter('/books/{0}/loan', book), post)
         .success(function(response) {
-            if (!response.errors) {
-                response.data.author = autor(response.data.author);
-                deferred.resolve(response.data);
+            if (response._status == 'OK') {
+                deferred.resolve(true);
             }
             else {
                 deferred.reject();
@@ -40,31 +58,18 @@ angular.module('livrio.services')
         return deferred.promise;
     };
 
-    
 
     self.changeStatus = function(book, status, text) {
         var post = {
-            book: book,
             text: text || '',
             status: status || 'requested'
         };
 
         var deferred = $q.defer();
-        $http.put(settings.URL.LOAN + "/status", post)
+        $http.post(toRouter('/books/{0}/loan/status',book), post)
         .success(function(response) {
-            if (!response.errors) {
-
-                if (status == 'requested_canceled' || status == 'wait_delivery_canceled') {
-                    $cordovaToast.showLongBottom(trans('loan.toast_request_cancel'));
-                }
-                else if (status == 'requested_returned') {
-                    $cordovaToast.showLongBottom(trans('loan.toast_request'));
-                }
-                else if (status == 'requested_denied') {
-                    $cordovaToast.showLongBottom(trans('loan.toast_loan_cancel'));
-                }
-                response.data.author = autor(response.data.author);
-                deferred.resolve(response.data);
+            if (response._status == 'OK') {
+                deferred.resolve(true);
             }
             else {
                 deferred.reject();
@@ -72,7 +77,6 @@ angular.module('livrio.services')
         })
         .error(function() {
             deferred.reject();
-            console.log("TRATAR ERROR");
         });
 
         return deferred.promise;
