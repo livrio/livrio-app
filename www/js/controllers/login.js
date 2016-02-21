@@ -115,7 +115,7 @@ angular.module('livrio.controllers', [])
                 .then(function(data) {
                     $ionicHistory.clearCache();
                     window.location = '#/app/friend-invite';
-                    firstLogin(data.first_name);
+                    //firstLogin();
                     hideLoading();
                 },
                 function() {

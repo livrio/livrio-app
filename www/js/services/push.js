@@ -252,12 +252,12 @@ angular.module('livrio.services')
     function doUpdateToken(platform, token) {
 
         var post = {
-            deviceToken: {
+            device_token: {
                 platform: platform,
                 token: token
             }
         };
-        $http.put(settings.URL.USER + "/" + $rootScope.user.id, post)
+        $http.patch(toRouter('/accounts/update'), post)
         .success(function() {
             console.log('SAVE:SUCCESS');
         }).error(function() {
