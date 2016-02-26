@@ -93,12 +93,12 @@ angular.module('livrio.controllers')
                     onTap: function(e) {
                         var days = parseInt($scope.data.day,10) * parseInt($scope.data.type,10);
 
-                        LOAN.add(book.id, user.id, days,'sent')
+                        LOAN.add(book._id, user._id, days,'sent')
                         .then(function(book) {
                             $rootScope.bookView.loaned = book.loaned;
                             $cordovaToast.showLongBottom(trans('lend.toast_success'));
                             $state.go('app.book-view',{
-                                id: book.id
+                                id: book._id
                             })
                         },
                         function() {

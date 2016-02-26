@@ -43,7 +43,7 @@ angular.module("livrio.directives")
             $scope.onLink = function(item) {
                 if (!item.is_contact) {
                     $state.go('app.friend-profile',{
-                        id: item.id
+                        id: item._id
                     });
                 }
             }
@@ -74,7 +74,7 @@ angular.module("livrio.directives")
         var o = {};
         switch (book.loaned.status) {
             case 'sent':
-                o.description = String.format('Te emprestou este livro por {0} dias.',book.loaned.expired);
+                o.description = String.format('Te emprestou este livro por {0} dias.',book.loaned.duration);
                 o.buttons = [
                     {
                         text: 'Cancelar',
@@ -98,6 +98,16 @@ angular.module("livrio.directives")
                         action: 'requested_canceled'
                     }
                 ];
+
+            case 'requested_accept':
+                o.description = 'Acerte detalhes do empréstimo deste livro.'
+                o.buttons = [
+                    {
+                        text: 'ver empréstimo',
+                        cls: 'success',
+                        action: 'show_loan'
+                    }
+                ];
             break;
 
         }
@@ -109,7 +119,7 @@ angular.module("livrio.directives")
         var o = {};
         switch (book.loaned.status) {
             case 'requested':
-                o.description = String.format('Solicitou empréstimo deste livro por {0} dias.',book.loaned.expired);
+                o.description = String.format('Solicitou empréstimo deste livro por {0} dias.',book.loaned.duration);
                 o.buttons = [
                     {
                         text: 'Cancelar',
@@ -133,6 +143,17 @@ angular.module("livrio.directives")
                     }
                 ];
             break;
+
+            case 'requested_accept':
+                o.description = 'Acerte detalhes do empréstimo deste livro.'
+                o.buttons = [
+                    {
+                        text: 'ver empréstimo',
+                        cls: 'success',
+                        action: 'show_loan'
+                    }
+                ];
+            break;
         }
         console.log(book,o);
         return o;
@@ -150,15 +171,18 @@ angular.module("livrio.directives")
                 okText: 'OK'
             }).then(function(res) {
                 if (res) {
-                    LOAN.changeStatus(book.id, status, res)
+                    LOAN.changeStatus(book._id, status, res)
                     .then(function(data) {
                         deferred.resolve(data);
                     });
                 }
             });
         }
+        else if (status == 'show_loan') {
+            window.location = '#/app/loan/' + book._id;
+        }
         else {
-            LOAN.changeStatus(book.id, status)
+            LOAN.changeStatus(book._id, status)
             .then(function(data) {
                 deferred.resolve(data);
             });
@@ -193,19 +217,19 @@ angular.module("livrio.directives")
                 var loaned = book.loaned;
 
                 if (!book.is_owner) {
-                    $scope.show = book.loaned && book.loaned.id == $rootScope.user.id;
+                    $scope.show = book.loaned && book.loaned._id == $rootScope.user._id;
                     var owner = book.owner;
                     $scope.photo = owner.photo;
                     $scope.fullname = owner.fullname;
-                    $scope.user_id = owner.id;
+                    $scope.user_id = owner._id;
                     $scope.options = processLoaned(book);
 
                 }
                 else {
-                    $scope.show = book.loaned && book.owner.id == $rootScope.user.id;
+                    $scope.show = book.loaned && book.owner._id == $rootScope.user._id;
                     $scope.photo = loaned.photo;
                     $scope.fullname = loaned.fullname;
-                    $scope.user_id = loaned.id;
+                    $scope.user_id = loaned._id;
                     $scope.options = processOwner(book);
                 }
             }
@@ -213,12 +237,7 @@ angular.module("livrio.directives")
 
             $scope.onAction = function(v) {
                 console.log('action:',v);
-                onChangeStatus($scope.book, v).then(function(data) {
-                    BOOK.view($scope.book.id)
-                    .then(function(data){
-                        $scope.book = data;
-                    });
-                });
+                onChangeStatus($scope.book, v);
             }
 
 

@@ -1,4 +1,8 @@
-<ion-view title="Padrão Javascript">
+<ion-view >
+
+ <ion-nav-title>
+        {{loaned.book.title}}
+    </ion-nav-title>
 
     <ion-content class="loan-view book-view" scroll="false">
 
@@ -18,7 +22,7 @@
         </div>
 
 
-        <div ng-show="activeTab==0">
+        <div ng-show="activeTab==0" class="bg-color">
 
             <div class="wait-message spinner-large" ng-show="loading_book">
                 <ion-spinner></ion-spinner>
@@ -30,14 +34,30 @@
             <bookinfo book="loaned.book"></bookinfo>
 
             <div class="item tabs tabs-secondary tabs-icon-top bar-option">
-                <a href="" class="tab-item success">Emprestado em<br />21/01/2016</a>
-                <a href="" class="tab-item danger">Devolução em<br />21/02/2016</a>
+                <a href="" class="tab-item success">Emprestado em<br /> {{loaned._created | date:"dd/MM/yyyy"}}</a>
+
+                <a href="" class="tab-item danger" ng-hide="loaned.delivered_date">Devolução em<br />{{loaned.duration}} dias</a>
+                <a href="" class="tab-item danger" ng-show="loaned.delivered_date">Devolução em<br />{{loaned.delivered_date | date:"dd/MM/yyyy"}}</a>
 
             </div>
    
 
 
         </div>
+
+        <div class="card loaned-action">
+    <div class="item loan item-text-wrap"  ui-sref="app.friend-profile({id:user_id})">
+        
+        <p>
+            Você já entregou o livro para seu amigo?
+        </p>
+
+    </div>
+    <div class="item item-line no-margin tabs tabs-secondary">
+        <a class="tab-item danger">Cancelar empréstimo</a>
+        <a class="tab-item success">Sim, entreguei</a>
+    </div>
+</div>
 
         </div>
 
@@ -46,12 +66,12 @@
         <div class="hero" >
 
             
-            <div class="cover" ng-style="friend.cover">
+            <div class="cover" ng-style="friend.bg_cover">
 
             </div>
             <div class="content">
                 
-                <div class="avatar" ng-style="friend.photo">
+                <div class="avatar" ng-style="friend.bg_photo">
                     
                 </div>
                 <h3>{{friend.fullname}}</h3>
@@ -97,10 +117,10 @@
         
             <div ng-repeat="message in messages" class="message-wrapper">
       
-                  <div ng-if="user._id !== message.userId">
+                  <div ng-if="user._id !== message.account_id ">
                       
                     <img class="profile-pic left" 
-                          ng-src="{{toUser.pic}}" />
+                          ng-src="{{friend.photo}}" />
       
                       <div class="chat-bubble left">
       
@@ -108,16 +128,16 @@
                           </div>
       
                           <div class="message-detail">
-                              <span am-time-ago="message.date"></span>
+                              <span am-time-ago="message._created"></span>
                           </div>
       
                       </div>
                   </div>
       
-                  <div ng-if="user._id === message.userId">
+                  <div ng-if="user._id === message.account_id">
                     
                        <img  class="profile-pic right" 
-                          ng-src="{{user.pic}}"/>
+                          ng-src="{{user.photo}}"/>
                     
                       <div class="chat-bubble right">
       
@@ -125,7 +145,7 @@
                           </div>
       
                           <div class="message-detail">
-                              <span am-time-ago="message.date"></span>
+                              <span am-time-ago="message._created"></span>
                           </div>
       
                       </div>

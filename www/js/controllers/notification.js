@@ -87,4 +87,9 @@ angular.module('livrio.controllers')
         }
     }
 
+    $scope.$on('$ionicView.enter', function() {
+        console.log('Notifications $ionicView.enter');
+        $scope.onRefresh();
+    });
+
 });

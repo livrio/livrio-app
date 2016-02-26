@@ -148,9 +148,9 @@ angular.module('livrio.controllers', [])
         .then(function(user) {
             hideLoading();
             window.location = '#/app/book';
-            if (user.create) {
-                firstLogin(user.first_name);
-            }
+            // if (user.create) {
+                //firstLogin(user.first_name);
+            // }
         },
         function(error) {
             hideLoading();

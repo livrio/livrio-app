@@ -14,6 +14,48 @@ angular.module('livrio.services')
         }
     }
 
+    self.messages = function(id, offset) {
+        var deferred = $q.defer();
+
+        $http.get(toRouter('/books/{0}/loan/messages',id),{
+            params: {
+                offset: offset || 0
+            }
+        })
+        .success(function(response) {
+            if (response._status == 'OK') {
+                deferred.resolve(response._items);
+            }
+            else {
+                deferred.reject();
+            }
+        })
+        .error(function() {
+            deferred.reject();
+        });
+
+        return deferred.promise;
+    };
+
+    self.createMessage = function(id, text) {
+        var deferred = $q.defer();
+
+        $http.post(toRouter('/books/{0}/loan/messages',id),{'text':text})
+        .success(function(response) {
+            if (response._status == 'OK') {
+                deferred.resolve(response);
+            }
+            else {
+                deferred.reject();
+            }
+        })
+        .error(function() {
+            deferred.reject();
+        });
+
+        return deferred.promise;
+    };
+
 
     self.get = function(id){
         var deferred = $q.defer();
@@ -34,18 +76,17 @@ angular.module('livrio.services')
         return deferred.promise;
     }
 
-    self.add = function(book, user, duration, status) {
+    self.add = function(book, user, duration) {
         var post = {
             'friend_id': user,
-            duration: duration || 1,
-            status: status || 'requested'
+            duration: duration || 1
         };
 
         var deferred = $q.defer();
         $http.post(toRouter('/books/{0}/loan', book), post)
         .success(function(response) {
             if (response._status == 'OK') {
-                deferred.resolve(true);
+                deferred.resolve(response);
             }
             else {
                 deferred.reject();
@@ -92,9 +133,9 @@ angular.module('livrio.services')
 
         $rootScope.$emit("loan.modal", book, function(duration) {
             console.log('success');
-            self.add(book.id, $rootScope.user.id, duration)
+            self.add(book._id, $rootScope.user._id, duration)
             .then(function(data) {
-                book.loaned = data.loaned;
+                book.loaned = data;
                 $cordovaToast.showLongBottom(trans('loan.toast_request_loan'));
             });
             deferred.resolve();

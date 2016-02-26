@@ -21,7 +21,7 @@ angular.module("livrio.services")
             $cordovaContacts.find({
                 fields:['id','displayName','phoneNumbers','emails','birthdays','photos']
             }).then(function(allContacts) {
-                $http.post(settings.URL.CONTACT, allContacts)
+                $http.post( toRouter('/contacts') , allContacts)
                 .success(function() {
                     window.localStorage.syncContact = true;
                     deferred.resolve();

@@ -11,7 +11,7 @@ angular.module("livrio.controllers")
         $scope.form = {
             isbn: "",
             title: "",
-            author: "",
+            authors: "",
             thumb: "img/cover.gif",
             shelfs: [],
             config: {}
@@ -51,13 +51,13 @@ angular.module("livrio.controllers")
     $scope.doSave = function(form) {
         if (form.$valid) {
             var post = {
-                id: id || false,
+                _id: id || false,
                 isbn: $scope.form.isbn,
                 title: $scope.form.title,
-                author: $scope.form.author,
+                authors: $scope.form.authors,
                 cover_source: $scope.form.cover_source,
                 publisher: $scope.form.publisher,
-                published_year: $scope.form.published_year,
+                published_date: $scope.form.published_date,
                 page_count: $scope.form.page_count
             };
 

@@ -50,11 +50,11 @@
                     <div class="form-error" ng-message="required">{{'book_form.field_title' | translate}} {{'app.required_field' | translate}}</div>
                 </div>
 
-                <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formLibrary.author.$invalid && formLibrary.$submitted}">
+                <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formLibrary.authors.$invalid && formLibrary.$submitted}">
                     <span class="input-label">{{'book_form.field_author' | translate}}</span>
-                    <input type="text"  name="author" ng-model="form.author" required>
+                    <input type="text"  name="authors" ng-model="form.authors" required>
                 </label>
-                <div class="form-errors" ng-messages="formLibrary.author.$error" ng-show="formLibrary.$submitted">
+                <div class="form-errors" ng-messages="formLibrary.authors.$error" ng-show="formLibrary.$submitted">
                     <div class="form-error" ng-message="required">{{'book_form.field_author' | translate}} {{'app.required_field' | translate}}</div>
                 </div>
 
@@ -81,7 +81,7 @@
 
           <label class="item item-input item-stacked-label">
              <span class="input-label">{{'book_form.field_publisher_year' | translate}}</span>
-              <input type="number"  name="published_year" ng-model="form.published_year">
+              <input type="number"  name="published_date" ng-model="form.published_date">
           </label>
 
           <label class="item item-input item-stacked-label">
