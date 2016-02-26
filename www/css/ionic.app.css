@@ -8274,15 +8274,16 @@ ul.rating li i {
 .invite-tab {
   position: relative; }
   .invite-tab.tabs-background-assertive {
-    background-color: #d6123c;
-    border: none; }
+    background-color: #fff;
+    border-bottom: 1px solid #ddd; }
   .invite-tab a {
-    color: rgba(249, 249, 249, 0.6);
+    color: #444;
     text-transform: uppercase;
     font-weight: 500;
     max-width: inherit; }
     .invite-tab a.active {
-      color: #fff; }
+      color: #444;
+      border-bottom: 2px solid #d6123c; }
   .invite-tab.tabs-top {
     top: 0px; }
 

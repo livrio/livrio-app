@@ -90,19 +90,20 @@ ul.rating li i {
 .invite-tab{
     position: relative;
     &.tabs-background-assertive{
-        background-color: $assertive;
-        border: none;
+        background-color: #fff;
+        border-bottom: 1px solid #ddd;
     }
 
     a{
-        color: rgba(249, 249, 249, 0.6);
+        color: #444;
         text-transform: uppercase;
         font-weight: 500;
         max-width: inherit;
 
 
         &.active{
-            color: #fff;
+            color: #444;
+            border-bottom: 2px solid $assertive;
         }
     }
 
