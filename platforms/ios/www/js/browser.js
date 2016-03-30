@@ -123,6 +123,9 @@ if (!window.cordova) {
                     })
                 }
             }
+        },
+        finish : function(){
+            
         }
     }
 

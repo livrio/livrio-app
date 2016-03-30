@@ -1,11 +1,11 @@
 {
     "app": {
         "backbutton": "Pressione o botão voltar para sair",
-        "offline": "Você precisa estar conectado a internet. Por favor verifique sua conexão",
         "welcome": "Olá <strong>{0}</strong>, seja bem vindo ao <strong>Livrio.</strong> Por aqui, a gente compartilha livros com quem também ama livros. Eu vou te ajudar a cadastrar os seus livros e libertá-los para o mundo.",
+        "offline": "Você precisa estar conectado a internet. Por favor verifique sua conexão",
+        "refresh": "Atualizar",
         "loading": "Carregando",
         "searching": "Pesquisando",
-        "refresh": "Atualizar",
         "required_field": "é obrigatório",
         "name": "Livrio"
     },
@@ -36,6 +36,7 @@
         "btn_comment": "Comentários",
         "btn_lend": "Emprestar este livro",
         "btn_loan": "Pedir emprestado",
+        "btn_loaned": "Livro emprestado",
         "synopsis": "Sinopse",
         "lent": "Emprestado para",
         "loan": "Recebido de"
@@ -64,6 +65,8 @@
     "book_form": {
         "title_create": "Novo Livro",
         "title_update": "Editar Livro",
+        "barcode_invalid": "O ISBN <strong>{0}</strong> é inválido. Verifique se foi digitado corretamente!",
+        "isbn_not_found": "Nenhum livro encontrado com o ISBN: <strong>{0}</strong>.<br /> Você pode informar os dados, para que outros usuários não tenham o mesmo problema.",
         "isbn_duplicate_notice": "Este livro já está cadastrado",
         "sheet_photo": "Tirar foto",
         "sheet_picture": "Galeria",
@@ -93,7 +96,7 @@
         "toast_failure": "Ops, tente mais tarde!",
         "invite_msg": "Seu amigo {0} quer te emprestar o livro {1} para você ler. Peça emprestado através do Livrio!",
         "invite_subject": "{0} quer te emprestar um livro",
-        "invite_link": "http://livr.io/get",
+        "invite_link": "http://livr.io",
         "toast_external_success": "Convite de empréstimo enviado!",
         "title": "Emprestar livro",
         "placeholder": "Procurar amigo..."
@@ -107,7 +110,7 @@
         "empty_search": "Não encontrou seu amigo? <p>Talvez ele ainda não conheça o <strong>Livrio</strong>! Utilize a botão <i class=\"ion ion-android-share-alt\"></i> acima para enviar a recomendação através de outras redes.</p><img src=\"img/bored.svg\" />",
         "invite_msg": "Seu amigo {0} recomendou o livro {1} para você ler. Peça emprestado através do Livrio!",
         "invite_subject": "Recomendação de livro",
-        "invite_link": "http://livr.io/get",
+        "invite_link": "http://livr.io",
         "toast_success": "Recomendação enviada!",
         "toast_failure": "Ops, tente mais tarde!",
         "title": "Recomendar livro",
@@ -143,20 +146,19 @@
         "info_facebook": "Para ter acesso aos livros incríveis que estão parados nas estantes deles, encontre-os por aqui.",
         "empty_list": "Você não tem amigos cadastrados<p>Clique no <i class=\"ion ion-android-person-add\"></i> para convidar seus amigos.</p><img src=\"img/bored.svg\" />",
         "book": "Livros",
-        "title": "Meus amigos",
-        "btn_facebook": "Conectar ao Facebook"
+        "title": "Meus amigos"
     },
     "friend_invite": {
         "invite_msg": "Oi, agora todos os meus livros estão disponíveis no Livrio e você pode pedir emprestado a hora que quiser.",
         "invite_subject": "Vem ver",
-        "invite_link": "http://livr.io/get",
+        "invite_link": "http://livr.io",
+        "info_title": "Olá {0}, convide seus amigos!!",
         "toast_share_whatsapp": "Convite enviado!",
         "toast_share_error": "Ops, tente mais tarde!",
         "toast_share_facebook": "Recomendação enviada!",
         "toast_share": "Compartilhado!",
         "title": "Convidar amigos",
         "loading": "Enviando",
-        "info_title": "Olá {0}, convide seus amigos!!",
         "info_text": "Quanto mais amigos você tiver, mais livros você terá acesso.",
         "btn_search": "Procurar amigos",
         "btn_facebook": "Recomendar no Facebook",
@@ -164,7 +166,14 @@
         "btn_share": "Compartilhar"
     },
     "friend_profile": {
-        "empty_list_book": "Nenhum livro encontrado<p>Seu amigo ainda não cadastrou nenhum livro.</p><img src=\"img/bored.svg\" />"
+        "empty_list_book": "Nenhum livro encontrado<p>Seu amigo ainda não cadastrou nenhum livro.</p><img src=\"img/bored.svg\" />",
+        "question_delete": "Defazer amizade",
+        "question_delete_no": "Cancelar",
+        "question_delete_yes": "Defazer",
+        "question_text": "Você não poderá mais solicitar empréstimos! Deseja continuar?",
+        "toast_remove_friend": "Amizade desfeita!",
+        "sheet_remove": "Defazer amizade",
+        "sheet_cancel": "Cancelar"
     },
     "login": {
         "loading_login": "Entrando",
@@ -206,10 +215,6 @@
         "time_yesterday": "Ontem",
         "time_days": "há {0} dias",
         "time_week": "há {0} semanas",
-        "question_friend_title": "Solicitação de amizade",
-        "question_friend_no": "Recusar",
-        "question_friend_yes": "Aceitar",
-        "question_friend_msg": "Você deseja se conectar com <strong>{0}</strong>",
         "msg_system_first_book": "Parabéns <span>{0}</span>! Você cadastrou seu primeiro livro. Que tal agora convidar seus amigos?",
         "msg_system_welcome": "Olá <span>{0}</span>, seja bem vindo ao <strong>Livrio.</strong> Por aqui, a gente compartilha livros com quem também ama livros. Eu vou te ajudar a cadastrar os seus livros e libertá-los para o mundo.",
         "msg_system_library_empty": "<span>{0}</span> você ainda não cadastrou nenhum livro. Cadastre e compartilhe com seus amigos!",
@@ -246,6 +251,10 @@
         "field_phone": "Celular",
         "placeholder_phone": "(Opcional)",
         "info_phone": "Digite seu número de celular, no futuro faremos trocas de mensagens para os empréstimos através do Whatsapp.",
+        "field_state": "Estado",
+        "field_city": "Cidade",
+        "placeholder_city": "Qual sua cidade?",
+        "info_city": "Informe sua cidade para facilitar a localização de livros.",
         "info": "Fique tranquilo. Suas informações só serão utilizadas para sugerir livros que tenham mais a ver com você!"
     },
     "friends": {
@@ -266,6 +275,8 @@
         "title": "Configurações",
         "allow_search_by_email": "Permitir que me encontrem pelo email.",
         "help_allow_search_by_email": "Se habilitado permite que seus amigos encontrem você pelo email.",
+        "allow_location": "Bloquear Cidade/Estado",
+        "help_allow_location": "Se bloqueado somente seus amigos terão acesso a sua cidade e estado.",
         "allow_notification_push": "Permitir notificações push",
         "help_allow_notification_push": "Se habilitado você receberá notificações de empréstimos, solicitações de amizade, notificações de atraso na devolução do livro, etc.",
         "allow_notification_email": "Permitir notificações por email",
@@ -283,6 +294,9 @@
         "tab_suggest": "Sugestões",
         "tab_contact": "Contatos",
         "placeholder": "Procurar por nome ou email"
+    },
+    "help": {
+        "title": "Dúvidas Frequentes"
     },
     "friend_contact": {
         "title": "Acesso aos contatos",
@@ -304,6 +318,7 @@
         "shelfs": "Estantes",
         "empty_shelfs": "Você ainda não tem estantes. Que tal organizar seus livros por temas?.",
         "profile": "Meu perfil",
+        "help": "Dúvidas Frequentes",
         "config": "Configurações",
         "about": "Sobre o aplicativo",
         "exit": "Sair"

@@ -1,7 +1,9 @@
 <ion-view title="{{'friend_search.title' | translate}}">
 
 
-
+<ion-nav-buttons side="right">
+        <button ng-show="activeTab==2" type="button" class="button icon button-clean ion-android-refresh" ng-click="onRefreshContact()"></button>
+    </ion-nav-buttons>
 
 
 <ion-content class="has-header view-friend-add" scroll="false">

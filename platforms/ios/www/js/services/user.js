@@ -15,10 +15,12 @@ angular.module("livrio.services")
 
     self.updateContacts = function() {
         var deferred = $q.defer();
+        console.log(window.localStorage.syncContact)
         if (!window.localStorage.syncContact) {
             $cordovaContacts.find({
                 fields:['id','displayName','phoneNumbers','emails','birthdays','photos']
             }).then(function(allContacts) {
+                console.log(JSON.stringify(allContacts))
                 $http.post(settings.URL.CONTACT, allContacts)
                 .success(function() {
                     window.localStorage.syncContact = true;
@@ -30,6 +32,7 @@ angular.module("livrio.services")
                 });
             },
             function() {
+                console.log('error contacts')
                 window.localStorage.syncContact = false;
                 deferred.reject();
             });

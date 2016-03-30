@@ -153,7 +153,7 @@ angular.module("livrio.controllers")
             ref: item._id
         }, true)
         .then(function() {
-            
+            $rootScope.$emit("book.refresh");
         });
     }
 });
