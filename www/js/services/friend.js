@@ -11,12 +11,24 @@ angular.module('livrio.services')
         params.sort = params.sort || 'name';
         params.order = params.order || 'asc';
         var deferred = $q.defer();
-        $http.get(settings.URL.FRIEND, {
+
+        var url = toRouter('/friends');
+        if (params.where == 'other') {
+            url = toRouter('/friends/search');
+        }
+        else if (params.where == 'suggest') {
+            url = toRouter('/friends/suggest');
+        }
+        else if (params.where == 'contacts') {
+            url = toRouter('/contacts');
+        }
+
+        $http.get(url, {
             params: params
         })
         .success(function(response) {
-            if (!response.errors) {
-                deferred.resolve(response.data);
+            if (response._status == 'OK') {
+                deferred.resolve(response._items);
             }
             else {
                 deferred.resolve([]);
@@ -32,9 +44,9 @@ angular.module('livrio.services')
 
     self.add = function(item) {
         var deferred = $q.defer();
-        $http.post(settings.URL.FRIEND + "/" + item.id + "/request")
+        $http.post( toRouter('/friends/{0}/invite', item._id))
         .success(function(response) {
-            if (!response.errors) {
+            if (response._status == 'OK') {
                 $cordovaToast.showLongBottom(trans('friends.toast_request_friend'));
                 deferred.resolve(true);
             }
@@ -51,9 +63,9 @@ angular.module('livrio.services')
 
     self.invite = function(item) {
         var deferred = $q.defer();
-        $http.post(settings.URL.FRIEND + "/" + item.id + "/invite")
+        $http.post( toRouter('/contacts/{0}/invite', item._id))
         .success(function(response) {
-            if (!response.errors) {
+            if (response._status == 'OK') {
                 $cordovaToast.showLongBottom(trans('friends.toast_request_friend'));
                 deferred.resolve(true);
             }
@@ -70,11 +82,17 @@ angular.module('livrio.services')
 
     self.confirm = function(item, question) {
         var deferred = $q.defer();
-        $http.post(settings.URL.FRIEND + "/" +  item.id  + "/response",{
-            response: question
-        })
+        var url;
+        if (question == 'yes') {
+            url = toRouter('/friends/{0}/invite/accept',item._id);
+        }
+        else {
+            url = toRouter('/friends/{0}/invite/cancel',item._id);
+        }
+
+        $http.post(url)
         .success(function(response) {
-            if (!response.errors) {
+            if (response._status == 'OK') {
                 if (question == 'yes') {
                     $cordovaToast.showLongBottom(trans('friends.toast_friend'));
                 }
@@ -93,10 +111,10 @@ angular.module('livrio.services')
 
     self.view = function(id) {
         var deferred = $q.defer();
-        $http.get(settings.URL.FRIEND + "/" + id)
+        $http.get(toRouter('/friends/{0}',id))
         .success(function(response) {
-            if (!response.errors) {
-                deferred.resolve(response.data);
+            if (response._status == 'OK') {
+                deferred.resolve(response);
             }
             else {
                 deferred.reject();
@@ -162,9 +180,9 @@ angular.module('livrio.services')
         }).then(function(res) {
             if (res) {
 
-                $http.post(settings.URL.FRIEND + "/" + item.id + "/remove")
+                $http.delete(toRouter('/friends/{0}', item._id))
                 .success(function(response) {
-                    if (!response.errors) {
+                    if (response._status == 'OK') {
                         $cordovaToast.showLongBottom(trans('friend_profile.toast_remove_friend'));
                         $rootScope.$emit("friend.refresh");
                         $ionicHistory.nextViewOptions({

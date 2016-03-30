@@ -54,12 +54,12 @@ angular.module('livrio.services',[])
         isbn = isbn + ""
         var deferred = $q.defer();
         isbn = isbn.replace(/[^0-9X]/gi, '');
-        var url = settings.URL.ISBN + "/" + isbn;
+        var url = String.format(settings.URL.ISBNDB, isbn);
 
         $http.get(url)
         .success(function(response) {
-            if (!response.errors) {
-                deferred.resolve(response.data);
+            if (response._status == 'OK') {
+                deferred.resolve(response);
             }
             else {
                 deferred.reject({
@@ -108,14 +108,13 @@ angular.module('livrio.services',[])
     self.like = function(book) {
         var type = book.is_like ? 'delete' : 'post';
         var deferred = $q.defer();
-        $http[type](settings.URL.BOOK + "/" + book.id + '/like')
+        $http[type](toRouter('/books/{0}/like',book._id))
         .success(function(response) {
-            if (!response.errors) {
-                response.data.author = autor(response.data.author);
-                deferred.resolve(response.data);
+            if (response._status == 'OK') {
+                deferred.resolve(true);
             }
             else {
-                deferred.resolve(book);
+                deferred.resolve(false);
             }
         });
         return deferred.promise;
@@ -125,30 +124,29 @@ angular.module('livrio.services',[])
     self.save = function(data, hide_toast) {
         var deferred = $q.defer();
 
-        var action = data.id ? 'put' : 'post';
-        var url = settings.URL.BOOK;
-        if (action == 'put') {
-            url = url + '/' + data.id;
+        var action = data._id ? 'patch' : 'post';
+        var url = toRouter('/books');
+        if (action == 'patch') {
+            url = toRouter('/books/{0}', data._id);
         }
-
+        console.log(data)
         $http[action](url, data)
         .success(function(response) {
-            if (!response.errors) {
-                response.data.author = autor(response.data.author);
+            if (response._status == 'OK') {
                 if (action == 'post') {
-                    response.data.create = true;
+                    response.create = true;
                     if (!hide_toast) {
                         $cordovaToast.showLongBottom(trans('book_form.toast_create'));
                     }
                     USER.updateAmountBook();
                 }
                 else {
-                    response.data.update = true;
+                    response.update = true;
                     if (!hide_toast) {
                         $cordovaToast.showLongBottom(trans('book_form.toast_update'));
                     }
                 }
-                deferred.resolve(response.data);
+                deferred.resolve(response);
             }
             else {
                 deferred.reject({
@@ -168,12 +166,9 @@ angular.module('livrio.services',[])
     self.recommend = function(book, friend) {
 
         var deferred = $q.defer();
-        var post = {
-            friend: friend
-        }
-        $http.post(settings.URL.BOOK + "/" + book.id + '/recommend',post)
+        $http.post( toRouter('/books/{0}/recommend/{1}', book._id, friend))
         .success(function(response) {
-            if (!response.errors) {
+            if (response._status == 'OK') {
                 deferred.resolve(true);
                 $cordovaToast.showLongBottom(trans('recommend.toast_success'));
             }
@@ -188,12 +183,12 @@ angular.module('livrio.services',[])
     self.comment = function(book, message) {
 
         var deferred = $q.defer();
-        $http.post(settings.URL.BOOK + "/" + book.id + '/comment',{
-            message: message
+        $http.post(toRouter('/books/{0}/comments',book._id),{
+            comment: message
         })
         .success(function(response) {
-            if (!response.errors) {
-                deferred.resolve(response.data);
+            if (response._status == 'OK') {
+                deferred.resolve(response);
             }
             else {
                 deferred.resolve([]);
@@ -205,10 +200,10 @@ angular.module('livrio.services',[])
     self.comments = function(book) {
 
         var deferred = $q.defer();
-        $http.get(settings.URL.BOOK + "/" + book.id + '/comment')
+        $http.get(toRouter('/books/{0}/comments',book._id))
         .success(function(response) {
-            if (!response.errors) {
-                deferred.resolve(response.data);
+            if (response._status == 'OK') {
+                deferred.resolve(response._items);
             }
             else {
                 deferred.resolve([]);
@@ -232,10 +227,10 @@ angular.module('livrio.services',[])
         }).then(function(res) {
             if (res) {
                 book.removed = true;
-                $http.delete(settings.URL.BOOK + "/" + book.id)
+                $http.delete(toRouter('/books/{0}', book._id))
                 .success(function(response) {
                     $ionicLoading.hide();
-                    if (!response.errors) {
+                    if (response._status == 'OK') {
                         $ionicHistory.clearCache();
                         $cordovaToast.showLongBottom(trans('book.toast_delete'));
                         //$rootScope.$emit("book.refresh");
@@ -267,11 +262,10 @@ angular.module('livrio.services',[])
 
     self.view = function(id) {
         var deferred = $q.defer();
-        $http.get(settings.URL.BOOK + "/" + id)
+        $http.get( toRouter('/books/{0}/info',id))
         .success(function(response) {
-            if (!response.errors) {
-                response.data.author = autor(response.data.author);
-                deferred.resolve(response.data);
+            if (response._status == 'OK') {
+                deferred.resolve(response);
             }
             else {
                 deferred.reject();
@@ -285,7 +279,7 @@ angular.module('livrio.services',[])
 
     self.update = function(book) {
         $rootScope.bookUpdate = book;
-        window.location = "#/app/book-form/" + book.id;
+        window.location = "#/app/book-form/" + book._id;
     };
 
     self.search = function(params) {
@@ -294,15 +288,12 @@ angular.module('livrio.services',[])
         params.sort = 'title';
         params.order = 'asc';
         var deferred = $q.defer();
-        $http.get(settings.URL.ISBN + '/search', {
+        $http.get(settings.URL.ISBNDB_SEARCH, {
             params: params
         })
         .success(function(response) {
-            if (!response.errors) {
-                angular.forEach(response.data, function(v) {
-                    v.author = autor(v.author);
-                });
-                deferred.resolve(response.data);
+            if (response._status == 'OK') {
+                deferred.resolve(response._items);
             }
             else {
                 deferred.resolve([]);
@@ -331,16 +322,14 @@ angular.module('livrio.services',[])
         params.sort = 'title';
         params.order = 'asc';
         params.limit = 20;
+        params.where = 'my'
         var deferred = $q.defer();
-        $http.get(settings.URL.BOOK, {
+        $http.get(toRouter('/books/search'), {
             params: params
         })
         .success(function(response) {
-            if (!response.errors) {
-                angular.forEach(response.data, function(v) {
-                    v.author = autor(v.author);
-                });
-                deferred.resolve(response.data);
+            if (response._status == 'OK') {
+                deferred.resolve(response._items);
             }
             else {
                 deferred.resolve([]);

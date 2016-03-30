@@ -50,6 +50,24 @@ function convertImgToBase64URL(url, callback, outputFormat) {
     img.src = url;
 }
 
+moment.locale('en', {
+  relativeTime: {
+    future : '%s',
+    past : '%s',
+    s : 'agora',
+    m : 'há 1 minuto',
+    mm : 'há %d minutos',
+    h : 'há 1 hora',
+    hh : 'há %d horas',
+    d : 'há 1 dia',
+    dd : 'há %d dias',
+    M : 'há 1 mês',
+    MM : 'há %d meses',
+    y : 'há 1 ano',
+    yy : 'há %d anos'
+  }
+});
+
 angular.module('livrio', [
   'ionic',
   'ngMessages',
@@ -59,6 +77,8 @@ angular.module('livrio', [
   'livrio.config',
   'livrio.directives',
   'ionicLazyLoad',
+  'angularMoment',
+  'monospaced.elastic',
   'pascalprecht.translate'
   ])
 
@@ -133,6 +153,7 @@ angular.module('livrio', [
         $rootScope.user = JSON.parse(window.localStorage.user);
         $http.defaults.headers.common['Authorization'] = window.localStorage.getItem('token');
         window.location = '#/app/book';
+        // window.location = '#/app/book-view/56bd44b7f387bc212b83b524';
         document.addEventListener("deviceready", function() {
             USER.updateLocation();
         });

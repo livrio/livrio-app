@@ -14,20 +14,17 @@ angular.module('livrio.services')
         }
     }
 
-    self.add = function(book, user, duration, status) {
-        var post = {
-            book: book,
-            user: user,
-            duration: duration || 1,
-            status: status || 'requested'
-        };
-
+    self.messages = function(id, offset) {
         var deferred = $q.defer();
-        $http.put(settings.URL.LOAN + "/start", post)
+
+        $http.get(toRouter('/loan/{0}/messages',id),{
+            params: {
+                offset: offset || 0
+            }
+        })
         .success(function(response) {
-            if (!response.errors) {
-                response.data.author = autor(response.data.author);
-                deferred.resolve(response.data);
+            if (response._status == 'OK') {
+                deferred.resolve(response._items);
             }
             else {
                 deferred.reject();
@@ -40,31 +37,38 @@ angular.module('livrio.services')
         return deferred.promise;
     };
 
-    
+    self.all = function(params) {
+        params = params || {};
 
-    self.changeStatus = function(book, status, text) {
-        var post = {
-            book: book,
-            text: text || '',
-            status: status || 'requested'
-        };
-
+        params.sort = 'title';
+        params.order = 'asc';
+        params.limit = 20;
         var deferred = $q.defer();
-        $http.put(settings.URL.LOAN + "/status", post)
+        $http.get(toRouter('/loan'), {
+            params: params
+        })
         .success(function(response) {
-            if (!response.errors) {
+            if (response._status == 'OK') {
+                deferred.resolve(response._items);
+            }
+            else {
+                deferred.resolve([]);
+            }
+        })
+        .error(function() {
+            deferred.resolve([]);
+            console.log("TRATAR ERROR");
+        });
+        return deferred.promise;
+    };
 
-                if (status == 'requested_canceled' || status == 'wait_delivery_canceled') {
-                    $cordovaToast.showLongBottom(trans('loan.toast_request_cancel'));
-                }
-                else if (status == 'requested_returned') {
-                    $cordovaToast.showLongBottom(trans('loan.toast_request'));
-                }
-                else if (status == 'requested_denied') {
-                    $cordovaToast.showLongBottom(trans('loan.toast_loan_cancel'));
-                }
-                response.data.author = autor(response.data.author);
-                deferred.resolve(response.data);
+    self.createMessage = function(id, text) {
+        var deferred = $q.defer();
+
+        $http.post(toRouter('/loan/{0}/messages',id),{'text':text})
+        .success(function(response) {
+            if (response._status == 'OK') {
+                deferred.resolve(response);
             }
             else {
                 deferred.reject();
@@ -72,7 +76,92 @@ angular.module('livrio.services')
         })
         .error(function() {
             deferred.reject();
-            console.log("TRATAR ERROR");
+        });
+
+        return deferred.promise;
+    };
+
+    self.updateAddress = function(id, address) {
+        var deferred = $q.defer();
+
+        $http.patch(toRouter('/loan/{0}/address',id),{'address': address})
+        .success(function(response) {
+            if (response._status == 'OK') {
+                deferred.resolve(response);
+            }
+            else {
+                deferred.reject();
+            }
+        })
+        .error(function() {
+            deferred.reject();
+        });
+
+        return deferred.promise;
+    }
+
+
+    self.get = function(id){
+        var deferred = $q.defer();
+
+        $http.get(toRouter('/loan/{0}',id))
+        .success(function(response) {
+            if (response._status == 'OK') {
+                deferred.resolve(response);
+            }
+            else {
+                deferred.reject();
+            }
+        })
+        .error(function() {
+            deferred.reject();
+        });
+
+        return deferred.promise;
+    }
+
+    self.add = function(book, user, duration) {
+        var post = {
+            'friend_id': user,
+            duration: duration || 1
+        };
+
+        var deferred = $q.defer();
+        $http.post(toRouter('/books/{0}/loan', book), post)
+        .success(function(response) {
+            if (response._status == 'OK') {
+                deferred.resolve(response);
+            }
+            else {
+                deferred.reject();
+            }
+        })
+        .error(function() {
+            deferred.reject();
+        });
+
+        return deferred.promise;
+    };
+
+
+    self.changeStatus = function(loan, status, text) {
+        var post = {
+            text: text || '',
+            status: status || 'requested'
+        };
+
+        var deferred = $q.defer();
+        $http.post(toRouter('/loan/{0}/status',loan), post)
+        .success(function(response) {
+            if (response._status == 'OK') {
+                deferred.resolve(true);
+            }
+            else {
+                deferred.reject();
+            }
+        })
+        .error(function() {
+            deferred.reject();
         });
 
         return deferred.promise;
@@ -88,9 +177,10 @@ angular.module('livrio.services')
 
         $rootScope.$emit("loan.modal", book, function(duration) {
             console.log('success');
-            self.add(book.id, $rootScope.user.id, duration)
+            self.add(book._id, $rootScope.user._id, duration)
             .then(function(data) {
-                book.loaned = data.loaned;
+                book.loaned = data;
+                window.location = '#/app/loan/' + data._id;
                 $cordovaToast.showLongBottom(trans('loan.toast_request_loan'));
             });
             deferred.resolve();

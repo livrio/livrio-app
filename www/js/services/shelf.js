@@ -18,14 +18,14 @@ angular.module("livrio.services")
         }).then(function(res) {
             console.log(res);
             if (res) {
-                $http.post(settings.URL.SHELF, {
+                $http.post( toRouter('/shelves'), {
                     name: res
                 })
                 .success(function(response) {
-                    if (!response.errors) {
+                    if (response._status == 'OK') {
                         $cordovaToast.showLongBottom(trans('shelf.toast_create'));
-                        $rootScope.shelfs.push(response.data);
-                        deferred.resolve(response.data);
+                        $rootScope.shelfs.push(response);
+                        deferred.resolve(response);
                     }
                     else {
                         deferred.reject();
@@ -52,13 +52,14 @@ angular.module("livrio.services")
         }).then(function(res) {
 
             if (res) {
-                $http.put(settings.URL.SHELF + '/' + shelf.id, {
+                console.log(shelf);
+                $http.patch( toRouter('/shelves/{0}', shelf._id), {
                     name: res
                 })
                 .success(function(response) {
-                    if (!response.errors) {
+                    if (response._status == 'OK') {
                         $cordovaToast.showLongBottom(trans('shelf.toast_update'));
-                        shelf.name = response.data.name;
+                        shelf.name = response.name;
                         self.all();
                         deferred.resolve(response.data);
                     }
@@ -85,16 +86,15 @@ angular.module("livrio.services")
             template: trans('shelf.popup_delete_msg') + '<br /><strong>' + shelf.name + '</strong>'
         }).then(function(res) {
             if (res) {
-                $http.delete(settings.URL.SHELF + "/" + shelf.id)
+                $http.delete( toRouter('/shelves/{0}', shelf._id))
                 .success(function(response) {
-                    if (!response.errors) {
-                        self.all();
-                        $cordovaToast.showLongBottom(trans('shelf.toast_delete'));
-                        $ionicHistory.nextViewOptions({
-                            disableBack: true
-                        });
-                        $state.go('app.book');
-                    }
+                    self.all();
+                    $cordovaToast.showLongBottom(trans('shelf.toast_delete'));
+                    $ionicHistory.nextViewOptions({
+                        disableBack: true
+                    });
+                    $state.go('app.book');
+                    
                 })
                 .error(function() {
                     $rootScope.$emit("error.http");
@@ -108,7 +108,7 @@ angular.module("livrio.services")
             id: 0
         };
         angular.forEach(function(item) {
-            if (id === item.id) {
+            if (id === item._id) {
                 result = item;
                 return false;
             }
@@ -119,33 +119,22 @@ angular.module("livrio.services")
 
     self.books = function(id) {
         return BOOK.all({
-            shelf: id || 0
+            shelves: [id] || []
         });
     };
 
     self.get = function(id) {
         var deferred = $q.defer();
 
-        var shelf = self.getCache(id);
+        $http.get(toRouter('/shelves/{0}', id))
+        .success(function(response) {
+            deferred.resolve(response);
 
-        if (shelf.id === 0) {
-            $http.get(settings.URL.SHELF + "/" + id)
-            .success(function(response) {
-                if (!response.errors) {
-                    deferred.resolve(response.data);
-                }
-                else {
-                    console.log('ERROR SHELF CREATE');
-                    deferred.reject();
-                }
-            })
-            .error(function() {
-                console.log("TRATAR ERROR");
-            });
-        }
-        else {
-            deferred.resolve(shelf);
-        }
+        })
+        .error(function() {
+            console.log("TRATAR ERROR");
+        });
+
 
 
         return deferred.promise;
@@ -154,15 +143,11 @@ angular.module("livrio.services")
 
     self.all = function() {
         var deferred = $q.defer();
-        $http.get(settings.URL.SHELF)
+        $http.get(toRouter('/shelves'))
         .success(function(response) {
-            if (!response.errors) {
-                $rootScope.shelfs = response.data;
-                deferred.resolve(response.data);
-            }
-            else {
-                console.log('ERROR SHELF CREATE');
-            }
+            response._items = response._items || []
+            $rootScope.shelfs = response._items;
+            deferred.resolve(response._items);
         })
         .error(function() {
             console.log("TRATAR ERROR");

@@ -1,32 +1,29 @@
 angular.module('livrio.controllers')
 
-.controller('book_loan_ctrl', function($scope, $rootScope, $filter, BOOK) {
+.controller('book_loan_ctrl', function($scope, $rootScope, $filter, LOAN) {
 
 
     var trans = $filter('translate');
 
     $scope.empty_list = trans('book_loan.empty_list');
 
-    $scope.librarys = [];
+    $scope.activeTab = true;
+
 
     $scope.loading = true;
     $scope.onRefresh = function() {
 
-        BOOK.all({
-            loan: 'my'
-        })
+        params = {}
+        if ($scope.activeTab) {
+            params['active'] = true
+        }
+        else {
+            params['history'] = true
+        }
+        LOAN.all(params)
         .then(function(data) {
-            $scope.bookLoaneds = data;
-
-            BOOK.all({
-                loan: 'other'
-            })
-            .then(function(data) {
-                $scope.bookLoans = data;
-
-                $scope.loading = false;
-                $scope.$broadcast('scroll.refreshComplete');
-            });
+            $scope.loans = data;
+            $scope.loading = false;
         });
     };
 
@@ -35,4 +32,10 @@ angular.module('livrio.controllers')
     $rootScope.$on("book_loan.refresh",function() {
         $scope.onRefresh();
     });
+
+
+    $scope.onChangeTab = function(tab) {
+        $scope.activeTab = tab;
+        $scope.onRefresh();
+    }
 });

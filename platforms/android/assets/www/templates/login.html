@@ -1,7 +1,51 @@
 <ion-view>
-  <ion-content class="login" >
+  <ion-content class="login" scroll="false" ng-class="{'hide-count':hideCount}">
 
-<div class="center">
+<a class="skip" ng-click="onSkip()" href="#" ng-hide="hideCount">Pular</a>
+<ion-slide-box on-slide-changed="onChangeTabSlide($index)">
+
+<ion-slide  class="box-3">
+
+  <img src="img/intro/toque.png" class="icon-intro" />
+    <div class="box">
+        <h1>Cadastre seus livros com um toque</h1>
+        <p>
+        Escaneie o código de barras com o app e pronto. Você já pode emprestar seus livros.
+        </p>
+        </div>
+  </ion-slide>
+  
+  <ion-slide class="box-1">
+
+    <img src="img/intro/lupa.png"  class="icon-intro"/>
+
+    <div  class="box">
+        <h1>Solicite um empréstimo</h1>
+        <p>
+        Procure entre os livros dos seus amigos ou das pessoas que estão por perto e peça emprestado.
+        </p>
+    </div>
+
+
+  </ion-slide >
+  <ion-slide  class="box-2">
+
+    <img src="img/intro/livro.png"  class="icon-intro"/>
+
+        <div  class="box">
+        <h1>Gerencie seus empréstimos</h1>
+        <p>
+        Aprove, empreste e combine um prazo. Livrio avisa a hora da devolução.
+        </p>
+    </div>
+  </ion-slide>
+
+  
+
+
+  <ion-slide >
+
+  <div class="center">
                 <img src="img/login.svg" style="    height: 150px;" />
 
             </div>
@@ -19,10 +63,7 @@
     </div>
 
 
-    <ion-slide-box show-pager="false" on-slide-changed="onChangeTab($index)" ng-hide="loading">
-      
-      <ion-slide>
-        <form ng-submit="doLogin(formLogin.$valid)" name="formLogin" novalidate class="form-login">
+  <form ng-submit="doLogin(formLogin.$valid)" name="formLogin" novalidate class="form-login" ng-show="tab==0 && !loading">
            
         
         
@@ -70,15 +111,9 @@
 
 
         </form>
-        
 
 
-      </ion-slide>
-
-      <ion-slide>
-       
-
-        <form ng-submit="doCreate(formCreate.$valid)" name="formCreate" novalidate>
+         <form ng-submit="doCreate(formCreate.$valid)" name="formCreate" novalidate ng-show="tab==1 && !loading">
             <div class="list">
 
             <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formCreate.fullname.$invalid && submittedCreate}">
@@ -124,15 +159,13 @@
 
           </form>
 
-      </ion-slide>
-
-    </ion-slide-box>
-
-    
+   
+  </ion-slide>
 
 
-    
 
-    
+</ion-slide-box>    
+
+
   </ion-content>
 </ion-view>

@@ -46,6 +46,7 @@ $calm: #63c9ce !default;
 @import "scss/book_view";
 @import "scss/books";
 @import "scss/friends"; 
+@import "scss/loan-view"; 
  
 
 ul.rating li {
@@ -89,19 +90,20 @@ ul.rating li i {
 .invite-tab{
     position: relative;
     &.tabs-background-assertive{
-        background-color: $assertive;
-        border: none;
+        background-color: #fff;
+        border-bottom: 1px solid #ddd;
     }
 
     a{
-        color: rgba(249, 249, 249, 0.6);
+        color: #444;
         text-transform: uppercase;
         font-weight: 500;
         max-width: inherit;
 
 
         &.active{
-            color: #fff;
+            color: #444;
+            border-bottom: 2px solid $assertive;
         }
     }
 
@@ -841,6 +843,89 @@ label.item.valid-lr {
                 border-bottom: 3px solid #d6113c;
             }
 
+        }
+    }
+
+    .slider {
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      bottom: 0 !important;
+      right: 0 !important;
+    }
+
+    .skip{
+        position: absolute;
+        bottom: 16px;
+        color: #fff;
+        right: 20px;
+        font-size: 12px;
+        text-transform: inherit;
+        text-decoration: underline;
+        z-index: 10;
+    }
+
+    .slider-slide {
+
+        
+        img.icon-intro {
+            padding: 0 70px;
+            width: 80%;
+            margin-top: 13%;
+        }
+
+        div.box{
+            margin-top: 40px;
+            padding: 0 70px;
+            text-align: left;
+
+            h1{
+                font-size: 18px;
+                color: #6C14A3;
+            }
+
+            p{
+                font-size: 14px;
+                line-height: 23px;
+                font-weight: 300;
+            }
+        }
+    }
+
+    .slider-pager-page{
+        .icon {
+            color: #fff;
+        }
+    }
+
+    &.hide-count .slider-pager-page{
+        display: none;
+    }
+
+
+    .box-1{
+        text-align: center;
+        background-image: url(../img/intro/1.png);
+        
+
+        
+    }
+
+    .box-2{
+        text-align: center;
+        background-image: url(../img/intro/2.png);
+    }
+
+    .box-3{
+        text-align: center;
+        background-image: url(../img/intro/3.png);
+
+        div.box h1{
+            color: #F8AF00;
+        }
+
+        div.box p{
+            color: #fff;
         }
     }
 

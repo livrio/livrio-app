@@ -61,21 +61,20 @@ angular.module('livrio.controllers')
         $scope.activeTab = tab;
         if (tab == 0) { //procurar
             params = {
-                type: 'other'
+                where: 'other'
             };
             $scope.showSearch = true;
         }
         else if (tab == 1) {
             params = {
-                suggest: true,
-                contacts: true
+                where: 'suggest'
             };
             $scope.showSearch = false;
         }
         else if (tab == 2) {
             $scope.showSearch = true;
             params = {
-                contacts: true
+                where: 'contacts'
             };
         }
 
@@ -83,7 +82,7 @@ angular.module('livrio.controllers')
 
 
         params['limit'] = 20;
-        params['page'] = 1;
+        params['offset'] = 1;
 
         if (tab == 1) {
             params['limit'] = 100;
@@ -124,7 +123,7 @@ angular.module('livrio.controllers')
             if (reset) {
                 $scope.friendsResult = [];
             }
-            params['word'] = "%" + input + "%";
+            params['search'] = input;
             $scope.pagging = true;
             $scope.searchStart = true;
             FRIEND.all(params).then(function(data) {
@@ -156,8 +155,8 @@ angular.module('livrio.controllers')
         $scope.hasScroll = false;
         $scope.searchStart = false;
 
-        delete params['word'];
-        params['page'] = 1;
+        delete params['search'];
+        params['offset'] = 1;
         load();
     };
 
@@ -176,7 +175,7 @@ angular.module('livrio.controllers')
     $scope.onChangeTab(null, 0);
 
     $scope.loadMore = function() {
-        params['page'] = params['page'] + 1;
+        params['offset'] = params['offset'] + 1;
         var word = $scope.search.word;
         if (word && word.length >= 3) {
             $scope.onSearch($scope.search.word, true);

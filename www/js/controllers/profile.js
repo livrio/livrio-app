@@ -29,7 +29,7 @@ angular.module('livrio.controllers')
 
 
 
-    var id = $rootScope.user.id;
+    var id = $rootScope.user._id;
 
 
     $scope.onPicture = function() {
@@ -101,12 +101,12 @@ angular.module('livrio.controllers')
         }
 
 
-        $http.put(settings.URL.USER + '/' + id, post)
+        $http.patch(toRouter('/accounts/update'), post)
         .success(function(response) {
             if (!response.errors) {
-                window.localStorage.user = JSON.stringify(response.data);
-                $rootScope.user = response.data;
-                $scope.form = $rootScope.user;
+                // window.localStorage.user = JSON.stringify(response.data);
+                // $rootScope.user = response.data;
+                // $scope.form = $rootScope.user;
                 $cordovaToast.showLongBottom(trans('profile.toast_save'));
             }
             else {
@@ -167,10 +167,11 @@ angular.module('livrio.controllers')
             }
 
 
-            $http.put(settings.URL.USER + '/' + id, post)
+            $http.patch( toRouter('/accounts/update'), post)
             .success(function(response) {
-                window.localStorage.user = JSON.stringify(response.data);
-                $rootScope.user = response.data;
+                // window.localStorage.user = JSON.stringify(response.data);
+                // $rootScope.user = response.data;
+                $rootScope.user[field.$name] = field.$modelValue
                 $cordovaToast.showLongBottom(trans('profile.toast_save'));
             });
         }

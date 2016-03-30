@@ -80,7 +80,7 @@ angular.module("livrio.controllers")
 
     $rootScope.$on("loan.add",function(e, item) {
         book = item;
-        id = item.id;
+        id = item._id;
         onRefresh();
         $scope.bookTitle = item.title;
     });
@@ -102,15 +102,15 @@ angular.module("livrio.controllers")
         var ids = [];
         angular.forEach($scope.shelfList, function(v) {
             if (v.checked) {
-                ids.push(v.id);
+                ids.push(v._id);
             }
         });
 
         console.log(book_shelf);
 
         BOOK.save({
-            id: book_shelf.id,
-            shelfs: ids
+            _id: book_shelf._id,
+            shelves: ids
         })
         .then(function(book) {
             book_shelf = book;
@@ -130,7 +130,7 @@ angular.module("livrio.controllers")
         angular.forEach($scope.shelfList, function(v) {
             v.checked = false;
             angular.forEach(book.shelfs, function(v1) {
-                if (v1.id == v.id) {
+                if (v1._id == v._id) {
                     v.checked = true;
                 }
             });

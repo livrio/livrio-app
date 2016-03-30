@@ -3,12 +3,14 @@ angular.module("livrio.services")
 
     var self = this;
 
-    function saveSession(user, token) {
+    self.registerToken = function(token) {
         window.localStorage.token = token;
         $http.defaults.headers.common.Authorization = token;
+    };
+
+    function saveSession(user) {
         window.localStorage.user = JSON.stringify(user);
         $rootScope.user = user;
-
         PUSH.register( true);
     }
 
@@ -20,8 +22,7 @@ angular.module("livrio.services")
             $cordovaContacts.find({
                 fields:['id','displayName','phoneNumbers','emails','birthdays','photos']
             }).then(function(allContacts) {
-                console.log(JSON.stringify(allContacts))
-                $http.post(settings.URL.CONTACT, allContacts)
+                $http.post( toRouter('/contacts') , allContacts)
                 .success(function() {
                     window.localStorage.syncContact = true;
                     deferred.resolve();
@@ -48,9 +49,8 @@ angular.module("livrio.services")
         var user = $rootScope.user;
 
         navigator.geolocation.getCurrentPosition(function(position) {
-            $http.put(settings.URL.USER + "/" + user.id, {
-                latitude: position.coords.latitude,
-                longitude: position.coords.longitude
+            $http.patch( toRouter('/accounts/update'), {
+                location: position.coords.latitude + "," + position.coords.longitude
             });
         });
     };
@@ -87,13 +87,13 @@ angular.module("livrio.services")
 
         angular.extend(post, params);
 
-        $http.post(settings.URL.USER, post)
+        $http.post( toRouter('/accounts/create'), post)
         .success(function(response) {
-            if (!response.errors) {
+            if (response._status == 'OK') {
                 deferred.resolve(response.data);
             }
             else {
-                if (response.errors.code === 10) {
+                if (response._code === 10) {
                     deferred.reject({
                         email:true
                     });
@@ -112,6 +112,27 @@ angular.module("livrio.services")
         return deferred.promise;
     };
 
+    self.get = function(id){
+        var deferred = $q.defer();
+
+        $http.get(toRouter('/accounts/info'))
+        .success(function(response) {
+
+            if (response._status == 'OK') {
+                deferred.resolve(response);
+
+            }
+            else {
+                deferred.reject();
+            }
+        })
+        .error(function(error) {
+            deferred.reject();
+        });
+
+        return deferred.promise;
+    };
+
     self.auth = function(params) {
 
         var deferred = $q.defer();
@@ -120,12 +141,17 @@ angular.module("livrio.services")
 
         angular.extend(post, params);
 
-        $http.post(settings.URL.LOGIN, post)
+        $http.post(toRouter('/auth'), post)
         .success(function(response) {
 
-            if (!response.errors) {
-                saveSession(response.data.user, response.data.token);
-                deferred.resolve(response.data.user);
+            if (response._status == 'OK') {
+                self.registerToken(response.token);
+                self.get(response._id)
+                .then(function(data) {
+                    saveSession(data);
+                    deferred.resolve();
+                });
+
                 self.updateLocation();
             }
             else {

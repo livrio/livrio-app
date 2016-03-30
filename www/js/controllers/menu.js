@@ -14,7 +14,7 @@ angular.module('livrio.controllers')
                 disableBack: true
             });
             $state.go('app.book-shelf',{
-                id: item.id
+                id: item._id
             });
             $ionicHistory.clearCache();
         });

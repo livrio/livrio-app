@@ -150,7 +150,7 @@ angular.module("livrio.controllers")
         item.added = true;
         $cordovaToast.showLongBottom(trans('book_form.toast_create'));
         BOOK.save({
-            ref: item.id
+            ref: item._id
         }, true)
         .then(function() {
             $rootScope.$emit("book.refresh");

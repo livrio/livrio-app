@@ -1,7 +1,16 @@
 "use strict";
-// var DOMAIN_API = "http://api.livr.io/v1";
-// 
-var DOMAIN_API = "http://api-test.livr.io/v1";
+var DOMAIN_API = "http://api.livr.io/v1";
+
+var DOMAIN_API2 = "http://127.0.0.1:5000/v1";
+
+var DOMAIN_API2 = "http://127.0.0.1:5000/v1";
+// var DOMAIN_API = "http://api-test.livr.io/v1";
+
+function toRouter(route) {
+    var args = Array.prototype.slice.call(arguments, 1);
+    args.unshift(DOMAIN_API2 + route)
+    return String.format.apply(null,args)
+}
 
 angular.module("livrio.config",[
     'pascalprecht.translate'
@@ -10,6 +19,8 @@ angular.module("livrio.config",[
     API_BASE_URL: "http://api.wiflip.in/v1",
     GA: "UA-54794657-1",
     URL: {
+        ISBNDB: 'http://127.0.0.1:5001/v1/book/{0}',
+        ISBNDB_SEARCH: 'http://127.0.0.1:5001/v1/search',
         USER: DOMAIN_API + "/user",
         LOGIN: DOMAIN_API + "/auth/login",
         LOGOUT: DOMAIN_API + "/auth/logout",
@@ -241,6 +252,43 @@ angular.module("livrio.config",[
             }
         }
     })
+
+    .state("app.loan", {
+        url: "/loan/:id",
+        views: {
+            "menuContent": {
+                templateUrl: "templates/loan-view.html",
+                controller: "loan_view_ctrl"
+            }
+        }
+    })
+
+    .state('app.loan.book', {
+        url: '/book',
+        views: {
+            'tab-book': {
+                templateUrl: 'templates/loan-tab-book.html'
+            }
+        }
+      })
+
+    .state('app.loan.friend', {
+        url: '/friend',
+        views: {
+            'tab-friend': {
+                templateUrl: 'templates/loan-tab-friend.html'
+            }
+        }
+      })
+
+    .state('app.loan.message', {
+        url: '/message',
+        views: {
+            'tab-message': {
+                templateUrl: 'templates/loan-tab-message.html'
+            }
+        }
+      })
 
     /*
         ----> ROUTE: AMIGOS

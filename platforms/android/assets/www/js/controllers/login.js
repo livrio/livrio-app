@@ -28,7 +28,6 @@ angular.module('livrio.controllers', [])
 
     $scope.onChangeTab = function(index) {
         $scope.tab = index;
-        $ionicSlideBoxDelegate.slide(index);
     };
 
     $scope.form = {
@@ -115,7 +114,7 @@ angular.module('livrio.controllers', [])
                 .then(function(data) {
                     $ionicHistory.clearCache();
                     window.location = '#/app/friend-invite';
-                    firstLogin(data.first_name);
+                    //firstLogin();
                     hideLoading();
                 },
                 function() {
@@ -148,9 +147,9 @@ angular.module('livrio.controllers', [])
         .then(function(user) {
             hideLoading();
             window.location = '#/app/book';
-            if (user.create) {
-                firstLogin(user.first_name);
-            }
+            // if (user.create) {
+                //firstLogin(user.first_name);
+            // }
         },
         function(error) {
             hideLoading();
@@ -167,5 +166,15 @@ angular.module('livrio.controllers', [])
         });
 
     };
+
+
+    $scope.onChangeTabSlide = function(index) {
+        $scope.hideCount = index == 3;
+    }
+
+    $scope.onSkip = function() {
+        console.log('skip');
+        $ionicSlideBoxDelegate.slide(3);
+    }
 
 });

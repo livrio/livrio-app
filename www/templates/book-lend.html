@@ -21,9 +21,11 @@
 
         <div class="list friend-list" ng-hide="searching">
 
-            <div class="item item-avatar" ng-repeat="item in friends" ng-click="doLoan(item)">
+            <div class="friend-card item item-avatar" ng-repeat="item in friends" ng-click="doLoan(item)">
             <img ng-src="{{item.photo}}" />
             {{item.fullname}}
+            <span class="amount" ng-show="item.amount_books">{{'friend.book' | translate}} {{item.amount_books}}</span>
+    <span class="amount" ng-show="item.city && item.state">{{item.city}}/{{item.state}}</span>
             </div>
 
         </div>

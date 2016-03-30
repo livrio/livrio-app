@@ -57,37 +57,7 @@
         overflow: hidden;
     }
 
-    .details{
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        align-items: flex-start;
-    }
-
-    .book-info{
-
-        .cover{
-            width: 125px;
-        }
-
-
-        .info {
-            padding-left: 20px;
-            flex: 1;
-
-            p {
-                color: #080C15;
-                font-size: 12px;
-                strong{
-                    display: block;
-                    font-size: 13px;
-                    font-weight: 500;
-                }
-            }
-        }
-    }
+    
 
     .item.description{
         font-size: 12px;
@@ -106,4 +76,35 @@
         font-family: $font-family-title;
         font-size: 19px;
     }
+}
+
+
+.book-info {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    
+    .cover{
+        width: 125px;
+    }
+
+
+    .info {
+        padding-left: 20px;
+        flex: 1;
+
+        p {
+            color: #080C15;
+            font-size: 12px;
+            strong{
+                display: block;
+                font-size: 13px;
+                font-weight: 500;
+            }
+        }
+    }
+    
 }

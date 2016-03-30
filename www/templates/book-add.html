@@ -29,10 +29,10 @@
         <div ng-repeat="item in librarys" class="item book-card">
             <div>
                 
-                <img class="cover" image-lazy-src="{{item.thumb}}" image-lazy-loader="android" image-lazy-distance-from-bottom-to-load="100"/>
+                <img class="cover" image-lazy-src="{{item.cover}}" image-lazy-loader="android" image-lazy-distance-from-bottom-to-load="100"/>
                 <div class="content">
                     <h2>{{item.title}}</h2>
-                    <h3>{{item.author}}</h3>
+                    <h3>{{item.authors | concat}}</h3>
                 </div>
 
                 <button class="button button-book-add icon-left button-small ion-plus" ng-click="onAdd(item)" ng-hide="item.added">{{'book_add.add' | translate}}
