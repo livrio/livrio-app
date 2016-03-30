@@ -5,17 +5,18 @@ angular.module('livrio.controllers')
 
     var user = $rootScope.user;
 
-    $scope.config = user.config;
+    $scope.config = user.config || {};
 
     $scope.onChangeField = function() {
         var post = {
             config: $scope.config
         };
 
-        $http.put(settings.URL.USER + '/' + user.id, post)
+        console.log(post)
+        $http.patch(toRouter('/accounts/update'), post)
         .success(function(response) {
-            window.localStorage.user = JSON.stringify(response.data);
-            $rootScope.user = response.data;
+            // window.localStorage.user = JSON.stringify(response.data);
+            // $rootScope.user = response.data;
         });
     };
 });

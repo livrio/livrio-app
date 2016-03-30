@@ -52,19 +52,19 @@ function convertImgToBase64URL(url, callback, outputFormat) {
 
 moment.locale('en', {
   relativeTime: {
-    future : 'em %s',
-    past : '%s atrás',
-    s : 'poucos segundos',
-    m : 'um minuto',
-    mm : '%d minutos',
-    h : 'uma hora',
-    hh : '%d horas',
-    d : 'um dia',
-    dd : '%d dias',
-    M : 'um mês',
-    MM : '%d meses',
-    y : 'um ano',
-    yy : '%d anos'
+    future : '%s',
+    past : '%s',
+    s : 'agora',
+    m : 'há 1 minuto',
+    mm : 'há %d minutos',
+    h : 'há 1 hora',
+    hh : 'há %d horas',
+    d : 'há 1 dia',
+    dd : 'há %d dias',
+    M : 'há 1 mês',
+    MM : 'há %d meses',
+    y : 'há 1 ano',
+    yy : 'há %d anos'
   }
 });
 

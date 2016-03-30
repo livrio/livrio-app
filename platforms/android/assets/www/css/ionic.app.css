@@ -8047,7 +8047,13 @@ a.button {
       position: relative;
       top: 5px;
       left: 5px;
-      font-style: italic; }
+      line-height: 12px; }
+      .book-card .user-loan > span small {
+        display: block; }
+        .book-card .user-loan > span small.success {
+          color: #1B5E20; }
+        .book-card .user-loan > span small.danger {
+          color: #B71C1C; }
   .book-card .button-book-add {
     text-transform: uppercase;
     font-size: 10px;
@@ -8141,6 +8147,10 @@ a.button {
   .loan-view .hero > .content {
     position: initial;
     margin-top: -50px; }
+  .loan-view .bar-cancel {
+    text-align: center;
+    background-color: #B71C1C !important;
+    color: #fff; }
 
 .messager .message {
   font-size: 11px; }
@@ -8274,15 +8284,16 @@ ul.rating li i {
 .invite-tab {
   position: relative; }
   .invite-tab.tabs-background-assertive {
-    background-color: #d6123c;
-    border: none; }
+    background-color: #fff;
+    border-bottom: 1px solid #ddd; }
   .invite-tab a {
-    color: rgba(249, 249, 249, 0.6);
+    color: #444;
     text-transform: uppercase;
     font-weight: 500;
     max-width: inherit; }
     .invite-tab a.active {
-      color: #fff; }
+      color: #444;
+      border-bottom: 2px solid #d6123c; }
   .invite-tab.tabs-top {
     top: 0px; }
 
@@ -8762,6 +8773,53 @@ label.item.valid-lr {
       text-transform: uppercase; }
       .login .tab-login div.active {
         border-bottom: 3px solid #d6113c; }
+  .login .slider {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    right: 0 !important; }
+  .login .skip {
+    position: absolute;
+    bottom: 16px;
+    color: #fff;
+    right: 20px;
+    font-size: 12px;
+    text-transform: inherit;
+    text-decoration: underline;
+    z-index: 10; }
+  .login .slider-slide img.icon-intro {
+    padding: 0 70px;
+    width: 80%;
+    margin-top: 13%; }
+  .login .slider-slide div.box {
+    margin-top: 40px;
+    padding: 0 70px;
+    text-align: left; }
+    .login .slider-slide div.box h1 {
+      font-size: 18px;
+      color: #6C14A3; }
+    .login .slider-slide div.box p {
+      font-size: 14px;
+      line-height: 23px;
+      font-weight: 300; }
+  .login .slider-pager-page .icon {
+    color: #fff; }
+  .login.hide-count .slider-pager-page {
+    display: none; }
+  .login .box-1 {
+    text-align: center;
+    background-image: url(../img/intro/1.png); }
+  .login .box-2 {
+    text-align: center;
+    background-image: url(../img/intro/2.png); }
+  .login .box-3 {
+    text-align: center;
+    background-image: url(../img/intro/3.png); }
+    .login .box-3 div.box h1 {
+      color: #F8AF00; }
+    .login .box-3 div.box p {
+      color: #fff; }
 
 .book-form .item {
   border: none;

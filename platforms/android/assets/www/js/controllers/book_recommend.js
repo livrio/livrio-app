@@ -52,10 +52,10 @@ angular.module('livrio.controllers')
     };
 
     $scope.doRecommend = function(user) {
-        BOOK.recommend(book, user.id)
+        BOOK.recommend(book, user._id)
         .then(function() {
             $state.go('app.book-view',{
-                id: book.id
+                id: book._id
             });
         });
 

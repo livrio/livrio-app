@@ -106,7 +106,19 @@
             position: relative;
             top: 5px;
             left: 5px;
-            font-style: italic;
+            line-height: 12px;
+
+            small{
+                display: block;
+
+                &.success{
+                    color: #1B5E20;
+                }
+
+                &.danger{
+                    color: #B71C1C;
+                }
+            }
 
         }
     }

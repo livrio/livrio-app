@@ -1,16 +1,16 @@
-<div class="item book-card" ng-hide="book.removed" ui-sref="app.book-view({id:book.id})">
+<div class="item book-card" ng-hide="book.removed" ui-sref="app.book-view({id:book._id})">
 
     <button ng-click="onActionBook($event, book)" ng-show="button" class="button button-clean button-icon ion-android-more-vertical" type="button"></button>
     <div>
 
         
-        <img class="cover" image-lazy-src="{{book.thumb}}" image-lazy-loader="android" image-lazy-distance-from-bottom-to-load="100"/>
+        <img class="cover" image-lazy-src="{{book.cover}}" image-lazy-loader="android" image-lazy-distance-from-bottom-to-load="100"/>
 
         <div class="content">
             <h2>{{book.title}}</h2>
-            <h3>{{book.author}}</h3>
+            <h3>{{book.authors | concat}}</h3>
 
-            <div class="user-loan" ng-show="book.loaned && book.is_owner && book.owner.id==user.id && !owner">
+            <div class="user-loan" ng-show="book.loaned && book.is_owner && book.owner._id==user._id && !owner">
                 <img ng-src="{{book.loaned.photo}}" /> 
                 <span class="name">
                     <span>{{'book.lent' | translate}}</span>
@@ -18,7 +18,7 @@
                 </span>
             </div>
 
-            <div class="user-loan" ng-show="book.loaned && !book.is_owner && book.loaned.id==user.id && !owner">
+            <div class="user-loan" ng-show="book.loaned && !book.is_owner && book.loaned._id==user._id && !owner">
                 <img ng-src="{{book.owner.photo}}" /> 
                 <span class="name">
                     <span>{{'book.loan' | translate}} </span>

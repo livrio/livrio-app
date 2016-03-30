@@ -21,7 +21,7 @@ angular.module('livrio.controllers')
         .then(function(data) {
             $scope.comments = [];
             angular.forEach(data, function(item) {
-                item.date = $filter('dateparse')(new Date(item.registration));
+                item.date = $filter('dateparse')(new Date(item._created));
                 $scope.comments.push(item);
             });
             $scope.loading = false;
@@ -29,7 +29,7 @@ angular.module('livrio.controllers')
 
             $interval(function() {
                 angular.forEach($scope.comments, function(item) {
-                    item.date = $filter('dateparse')(new Date(item.registration));
+                    item.date = $filter('dateparse')(new Date(item._created));
                 });
             }, 60000);
         });
@@ -44,7 +44,7 @@ angular.module('livrio.controllers')
         }
         BOOK.comment(book, message)
         .then(function(data) {
-            data.date = $filter('dateparse')(new Date(data.registration));
+            data.date = $filter('dateparse')(new Date(data._created));
             $scope.comments.unshift(data);
         });
 

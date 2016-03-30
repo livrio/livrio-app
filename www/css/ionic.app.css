@@ -8047,7 +8047,13 @@ a.button {
       position: relative;
       top: 5px;
       left: 5px;
-      font-style: italic; }
+      line-height: 12px; }
+      .book-card .user-loan > span small {
+        display: block; }
+        .book-card .user-loan > span small.success {
+          color: #1B5E20; }
+        .book-card .user-loan > span small.danger {
+          color: #B71C1C; }
   .book-card .button-book-add {
     text-transform: uppercase;
     font-size: 10px;
@@ -8109,6 +8115,12 @@ a.button {
 
 .loan-view {
   /*    border-color: #d6123c;*/ }
+  .loan-view .tab-a {
+    position: absolute !important;
+    top: 50px !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    right: 0 !important; }
   .loan-view .tabs {
     background: none;
     border-bottom: 1px solid #ddd; }
@@ -8141,12 +8153,22 @@ a.button {
   .loan-view .hero > .content {
     position: initial;
     margin-top: -50px; }
+  .loan-view .bar-cancel {
+    text-align: center;
+    background-color: #B71C1C !important;
+    color: #fff; }
+  .loan-view .bar-finish {
+    text-align: center;
+    background-color: #1B5E20 !important;
+    color: #fff; }
 
 .messager .message {
   font-size: 11px; }
 .messager .message-detail {
   white-space: nowrap;
   font-size: 11px; }
+  .messager .message-detail span {
+    color: #666; }
 .messager .bar.item-input-inset .item-input-wrapper input {
   width: 100% !important; }
 .messager .message-wrapper {
@@ -8195,6 +8217,10 @@ a.button {
   -webkit-transform: rotate(45deg);
   bottom: 10px;
   right: -5px; }
+.messager .chat-bubble.system {
+  background-color: #EEEFB0; }
+  .messager .chat-bubble.system:before {
+    background-color: #EEEFB0; }
 .messager .user-messages-top-icon {
   font-size: 28px;
   display: inline-block;
@@ -8763,6 +8789,53 @@ label.item.valid-lr {
       text-transform: uppercase; }
       .login .tab-login div.active {
         border-bottom: 3px solid #d6113c; }
+  .login .slider {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    right: 0 !important; }
+  .login .skip {
+    position: absolute;
+    bottom: 16px;
+    color: #fff;
+    right: 20px;
+    font-size: 12px;
+    text-transform: inherit;
+    text-decoration: underline;
+    z-index: 10; }
+  .login .slider-slide img.icon-intro {
+    padding: 0 70px;
+    width: 80%;
+    margin-top: 13%; }
+  .login .slider-slide div.box {
+    margin-top: 40px;
+    padding: 0 70px;
+    text-align: left; }
+    .login .slider-slide div.box h1 {
+      font-size: 18px;
+      color: #6C14A3; }
+    .login .slider-slide div.box p {
+      font-size: 14px;
+      line-height: 23px;
+      font-weight: 300; }
+  .login .slider-pager-page .icon {
+    color: #fff; }
+  .login.hide-count .slider-pager-page {
+    display: none; }
+  .login .box-1 {
+    text-align: center;
+    background-image: url(../img/intro/1.png); }
+  .login .box-2 {
+    text-align: center;
+    background-image: url(../img/intro/2.png); }
+  .login .box-3 {
+    text-align: center;
+    background-image: url(../img/intro/3.png); }
+    .login .box-3 div.box h1 {
+      color: #F8AF00; }
+    .login .box-3 div.box p {
+      color: #fff; }
 
 .book-form .item {
   border: none;

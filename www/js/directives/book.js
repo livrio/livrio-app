@@ -72,90 +72,30 @@ angular.module("livrio.directives")
 
     function processLoaned(book) {
         var o = {};
-        switch (book.loaned.status) {
-            case 'sent':
-                o.description = String.format('Te emprestou este livro por {0} dias.',book.loaned.duration);
-                o.buttons = [
-                    {
-                        text: 'Cancelar',
-                        cls: 'danger',
-                        action: 'sent_denied'
-                    },
-                    {
-                        text: 'Confirmar',
-                        cls: 'success',
-                        action: 'sent_accept'
-                    }
-                ];
-            break;
 
-            case 'requested':
-                o.description = 'Aguardando confirmação de empréstimo.';
-                o.buttons = [
-                    {
-                        text: 'Cancelar solicitação',
-                        cls: 'danger',
-                        action: 'requested_canceled'
-                    }
-                ];
-
-            case 'requested_accept':
-                o.description = 'Acerte detalhes do empréstimo deste livro.'
-                o.buttons = [
-                    {
-                        text: 'ver empréstimo',
-                        cls: 'success',
-                        action: 'show_loan'
-                    }
-                ];
-            break;
-
-        }
+        o.description = 'Acerte detalhes do empréstimo deste livro.'
+        o.buttons = [
+            {
+                text: 'ver empréstimo',
+                cls: 'success',
+                action: 'show_loan'
+            }
+        ];
         console.log(book,o);
         return o;
     }
 
     function processOwner(book) {
         var o = {};
-        switch (book.loaned.status) {
-            case 'requested':
-                o.description = String.format('Solicitou empréstimo deste livro por {0} dias.',book.loaned.duration);
-                o.buttons = [
-                    {
-                        text: 'Cancelar',
-                        cls: 'danger',
-                        action: 'requested_denied'
-                    },
-                    {
-                        text: 'Emprestar',
-                        cls: 'success',
-                        action: 'requested_accept'
-                    }
-                ];
-            break;
-            case 'sent':
-                o.description = 'Aguardando seu amigo confirmar recebimento do livro.'
-                o.buttons = [
-                    {
-                        text: 'Cancelar empréstimo',
-                        cls: 'danger',
-                        action: 'sent_canceled'
-                    }
-                ];
-            break;
 
-            case 'requested_accept':
-                o.description = 'Acerte detalhes do empréstimo deste livro.'
-                o.buttons = [
-                    {
-                        text: 'ver empréstimo',
-                        cls: 'success',
-                        action: 'show_loan'
-                    }
-                ];
-            break;
-        }
-        console.log(book,o);
+        o.description = 'Acerte detalhes do empréstimo deste livro.'
+        o.buttons = [
+            {
+                text: 'ver empréstimo',
+                cls: 'success',
+                action: 'show_loan'
+            }
+        ];
         return o;
     }
 
@@ -179,7 +119,7 @@ angular.module("livrio.directives")
             });
         }
         else if (status == 'show_loan') {
-            window.location = '#/app/loan/' + book._id;
+            window.location = '#/app/loan/' + book.loaned._id;
         }
         else {
             LOAN.changeStatus(book._id, status)
@@ -211,6 +151,11 @@ angular.module("livrio.directives")
             function changeBook(book) {
                 console.log('book');
                 if (!book) {
+                    return;
+                }
+
+                if (!book.loaned) {
+                    $scope.show = false;
                     return;
                 }
                 var user = $rootScope.user;

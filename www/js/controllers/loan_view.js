@@ -1,6 +1,6 @@
 angular.module('livrio.controllers')
 
-.controller('loan_view_ctrl', function($scope, $rootScope, $stateParams, $ionicScrollDelegate, $timeout, $interval, BOOK, LOAN) {
+.controller('loan_view_ctrl', function($scope, $rootScope, $stateParams, $ionicScrollDelegate, $timeout, $interval, $ionicPopup, BOOK, LOAN) {
 
     var id = $stateParams.id;
 
@@ -14,10 +14,15 @@ angular.module('livrio.controllers')
     $scope.user = {};
     $scope.friend  = {}
 
+    $scope.address = 'Informe o local de entrega aqui.';
+
 
     LOAN.get(id)
     .then(function(data) {
         data._created = new Date(data._created);
+        if (data.delivered_date) {
+            data.delivered_date = new Date(data.delivered_date);
+        }
         $scope.loaned = data;
         if (user_id == data['owner']['_id']) {
             $scope.user = data['owner'];
@@ -34,6 +39,10 @@ angular.module('livrio.controllers')
         $scope.friend.bg_photo = {
             'background-image': 'url(' + $scope.friend.photo + ')'
         };
+
+        if (data.address) {
+            $scope.address = data.address;
+        }
 
         $scope.loading_book = false;
     });
@@ -165,51 +174,47 @@ angular.module('livrio.controllers')
     };
 
 
-    // msgs = []
-    // msgs.push({
-    //     userId: '534b8e5aaa5e7afc1b23e69b',
-    //     date: new Date(),
-    //     text: 'AAAAAAAAAAA'
-    // });
-    // msgs.push({
-    //     userId: '534b8fb2aa5e7afc1b23e69c',
-    //     date: new Date(),
-    //     text: 'BBBBB'
-    // });
-    // msgs.push({
-    //     userId: '534b8e5aaa5e7afc1b23e69b',
-    //     date: new Date(),
-    //     text: 'Expression to evaluate when a scroll action completes. Has access to scrollLeft and scrollTop locals.\n\nExpression to evaluate when a scroll action completes. Has access to scrollLeft and scrollTop locals.'
-    // });
-    // msgs.push({
-    //     userId: '56bbe014f387bc234877fd5a',
-    //     date: new Date(),
-    //     text: 'DDDD'
-    // });
-
-    // msgs.push({
-    //     userId: '534b8e5aaa5e7afc1b23e69b',
-    //     date: new Date(),
-    //     text: 'AAAAAAAAAAA'
-    // });
-    // msgs.push({
-    //     userId: '534b8fb2aa5e7afc1b23e69c',
-    //     date: new Date(),
-    //     text: 'BBBBB'
-    // });
-    // msgs.push({
-    //     userId: '534b8e5aaa5e7afc1b23e69b',
-    //     date: new Date(),
-    //     text: 'CCCCCCCC'
-    // });
-    // msgs.push({
-    //     userId: '534b8fb2aa5e7afc1b23e69c',
-    //     date: new Date(),
-    //     text: 'DDDD'
-    // });
+    $scope.onAction = function(status) {
+        if (status == 'cancel') {
+            $ionicPopup.prompt({
+                title: 'Cancelar empréstimo',
+                template: String.format('Você está cancelando o empréstimo do livro <strong>{0}</strong>. Informe o motivo do cancelamento para seu amigo.',$scope.loaned.book.title) + '<input ng-model="data.response" type="text" placeholder="Qual motivo?">',
+                cancelText: 'Cancelar',
+                okText: 'OK'
+            }).then(function(res) {
+                if (res) {
+                    LOAN.changeStatus($scope.loaned._id, status, res)
+                    .then(function(data) {
+                        $scope.loaned.status = 'cancel';
+                    });
+                }
+            });
+        }
+        else {
+            LOAN.changeStatus($scope.loaned._id, status)
+            .then(function(data) {
+                $scope.loaned.status = status;
+            });
+        }
+    }
 
 
-    // $scope.messages = msgs
+    $scope.onUpdateAddress = function() {
+        if ($scope.loaned.status == 'cancel' || $scope.loaned.status == 'finish'){
+            return;
+        }
+        $ionicPopup.prompt({
+                title: 'Local de entrega',
+                template: 'Qual sua sugestão de local de entrega do livro? <input ng-model="data.response" type="text" placeholder="Digite aqui.">',
+                cancelText: 'Cancelar',
+                okText: 'OK'
+            }).then(function(res) {
+                if (res) {
+                    LOAN.updateAddress(id, res);
+                    $scope.address = res;
+                }
+            });
+    };
 
 
 });

@@ -1,23 +1,70 @@
-    <ion-view title="{{'book_loan.title' | translate}}">
-    <ion-content>
+<ion-view title="{{'book_loan.title' | translate}}">
+<ion-content scroll="false" class="has-header">
 
-        <ion-refresher pulling-text="{{'app.refresh' | translate}}" on-refresh="onRefresh()"></ion-refresher>
+ <div class="invite-tab tabs tabs-background-assertive tabs-top" >
 
-        <div class="wait-message" ng-show="loading">
-            <ion-spinner class="spinner-energized"></ion-spinner>
-            <span>{{'app.loading' | translate}}</span>
-        </div>
+    <a class="tab-item" ng-class="{'active':activeTab}" ng-click="onChangeTab(true)">Ativos</a>
+    <a class="tab-item"  ng-class="{'active':!activeTab}" ng-click="onChangeTab(false)">Histórico</a>
+    
+</div>
 
-        <div class="list" ng-hide="loading">
-            <book ng-repeat="item in bookLoans" book="item"></book>
+    
 
-            <book ng-repeat="item in bookLoaneds" book="item"></book>
-        </div>
-
-        <div class="notice-library-empty" ng-hide="bookLoaneds.length || bookLoans.length || loading" ng-bind-html="empty_list">
-
-
+    <div class="wait-message" ng-show="loading">
+        <ion-spinner class="spinner-energized"></ion-spinner>
+        <span>{{'app.loading' | translate}}</span>
     </div>
 
-    </ion-content>
+    <ion-scroll  direction="y" style="width: 100%; height: 100%">
+        <div class="list" ng-hide="loading">
+            
+            <div class="item book-card" ng-repeat="item in loans" ui-sref="app.loan({id:item._id})">
+
+                <div>
+
+                    
+                    <img class="cover" image-lazy-src="{{item.book.cover}}" image-lazy-loader="android" image-lazy-distance-from-bottom-to-load="100"/>
+
+                    <div class="content">
+                        <h2>{{item.book.title}}</h2>
+                        <h3>{{item.book.authors | concat}}</h3>
+
+                        <div class="user-loan" ng-show="item.owner_id==user._id">
+                            <img ng-src="{{item.friend.photo}}" /> 
+                            <span class="name">
+                                {{item.friend.fullname}}
+                                <small class="danger" ng-show="item.status == 'cancel'">Empréstimo cancelado.</small>
+                                <small class="success" ng-show="item.status == 'sent'">Empréstimo em andamento.</small>
+                            </span>
+                        </div>
+
+                        <div class="user-loan" ng-show="book.loaned && !book.is_owner && book.loaned._id==user._id && !owner">
+                            <img ng-src="{{book.owner.photo}}" /> 
+                            <span class="name">
+                                <span>{{'book.loan' | translate}} </span>
+                                {{book.owner.fullname}}
+                            </span>
+                        </div>
+
+                        <div class="user-loan" ng-show="owner">
+                            <img ng-src="{{book.owner.photo}}" /> 
+                            <span class="name">
+                                <span>Livro de </span>
+                                {{book.owner.fullname}}
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="notice-library-empty" ng-hide="loans.length || loading" ng-bind-html="empty_list">
+    </ion-scroll>
+   
+</div>
+
+</ion-content>
 </ion-view>

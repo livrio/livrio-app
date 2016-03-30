@@ -153,7 +153,7 @@ angular.module('livrio', [
         $rootScope.user = JSON.parse(window.localStorage.user);
         $http.defaults.headers.common['Authorization'] = window.localStorage.getItem('token');
         window.location = '#/app/book';
-        window.location = '#/app/loan/56bd44b7f387bc212b83b524';
+        // window.location = '#/app/book-view/56bd44b7f387bc212b83b524';
         document.addEventListener("deviceready", function() {
             USER.updateLocation();
         });

@@ -49,6 +49,18 @@ angular.module('livrio.controllers')
     };
   }
 ])
+.filter('concat', ['$filter',
+  function($filter) {
+    return function(v) {
+      if (v && !(typeof v === 'string')) {
+            return v.join(', ');
+        }
+        else {
+            return v;
+        }
+    };
+  }
+])
 
 .controller('notification_ctrl', function($scope, $rootScope, $ionicHistory, $ionicPopup, $timeout, $filter, PUSH, FRIEND) {
 
@@ -74,5 +86,10 @@ angular.module('livrio.controllers')
             }
         }
     }
+
+    $scope.$on('$ionicView.enter', function() {
+        console.log('Notifications $ionicView.enter');
+        $scope.onRefresh();
+    });
 
 });

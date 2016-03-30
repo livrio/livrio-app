@@ -24,7 +24,9 @@ angular.module('livrio.controllers')
     $scope.onLike = function(book) {
         BOOK.like(book)
         .then(function(data) {
-            $rootScope.bookView = data;
+            if (data){
+                book.is_like = !book.is_like
+            }
         });
     };
 

@@ -37,12 +37,12 @@
 
 
 
-            <a class="tab-item" ui-sref="app.book-recommend({id:bookView.id})">
+            <a class="tab-item" ui-sref="app.book-recommend({id:bookView._id})">
             <i class="icon ion-share"></i>
             {{'book.btn_recommend' | translate }}
             </a>
 
-            <a class="tab-item"  ui-sref="app.book-comment({id:bookView.id})">
+            <a class="tab-item"  ui-sref="app.book-comment({id:bookView._id})">
             <i class="icon ion-chatboxes"></i>
             {{'book.btn_comment' | translate }}
             </a>
@@ -56,7 +56,7 @@
 
         <div class="item tabs tabs-secondary tabs-icon-left" ng-show="(bookView.owner.is_friend || bookView.is_owner) && !bookView.loaned">
 
-            <a class="tab-item request-loan" ng-show="!bookView.loaned && bookView.is_owner && bookView.owner.id==user.id" ui-sref="app.book-lend({id:bookView.id})">
+            <a class="tab-item request-loan" ng-show="!bookView.loaned && bookView.is_owner && bookView.owner._id==user._id" ui-sref="app.book-lend({id:bookView._id})">
             <i class="icon ion-forward"></i>
             {{'book.btn_lend' | translate }}
             </a>
@@ -70,7 +70,7 @@
 
 
         </div>
-        <div class="item tabs tabs-secondary tabs-icon-left" ng-show="bookView.loaned && (!bookView.is_owner && bookView.loaned.id!=user.id)">
+        <div class="item tabs tabs-secondary tabs-icon-left" ng-show="bookView.loaned && (!bookView.is_owner && bookView.loaned._id!=user._id)">
             <a class="tab-item request-loan" >
             {{'book.btn_loaned' | translate }}
             </a>
@@ -78,18 +78,7 @@
 
     </div>
 
-    
-    <div class="card loaned-action" >
-        <div class="item item-avatar loan item-text-wrap"  style="padding-bottom: 0;" ui-sref="app.loan({id:bookView.loaned.id})">
-            <p>
-                Ver emprestimo
-            </p>
-
-        </div>
-    </div>
-
-        
-
+    <bookaction book="bookView" status="bookView.loaned.status"></bookaction>
 
 
     <div class="list" ng-show="bookView.description"  ng-class="{'collpase':!moreDescription}">

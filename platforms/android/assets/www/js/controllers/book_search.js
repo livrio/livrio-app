@@ -30,18 +30,10 @@ angular.module("livrio.controllers")
             $scope.searchStart = true;
             BOOK.all({
                 limit: 40,
-                history: true,
-                word: "%" + input + "%"
+                search: input 
             }).then(function(data) {
                 $scope.librarys = data;
-                BOOK.all({
-                    limit: 40,
-                    search_friend:true,
-                    word: "%" + input + "%"
-                }).then(function(data) {
-                    $scope.searching = false;
-                    $scope.libraryFriends = data;
-                });
+                $scope.searching = false;
             });
         }, 250); // delay 250 ms
     };

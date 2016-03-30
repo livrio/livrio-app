@@ -28,7 +28,6 @@ angular.module('livrio.controllers', [])
 
     $scope.onChangeTab = function(index) {
         $scope.tab = index;
-        $ionicSlideBoxDelegate.slide(index);
     };
 
     $scope.form = {
@@ -167,5 +166,15 @@ angular.module('livrio.controllers', [])
         });
 
     };
+
+
+    $scope.onChangeTabSlide = function(index) {
+        $scope.hideCount = index == 3;
+    }
+
+    $scope.onSkip = function() {
+        console.log('skip');
+        $ionicSlideBoxDelegate.slide(3);
+    }
 
 });

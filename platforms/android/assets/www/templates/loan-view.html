@@ -1,4 +1,8 @@
-<ion-view title="Padrão Javascript">
+<ion-view >
+
+ <ion-nav-title>
+        {{loaned.book.title}}
+    </ion-nav-title>
 
     <ion-content class="loan-view book-view" scroll="false">
 
@@ -18,7 +22,7 @@
         </div>
 
 
-        <div ng-show="activeTab==0">
+        <div ng-show="activeTab==0" class="bg-color">
 
             <div class="wait-message spinner-large" ng-show="loading_book">
                 <ion-spinner></ion-spinner>
@@ -27,17 +31,62 @@
 
         <div class="list" ng-hide="loading_book">
             <!-- <i class="btn-more icon ion-information-circled"></i> -->
-            <bookinfo book="book"></bookinfo>
+            <bookinfo book="loaned.book"></bookinfo>
 
             <div class="item tabs tabs-secondary tabs-icon-top bar-option">
-                <a href="" class="tab-item success">Emprestado em<br />21/01/2016</a>
-                <a href="" class="tab-item danger">Devolução em<br />21/02/2016</a>
+                <a href="" class="tab-item success">Emprestado em<br /> {{loaned._created | date:"dd/MM/yyyy"}}</a>
+
+                <a href="" class="tab-item danger" ng-hide="loaned.delivered_date">Devolução em<br />{{loaned.duration}} dias</a>
+                <a href="" class="tab-item danger" ng-show="loaned.delivered_date">Devolução em<br />{{loaned.delivered_date | date:"dd/MM/yyyy"}}</a>
+
+            </div>
+
+            <div class="item item-wrap-text address" ng-click="onUpdateAddress()">
+                Local de entrega
+                <p>{{address}}</p>
+
+            </div>
+
+            <div class="item bar-cancel" ng-show="loaned.status == 'cancel'">
+
+                Empréstimo cancelado
 
             </div>
    
 
 
         </div>
+
+
+
+        <div class="card loaned-action" ng-show="loaned.status == 'sent' && loaned.owner._id == user._id">
+            <div class="item loan item-text-wrap" style="padding-bottom: 0;">
+                <p style="text-align: center;padding: 10px;padding-bottom: 20px;">
+                    Você já entregou o livro para <strong>{{friend.fullname}}</strong>?
+                </p>
+
+            </div>
+            <div class="item item-line no-margin tabs tabs-secondary">
+                <a class="tab-item danger" ng-click="onAction('cancel')">Cancelar empréstimo</a>
+                <a class="tab-item success" ng-click="onAction('delivery')" >Entreguei</a>
+            </div>
+        </div>
+
+        <div class="card loaned-action" ng-show="loaned.status == 'delivery' && loaned.owner._id == user._id">
+            <div class="item loan item-text-wrap" style="padding-bottom: 0;">
+                <p style="text-align: center;padding: 10px;padding-bottom: 20px;">
+                    Aguardando seu amigo <strong>{{friend.fullname}}</strong> confirmar que recebeu o livro.
+                </p>
+
+            </div>
+            <div class="item item-line no-margin tabs tabs-secondary">
+                <a class="tab-item danger" ng-click="onAction('cancel')">Cancelar empréstimo</a>
+            </div>
+        </div>
+
+
+
+
 
         </div>
 
@@ -46,17 +95,17 @@
         <div class="hero" >
 
             
-            <div class="cover" style="background-image: url(img/bg.jpg);">
+            <div class="cover" ng-style="friend.bg_cover">
 
             </div>
             <div class="content">
                 
-                <div class="avatar" style="background-image: url(https://livrio-static.s3-sa-east-1.amazonaws.com/user/56bbe014f387bc234877fd5a/photo.jpg);">
+                <div class="avatar" ng-style="friend.bg_photo">
                     
                 </div>
-                <h3>Aurélio Saraiva</h3>
-                <h4>livros 20</h4>
-                <h4>Florinópolis/SC</h4>
+                <h3>{{friend.fullname}}</h3>
+                <h4>livros {{friend.amount_books}}</h4>
+                <h4 ng-show="friend.city && friend.state">{{friend.city}}/{{friend.state}}</h4>
             </div>
 
 
@@ -64,21 +113,17 @@
         </div>
 
         <div class="list">
-            <div class="item item-wrap-text address">
-                Endereço
-                <p>Rua: São Jorge, 181 ap 401 - Centro - Florinópolis - SC</p>
-
-            </div>
+            
 
             <div class="item item-wrap-text address">
                 Email
-                <p>aureliosaraiva@gmail.com</p>
+                <p>{{friend.email}}</p>
 
             </div>
 
-            <div class="item item-wrap-text address">
+            <div class="item item-wrap-text address" ng-show="friend.phone">
                 Telefone
-                <p>(48) 8411-4499</p>
+                <p>{{friend.phone}}</p>
 
             </div>
         </div>
@@ -97,10 +142,10 @@
         
             <div ng-repeat="message in messages" class="message-wrapper">
       
-                  <div ng-if="user._id !== message.userId">
+                  <div ng-if="user._id !== message.account_id ">
                       
                     <img class="profile-pic left" 
-                          ng-src="{{toUser.pic}}" />
+                          ng-src="{{friend.photo}}" />
       
                       <div class="chat-bubble left">
       
@@ -108,16 +153,16 @@
                           </div>
       
                           <div class="message-detail">
-                              <span am-time-ago="message.date"></span>
+                              <span am-time-ago="message._created"></span>
                           </div>
       
                       </div>
                   </div>
       
-                  <div ng-if="user._id === message.userId">
+                  <div ng-if="user._id === message.account_id">
                     
                        <img  class="profile-pic right" 
-                          ng-src="{{user.pic}}"/>
+                          ng-src="{{user.photo}}"/>
                     
                       <div class="chat-bubble right">
       
@@ -125,7 +170,7 @@
                           </div>
       
                           <div class="message-detail">
-                              <span am-time-ago="message.date"></span>
+                              <span am-time-ago="message._created"></span>
                           </div>
       
                       </div>
