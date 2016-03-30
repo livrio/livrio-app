@@ -6,7 +6,7 @@ angular.module('livrio.services',[])
     var trans = $filter('translate');
 
     self.isISBN = function(str) {
-
+        str = str + ""
         var sum,
             weight,
             digit,
@@ -51,6 +51,7 @@ angular.module('livrio.services',[])
 
 
     self.getByISBN = function(isbn) {
+        isbn = isbn + ""
         var deferred = $q.defer();
         isbn = isbn.replace(/[^0-9X]/gi, '');
         var url = settings.URL.ISBN + "/" + isbn;
@@ -121,7 +122,7 @@ angular.module('livrio.services',[])
     };
 
 
-    self.save = function(data) {
+    self.save = function(data, hide_toast) {
         var deferred = $q.defer();
 
         var action = data.id ? 'put' : 'post';
@@ -136,15 +137,17 @@ angular.module('livrio.services',[])
                 response.data.author = autor(response.data.author);
                 if (action == 'post') {
                     response.data.create = true;
-                    $cordovaToast.showLongBottom(trans('book_form.toast_create'));
+                    if (!hide_toast) {
+                        $cordovaToast.showLongBottom(trans('book_form.toast_create'));
+                    }
                     USER.updateAmountBook();
                 }
                 else {
                     response.data.update = true;
-                    $cordovaToast.showLongBottom(trans('book_form.toast_update'));
+                    if (!hide_toast) {
+                        $cordovaToast.showLongBottom(trans('book_form.toast_update'));
+                    }
                 }
-                $rootScope.$emit('book.refresh');
-                $rootScope.$emit('book_shelf.refresh');
                 deferred.resolve(response.data);
             }
             else {
@@ -235,8 +238,8 @@ angular.module('livrio.services',[])
                     if (!response.errors) {
                         $ionicHistory.clearCache();
                         $cordovaToast.showLongBottom(trans('book.toast_delete'));
-                        $rootScope.$emit("book.refresh");
-                        $rootScope.$emit('book_shelf.refresh');
+                        //$rootScope.$emit("book.refresh");
+                        //$rootScope.$emit('book_shelf.refresh');
                         $state.go('app.book');
 
                         USER.updateAmountBook(true);
@@ -457,9 +460,9 @@ angular.module('livrio.services',[])
 
         options.push({ text: "<i class=\"icon ion-android-bookmark\"></i> " + trans('book.sheet_shelfs') });
 
-        if (!book.is_ref) {
-            options.push({ text: "<i class=\"icon ion-edit\"></i> " + trans('book.sheet_update') });
-        }
+
+        options.push({ text: "<i class=\"icon ion-edit\"></i> " + trans('book.sheet_update') });
+        
 
         $ionicActionSheet.show({
             buttons: options,

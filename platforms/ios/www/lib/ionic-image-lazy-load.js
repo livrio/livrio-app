@@ -54,7 +54,7 @@ angular.module('ionicLazyLoad')
 
                 var loader;
                 if ($attributes.imageLazyLoader) {
-                    loader = $compile('<div class="image-loader-container"><ion-spinner class="image-loader" icon="' + $attributes.imageLazyLoader + '"></ion-spinner></div>')($scope);
+                    loader = $compile('<div class="image-loader-container"><img class="loader" src="img/loader.gif" /></div>')($scope);
                     $element.after(loader);
                 }
 
@@ -62,7 +62,7 @@ angular.module('ionicLazyLoad')
                     if(loader)
                         loader.remove();
                     if ($attributes.imageLazyLoader) {
-                        loader = $compile('<div class="image-loader-container"><ion-spinner class="image-loader" icon="' + $attributes.imageLazyLoader + '"></ion-spinner></div>')($scope);
+                        loader = $compile('<div class="image-loader-container"><img class="loader" src="img/loader.gif" /></div>')($scope);
                         $element.after(loader);
                     }
                     var deregistration = $scope.$on('lazyScrollEvent', function () {
@@ -100,6 +100,19 @@ angular.module('ionicLazyLoad')
                             $ionicScrollDelegate.resize();
                         }
                         $element.unbind("load");
+                    });
+
+                    $element.bind("error", function (e) {
+
+                        if ($attributes.imageLazyLoader) {
+                            loader.remove();
+                        }
+                        if ($scope.lazyScrollResize == "true") {
+                            //Call the resize to recalculate the size of the screen
+                            $ionicScrollDelegate.resize();
+                        }
+                        $element.unbind("error");
+                        $element[0].src = 'img/cover.gif';
                     });
 
                     if ($scope.imageLazyBackgroundImage == "true") {
