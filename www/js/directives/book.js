@@ -162,7 +162,7 @@ angular.module("livrio.directives")
                 var loaned = book.loaned;
 
                 if (!book.is_owner) {
-                    $scope.show = book.loaned && book.loaned._id == $rootScope.user._id;
+                    $scope.show = book.loaned && book.loaned.account_id == $rootScope.user._id;
                     var owner = book.owner;
                     $scope.photo = owner.photo;
                     $scope.fullname = owner.fullname;
@@ -195,9 +195,8 @@ angular.module("livrio.directives")
   return {
     link: function(scope, element, attrs) {
       $timeout(function() {
-        element[0].focus(); 
+        element[0].focus();
       }, 150);
     }
   };
 });
-

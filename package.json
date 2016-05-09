@@ -31,7 +31,7 @@
     "nl.x-services.plugins.socialsharing",
     "nl.x-services.plugins.toast",
     "org.apache.cordova.splashscreen",
-    "cordova-plugin-app-version",
+    "cordova-plugin-appinfo",
     "cordova-plugin-market",
     "phonegap-plugin-push",
     {

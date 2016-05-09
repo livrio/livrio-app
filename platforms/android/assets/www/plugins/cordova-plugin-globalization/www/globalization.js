@@ -1,4 +1,5 @@
-cordova.define("cordova-plugin-globalization.globalization", function(require, exports, module) { /*
+cordova.define("cordova-plugin-globalization.globalization", function(require, exports, module) {
+/*
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -20,8 +21,7 @@ cordova.define("cordova-plugin-globalization.globalization", function(require, e
 */
 
 var argscheck = require('cordova/argscheck'),
-    exec = require('cordova/exec'),
-    GlobalizationError = require('./GlobalizationError');
+    exec = require('cordova/exec');
 
 var globalization = {
 

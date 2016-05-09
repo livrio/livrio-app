@@ -1,27 +1,18 @@
 {
   "name": "cordova-plugin-market",
-  "version": "1.1.2",
-  "description": "Cordova (PhoneGap) 3.0+ plugin to open an application on native Marketplace app, aka Google Play for Android or App Store for iOS.",
-  "cordova": {
-    "id": "cordova-plugin-market",
-    "platforms": [
-      "android",
-      "ios"
-    ]
+  "version": "1.1.3",
+  "description": "cordova-plugin-market =====================",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "cordova",
-    "app store",
-    "play store",
-    "cordova-ios",
-    "cordova-android"
-  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/xmartlabs/cordova-plugin-market.git"
+    "url": "git+https://github.com/xmartlabs/cordova-plugin-market.git"
   },
-  "author": "xmartlabs",
-  "license": "ISC",
+  "keywords": [],
+  "author": "Victor Bjelkholm <victorbjelkholm@gmail.com> (https://www.github.com/victorbjelkholm)",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/xmartlabs/cordova-plugin-market/issues"
   },

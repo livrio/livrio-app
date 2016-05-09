@@ -24,7 +24,7 @@ angular.module('livrio.services')
             var text = '', href='';
 
             if (item.type === 'system_first_book') {
-                text = String.format(trans('notification.msg_system_first_book'), item.from.fullname);
+                text = String.format(trans('notification.msg_system_first_book'), item.user.fullname);
                 href = "#/app/friend-invite";
             }
             else if (item.type === 'info_text') {
@@ -35,37 +35,37 @@ angular.module('livrio.services')
                 }
             }
             else if (item.type === 'system_welcome') {
-                text = String.format(trans('notification.msg_system_welcome'), item.from.fullname);
+                text = String.format(trans('notification.msg_system_welcome'), item.user.fullname);
                 href = "#/app/book-add";
             }
             else if (item.type === 'system_updated') {
                 text = item.content.text ;
             }
             else if (item.type === 'system_library_empty') {
-                text = String.format(trans('notification.msg_system_library_empty'), item.from.fullname);
+                text = String.format(trans('notification.msg_system_library_empty'), item.user.fullname);
                 href = "#/app/book-add";
             }
             else if (item.type === 'friend') {
-                text = String.format(trans('notification.msg_friend'), item.user.fullname);
+                text = String.format(trans('notification.msg_friend'), item.from.fullname);
                 href = "#/app/friend-profile/" + item.user._id;
 
             }
             else if (item.type === 'loan_request') {
-                text = String.format(trans('notification.msg_loan_request'), item.user.fullname, item.book.title);
+                text = String.format(trans('notification.msg_loan_request'), item.from.fullname, item.book.title);
                 item.question = true;
                 href = "#/app/book-view/" + item.book._id;
             }
             else if (item.type === 'friend_like_book') {
-                text = String.format(trans('notification.msg_friend_like_book'), item.user.fullname, item.book.title);
+                text = String.format(trans('notification.msg_friend_like_book'), item.from.fullname, item.book.title);
                 href = "#/app/book-view/" + item.book._id;
             }
              else if (item.type === 'friend_recommend_book') {
-                text = String.format(trans('notification.msg_friend_recommend_book'), item.user.fullname, item.book.title);
+                text = String.format(trans('notification.msg_friend_recommend_book'), item.from.fullname, item.book.title);
                 href = "#/app/book-view/" + item.book._id;
             }
             else if (item.type === 'loan_confirm_yes') {
                 item.question = true;
-                text = String.format(trans('notification.msg_loan_confirm_yes'), item.user.fullname, item.book.title);
+                text = String.format(trans('notification.msg_loan_confirm_yes'), item.from.fullname, item.book.title);
 
                 if (item.content.msg) {
                     text = text + ' &horbar; ' + item.content.msg ;
@@ -74,30 +74,30 @@ angular.module('livrio.services')
                 href = "#/app/book-view/" + item.book._id;
             }
             else if (item.type === 'loan_confirm_no') {
-                text = String.format(trans('notification.msg_loan_confirm_no'), item.user.fullname, item.book.title);
+                text = String.format(trans('notification.msg_loan_confirm_no'), item.from.fullname, item.book.title);
                 href = "#/app/book-view/" + item.book._id;
                 if (item.content.reason) {
                     text = text + ' &horbar; ' + item.content.reason ;
                 }
             }
             else if (item.type === 'loan_request_return') {
-                text = String.format(trans('notification.msg_loan_request_return'), item.user.fullname, item.book.title);
+                text = String.format(trans('notification.msg_loan_request_return'), item.from.fullname, item.book.title);
                 href = "#/app/book-view/" + item.book._id;
             }
             else if (item.type === 'loan_return_confirm') {
-                text = String.format(trans('notification.msg_loan_return_confirm'), item.user.fullname, item.book.title);
+                text = String.format(trans('notification.msg_loan_return_confirm'), item.from.fullname, item.book.title);
                 href = "#/app/book-view/" + item.book._id;
             }
             else if (item.type === 'loan_confirm') {
-                text = String.format(trans('notification.msg_loan_confirm'), item.user.fullname, item.book.title);
+                text = String.format(trans('notification.msg_loan_confirm'), item.from.fullname, item.book.title);
                 href = "#/app/book-view/" + item.book._id;
             }
             else if (item.type === 'loan_confirm') {
-                text = String.format(trans('notification.msg_loan_confirm'), item.user.fullname, item.book.title);
+                text = String.format(trans('notification.msg_loan_confirm'), item.from.fullname, item.book.title);
                 href = "#/app/book-view/" + item.book._id;
             }
             else if (item.type === 'loan_sent_canceled') {
-                text = String.format(trans('notification.msg_loan_sent_canceled'), item.user.fullname, item.book.title);
+                text = String.format(trans('notification.msg_loan_sent_canceled'), item.from.fullname, item.book.title);
                 if (item.content.reason) {
                     text = text + ' &horbar; ' + item.content.reason ;
                 }
@@ -105,7 +105,7 @@ angular.module('livrio.services')
                 href = "#/app/book-view/" + item.book._id;
             }
             else if (item.type === 'loan_sent_refused') {
-                text = String.format(trans('notification.msg_loan_sent_refused'), item.user.fullname, item.book.title);
+                text = String.format(trans('notification.msg_loan_sent_refused'), item.from.fullname, item.book.title);
                 if (item.content.reason) {
                     text = text + ' &horbar; ' + item.content.reason ;
                 }
@@ -135,7 +135,6 @@ angular.module('livrio.services')
             item.unview = !item.view;
             item.unread = !item.read;
             item.href = href;
-            console.log(item)
         }
         catch (e) {
             console.log(e)
@@ -335,4 +334,3 @@ angular.module('livrio.services')
     return self;
 
 }]);
-

@@ -3,8 +3,8 @@
 
  <div class="invite-tab tabs tabs-background-assertive tabs-top" >
 
-    <a class="tab-item" ng-class="{'active':activeTab}" ng-click="onChangeTab(true)">Ativos</a>
-    <a class="tab-item"  ng-class="{'active':!activeTab}" ng-click="onChangeTab(false)">Histórico</a>
+    <a class="tab-item" ng-class="{'active':activeTab}" ng-click="onChangeTab(true)">Peguei</a>
+    <a class="tab-item"  ng-class="{'active':!activeTab}" ng-click="onChangeTab(false)">Emprestei</a>
     
 </div>
 
@@ -34,25 +34,40 @@
                             <span class="name">
                                 {{item.friend.fullname}}
                                 <small class="danger" ng-show="item.status == 'cancel'">Empréstimo cancelado.</small>
-                                <small class="success" ng-show="item.status == 'sent'">Empréstimo em andamento.</small>
+                                <small class="success" ng-show="item.status == 'sent' || item.status == 'requested'">Empréstimo em andamento.</small>
+                                <small class="success" ng-show="item.status == 'finish'">Empréstimo finalizado.</small>
+                                <small class="success" ng-show="item.status == 'delivery' && item.owner_id==user._id">Aguardando seu amigo confirmar. </small>
+
+                                <small class="success" ng-show="item.status == 'delivery' && item.owner_id!=user._id">Aguardando você confirmar. </small>
+
+                                <small class="success" ng-show="item.status == 'delivered'">Emprestado.</small>
+
+                        
+                                <small class="success" ng-show="item.status == 'request_return' || item.status == 'confirm_return' || item.status == 'send_return'">Solicitado devolução.</small>
+
                             </span>
                         </div>
 
-                        <div class="user-loan" ng-show="book.loaned && !book.is_owner && book.loaned._id==user._id && !owner">
-                            <img ng-src="{{book.owner.photo}}" /> 
+                        <div class="user-loan" ng-show="item.owner_id!=user._id">
+                            <img ng-src="{{item.owner.photo}}" /> 
                             <span class="name">
-                                <span>{{'book.loan' | translate}} </span>
-                                {{book.owner.fullname}}
+                                {{item.owner.fullname}}
+                                <small class="danger" ng-show="item.status == 'cancel'">Empréstimo cancelado.</small>
+                                <small class="success" ng-show="item.status == 'sent' || item.status == 'requested'">Empréstimo em andamento.</small>
+                                <small class="success" ng-show="item.status == 'finish'">Empréstimo finalizado.</small>
+                                <small class="success" ng-show="item.status == 'delivery' && item.owner_id==user._id">Aguardando seu amigo confirmar. </small>
+
+                                <small class="success" ng-show="item.status == 'delivery' && item.owner_id!=user._id">Aguardando você confirmar. </small>
+
+                                <small class="success" ng-show="item.status == 'delivered'">Emprestado.</small>
+
+                        
+                                <small class="success" ng-show="item.status == 'request_return' || item.status == 'confirm_return' || item.status == 'send_return'">Solicitado devolução.</small>
+
                             </span>
                         </div>
 
-                        <div class="user-loan" ng-show="owner">
-                            <img ng-src="{{book.owner.photo}}" /> 
-                            <span class="name">
-                                <span>Livro de </span>
-                                {{book.owner.fullname}}
-                            </span>
-                        </div>
+
 
                     </div>
                 </div>

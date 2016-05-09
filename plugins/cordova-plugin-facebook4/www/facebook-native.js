@@ -46,3 +46,11 @@ exports.appInvite = function appLinks (options, s, f) {
   options = options || {}
   exec(s, f, 'FacebookConnectPlugin', 'appInvite', [options])
 }
+
+exports.getDeferredApplink = function (s, f) {
+  exec(s, f, 'FacebookConnectPlugin', 'getDeferredApplink', [])
+}
+
+exports.activateApp = function (s, f) {
+  exec(s, f, 'FacebookConnectPlugin', 'activateApp', [])
+}

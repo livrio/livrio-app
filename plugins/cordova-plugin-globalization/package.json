@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-globalization",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Cordova Globalization Plugin",
   "cordova": {
     "id": "cordova-plugin-globalization",
@@ -36,6 +36,13 @@
     "cordova-tizen",
     "cordova-blackberry10"
   ],
+  "scripts": {
+    "test": "npm run jshint",
+    "jshint": "jshint www && jshint src && jshint tests"
+  },
   "author": "Apache Software Foundation",
-  "license": "Apache 2.0"
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "jshint": "^2.6.0"
+  }
 }

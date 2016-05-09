@@ -70,6 +70,7 @@ angular.module('livrio.controllers', [])
             USER.auth(post)
             .then(function(data) {
                 $ionicHistory.clearCache();
+                hideLoading();
                 window.location = '#/app/book';
             },
             function(error) {
@@ -114,7 +115,7 @@ angular.module('livrio.controllers', [])
                 .then(function(data) {
                     $ionicHistory.clearCache();
                     window.location = '#/app/friend-invite';
-                    //firstLogin();
+                    firstLogin($scope.form.fullname);
                     hideLoading();
                 },
                 function() {

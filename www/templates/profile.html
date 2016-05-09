@@ -13,22 +13,22 @@
 
             </div>
             <div class="content">
-                
+
                 <div class="avatar" ng-style="photo" ng-click="onPicture()">
-                    
+
                 </div>
                 <h3>{{form.fullname}}</h3>
                 <h4>{{'profile.book' | translate}} {{user.amount_book}}</h4>
             </div>
 
-            
+
         </div>
    </ion-nav-bar>
 
 
   <ion-content>
 
-        
+
 
         <form ng-submit="doUpdate(formUpdate.$valid)" name="formUpdate" novalidate id="formUpdate">
         <div class="list">
@@ -42,7 +42,7 @@
                 <div class="form-error" ng-message="required">{{'profile.field_name' | translate}} {{'app.required_field' | translate}}</div>
             </div>
 
-         
+
 
             <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formUpdate.birthday.$invalid && formUpdate.$submitted}">
                 <span class="input-label">{{'profile.field_birthday' | translate}}</span>
@@ -66,7 +66,7 @@
 
            <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : formUpdate.email.$invalid && formUpdate.$submitted}">
                 <span class="input-label">{{'profile.field_email' | translate}}</span>
-                <input type="email"  name="email" ng-model="form.email" ng-blur="onChangeField(formUpdate.email)" required>
+                <input disabled="true" type="email"  name="email" ng-model="form.email" ng-blur="onChangeField(formUpdate.email)" required>
             </label>
             <div class="form-errors" ng-messages="formUpdate.email.$error" ng-show="formUpdate.$submitted">
                 <div class="form-error" ng-message="required">{{'profile.field_email' | translate}} {{'app.required_field' | translate}}</div>
@@ -120,14 +120,14 @@
 
 
 
-            
+
 
 
         </div>
 
         <p class="padding">
         {{'profile.info' | translate}}
-        
+
         </p>
 
     </form>

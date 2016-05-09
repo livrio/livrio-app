@@ -1,4 +1,5 @@
-cordova.define("com.xmartlabs.cordova.market.Market", function(require, exports, module) { /**
+cordova.define("com.xmartlabs.cordova.market.Market", function(require, exports, module) {
+/**
  * Cordova Market plugin
  * Author: Miguel Revetria <miguel@xmartlabs.com>
  * License: Apache 2.0

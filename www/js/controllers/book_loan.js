@@ -15,10 +15,10 @@ angular.module('livrio.controllers')
 
         params = {}
         if ($scope.activeTab) {
-            params['active'] = true
+            params['loan_friend'] = true
         }
         else {
-            params['history'] = true
+            params['loan_owner'] = true
         }
         LOAN.all(params)
         .then(function(data) {

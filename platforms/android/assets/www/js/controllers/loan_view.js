@@ -20,6 +20,9 @@ angular.module('livrio.controllers')
     LOAN.get(id)
     .then(function(data) {
         data._created = new Date(data._created);
+        if (data.delivered_date) {
+            data.delivered_date = new Date(data.delivered_date);
+        }
         $scope.loaned = data;
         if (user_id == data['owner']['_id']) {
             $scope.user = data['owner'];
@@ -37,7 +40,7 @@ angular.module('livrio.controllers')
             'background-image': 'url(' + $scope.friend.photo + ')'
         };
 
-        if(data.address){
+        if (data.address) {
             $scope.address = data.address;
         }
 
@@ -197,7 +200,7 @@ angular.module('livrio.controllers')
 
 
     $scope.onUpdateAddress = function() {
-        if ($scope.loaned.status == 'cancel'){
+        if ($scope.loaned.status == 'cancel' || $scope.loaned.status == 'finish'){
             return;
         }
         $ionicPopup.prompt({

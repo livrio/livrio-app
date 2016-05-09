@@ -1,10 +1,10 @@
 "use strict";
 var DOMAIN_API = "http://api.livr.io/v1";
 DOMAIN_API = "http://livrio.codeway.in/v1";
-var DOMAIN_API2 = "http://127.0.0.1:5000/v1";
+var DOMAIN_API2 = "http://api-v2.livr.io/v1";
 
-var DOMAIN_API2 = "http://127.0.0.1:5000/v1";
-// var DOMAIN_API = "http://api-test.livr.io/v1";
+// DOMAIN_API2 = "http://127.0.0.1:5000/v1";
+
 
 function toRouter(route) {
     var args = Array.prototype.slice.call(arguments, 1);
@@ -19,8 +19,8 @@ angular.module("livrio.config",[
     API_BASE_URL: "http://api.wiflip.in/v1",
     GA: "UA-54794657-1",
     URL: {
-        ISBNDB: 'http://127.0.0.1:5001/v1/book/{0}',
-        ISBNDB_SEARCH: 'http://127.0.0.1:5001/v1/search',
+        ISBNDB: 'http://isbndb.livr.io/v1/book/{0}',
+        ISBNDB_SEARCH: 'http://isbndb.livr.io/v1/search',
         USER: DOMAIN_API + "/user",
         LOGIN: DOMAIN_API + "/auth/login",
         LOGOUT: DOMAIN_API + "/auth/logout",

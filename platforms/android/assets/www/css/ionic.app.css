@@ -8115,6 +8115,12 @@ a.button {
 
 .loan-view {
   /*    border-color: #d6123c;*/ }
+  .loan-view .tab-a {
+    position: absolute !important;
+    top: 50px !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    right: 0 !important; }
   .loan-view .tabs {
     background: none;
     border-bottom: 1px solid #ddd; }
@@ -8151,12 +8157,18 @@ a.button {
     text-align: center;
     background-color: #B71C1C !important;
     color: #fff; }
+  .loan-view .bar-finish {
+    text-align: center;
+    background-color: #1B5E20 !important;
+    color: #fff; }
 
 .messager .message {
   font-size: 11px; }
 .messager .message-detail {
   white-space: nowrap;
   font-size: 11px; }
+  .messager .message-detail span {
+    color: #666; }
 .messager .bar.item-input-inset .item-input-wrapper input {
   width: 100% !important; }
 .messager .message-wrapper {
@@ -8205,6 +8217,10 @@ a.button {
   -webkit-transform: rotate(45deg);
   bottom: 10px;
   right: -5px; }
+.messager .chat-bubble.system {
+  background-color: #EEEFB0; }
+  .messager .chat-bubble.system:before {
+    background-color: #EEEFB0; }
 .messager .user-messages-top-icon {
   font-size: 28px;
   display: inline-block;

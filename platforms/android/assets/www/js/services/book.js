@@ -233,8 +233,8 @@ angular.module('livrio.services',[])
                     if (response._status == 'OK') {
                         $ionicHistory.clearCache();
                         $cordovaToast.showLongBottom(trans('book.toast_delete'));
-                        $rootScope.$emit("book.refresh");
-                        $rootScope.$emit('book_shelf.refresh');
+                        //$rootScope.$emit("book.refresh");
+                        //$rootScope.$emit('book_shelf.refresh');
                         $state.go('app.book');
 
                         USER.updateAmountBook(true);

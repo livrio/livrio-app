@@ -62,7 +62,7 @@ angular.module('livrio.controllers')
             buttons: [
                 { text: "<i class=\"icon ion-android-camera\"></i> " + trans('profile.sheet_photo') },
                 { text: "<i class=\"icon ion-image\"></i> " + trans('profile.sheet_picture')}
-                
+
             ],
             destructiveText: "<i class=\"icon ion-trash-a\"></i> " + trans('profile.sheet_remove'),
             titleText: trans('profile.sheet_title'),
@@ -104,9 +104,11 @@ angular.module('livrio.controllers')
         $http.patch(toRouter('/accounts/update'), post)
         .success(function(response) {
             if (!response.errors) {
-                // window.localStorage.user = JSON.stringify(response.data);
+                // $rootScope.user[]
+                // window.localStorage.user = $rootScope.user;
                 // $rootScope.user = response.data;
                 // $scope.form = $rootScope.user;
+
                 $cordovaToast.showLongBottom(trans('profile.toast_save'));
             }
             else {
@@ -156,6 +158,14 @@ angular.module('livrio.controllers')
         });
     };
 
+    function toConvertSession(){
+        var user = angular.copy($rootScope.user);
+        if(user['birthday']){
+            user['birthday'] = formatDate(user['birthday']);
+        }
+        window.localStorage.user = JSON.stringify(user);
+    }
+
     $scope.onChangeField = function(field) {
         if (field.$valid) {
             var post = {};
@@ -169,9 +179,8 @@ angular.module('livrio.controllers')
 
             $http.patch( toRouter('/accounts/update'), post)
             .success(function(response) {
-                // window.localStorage.user = JSON.stringify(response.data);
-                // $rootScope.user = response.data;
-                $rootScope.user[field.$name] = field.$modelValue
+                $rootScope.user[field.$name] = field.$modelValue;
+                toConvertSession();
                 $cordovaToast.showLongBottom(trans('profile.toast_save'));
             });
         }

@@ -7897,6 +7897,9 @@ a.button {
   font-weight: 500;
   font-size: 16px; }
 
+input[disabled] {
+  background-color: #FFF; }
+
 .book-view .btn-more {
   position: absolute;
   top: 16px;
