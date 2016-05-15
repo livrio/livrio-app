@@ -1,0 +1,324 @@
+<ion-view >
+
+ <ion-nav-title>
+        {{loaned.book.title}}
+    </ion-nav-title>
+
+    <ion-content class="loan-view book-view" scroll="false">
+
+    
+
+
+        <div class="tabs tabs-icon-only tabs-top">
+          <a class="tab-item active" ng-class="{'active':activeTab==0}" ng-click="activeTab=0">
+            <i class="icon ion-ios-book" ng-class="{'ion-ios-book':activeTab==0, 'ion-ios-book-outline':activeTab!=0}"></i>
+          </a>
+          <a class="tab-item" ng-class="{'active':activeTab==1}"  ng-click="activeTab=1">
+            <i class="icon ion-ios-person-outline" ng-class="{'ion-ios-person':activeTab==1, 'ion-ios-person-outline':activeTab!=1}"></i>
+          </a>
+          <a class="tab-item" ng-class="{'active':activeTab==2}"  ng-click="activeTab=2">
+            <i class="icon ion-ios-chatboxes-outline" ng-class="{'ion-ios-chatboxes':activeTab==2, 'ion-ios-chatboxes-outline':activeTab!=2}"></i>
+          </a>
+        </div>
+
+
+        <div ng-show="activeTab==0" class="bg-color tab-a">
+
+        <ion-scroll  direction="y">
+
+            <div class="wait-message spinner-large" ng-show="loading_book">
+                <ion-spinner></ion-spinner>
+                <span>{{'app.loading' | translate}}</span>
+            </div>
+
+        <div class="list" ng-hide="loading_book">
+            <!-- <i class="btn-more icon ion-information-circled"></i> -->
+            <bookinfo book="loaned.book"></bookinfo>
+
+            <div class="item tabs tabs-secondary tabs-icon-top bar-option">
+                <a href="" class="tab-item success">Emprestado em<br /> {{loaned._created | date:"dd/MM/yyyy"}}</a>
+
+                <a href="" class="tab-item danger" ng-hide="loaned.delivered_date">Devolução em<br />{{loaned.duration}} dias</a>
+                <a href="" class="tab-item danger" ng-show="loaned.delivered_date">Devolução em<br />{{loaned.delivered_date | date:"dd/MM/yyyy"}}</a>
+
+            </div>
+
+            <div class="item item-wrap-text address" ng-click="onUpdateAddress()">
+                Local de entrega
+                <p>{{address}}</p>
+
+            </div>
+
+            <div class="item bar-cancel" ng-show="loaned.status == 'cancel'">
+
+                Empréstimo cancelado
+
+            </div>
+
+            <div class="item bar-finish" ng-show="loaned.status == 'finish'">
+
+                Empréstimo finalizado
+
+            </div>
+   
+
+
+        </div>
+
+
+
+        <div class="card loaned-action" ng-show="(loaned.status == 'sent' || loaned.status == 'requested')&& loaned.owner._id == user._id">
+            <div class="item loan item-text-wrap" style="padding-bottom: 0;">
+                <p style="text-align: center;padding: 10px;padding-bottom: 20px;">
+                    Você já entregou o livro para <strong>{{friend.fullname}}</strong>?
+                </p>
+
+            </div>
+            <div class="item item-line no-margin tabs tabs-secondary">
+                <a class="tab-item danger" ng-click="onAction('cancel')">Cancelar empréstimo</a>
+                <a class="tab-item success" ng-click="onAction('delivery')" >Entreguei</a>
+            </div>
+        </div>
+
+        <div class="card loaned-action" ng-show="(loaned.status == 'sent' || loaned.status == 'requested') && loaned.owner._id != user._id">
+            <div class="item loan item-text-wrap" style="padding-bottom: 0;">
+                <p style="text-align: center;padding: 10px;padding-bottom: 20px;">
+                    Quer cancelar este empréstimo?
+                </p>
+
+            </div>
+            <div class="item item-line no-margin tabs tabs-secondary">
+                <a class="tab-item danger" ng-click="onAction('cancel')">Cancelar empréstimo</a>
+            </div>
+        </div>
+
+        <div class="card loaned-action" ng-show="loaned.status == 'delivery' && loaned.owner._id == user._id">
+            <div class="item loan item-text-wrap" style="padding-bottom: 0;">
+                <p style="text-align: center;padding: 10px;padding-bottom: 20px;">
+                    Aguardando seu amigo <strong>{{friend.fullname}}</strong> confirmar que recebeu o livro.
+                </p>
+
+            </div>
+            <div class="item item-line no-margin tabs tabs-secondary">
+                <a class="tab-item danger" ng-click="onAction('cancel')">Cancelar empréstimo</a>
+            </div>
+        </div>
+
+        <div class="card loaned-action" ng-show="loaned.status == 'delivery' && loaned.owner._id != user._id">
+            <div class="item loan item-text-wrap" style="padding-bottom: 0;">
+                <p style="text-align: center;padding: 10px;padding-bottom: 20px;">
+                    Seu amigo <strong>{{friend.fullname}}</strong> já te entregou o livro?
+                </p>
+
+            </div>
+            <div class="item item-line no-margin tabs tabs-secondary">
+                <a class="tab-item danger" ng-click="onAction('cancel')">Cancelar empréstimo</a>
+                <a class="tab-item success" ng-click="onAction('delivered')" >Entregou</a>
+            </div>
+        </div>
+
+
+        <div class="card loaned-action" ng-show="loaned.status == 'delivered' && loaned.owner._id == user._id">
+            <div class="item loan item-text-wrap" style="padding-bottom: 0;">
+                <p style="text-align: center;padding: 10px;padding-bottom: 20px;">
+                    Solicitar o livro de volta para <strong>{{friend.fullname}}</strong>.
+                </p>
+
+            </div>
+            <div class="item item-line no-margin tabs tabs-secondary">
+                <a class="tab-item success" ng-click="onAction('request_return')" >Pedir de volta</a>
+            </div>
+        </div>
+
+        <div class="card loaned-action" ng-show="loaned.status == 'delivered' && loaned.owner._id != user._id">
+            <div class="item loan item-text-wrap" style="padding-bottom: 0;">
+                <p style="text-align: center;padding: 10px;padding-bottom: 20px;">
+                    Devolver livro para <strong>{{friend.fullname}}</strong>.
+                </p>
+
+            </div>
+            <div class="item item-line no-margin tabs tabs-secondary">
+                <a class="tab-item success" ng-click="onAction('send_return')" >Devolver</a>
+            </div>
+        </div>
+
+        <div class="card loaned-action" ng-show="loaned.status == 'request_return' && loaned.owner._id == user._id">
+            <div class="item loan item-text-wrap" style="padding-bottom: 0;">
+                <p style="text-align: center;padding: 10px;padding-bottom: 20px;">
+                    Aguardando seu amigo <strong>{{friend.fullname}}</strong> devolver o livro.
+                </p>
+
+            </div>
+        </div>
+
+        <div class="card loaned-action" ng-show="loaned.status == 'send_return' && loaned.owner._id != user._id">
+            <div class="item loan item-text-wrap" style="padding-bottom: 0;">
+                <p style="text-align: center;padding: 10px;padding-bottom: 20px;">
+                    Aguardando seu amigo <strong>{{friend.fullname}}</strong> confirmar a devolução.
+                </p>
+            </div>
+        </div>
+
+
+        <div class="card loaned-action" ng-show="loaned.status == 'request_return' && loaned.owner._id != user._id">
+            <div class="item loan item-text-wrap" style="padding-bottom: 0;">
+                <p style="text-align: center;padding: 10px;padding-bottom: 20px;">
+                    Você já devolveu o livro para seu amigo <strong>{{friend.fullname}}</strong>.
+                </p>
+
+            </div>
+            <div class="item item-line no-margin tabs tabs-secondary">
+                <a class="tab-item success" ng-click="onAction('confirm_return')" >Já devolvi</a>
+            </div>
+        </div>
+
+        <div class="card loaned-action" ng-show="loaned.status == 'confirm_return' && loaned.owner._id == user._id">
+            <div class="item loan item-text-wrap" style="padding-bottom: 0;">
+                <p style="text-align: center;padding: 10px;padding-bottom: 20px;">
+                    Seu amigo <strong>{{friend.fullname}}</strong> disse que já te entregou o livro.
+                </p>
+
+            </div>
+            <div class="item item-line no-margin tabs tabs-secondary">
+                <a class="tab-item success" ng-click="onAction('finish')" >Sim, já peguei de volta</a>
+            </div>
+        </div>
+
+        <div class="card loaned-action" ng-show="loaned.status == 'send_return' && loaned.owner._id == user._id">
+            <div class="item loan item-text-wrap" style="padding-bottom: 0;">
+                <p style="text-align: center;padding: 10px;padding-bottom: 20px;">
+                    Seu amigo <strong>{{friend.fullname}}</strong> quer devolver o livro.
+                </p>
+
+            </div>
+            <div class="item item-line no-margin tabs tabs-secondary">
+                <a class="tab-item success" ng-click="onAction('finish')" >Ok, já estou com o livro</a>
+            </div>
+        </div>
+
+
+
+
+
+
+
+</ion-scroll>
+        </div>
+
+        <div ng-show="activeTab==1" class="tab-a">
+
+        <div class="hero" >
+
+            
+            <div class="cover" ng-style="friend.bg_cover">
+
+            </div>
+            <div class="content">
+                
+                <div class="avatar" ng-style="friend.bg_photo">
+                    
+                </div>
+                <h3>{{friend.fullname}}</h3>
+                <h4>livros {{friend.amount_books}}</h4>
+                <h4 ng-show="friend.city && friend.state">{{friend.city}}/{{friend.state}}</h4>
+            </div>
+
+
+                
+        </div>
+
+        <div class="list">
+            
+
+            <div class="item item-wrap-text address">
+                Email
+                <p>{{friend.email}}</p>
+
+            </div>
+
+            <div class="item item-wrap-text address" ng-show="friend.phone">
+                Telefone
+                <p>{{friend.phone}}</p>
+
+            </div>
+        </div>
+
+
+
+        </div>
+
+
+        <div ng-show="activeTab==2" class="messager tab-a" id="userMessagesView">
+
+        <ion-scroll delegate-handle="userMessageScroll" direction="y">
+
+        
+
+        
+            <div ng-repeat="message in messages" class="message-wrapper">
+      
+                  <div ng-if="user._id !== message.account_id ">
+                      
+                    <img class="profile-pic left" 
+                          ng-src="{{friend.photo}}" />
+      
+                      <div class="chat-bubble left" ng-class="{'system':message.system}">
+      
+                          <div class="message" ng-bind-html="message.text | nl2br">
+                          </div>
+      
+                          <div class="message-detail">
+                              <span am-time-ago="message._created"></span>
+                          </div>
+      
+                      </div>
+                  </div>
+      
+                  <div ng-if="user._id === message.account_id">
+                    
+                       <img  class="profile-pic right" 
+                          ng-src="{{user.photo}}"/>
+                    
+                      <div class="chat-bubble right" ng-class="{'system':message.system}">
+      
+                          <div class="message" ng-bind-html="message.text | nl2br">
+                          </div>
+      
+                          <div class="message-detail">
+                              <span am-time-ago="message._created"></span>
+                          </div>
+      
+                      </div>
+                    
+                  </div>
+      
+                  <div class="cf"></div>
+      
+            </div>
+
+            </ion-scroll>
+
+            <form ng-show="activeTab==2" name="sendMessageForm" ng-submit="sendMessage(sendMessageForm)" novalidate>
+              <ion-footer-bar class="bar-stable item-input-inset message-footer" keyboard-attach>
+                  <label class="item-input-wrapper">
+                      <textarea ng-model="input.message" value="" placeholder="Digite aqui sua mensagem" required minlength="1" maxlength="1000" msd-elastic></textarea>
+                  </label>
+                  <div class="footer-btn-wrap">
+                    <button class="button button-icon icon ion-android-send footer-btn" type="submit"
+                        ng-disabled="!input.message || input.message === ''">
+                    </button>
+                  </div>
+              </ion-footer-bar>
+          </form>
+
+
+        </div>
+
+
+   
+
+    </ion-content>
+
+    
+
+</ion-view>

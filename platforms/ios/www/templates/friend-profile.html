@@ -1,0 +1,80 @@
+<ion-view class="no-header">
+   <ion-nav-bar>
+        <div class="hero border-bottom" >
+                <button ng-click="$ionicGoBack()" class="button back-button buttons   button-clear header-item">
+                    <i class="icon ion-android-arrow-back"></i>
+                </button>
+                <button  ng-click="onAction($event)" ng-show="friend.is_friend" class="button button-action buttons   button-clear header-item">
+                    <i class="icon ion-android-more-vertical"></i>
+                </button>
+                <div class="cover" ng-style="cover">
+
+                </div>
+                <div class="content">
+                    
+                    <div class="avatar" ng-style="photo">
+                        
+                    </div>
+                    <h3>{{friend.fullname}}</h3>
+                    <h4>livros {{friend.amount_books}}</h4>
+                    <h4 ng-show="friend.city && friend.state">{{friend.city}}/{{friend.state}}</h4>
+                </div>
+
+
+                
+            </div>
+
+
+   </ion-nav-bar>
+    
+  <ion-content class="bg-color friend-profile-view" scroll="false" ng-class="{'has-invite':friend.invited}" >
+
+
+
+    <div class="card" ng-show="friend.invited">
+        <div class="item item-avatar item-text-wrap"  style="padding-bottom: 0;">
+            <img ng-src="{{friend.invited.photo}}">
+            {{friend.invited.fullname}}
+            <p>
+                Solicitou amizade!
+            </p>
+        </div>
+        <div class="item item-line no-margin tabs tabs-secondary">
+            <a class="tab-item danger" ng-click="onResponseFriend(friend, 'no')">Remover</a>
+            <a class="tab-item success" ng-click="onResponseFriend(friend, 'yes')">Aceitar</a>
+            
+        </div>
+    </div>
+    
+    
+
+<ion-scroll  direction="y" lazy-scroll>
+         <ion-refresher pulling-text="{{'app.refresh' | translate}}" on-refresh="onRefresh(true)">
+        </ion-refresher>
+
+        <div class="wait-message" ng-show="loading">
+            <ion-spinner class="spinner-energized"></ion-spinner>
+            <span>{{'app.loading' | translate}}</span>
+        </div>
+
+        
+        <div class="list" ng-show="librarys.length">
+
+            <book ng-repeat="item in librarys" book="item"></book>
+        </div>
+
+        <div class="notice-library-empty" ng-show="librarys.length==0 && !loading" ng-bind-html="empty_list"></div>
+   
+
+    
+
+</ion-scroll>
+
+<ion-infinite-scroll ng-if="hasScroll"
+            on-infinite="loadMore()"
+            spinner="android"
+            distance="5%">
+        </ion-infinite-scroll>
+</ion-content>
+
+</ion-view>

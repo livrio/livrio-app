@@ -3,7 +3,7 @@ var DOMAIN_API = "http://api.livr.io/v1";
 DOMAIN_API = "http://livrio.codeway.in/v1";
 var DOMAIN_API2 = "http://api-v2.livr.io/v1";
 
-DOMAIN_API2 = "http://127.0.0.1:5000/v1";
+// DOMAIN_API2 = "http://127.0.0.1:5000/v1";
 
 
 function toRouter(route) {

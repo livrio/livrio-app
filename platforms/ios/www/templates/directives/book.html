@@ -1,0 +1,57 @@
+<div class="item book-card" ng-hide="book.removed" ui-sref="app.book-view({id:book._id})">
+
+    <button ng-click="onActionBook($event, book)" ng-show="button" class="button button-clean button-icon ion-android-more-vertical" type="button"></button>
+    <div>
+
+        
+        <img class="cover" image-lazy-src="{{book.cover}}" image-lazy-loader="android" image-lazy-distance-from-bottom-to-load="100"/>
+
+        <div class="content">
+            <h2>{{book.title}}</h2>
+            <h3>{{book.authors | concat}}</h3>
+
+            <div class="user-loan" ng-show="book.loaned && book.is_owner && book.owner._id==user._id && !owner">
+                <img ng-src="{{book.loaned.photo}}" /> 
+                <span class="name">
+                    {{book.loaned.fullname}}
+                    <small class="danger" ng-show="book.loaned.status == 'cancel'">Empréstimo cancelado.</small>
+                    <small class="success" ng-show="book.loaned.status == 'sent' || book.loaned.status == 'requested'">Empréstimo em andamento.</small>
+                    <small class="success" ng-show="book.loaned.status == 'finish'">Empréstimo finalizado.</small>
+                    <small class="success" ng-show="book.loaned.status == 'delivery'">Aguardando seu amigo confirmar. </small>
+
+
+                    <small class="success" ng-show="book.loaned.status == 'delivered'">Emprestado.</small>
+
+            
+                    <small class="success" ng-show="book.loaned.status == 'request_return' || book.loaned.status == 'confirm_return' || book.loaned.status == 'send_return'">Solicitado devolução.</small>
+                </span>
+            </div>
+
+            <div class="user-loan" ng-show="book.loaned && !book.is_owner && book.loaned._id==user._id && !owner">
+                <img ng-src="{{book.owner.photo}}" /> 
+                <span class="name">
+                    {{book.owner.fullname}}
+                    <small class="danger" ng-show="book.loaned.status == 'cancel'">Empréstimo cancelado.</small>
+                    <small class="success" ng-show="book.loaned.status == 'sent' || book.loaned.status == 'requested'">Empréstimo em andamento.</small>
+                    <small class="success" ng-show="book.loaned.status == 'finish'">Empréstimo finalizado.</small>
+                    <small class="success" ng-show="book.loaned.status == 'delivery'">Aguardando você confirmar. </small>
+
+                    <small class="success" ng-show="book.loaned.status == 'delivered'">Emprestado.</small>
+
+            
+                    <small class="success" ng-show="book.loaned.status == 'request_return' || book.loaned.status == 'confirm_return' || book.loaned.status == 'send_return'">Solicitado devolução.</small>
+                </span>
+            </div>
+
+            <div class="user-loan" ng-show="owner">
+                <img ng-src="{{book.owner.photo}}" /> 
+                <span class="name">
+                    <span>Livro de </span>
+                    {{book.owner.fullname}}
+                </span>
+            </div>
+
+        </div>
+    </div>
+
+</div>

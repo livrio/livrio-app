@@ -92,5 +92,13 @@
             "APP_ID": "708951699200694",
             "APP_NAME": "Livrio"
         }
+    },
+    "cordova-plugin-inappbrowser": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-inappbrowser"
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }

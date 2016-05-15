@@ -1,0 +1,85 @@
+<ion-view title="{{'book_loan.title' | translate}}">
+<ion-content scroll="false" class="has-header">
+
+ <div class="invite-tab tabs tabs-background-assertive tabs-top" >
+
+    <a class="tab-item" ng-class="{'active':activeTab}" ng-click="onChangeTab(true)">Peguei</a>
+    <a class="tab-item"  ng-class="{'active':!activeTab}" ng-click="onChangeTab(false)">Emprestei</a>
+    
+</div>
+
+    
+
+    <div class="wait-message" ng-show="loading">
+        <ion-spinner class="spinner-energized"></ion-spinner>
+        <span>{{'app.loading' | translate}}</span>
+    </div>
+
+    <ion-scroll  direction="y" style="width: 100%; height: 100%">
+        <div class="list" ng-hide="loading">
+            
+            <div class="item book-card" ng-repeat="item in loans" ui-sref="app.loan({id:item._id})">
+
+                <div>
+
+                    
+                    <img class="cover" image-lazy-src="{{item.book.cover}}" image-lazy-loader="android" image-lazy-distance-from-bottom-to-load="100"/>
+
+                    <div class="content">
+                        <h2>{{item.book.title}}</h2>
+                        <h3>{{item.book.authors | concat}}</h3>
+
+                        <div class="user-loan" ng-show="item.owner_id==user._id">
+                            <img ng-src="{{item.friend.photo}}" /> 
+                            <span class="name">
+                                {{item.friend.fullname}}
+                                <small class="danger" ng-show="item.status == 'cancel'">Empréstimo cancelado.</small>
+                                <small class="success" ng-show="item.status == 'sent' || item.status == 'requested'">Empréstimo em andamento.</small>
+                                <small class="success" ng-show="item.status == 'finish'">Empréstimo finalizado.</small>
+                                <small class="success" ng-show="item.status == 'delivery' && item.owner_id==user._id">Aguardando seu amigo confirmar. </small>
+
+                                <small class="success" ng-show="item.status == 'delivery' && item.owner_id!=user._id">Aguardando você confirmar. </small>
+
+                                <small class="success" ng-show="item.status == 'delivered'">Emprestado.</small>
+
+                        
+                                <small class="success" ng-show="item.status == 'request_return' || item.status == 'confirm_return' || item.status == 'send_return'">Solicitado devolução.</small>
+
+                            </span>
+                        </div>
+
+                        <div class="user-loan" ng-show="item.owner_id!=user._id">
+                            <img ng-src="{{item.owner.photo}}" /> 
+                            <span class="name">
+                                {{item.owner.fullname}}
+                                <small class="danger" ng-show="item.status == 'cancel'">Empréstimo cancelado.</small>
+                                <small class="success" ng-show="item.status == 'sent' || item.status == 'requested'">Empréstimo em andamento.</small>
+                                <small class="success" ng-show="item.status == 'finish'">Empréstimo finalizado.</small>
+                                <small class="success" ng-show="item.status == 'delivery' && item.owner_id==user._id">Aguardando seu amigo confirmar. </small>
+
+                                <small class="success" ng-show="item.status == 'delivery' && item.owner_id!=user._id">Aguardando você confirmar. </small>
+
+                                <small class="success" ng-show="item.status == 'delivered'">Emprestado.</small>
+
+                        
+                                <small class="success" ng-show="item.status == 'request_return' || item.status == 'confirm_return' || item.status == 'send_return'">Solicitado devolução.</small>
+
+                            </span>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="notice-library-empty" ng-hide="loans.length || loading" ng-bind-html="empty_list">
+    </ion-scroll>
+   
+</div>
+
+</ion-content>
+</ion-view>

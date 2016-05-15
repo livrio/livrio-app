@@ -1,0 +1,43 @@
+<ion-view title="{{'comment.title' | translate}}">
+    
+    <ion-content>
+
+    <ion-refresher pulling-text="{{'app.refresh' | translate}}" on-refresh="onRefresh()"></ion-refresher>
+
+    <div class="wait-message" ng-show="loading">
+        <ion-spinner class="spinner-energized"></ion-spinner>
+        <span>{{'app.loading' | translate}}</span>
+    </div>
+
+
+
+        <div class="notice-library-empty" ng-show="!loading && comments.length==0" ng-bind-html="empty_list"></div>
+        
+
+        <div class="list friend-list" ng-hide="loading">
+
+            <div class="item item-avatar item-text-wrap" ng-repeat="item in comments">
+                <img ng-src="{{item.owner.photo}}" />
+                {{item.owner.fullname}}
+                <p>{{item.message}}</p>
+                <small>{{item.date}}</small>
+            </div>
+        </div>
+        
+
+
+
+    </ion-content>
+
+
+
+    <form name="formComment" novalidate ng-submit="onComment(formComment, formComment.message.$modelValue)">
+        <ion-footer-bar class="item-input-inset input-comment">
+            <label class="item-input-wrapper">
+                <div class="photo" style="background-image: url({{user.photo}})"></div>
+                <input type="text" placeholder="{{'comment.placeholder' | translate}}" name="message" ng-model="message" />
+                <button type="submit" class="button button-icon icon button-small placeholder-icon ion-paper-airplane"></button>
+            </label>
+        </ion-footer-bar>
+    </form>
+</ion-view>
