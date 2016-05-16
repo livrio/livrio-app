@@ -57,7 +57,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.5</string>
+	<string>1.5.6</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -82,7 +82,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.5</string>
+	<string>1.5.6</string>
 	<key>FacebookAppID</key>
 	<string>708951699200694</string>
 	<key>FacebookDisplayName</key>
@@ -128,7 +128,7 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>NSMainNibFile</key>
-	<string></string>
+	<string>MainViewController</string>
 	<key>NSMainNibFile~ipad</key>
 	<string></string>
 	<key>UIInterfaceOrientation</key>
